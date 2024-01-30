@@ -6,7 +6,6 @@ plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
     kotlin("plugin.jpa") version "1.9.22"
-    kotlin("kapt") version "1.9.22"
 }
 
 allOpen {
@@ -17,6 +16,7 @@ allOpen {
 
 group = "com.zeki"
 version = "0.0.1-SNAPSHOT"
+var exposedVersion : String = "0.46.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -27,7 +27,6 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
@@ -37,11 +36,6 @@ dependencies {
     // db
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("com.h2database:h2")
-
-    // querydsl
-    implementation("com.querydsl:querydsl-core:5.0.0")
-    implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
-    kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -53,6 +47,18 @@ dependencies {
     // log
     implementation("io.github.microutils:kotlin-logging:3.0.5")
 
+
+    // exposed
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-crypt:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
+
+    implementation("org.jetbrains.exposed:exposed-json:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-money:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-spring-boot-starter:$exposedVersion")
 }
 
 tasks.withType<KotlinCompile> {
