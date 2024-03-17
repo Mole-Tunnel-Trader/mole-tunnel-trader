@@ -38,3 +38,4 @@ out/
 
 ### my ###
 /src/main/resources/*.yml
+/docker/mysql/data/

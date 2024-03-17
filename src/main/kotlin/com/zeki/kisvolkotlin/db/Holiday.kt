@@ -1,30 +1,37 @@
 package com.zeki.kisvolkotlin.db
 
+import org.jetbrains.exposed.sql.insertAndGetId
 import java.time.LocalDate
 
-class Holiday (
+class Holiday(
     id: HolidayId,
     name: String,
     date: LocalDate
-){
+) {
     var id: HolidayId = id
-        protected set
+        private set
 
     var name: String = name
-        protected set
+        private set
 
     var date: LocalDate = date
-        protected set
+        private set
 
-    fun updateHoliday(
-        holiday: Holiday
-    ): Boolean {
-        return !(this.name == holiday.name &&
-                this.date == holiday.date)
+    companion object {
+
+        fun createHoliday(
+            name: String,
+            date: LocalDate
+        ): HolidayId {
+            return HolidayEntity.insertAndGetId {
+                it[HolidayEntity.name] = name
+                it[HolidayEntity.date] = date
+            }.value.let(::HolidayId)
+        }
     }
 }
 
 @JvmInline
-value class HolidayId (
+value class HolidayId(
     val value: Long
 )

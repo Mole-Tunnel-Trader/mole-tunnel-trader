@@ -16,7 +16,7 @@ allOpen {
 
 group = "com.zeki"
 version = "0.0.1-SNAPSHOT"
-var exposedVersion : String = "0.46.0"
+var exposedVersion: String = "0.46.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -47,6 +47,9 @@ dependencies {
     // log
     implementation("io.github.microutils:kotlin-logging:3.0.5")
 
+    // logback & webclient
+    implementation("io.netty:netty-all") // mac
+    implementation("io.micrometer:micrometer-core") // mac
 
     // exposed
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
@@ -70,4 +73,12 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+// subModule
+tasks.register<Copy>("copyYmlFiles") {
+    description = "yml 파일 복사"
+    group = "my tasks"
+    from("kis-vol-kotlin-yml")
+    into("src/main/resources")
 }

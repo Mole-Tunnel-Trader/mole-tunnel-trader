@@ -31,5 +31,6 @@ enum class ResponseCode(
     CONFLICT_DATA(HttpStatus.CONFLICT, "409_0", "데이터가 충돌되었습니다."),
 
     /* 500 */
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500_0", "서버측 에러")
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500_0", "서버측 에러"),
+    INTERNAL_SERVER_WEBCLIENT_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500_1", "WebClient 통신 에러"),
 }
