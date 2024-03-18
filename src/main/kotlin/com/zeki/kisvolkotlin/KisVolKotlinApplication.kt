@@ -1,12 +1,12 @@
 package com.zeki.kisvolkotlin
 
-import org.jetbrains.exposed.spring.autoconfigure.ExposedAutoConfiguration
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration
+
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 
 @SpringBootApplication
-@ImportAutoConfiguration(ExposedAutoConfiguration::class)
+@EnableJpaAuditing
 class KisVolKotlinApplication
 
 fun main(args: Array<String>) {

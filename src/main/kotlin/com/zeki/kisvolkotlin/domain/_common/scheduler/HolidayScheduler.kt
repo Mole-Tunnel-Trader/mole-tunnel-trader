@@ -12,7 +12,7 @@ class HolidayScheduler(
     //    @Scheduled(cron = "0 0 0 * * *")
     @Transactional
     fun updateHolidayAtOneDay() {
-        holidayService.updateHoliday()
+        holidayService.upsertHoliday()
     }
 
 }

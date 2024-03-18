@@ -1,7 +1,9 @@
 package com.zeki.kisvolkotlin.domain.data_go.holiday
 
-import com.zeki.kisvolkotlin.db.HolidayDao
+import com.zeki.kisvolkotlin.db.repository.HolidayRepository
 import com.zeki.kisvolkotlin.domain.data_go.holiday.dto.HolidayResDto
+import com.zeki.kisvolkotlin.exception.ApiException
+import com.zeki.kisvolkotlin.exception.ResponseCode
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,6 +15,7 @@ import java.time.LocalTime
 
 @Service
 class HolidayService(
+    private val holidayRepository: HolidayRepository,
     @Qualifier("WebClientDataGo") private val webClientDataGo: WebClient,
 ) {
 
@@ -31,19 +34,22 @@ class HolidayService(
     }
 
     fun isHoliday(availableDate: LocalDate): Boolean {
-        val firstOrNull = HolidayDao.getHolidayByLocalDate(availableDate).firstOrNull()
+        val holiday = holidayRepository.findByDate(availableDate)
 
-        return when (firstOrNull) {
+        return when (holiday) {
             null -> false
             else -> true
         }
     }
 
     @Transactional
-    fun updateHoliday(standardDate: LocalDate = LocalDate.now()) {
+    fun upsertHoliday(standardDate: LocalDate = LocalDate.now()) {
         val holidayResDto = this.getHolidaysFromDataGo(standardDate)
 
-        println()
+        for (item in holidayResDto.response.body.items.item) {
+
+        }
+
     }
 
 
@@ -62,6 +68,15 @@ class HolidayService(
             .exchangeToMono { it.toEntity(HolidayResDto::class.java) }
             .block()
 
-        return responseDatas?.body ?: HolidayResDto()
+        val holidayResDto = responseDatas?.body ?: HolidayResDto()
+
+        if (holidayResDto.response.header.resultCode != "00") {
+            throw ApiException(
+                ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+                "유효한 결과값이 아닙니다. ${holidayResDto.response.header.resultMsg}"
+            )
+        }
+
+        return holidayResDto
     }
 }

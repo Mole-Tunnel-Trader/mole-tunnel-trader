@@ -16,6 +16,6 @@ class HolidayController(
 
     @GetMapping("/holiday/update")
     fun updateHoliday() {
-        holidayService.updateHoliday()
+        holidayService.upsertHoliday()
     }
 }

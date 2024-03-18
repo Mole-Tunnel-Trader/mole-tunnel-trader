@@ -30,6 +30,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
+    // jpa
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -50,18 +53,6 @@ dependencies {
     // logback & webclient
     implementation("io.netty:netty-all") // mac
     implementation("io.micrometer:micrometer-core") // mac
-
-    // exposed
-    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-crypt:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
-
-    implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
-
-    implementation("org.jetbrains.exposed:exposed-json:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-money:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-spring-boot-starter:$exposedVersion")
 }
 
 tasks.withType<KotlinCompile> {

@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.web.reactive.function.client.WebClient
 
 @ExtendWith(MockitoExtension::class)
-class HolidayServiceTest {
+class HolidayTableEntityServiceTest {
 
     @Mock
     private lateinit var webClientDataGoMock: WebClient
