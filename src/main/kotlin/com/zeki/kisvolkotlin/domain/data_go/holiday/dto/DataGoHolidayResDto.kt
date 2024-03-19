@@ -1,7 +1,7 @@
 package com.zeki.kisvolkotlin.domain.data_go.holiday.dto
 
 
-data class HolidayResDto(
+data class DataGoHolidayResDto(
     val response: Response = Response()
 )
 

@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
     kotlin("plugin.jpa") version "1.9.22"
+    kotlin("kapt") version "1.9.22"
 }
 
 allOpen {
@@ -32,6 +33,12 @@ dependencies {
 
     // jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // querydsl
+    implementation("com.querydsl:querydsl-core:5.1.0")
+    implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
+    kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
+
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

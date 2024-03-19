@@ -15,12 +15,21 @@ abstract class BaseEntity {
     var id: Long? = null
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false)
+    @Column(
+        name = "created_at",
+        nullable = false,
+        updatable = false,
+        columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP"
+    )
     var createdAt: LocalDateTime = LocalDateTime.now()
         protected set
 
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
+    @Column(
+        name = "updated_at",
+        nullable = false,
+        columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+    )
     var updatedAt: LocalDateTime = LocalDateTime.now()
         protected set
 }

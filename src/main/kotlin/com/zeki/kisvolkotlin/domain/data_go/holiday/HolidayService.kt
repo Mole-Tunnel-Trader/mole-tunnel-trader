@@ -1,7 +1,10 @@
 package com.zeki.kisvolkotlin.domain.data_go.holiday
 
+import com.zeki.kisvolkotlin.db.entity.Holiday
+import com.zeki.kisvolkotlin.db.repository.HolidayJoinRepository
 import com.zeki.kisvolkotlin.db.repository.HolidayRepository
-import com.zeki.kisvolkotlin.domain.data_go.holiday.dto.HolidayResDto
+import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toLocalDate
+import com.zeki.kisvolkotlin.domain.data_go.holiday.dto.DataGoHolidayResDto
 import com.zeki.kisvolkotlin.exception.ApiException
 import com.zeki.kisvolkotlin.exception.ResponseCode
 import org.springframework.beans.factory.annotation.Qualifier
@@ -16,10 +19,12 @@ import java.time.LocalTime
 @Service
 class HolidayService(
     private val holidayRepository: HolidayRepository,
+    private val holidayJoinRepository: HolidayJoinRepository,
     @Qualifier("WebClientDataGo") private val webClientDataGo: WebClient,
 ) {
 
-    @Transactional
+    @Transactional(readOnly = true)
+    // TODO : cache 처리
     fun getAvailableDate(standardTime: LocalTime = LocalTime.now()): LocalDate {
         var availableDate = when {
             standardTime.isBefore(LocalTime.of(16, 0)) -> LocalDate.now().minusDays(1)
@@ -43,19 +48,103 @@ class HolidayService(
     }
 
     @Transactional
-    fun upsertHoliday(standardDate: LocalDate = LocalDate.now()) {
-        val holidayResDto = this.getHolidaysFromDataGo(standardDate)
+    fun upsertHoliday(standardYear: Int = LocalDate.now().year) {
+        val holidaySaveList = mutableListOf<Holiday>()
+        val holidayUpdateList = mutableListOf<Holiday>()
+        val holidayDeleteList = mutableListOf<Holiday>()
 
-        for (item in holidayResDto.response.body.items.item) {
+        this.upsertHolidayByDataGo(standardYear, holidaySaveList, holidayUpdateList, holidayDeleteList)
+        this.upsertHolidayByWeekend(standardYear, holidaySaveList, holidayDeleteList)
 
+        holidayJoinRepository.bulkInsert(holidaySaveList)
+        holidayJoinRepository.bulkUpdate(holidayUpdateList)
+        holidayRepository.deleteAllInBatch(holidayDeleteList)
+    }
+
+    private fun upsertHolidayByDataGo(
+        standardYear: Int,
+        holidaySaveList: MutableList<Holiday>,
+        holidayUpdateList: MutableList<Holiday>,
+        holidayDeleteList: MutableList<Holiday>
+    ) {
+        val dataGoHolidayResDto = this.getHolidaysFromDataGo(standardYear)
+        val targetHolidayDataList = dataGoHolidayResDto.response.body.items.item
+        val holidayDateList =
+            targetHolidayDataList.stream()
+                .filter { it.isHoliday == "Y" }
+                .map { it.locdate.toLocalDate() }
+                .toList()
+
+        val savedHolidayMap = holidayRepository.findByDateIn(holidayDateList)
+            .associateBy { it.date }.toMutableMap()
+
+        for (item in targetHolidayDataList) {
+            val localDate = item.locdate.toLocalDate()
+
+            when (val holiday = savedHolidayMap[localDate]) {
+                null -> {
+                    holidaySaveList.add(
+                        Holiday(
+                            name = item.dateName,
+                            date = localDate,
+                            isHoliday = item.isHoliday == "Y"
+                        )
+                    )
+                }
+
+                else -> {
+                    if (holiday.updateHoliday(
+                            item.dateName,
+                            localDate,
+                            item.isHoliday == "Y"
+                        )
+                    ) holidayUpdateList.add(holiday)
+                }
+            }
+            savedHolidayMap.remove(localDate)
         }
 
+        holidayDeleteList.addAll(savedHolidayMap.values)
     }
 
 
-    fun getHolidaysFromDataGo(standardDate: LocalDate = LocalDate.now()): HolidayResDto {
+    private fun upsertHolidayByWeekend(
+        standardYear: Int,
+        holidaySaveList: MutableList<Holiday>,
+        holidayDeleteList: MutableList<Holiday>
+    ) {
+        val startDate = LocalDate.of(standardYear, 1, 1)
+        val endDate = LocalDate.of(standardYear, 12, 31)
+
+        val savedHolidayMap = holidayRepository.findByDateBetween(startDate, endDate)
+            .associateBy { it.date }.toMutableMap()
+
+        var currentDate = startDate
+        while (currentDate.isBefore(endDate) || currentDate.isEqual(endDate)) {
+            if (currentDate.dayOfWeek.value in listOf(6, 7)) {
+                when (savedHolidayMap[currentDate]) {
+                    null -> {
+                        holidaySaveList.add(
+                            Holiday(
+                                name = "주말",
+                                date = currentDate,
+                                isHoliday = false
+                            )
+                        )
+                    }
+                }
+            }
+
+            savedHolidayMap.remove(currentDate)
+            currentDate = currentDate.plusDays(1)
+        }
+
+        holidayDeleteList.addAll(savedHolidayMap.values)
+    }
+
+    private fun getHolidaysFromDataGo(standardYear: Int = LocalDate.now().year): DataGoHolidayResDto {
         val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap()
-        queryParams.add("solYear", standardDate.year.toString())
+        queryParams.add("solYear", standardYear.toString())
         queryParams.add("_type", "json")
         queryParams.add("numOfRows", "100")
 
@@ -65,18 +154,18 @@ class HolidayService(
                     .queryParams(queryParams)
                     .build()
             }
-            .exchangeToMono { it.toEntity(HolidayResDto::class.java) }
+            .exchangeToMono { it.toEntity(DataGoHolidayResDto::class.java) }
             .block()
 
-        val holidayResDto = responseDatas?.body ?: HolidayResDto()
+        val dataGoHolidayResDto = responseDatas?.body ?: DataGoHolidayResDto()
 
-        if (holidayResDto.response.header.resultCode != "00") {
+        if (dataGoHolidayResDto.response.header.resultCode != "00") {
             throw ApiException(
                 ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
-                "유효한 결과값이 아닙니다. ${holidayResDto.response.header.resultMsg}"
+                "유효한 결과값이 아닙니다. ${dataGoHolidayResDto.response.header.resultMsg}"
             )
         }
 
-        return holidayResDto
+        return dataGoHolidayResDto
     }
 }
