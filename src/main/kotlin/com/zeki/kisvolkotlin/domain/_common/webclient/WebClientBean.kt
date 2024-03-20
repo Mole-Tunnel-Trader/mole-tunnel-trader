@@ -23,7 +23,7 @@ import java.time.Duration
 import javax.net.ssl.SSLException
 
 @Configuration
-class WebClientCreator(
+class WebClientBean(
     val webClientBuilder: WebClient.Builder,
     val apiStatics: ApiStatics
 ) {

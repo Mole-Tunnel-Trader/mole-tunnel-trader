@@ -14,58 +14,65 @@ import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import org.springframework.web.reactive.function.client.WebClient
 import java.time.LocalDate
-import java.time.LocalTime
 
 @Service
 class HolidayService(
     private val holidayRepository: HolidayRepository,
     private val holidayJoinRepository: HolidayJoinRepository,
+
+    private val holidayDateService: HolidayDateService,
+
     @Qualifier("WebClientDataGo") private val webClientDataGo: WebClient,
 ) {
 
-    @Transactional(readOnly = true)
-    // TODO : cache 처리
-    fun getAvailableDate(standardTime: LocalTime = LocalTime.now()): LocalDate {
-        var availableDate = when {
-            standardTime.isBefore(LocalTime.of(16, 0)) -> LocalDate.now().minusDays(1)
-            else -> LocalDate.now()
-        }
-
-        while (this.isHoliday(availableDate)) {
-            availableDate = availableDate.minusDays(1)
-        }
-
-        return availableDate
-    }
-
-    fun isHoliday(availableDate: LocalDate): Boolean {
-        val holiday = holidayRepository.findByDate(availableDate)
-
-        return when (holiday) {
-            null -> false
-            else -> true
-        }
-    }
-
     @Transactional
-    fun upsertHoliday(standardYear: Int = LocalDate.now().year) {
+    fun upsertHoliday(standardYear: Int = holidayDateService.getAvailableDate().year) {
         val holidaySaveList = mutableListOf<Holiday>()
         val holidayUpdateList = mutableListOf<Holiday>()
-        val holidayDeleteList = mutableListOf<Holiday>()
+        val holidayDeleteSet = mutableSetOf<Holiday>()
 
-        this.upsertHolidayByDataGo(standardYear, holidaySaveList, holidayUpdateList, holidayDeleteList)
-        this.upsertHolidayByWeekend(standardYear, holidaySaveList, holidayDeleteList)
+        this.upsertHolidayByDataGo(standardYear, holidaySaveList, holidayUpdateList, holidayDeleteSet)
+        this.upsertHolidayByDataGo(standardYear + 1, holidaySaveList, holidayUpdateList, holidayDeleteSet)
+        this.upsertHolidayByWeekend(standardYear, holidaySaveList, holidayDeleteSet)
+        this.upsertHolidayByWeekend(standardYear + 1, holidaySaveList, holidayDeleteSet)
 
         holidayJoinRepository.bulkInsert(holidaySaveList)
         holidayJoinRepository.bulkUpdate(holidayUpdateList)
-        holidayRepository.deleteAllInBatch(holidayDeleteList)
+        holidayRepository.deleteAllInBatch(holidayDeleteSet)
     }
 
-    private fun upsertHolidayByDataGo(
+    fun getHolidaysFromDataGo(standardYear: Int = holidayDateService.getAvailableDate().year): DataGoHolidayResDto {
+        val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap()
+        queryParams.add("solYear", standardYear.toString())
+        queryParams.add("_type", "json")
+        queryParams.add("numOfRows", "100")
+
+        val responseDatas = webClientDataGo.get()
+            .uri {
+                it.path("B090041/openapi/service/SpcdeInfoService/getRestDeInfo")
+                    .queryParams(queryParams)
+                    .build()
+            }
+            .exchangeToMono { it.toEntity(DataGoHolidayResDto::class.java) }
+            .block()
+
+        val dataGoHolidayResDto = responseDatas?.body ?: DataGoHolidayResDto()
+
+        if (dataGoHolidayResDto.response.header.resultCode != "00") {
+            throw ApiException(
+                ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+                "유효한 결과값이 아닙니다. ${dataGoHolidayResDto.response.header.resultMsg}"
+            )
+        }
+
+        return dataGoHolidayResDto
+    }
+
+    fun upsertHolidayByDataGo(
         standardYear: Int,
         holidaySaveList: MutableList<Holiday>,
         holidayUpdateList: MutableList<Holiday>,
-        holidayDeleteList: MutableList<Holiday>
+        holidayDeleteSet: MutableSet<Holiday>
     ) {
         val dataGoHolidayResDto = this.getHolidaysFromDataGo(standardYear)
         val targetHolidayDataList = dataGoHolidayResDto.response.body.items.item
@@ -104,14 +111,14 @@ class HolidayService(
             savedHolidayMap.remove(localDate)
         }
 
-        holidayDeleteList.addAll(savedHolidayMap.values)
+        holidayDeleteSet.addAll(savedHolidayMap.values)
     }
 
 
-    private fun upsertHolidayByWeekend(
+    fun upsertHolidayByWeekend(
         standardYear: Int,
         holidaySaveList: MutableList<Holiday>,
-        holidayDeleteList: MutableList<Holiday>
+        holidayDeleteSet: MutableSet<Holiday>
     ) {
         val startDate = LocalDate.of(standardYear, 1, 1)
         val endDate = LocalDate.of(standardYear, 12, 31)
@@ -139,33 +146,7 @@ class HolidayService(
             currentDate = currentDate.plusDays(1)
         }
 
-        holidayDeleteList.addAll(savedHolidayMap.values)
+        holidayDeleteSet.addAll(savedHolidayMap.values)
     }
 
-    private fun getHolidaysFromDataGo(standardYear: Int = LocalDate.now().year): DataGoHolidayResDto {
-        val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap()
-        queryParams.add("solYear", standardYear.toString())
-        queryParams.add("_type", "json")
-        queryParams.add("numOfRows", "100")
-
-        val responseDatas = webClientDataGo.get()
-            .uri {
-                it.path("B090041/openapi/service/SpcdeInfoService/getRestDeInfo")
-                    .queryParams(queryParams)
-                    .build()
-            }
-            .exchangeToMono { it.toEntity(DataGoHolidayResDto::class.java) }
-            .block()
-
-        val dataGoHolidayResDto = responseDatas?.body ?: DataGoHolidayResDto()
-
-        if (dataGoHolidayResDto.response.header.resultCode != "00") {
-            throw ApiException(
-                ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
-                "유효한 결과값이 아닙니다. ${dataGoHolidayResDto.response.header.resultMsg}"
-            )
-        }
-
-        return dataGoHolidayResDto
-    }
 }

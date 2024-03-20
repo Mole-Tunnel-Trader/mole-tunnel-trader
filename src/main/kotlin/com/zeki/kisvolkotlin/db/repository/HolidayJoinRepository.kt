@@ -10,10 +10,15 @@ class HolidayJoinRepository(
     private val jpaQueryFactory: JPAQueryFactory,
     private val jdbcTemplate: JdbcTemplate
 ) {
-
-    // TODO : 1000건씩 끊어서 처리
+    private val batchSize = 1000
 
     fun bulkInsert(holidaySaveList: List<Holiday>) {
+        holidaySaveList.chunked(batchSize).forEach {
+            this.bulkInsertUsingBatch(it)
+        }
+    }
+
+    private fun bulkInsertUsingBatch(holidaySaveList: List<Holiday>) {
         var sql = "INSERT INTO holiday (date, name, is_holiday) VALUES "
 
         holidaySaveList.forEach {
@@ -25,6 +30,12 @@ class HolidayJoinRepository(
     }
 
     fun bulkUpdate(holidayUpdateList: List<Holiday>) {
+        holidayUpdateList.chunked(batchSize).forEach {
+            this.bulkUpdateUsingBatch(it)
+        }
+    }
+
+    private fun bulkUpdateUsingBatch(holidayUpdateList: List<Holiday>) {
         val sql = "UPDATE holiday SET name = ?, date = ?, is_holiday = ? WHERE id = ?"
 
         jdbcTemplate.batchUpdate(sql, holidayUpdateList.map {
