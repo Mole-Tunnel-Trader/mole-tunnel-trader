@@ -1,22 +1,57 @@
 package com.zeki.kisvolkotlin.domain.data_go.holiday
 
+import com.zeki.kisvolkotlin.db.entity.Holiday
+import com.zeki.kisvolkotlin.db.repository.HolidayRepository
 import com.zeki.kisvolkotlin.domain._common.util.CustomUtils
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
 @SpringBootTest
 @Transactional
+@ActiveProfiles("test")
 @Suppress("LocalVariableName")
 class HolidayServiceTest(
     @Autowired private var holidayService: HolidayService,
-    @Autowired private var holidayDateService: HolidayDateService
+    @Autowired private var holidayDateService: HolidayDateService,
+    @Autowired private var holidayRepository: HolidayRepository
 ) {
+
+    @BeforeEach
+    fun setUp() {
+        val holiday1 = Holiday(
+            date = LocalDate.of(2024, 2, 9),
+            name = "설날",
+            isHoliday = true
+        )
+        val holiday2 = Holiday(
+            date = LocalDate.of(2024, 2, 10),
+            name = "설날",
+            isHoliday = true
+        )
+        val holiday3 = Holiday(
+            date = LocalDate.of(2024, 2, 11),
+            name = "설날",
+            isHoliday = true
+        )
+        val holiday4 = Holiday(
+            date = LocalDate.of(2024, 2, 12),
+            name = "주말",
+            isHoliday = false
+        )
+
+        holidayRepository.save(holiday1)
+        holidayRepository.save(holiday2)
+        holidayRepository.save(holiday3)
+        holidayRepository.save(holiday4)
+    }
 
     @Nested
     @DisplayName("성공 테스트")
