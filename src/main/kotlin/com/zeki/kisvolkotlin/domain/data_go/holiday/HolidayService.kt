@@ -33,15 +33,18 @@ class HolidayService(
 
         this.upsertHolidayByDataGo(standardYear, holidaySaveList, holidayUpdateList, holidayDeleteSet)
         this.upsertHolidayByDataGo(standardYear + 1, holidaySaveList, holidayUpdateList, holidayDeleteSet)
+
         this.upsertHolidayByWeekend(standardYear, holidaySaveList, holidayDeleteSet)
         this.upsertHolidayByWeekend(standardYear + 1, holidaySaveList, holidayDeleteSet)
+
 
         holidayJoinRepository.bulkInsert(holidaySaveList)
         holidayJoinRepository.bulkUpdate(holidayUpdateList)
         holidayRepository.deleteAllInBatch(holidayDeleteSet)
     }
 
-    fun getHolidaysFromDataGo(standardYear: Int = holidayDateService.getAvailableDate().year): DataGoHolidayResDto {
+    fun getHolidaysFromDataGo(standardYear: Int = holidayDateService.getAvailableDate().year)
+            : DataGoHolidayResDto {
         val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap()
         queryParams.add("solYear", standardYear.toString())
         queryParams.add("_type", "json")
@@ -70,25 +73,23 @@ class HolidayService(
 
     fun upsertHolidayByDataGo(
         standardYear: Int,
-        holidaySaveList: MutableList<Holiday>,
-        holidayUpdateList: MutableList<Holiday>,
-        holidayDeleteSet: MutableSet<Holiday>
+        holidaySaveList: MutableCollection<Holiday>,
+        holidayUpdateList: MutableCollection<Holiday>,
+        holidayDeleteSet: MutableCollection<Holiday>
     ) {
         val dataGoHolidayResDto = this.getHolidaysFromDataGo(standardYear)
         val targetHolidayDataList = dataGoHolidayResDto.response.body.items.item
-        val holidayDateList =
-            targetHolidayDataList.stream()
-                .filter { it.isHoliday == "Y" }
-                .map { it.locdate.toLocalDate() }
-                .toList()
 
-        val savedHolidayMap = holidayRepository.findByDateIn(holidayDateList)
-            .associateBy { it.date }.toMutableMap()
+        val startDate = LocalDate.of(standardYear, 1, 1)
+        val endDate = LocalDate.of(standardYear, 12, 31)
+
+        val savedHolidayMap = holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, true)
+            .associateBy { "${it.date} ${it.name} ${it.isHoliday}" }.toMutableMap()
 
         for (item in targetHolidayDataList) {
             val localDate = item.locdate.toLocalDate()
 
-            when (val holiday = savedHolidayMap[localDate]) {
+            when (val holiday = savedHolidayMap["$localDate ${item.dateName} ${item.isHoliday == "Y"}"]) {
                 null -> {
                     holidaySaveList.add(
                         Holiday(
@@ -108,7 +109,7 @@ class HolidayService(
                     ) holidayUpdateList.add(holiday)
                 }
             }
-            savedHolidayMap.remove(localDate)
+            savedHolidayMap.remove("$localDate ${item.dateName} ${item.isHoliday == "Y"}")
         }
 
         holidayDeleteSet.addAll(savedHolidayMap.values)
@@ -117,13 +118,13 @@ class HolidayService(
 
     fun upsertHolidayByWeekend(
         standardYear: Int,
-        holidaySaveList: MutableList<Holiday>,
-        holidayDeleteSet: MutableSet<Holiday>
+        holidaySaveList: MutableCollection<Holiday>,
+        holidayDeleteSet: MutableCollection<Holiday>
     ) {
         val startDate = LocalDate.of(standardYear, 1, 1)
         val endDate = LocalDate.of(standardYear, 12, 31)
 
-        val savedHolidayMap = holidayRepository.findByDateBetween(startDate, endDate)
+        val savedHolidayMap = holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, false)
             .associateBy { it.date }.toMutableMap()
 
         var currentDate = startDate

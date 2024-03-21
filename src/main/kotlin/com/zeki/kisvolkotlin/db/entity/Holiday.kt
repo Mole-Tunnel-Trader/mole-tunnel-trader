@@ -45,4 +45,24 @@ class Holiday(
         this.isHoliday = isHoliday
         return true
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Holiday) return false
+
+        if (name != other.name) return false
+        if (date != other.date) return false
+        if (isHoliday != other.isHoliday) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + date.hashCode()
+        result = 31 * result + isHoliday.hashCode()
+        return result
+    }
+
+
 }

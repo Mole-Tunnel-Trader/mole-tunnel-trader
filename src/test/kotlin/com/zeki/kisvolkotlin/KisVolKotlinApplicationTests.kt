@@ -1,7 +1,4 @@
 package com.zeki.kisvolkotlin
 
 
-class KisVolKotlinApplicationTests {
-
-
-}
+class KisVolKotlinApplicationTests
