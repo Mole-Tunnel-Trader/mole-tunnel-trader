@@ -42,17 +42,17 @@ dependencies {
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly("com.h2database:h2")    // test db
 
     // db
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("com.h2database:h2")
 
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // swagger
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // log
     implementation("io.github.microutils:kotlin-logging:3.0.5")

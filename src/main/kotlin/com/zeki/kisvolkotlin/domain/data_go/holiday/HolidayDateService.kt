@@ -16,16 +16,34 @@ class HolidayDateService(
     // TODO : cache 처리
     fun getAvailableDate(
         standardDate: LocalDate = LocalDate.now(),
-        standardTime: LocalTime = LocalTime.now()
+        standardTime: LocalTime = LocalTime.now(),
+        standardDeltaDate: Int = 0
     ): LocalDate {
+
         var availableDate = when {
             standardTime.isBefore(CustomUtils.getStandardNowDate()) -> standardDate.minusDays(1)
             else -> standardDate
         }
 
-        while (this.isHoliday(availableDate)) {
+
+        // FIXME : 수학적 계산으로 조금 더 효율적으로 호출하게끔 고려해볼것
+        var isHoliday = this.isHoliday(availableDate)
+
+        while (isHoliday) {
             availableDate = availableDate.minusDays(1)
+            isHoliday = this.isHoliday(availableDate)
         }
+
+        for (i in 0 until standardDeltaDate) {
+            availableDate = availableDate.minusDays(1)
+            isHoliday = this.isHoliday(availableDate)
+
+            while (isHoliday) {
+                availableDate = availableDate.minusDays(1)
+                isHoliday = this.isHoliday(availableDate)
+            }
+        }
+
 
         return availableDate
     }

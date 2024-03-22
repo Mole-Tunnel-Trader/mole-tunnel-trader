@@ -1,7 +1,6 @@
-package com.zeki.kisvolkotlin.domain.data_go.holiday.dto
+package com.zeki.kisvolkotlin.domain.data_go.stock_code.dto
 
-
-data class DataGoHolidayResDto(
+data class DataGoStockCodeResDto(
     val response: Response = Response()
 )
 
@@ -23,13 +22,15 @@ data class Header(
 )
 
 data class Items(
-    val item: List<HolidayItem> = listOf()
+    val item: List<StockCodeItem> = listOf()
 )
 
-data class HolidayItem(
-    val dateKind: String = "",
-    val dateName: String = "",
-    val isHoliday: String = "",
-    val locdate: Int = 0,
-    val seq: Int = 0
+data class StockCodeItem(
+    val basDt: String = "",
+    val corpNm: String = "",
+    val crno: String = "",
+    val isinCd: String = "",
+    val itmsNm: String = "",
+    val mrktCtg: String = "",
+    val srtnCd: String = ""
 )

@@ -1,15 +1,15 @@
 package com.zeki.kisvolkotlin.db.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Index
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.time.LocalDate
 
 @Entity
 @Table(
     name = "holiday", indexes = [
         Index(name = "idx_holiday_date", columnList = "date")
+    ],
+    uniqueConstraints = [
+        UniqueConstraint(columnNames = ["name", "date", "is_holiday"])
     ]
 )
 class Holiday(
@@ -18,15 +18,15 @@ class Holiday(
     isHoliday: Boolean
 ) : BaseEntity() {
 
-    @Column(length = 50, nullable = false)
+    @Column(name = "name", length = 50, nullable = false)
     var name: String = name
         protected set
 
-    @Column(nullable = false)
+    @Column(name = "date", nullable = false)
     var date: LocalDate = date
         protected set
 
-    @Column(nullable = false)
+    @Column(name = "is_holiday", nullable = false)
     var isHoliday: Boolean = isHoliday
         protected set
 

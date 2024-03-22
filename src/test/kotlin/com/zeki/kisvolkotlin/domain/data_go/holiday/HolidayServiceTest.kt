@@ -1,17 +1,21 @@
 package com.zeki.kisvolkotlin.domain.data_go.holiday
 
 import com.zeki.kisvolkotlin.db.entity.Holiday
+import com.zeki.kisvolkotlin.db.repository.HolidayJoinRepository
 import com.zeki.kisvolkotlin.db.repository.HolidayRepository
 import com.zeki.kisvolkotlin.domain._common.util.CustomUtils
+import com.zeki.kisvolkotlin.domain.data_go.holiday.extend.ExtendHolidayService
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.reactive.function.client.WebClient
 import java.time.LocalDate
 
 @SpringBootTest
@@ -21,8 +25,21 @@ import java.time.LocalDate
 class HolidayServiceTest(
     @Autowired private var holidayService: HolidayService,
     @Autowired private var holidayDateService: HolidayDateService,
+
     @Autowired private var holidayRepository: HolidayRepository,
+    @Autowired private var holidayJoinRepository: HolidayJoinRepository,
+
+    @Qualifier("WebClientDataGo") @Autowired private var webClientDataGo: WebClient
 ) {
+
+    val extendHolidayService: ExtendHolidayService by lazy {
+        ExtendHolidayService(
+            holidayRepository = holidayRepository,
+            holidayJoinRepository = holidayJoinRepository,
+            holidayDateService = holidayDateService,
+            webClientDataGo = webClientDataGo
+        )
+    }
 
     @Nested
     @DisplayName("성공 테스트")
@@ -105,7 +122,7 @@ class HolidayServiceTest(
             )
 
 
-            holidayService.upsertHoliday(2024)
+            extendHolidayService.upsertHoliday(2024)
             val allEntity = holidayRepository.findAll()
             val size = allEntity.size
 
@@ -121,14 +138,11 @@ class HolidayServiceTest(
                 .toList()
 
             val `20240102 휴일아님 true 0개` = allEntity.stream()
-                .filter {
-                    it.date == LocalDate.of(2024, 1, 2) &&
-                            it.name == "휴일 아님" && it.isHoliday
-                }
+                .filter { it.name == "휴일 아님" }
                 .toList()
 
             // When
-            holidayService.upsertHoliday(2024)
+            extendHolidayService.upsertHoliday(2024)
             val allEntity2 = holidayRepository.findAll()
             val size2 = allEntity2.size
 

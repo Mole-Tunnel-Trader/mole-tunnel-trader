@@ -17,13 +17,16 @@ class HolidayJoinRepository(
     }
 
     private fun bulkInsertUsingBatch(holidaySaveList: Collection<Holiday>) {
-        var sql = "INSERT INTO holiday (date, name, is_holiday) VALUES "
+        var sql = buildString {
+            append("INSERT INTO holiday (date, name, is_holiday) VALUES ")
 
-        holidaySaveList.forEach {
-            sql += "('${it.date}', '${it.name}', ${it.isHoliday}), "
+
+            holidaySaveList.forEach {
+                append("('${it.date}', '${it.name}', ${it.isHoliday}), ")
+            }
         }
+        
         sql = sql.substring(0, sql.length - 2)
-
         jdbcTemplate.execute(sql)
     }
 

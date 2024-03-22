@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import org.springframework.web.reactive.function.client.WebClient
+import reactor.util.retry.Retry
+import java.time.Duration
 import java.time.LocalDate
 
 @Service
@@ -57,6 +59,7 @@ class HolidayService(
                     .build()
             }
             .exchangeToMono { it.toEntity(DataGoHolidayResDto::class.java) }
+            .retryWhen(Retry.fixedDelay(3, Duration.ofMillis(510)))
             .block()
 
         val dataGoHolidayResDto = responseDatas?.body ?: DataGoHolidayResDto()
@@ -107,9 +110,10 @@ class HolidayService(
                             item.isHoliday == "Y"
                         )
                     ) holidayUpdateList.add(holiday)
+                    savedHolidayMap.remove("$localDate ${item.dateName} ${item.isHoliday == "Y"}")
                 }
             }
-            savedHolidayMap.remove("$localDate ${item.dateName} ${item.isHoliday == "Y"}")
+
         }
 
         holidayDeleteSet.addAll(savedHolidayMap.values)
@@ -131,7 +135,7 @@ class HolidayService(
         while (currentDate.isBefore(endDate) || currentDate.isEqual(endDate)) {
             if (currentDate.dayOfWeek.value in listOf(6, 7)) {
                 when (savedHolidayMap[currentDate]) {
-                    null -> {
+                    null ->
                         holidaySaveList.add(
                             Holiday(
                                 name = "주말",
@@ -139,11 +143,12 @@ class HolidayService(
                                 isHoliday = false
                             )
                         )
-                    }
+
+                    else -> savedHolidayMap.remove(currentDate)
                 }
             }
 
-            savedHolidayMap.remove(currentDate)
+
             currentDate = currentDate.plusDays(1)
         }
 
