@@ -103,10 +103,12 @@ class StockCodeService(
             ).toStringDate()
 
         val queryParams = LinkedMultiValueMap<String, String>()
-        queryParams["resultType"] = "json"
-        queryParams["numOfRows"] = batchSize.toString()
-        queryParams["basDt"] = deltaOfToday
-        queryParams["pageNo"] = pageNo.toString()
+            .apply {
+                add("resultType", "json")
+                add("numOfRows", batchSize.toString())
+                add("basDt", deltaOfToday)
+                add("pageNo", pageNo.toString())
+            }
 
         val dataGoStockCodeItemList = mutableListOf<StockCodeItem>()
         while ((pageNo - 1) * batchSize < totalCount) {

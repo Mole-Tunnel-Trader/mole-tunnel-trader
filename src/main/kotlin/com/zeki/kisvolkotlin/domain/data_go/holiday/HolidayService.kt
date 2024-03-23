@@ -45,10 +45,12 @@ class HolidayService(
 
     fun getHolidaysFromDataGo(standardYear: Int = holidayDateService.getAvailableDate().year)
             : DataGoHolidayResDto {
-        val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap()
-        queryParams.add("solYear", standardYear.toString())
-        queryParams.add("_type", "json")
-        queryParams.add("numOfRows", "100")
+        val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>()
+            .apply {
+                add("solYear", standardYear.toString())
+                add("_type", "json")
+                add("numOfRows", "100")
+            }
 
         val responseDatas = webClientConnector.connect<Unit, DataGoHolidayResDto>(
             WebClientConnector.WebClientType.DATA_GO,
