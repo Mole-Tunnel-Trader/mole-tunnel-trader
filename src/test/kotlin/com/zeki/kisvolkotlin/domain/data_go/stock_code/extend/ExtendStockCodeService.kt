@@ -2,12 +2,12 @@ package com.zeki.kisvolkotlin.domain.data_go.stock_code.extend
 
 import com.zeki.kisvolkotlin.db.repository.StockCodeJoinRepository
 import com.zeki.kisvolkotlin.db.repository.StockCodeRepository
+import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
 import com.zeki.kisvolkotlin.domain.data_go.holiday.HolidayDateService
 import com.zeki.kisvolkotlin.domain.data_go.stock_code.StockCodeService
 import com.zeki.kisvolkotlin.domain.data_go.stock_code.dto.DataGoStockCodeResDto
 import com.zeki.kisvolkotlin.domain.data_go.stock_code.dto.StockCodeItem
 import com.zeki.kisvolkotlin.utils.TestUtils
-import org.springframework.web.reactive.function.client.WebClient
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -16,12 +16,12 @@ class ExtendStockCodeService(
     stockCodeRepository: StockCodeRepository,
     stockCodeJoinRepository: StockCodeJoinRepository,
     holidayDateService: HolidayDateService,
-    webClientDataGo: WebClient
+    webClientConnector: WebClientConnector
 ) : StockCodeService(
     stockCodeRepository,
     stockCodeJoinRepository,
     holidayDateService,
-    webClientDataGo
+    webClientConnector
 ) {
 
     override fun getStockCodesFromDataGo(

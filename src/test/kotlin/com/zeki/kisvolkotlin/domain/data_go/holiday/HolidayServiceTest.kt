@@ -4,6 +4,7 @@ import com.zeki.kisvolkotlin.db.entity.Holiday
 import com.zeki.kisvolkotlin.db.repository.HolidayJoinRepository
 import com.zeki.kisvolkotlin.db.repository.HolidayRepository
 import com.zeki.kisvolkotlin.domain._common.util.CustomUtils
+import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
 import com.zeki.kisvolkotlin.domain.data_go.holiday.extend.ExtendHolidayService
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -11,11 +12,9 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.reactive.function.client.WebClient
 import java.time.LocalDate
 
 @SpringBootTest
@@ -29,7 +28,7 @@ class HolidayServiceTest(
     @Autowired private var holidayRepository: HolidayRepository,
     @Autowired private var holidayJoinRepository: HolidayJoinRepository,
 
-    @Qualifier("WebClientDataGo") @Autowired private var webClientDataGo: WebClient
+    private val webClientConnector: WebClientConnector,
 ) {
 
     val extendHolidayService: ExtendHolidayService by lazy {
@@ -37,7 +36,7 @@ class HolidayServiceTest(
             holidayRepository = holidayRepository,
             holidayJoinRepository = holidayJoinRepository,
             holidayDateService = holidayDateService,
-            webClientDataGo = webClientDataGo
+            webClientConnector = webClientConnector
         )
     }
 

@@ -5,6 +5,7 @@ import com.zeki.kisvolkotlin.db.entity.em.StockMarket
 import com.zeki.kisvolkotlin.db.repository.StockCodeJoinRepository
 import com.zeki.kisvolkotlin.db.repository.StockCodeRepository
 import com.zeki.kisvolkotlin.domain._common.util.CustomUtils
+import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
 import com.zeki.kisvolkotlin.domain.data_go.holiday.HolidayDateService
 import com.zeki.kisvolkotlin.domain.data_go.stock_code.extend.ExtendStockCodeService
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -13,11 +14,9 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.reactive.function.client.WebClient
 import java.time.LocalDate
 
 @Suppress("LocalVariableName")
@@ -29,7 +28,7 @@ class StockCodeServiceTest(
     @Autowired private var stockCodeRepository: StockCodeRepository,
     @Autowired private var stockCodeJoinRepository: StockCodeJoinRepository,
     @Autowired private var holidayDateService: HolidayDateService,
-    @Qualifier("WebClientDataGo") @Autowired private var webClient: WebClient
+    private var webClientConnector: WebClientConnector
 ) {
 
     val extendStockCodeService: ExtendStockCodeService by lazy {
@@ -37,7 +36,7 @@ class StockCodeServiceTest(
             stockCodeRepository = stockCodeRepository,
             stockCodeJoinRepository = stockCodeJoinRepository,
             holidayDateService = holidayDateService,
-            webClientDataGo = webClient
+            webClientConnector = webClientConnector
         )
     }
 

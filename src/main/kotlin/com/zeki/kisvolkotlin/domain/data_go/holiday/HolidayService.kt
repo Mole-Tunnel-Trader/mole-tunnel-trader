@@ -4,17 +4,15 @@ import com.zeki.kisvolkotlin.db.entity.Holiday
 import com.zeki.kisvolkotlin.db.repository.HolidayJoinRepository
 import com.zeki.kisvolkotlin.db.repository.HolidayRepository
 import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toLocalDate
+import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
 import com.zeki.kisvolkotlin.domain.data_go.holiday.dto.DataGoHolidayResDto
 import com.zeki.kisvolkotlin.exception.ApiException
 import com.zeki.kisvolkotlin.exception.ResponseCode
-import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
-import org.springframework.web.reactive.function.client.WebClient
-import reactor.util.retry.Retry
-import java.time.Duration
 import java.time.LocalDate
 
 @Service
@@ -24,7 +22,7 @@ class HolidayService(
 
     private val holidayDateService: HolidayDateService,
 
-    @Qualifier("WebClientDataGo") private val webClientDataGo: WebClient,
+    private val webClientConnector: WebClientConnector,
 ) {
 
     @Transactional
@@ -52,15 +50,15 @@ class HolidayService(
         queryParams.add("_type", "json")
         queryParams.add("numOfRows", "100")
 
-        val responseDatas = webClientDataGo.get()
-            .uri {
-                it.path("B090041/openapi/service/SpcdeInfoService/getRestDeInfo")
-                    .queryParams(queryParams)
-                    .build()
-            }
-            .exchangeToMono { it.toEntity(DataGoHolidayResDto::class.java) }
-            .retryWhen(Retry.fixedDelay(3, Duration.ofMillis(510)))
-            .block()
+        val responseDatas = webClientConnector.connect<Unit, DataGoHolidayResDto>(
+            WebClientConnector.WebClientType.DATA_GO,
+            HttpMethod.GET,
+            "B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
+            requestParams = queryParams,
+            responseClassType = DataGoHolidayResDto::class.java,
+            retryCount = 3,
+            retryDelay = 510
+        )
 
         val dataGoHolidayResDto = responseDatas?.body ?: DataGoHolidayResDto()
 

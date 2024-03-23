@@ -2,22 +2,22 @@ package com.zeki.kisvolkotlin.domain.data_go.holiday.extend
 
 import com.zeki.kisvolkotlin.db.repository.HolidayJoinRepository
 import com.zeki.kisvolkotlin.db.repository.HolidayRepository
+import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
 import com.zeki.kisvolkotlin.domain.data_go.holiday.HolidayDateService
 import com.zeki.kisvolkotlin.domain.data_go.holiday.HolidayService
 import com.zeki.kisvolkotlin.domain.data_go.holiday.dto.DataGoHolidayResDto
 import com.zeki.kisvolkotlin.utils.TestUtils
-import org.springframework.web.reactive.function.client.WebClient
 
 class ExtendHolidayService(
     holidayRepository: HolidayRepository,
     holidayJoinRepository: HolidayJoinRepository,
     holidayDateService: HolidayDateService,
-    webClientDataGo: WebClient,
+    webClientConnector: WebClientConnector,
 ) : HolidayService(
     holidayRepository = holidayRepository,
     holidayJoinRepository = holidayJoinRepository,
     holidayDateService = holidayDateService,
-    webClientDataGo = webClientDataGo
+    webClientConnector = webClientConnector
 ) {
 
     override fun getHolidaysFromDataGo(standardYear: Int): DataGoHolidayResDto {

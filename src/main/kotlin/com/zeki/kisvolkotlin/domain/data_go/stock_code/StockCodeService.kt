@@ -5,16 +5,16 @@ import com.zeki.kisvolkotlin.db.entity.em.StockMarket
 import com.zeki.kisvolkotlin.db.repository.StockCodeJoinRepository
 import com.zeki.kisvolkotlin.db.repository.StockCodeRepository
 import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toStringDate
+import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
 import com.zeki.kisvolkotlin.domain.data_go.holiday.HolidayDateService
 import com.zeki.kisvolkotlin.domain.data_go.stock_code.dto.DataGoStockCodeResDto
 import com.zeki.kisvolkotlin.domain.data_go.stock_code.dto.StockCodeItem
-import org.springframework.beans.factory.annotation.Qualifier
+import com.zeki.kisvolkotlin.exception.ApiException
+import com.zeki.kisvolkotlin.exception.ResponseCode
+import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.LinkedMultiValueMap
-import org.springframework.web.reactive.function.client.WebClient
-import reactor.util.retry.Retry
-import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -25,7 +25,7 @@ class StockCodeService(
 
     private val holidayDateService: HolidayDateService,
 
-    @Qualifier("WebClientDataGo") private val webClientDataGo: WebClient
+    private val webClientConnector: WebClientConnector
 ) {
 
     @Transactional
@@ -100,30 +100,33 @@ class StockCodeService(
                 standardDate = standardDate,
                 standardTime = standardTime,
                 standardDeltaDate = standardDeltaDate
-            )
-                .toStringDate()
+            ).toStringDate()
 
-        val reqParam = LinkedMultiValueMap<String, String>()
-        reqParam["resultType"] = "json"
-        reqParam["numOfRows"] = batchSize.toString()
-        reqParam["basDt"] = deltaOfToday
-        reqParam["pageNo"] = pageNo.toString()
+        val queryParams = LinkedMultiValueMap<String, String>()
+        queryParams["resultType"] = "json"
+        queryParams["numOfRows"] = batchSize.toString()
+        queryParams["basDt"] = deltaOfToday
+        queryParams["pageNo"] = pageNo.toString()
 
         val dataGoStockCodeItemList = mutableListOf<StockCodeItem>()
         while ((pageNo - 1) * batchSize < totalCount) {
-            reqParam["pageNo"] = pageNo.toString()
+            queryParams["pageNo"] = pageNo.toString()
 
-            val responseDatas = webClientDataGo.get()
-                .uri {
-                    it.path("1160100/service/GetKrxListedInfoService/getItemInfo")
-                        .queryParams(reqParam)
-                        .build()
-                }
-                .exchangeToMono { it.toEntity(DataGoStockCodeResDto::class.java) }
-                .retryWhen(Retry.fixedDelay(3, Duration.ofMillis(510)))
-                .block()
+            val responseDatas = webClientConnector.connect<Unit, DataGoStockCodeResDto>(
+                WebClientConnector.WebClientType.DATA_GO,
+                HttpMethod.GET,
+                "1160100/service/GetKrxListedInfoService/getItemInfo",
+                requestParams = queryParams,
+                responseClassType = DataGoStockCodeResDto::class.java,
+                retryCount = 3,
+                retryDelay = 510
+            )
 
-            val dataGoStockCodeResDto = responseDatas?.body ?: DataGoStockCodeResDto()
+            val dataGoStockCodeResDto =
+                responseDatas?.body ?: throw ApiException(
+                    ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+                    "통신에러 queryParams: $queryParams"
+                )
 
             totalCount = dataGoStockCodeResDto.response.body.totalCount
             pageNo += 1
