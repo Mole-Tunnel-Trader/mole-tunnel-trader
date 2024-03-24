@@ -1,5 +1,6 @@
 package com.zeki.kisvolkotlin.domain._common.util
 
+import com.zeki.kisvolkotlin.db.entity.em.TradeMode
 import org.springframework.core.env.Environment
 import java.time.LocalDate
 import java.time.LocalTime
@@ -9,6 +10,8 @@ object CustomUtils {
     fun isProdProfile(environment: Environment): Boolean =
         "prod" in environment.activeProfiles || "prod" in environment.defaultProfiles
 
+    fun nowTradeMode(environment: Environment): TradeMode =
+        if (isProdProfile(environment)) TradeMode.REAL else TradeMode.TRAIN
 
     /**
      * 일봉 기준이므로
