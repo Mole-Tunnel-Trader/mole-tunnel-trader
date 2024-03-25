@@ -15,7 +15,7 @@ class TokenAspect(
 
 
     // 경우에 따라 Connection이 두번 발생할 수 있음
-    @Around("@annotation(com.zeki.kisvolkotlin.domain._common.aop.Token)")
+    @Around("@annotation(com.zeki.kisvolkotlin.domain._common.aop.GetToken)")
     fun tokenExecution(joinPoint: ProceedingJoinPoint): Any? {
         val token = tokenService.getOrCreateToken()
         TokenHolder.setToken(token)

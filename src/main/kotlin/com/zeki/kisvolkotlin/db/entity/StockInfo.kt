@@ -4,12 +4,17 @@ import jakarta.persistence.*
 import org.hibernate.annotations.Comment
 
 @Entity
-@Table(name = "stock_info")
+@Table(
+    name = "stock_info",
+    indexes = [
+        Index(name = "idx_stock_info_code", columnList = "code", unique = true),
+    ]
+)
 class StockInfo(
     name: String,
     code: String,
     otherCode: String,
-    fcam: Int,
+    fcamt: Int,
     amount: Long,
     marketCapital: Long,
     capital: Long,
@@ -35,7 +40,7 @@ class StockInfo(
 
     @Column(name = "fcam", nullable = false)
     @Comment("액면가")
-    var fcam: Int = fcam
+    var fcam: Int = fcamt
         protected set
 
     @Column(name = "amount", nullable = false)
@@ -77,24 +82,22 @@ class StockInfo(
     @OrderBy("date DESC ")
     val stockPriceList: MutableList<StockPrice> = mutableListOf()
 
-    fun updateStockPrice(
+    fun updateStockInfo(
         name: String,
-        code: String,
         otherCode: String,
         fcamt: Int,
         amount: Long,
-        marketCapitalization: Long,
+        marketCapital: Long,
         capital: Long,
         per: Double,
         pbr: Double,
         eps: Double
     ): Boolean {
         if (this.name == name &&
-            this.code == code &&
             this.otherCode == otherCode &&
             this.fcam == fcamt &&
             this.amount == amount &&
-            this.marketCapital == marketCapitalization &&
+            this.marketCapital == marketCapital &&
             this.capital == capital &&
             this.per == per &&
             this.pbr == pbr &&
@@ -102,11 +105,10 @@ class StockInfo(
         ) return false
 
         this.name = name
-        this.code = code
         this.otherCode = otherCode
         this.fcam = fcamt
         this.amount = amount
-        this.marketCapital = marketCapitalization
+        this.marketCapital = marketCapital
         this.capital = capital
         this.per = per
         this.pbr = pbr

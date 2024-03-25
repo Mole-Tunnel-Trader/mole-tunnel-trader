@@ -25,7 +25,7 @@ class TokenService(
     private val env: Environment,
 ) {
 
-    // TODO : AOP, cache 적용
+    // TODO : cache 적용
     @Transactional
     fun getOrCreateToken(): Token {
         val tradeMode = CustomUtils.nowTradeMode(env)
@@ -40,12 +40,13 @@ class TokenService(
         val kisTokenResDto = this.getTokenFromKis()
 
         val token = Token(
-            tokenValue = "$kisTokenResDto.tokenType $kisTokenResDto.accessToken",
+            tokenType = kisTokenResDto.tokenType,
+            tokenValue = kisTokenResDto.accessToken,
             tradeMode = CustomUtils.nowTradeMode(env),
             expiredDate = LocalDateTime.parse(
                 kisTokenResDto.accessTokenTokenExpired,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            )
+            ).minusHours(1)
         )
 
         return tokenRepository.save(token)

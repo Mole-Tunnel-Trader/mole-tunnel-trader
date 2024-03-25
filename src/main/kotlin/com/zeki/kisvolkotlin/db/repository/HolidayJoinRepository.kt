@@ -3,6 +3,7 @@ package com.zeki.kisvolkotlin.db.repository
 import com.zeki.kisvolkotlin.db.entity.Holiday
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
+import java.sql.Date
 
 @Repository
 class HolidayJoinRepository(
@@ -20,14 +21,21 @@ class HolidayJoinRepository(
         var sql = buildString {
             append("INSERT INTO holiday (date, name, is_holiday) VALUES ")
 
-
-            holidaySaveList.forEach {
-                append("('${it.date}', '${it.name}', ${it.isHoliday}), ")
+            repeat(holidaySaveList.size) {
+                append("(?, ?, ?), ")
             }
         }
-        
+
         sql = sql.substring(0, sql.length - 2)
-        jdbcTemplate.execute(sql)
+        
+        jdbcTemplate.update(sql) { ps ->
+            var i = 1
+            holidaySaveList.forEach { holiday ->
+                ps.setDate(i++, Date.valueOf(holiday.date))
+                ps.setString(i++, holiday.name)
+                ps.setBoolean(i++, holiday.isHoliday)
+            }
+        }
     }
 
     fun bulkUpdate(holidayUpdateList: Collection<Holiday>) {

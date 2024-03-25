@@ -14,20 +14,26 @@ class StockCodeJoinRepository(
         stockCodeSaveList.chunked(batchSize).forEach {
             this.bulkInsertUsingBatch(it)
         }
-
     }
 
     private fun bulkInsertUsingBatch(stockCodeSaveList: Collection<StockCode>) {
         var sql = buildString {
             append("INSERT INTO stock_code (code, name, market) VALUES ")
 
-            stockCodeSaveList.forEach {
-                append("('${it.code}', '${it.name}', '${it.market}'), ")
+            repeat(stockCodeSaveList.size) {
+                append("(?, ?, ?), ")
             }
         }
-
         sql = sql.substring(0, sql.length - 2)
-        jdbcTemplate.execute(sql)
+
+        jdbcTemplate.update(sql) { ps ->
+            var i = 1
+            stockCodeSaveList.forEach { stockCode ->
+                ps.setString(i++, stockCode.code)
+                ps.setString(i++, stockCode.name)
+                ps.setString(i++, stockCode.market.name)
+            }
+        }
     }
 
     fun bulkUpdate(stockCodeUpdateList: Collection<StockCode>) {
@@ -43,4 +49,5 @@ class StockCodeJoinRepository(
             arrayOf(it.name, it.market.name, it.id)
         })
     }
+    
 }
