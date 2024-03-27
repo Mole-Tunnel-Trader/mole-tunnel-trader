@@ -15,10 +15,9 @@ class StockInfoService(
 ) {
 
     @Transactional
-    fun upsertStockInfo(stockCodeList: List<String> = emptyList()) {
+    fun upsertStockInfo(stockCodeList: List<String>) {
         val stockInfoSaveList = mutableListOf<StockInfo>()
         val stockInfoUpdateList = mutableListOf<StockInfo>()
-        val stockInfoDeleteSet = mutableSetOf<StockInfo>()
 
         val savedStockInfoMap = stockInfoRepository.findByCodeIn(stockCodeList)
             .associateBy { it.code }
@@ -61,16 +60,11 @@ class StockInfoService(
                         )
 
                     if (isUpdate) stockInfoUpdateList.add(stockInfo)
-
-                    savedStockInfoMap.remove(output1.stockCode)
                 }
             }
         }
-        stockInfoDeleteSet.addAll(savedStockInfoMap.values)
 
         stockInfoJoinRepository.bulkInsert(stockInfoSaveList)
         stockInfoJoinRepository.bulkUpdate(stockInfoUpdateList)
-        stockInfoRepository.deleteAllInBatch(stockInfoDeleteSet)
     }
-
 }

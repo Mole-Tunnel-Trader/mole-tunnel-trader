@@ -32,7 +32,7 @@ class StockInfoWebClientService(
 
         return stockCodeList.stream()
             .map { stockCode ->
-                getStockInfoFromKis(stockCode, endDate, startDate, token.tokenType, token.tokenValue)
+                this.getStockInfoFromKis(stockCode, endDate, startDate, token.tokenType, token.tokenValue)
             }
             .toList()
     }
