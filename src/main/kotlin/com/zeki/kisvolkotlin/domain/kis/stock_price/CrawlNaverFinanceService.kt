@@ -1,5 +1,6 @@
 package com.zeki.kisvolkotlin.domain.kis.stock_price
 
+import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toLocalDate
 import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toStringDate
 import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
 import com.zeki.kisvolkotlin.domain.kis.stock_price.dto.NaverStockPriceResDto
@@ -11,7 +12,6 @@ import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import java.math.BigDecimal
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
 @Service
@@ -73,7 +73,7 @@ class CrawlNaverFinanceService(
 
                 when (i) {
                     0 -> {
-                        row.add(LocalDate.parse(item, DateTimeFormatter.ofPattern("yyyyMMdd")))
+                        row.add(item.toLocalDate("yyyyMMdd"))
                     }
 
                     items.size - 2 -> {

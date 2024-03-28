@@ -27,5 +27,8 @@ object CustomUtils {
 
     fun LocalDate.toStringDate(format: String = "yyyyMMdd"): String =
         this.format(DateTimeFormatter.ofPattern(format))
+
+    fun String.toLocalDate(format: String = "yyyyMMdd"): LocalDate =
+        LocalDate.parse(this, DateTimeFormatter.ofPattern(format))
 }
 

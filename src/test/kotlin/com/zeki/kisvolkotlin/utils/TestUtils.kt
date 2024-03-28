@@ -10,4 +10,6 @@ object TestUtils {
         val mapper = ObjectMapper().registerKotlinModule()
         return mapper.readValue(File(filePath), T::class.java)
     }
+
+    fun loadString(filePath: String): String = File(filePath).readText(Charsets.UTF_8)
 }

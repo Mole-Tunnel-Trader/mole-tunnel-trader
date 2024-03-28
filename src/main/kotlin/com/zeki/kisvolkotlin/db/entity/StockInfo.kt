@@ -1,6 +1,7 @@
 package com.zeki.kisvolkotlin.db.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.BatchSize
 import org.hibernate.annotations.Comment
 
 @Entity
@@ -79,6 +80,7 @@ class StockInfo(
         cascade = [CascadeType.PERSIST, CascadeType.MERGE],
         orphanRemoval = true
     )
+    @BatchSize(size = 1000)
     @OrderBy("date DESC ")
     val stockPriceList: MutableList<StockPrice> = mutableListOf()
 

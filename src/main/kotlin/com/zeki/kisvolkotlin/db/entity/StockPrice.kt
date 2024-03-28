@@ -14,9 +14,6 @@ class StockPrice private constructor(
     high: BigDecimal,
     low: BigDecimal,
     volume: Long,
-    volumeTotalPrice: BigDecimal,
-    beforeGapPrice: BigDecimal,
-    beforeGapSign: BigDecimal,
 ) : BaseEntity() {
 
     @Column(name = "date", nullable = false)
@@ -24,22 +21,22 @@ class StockPrice private constructor(
     var date: LocalDate = date
         protected set
 
-    @Column(name = "close", nullable = false)
+    @Column(name = "close", nullable = false, precision = 12)
     @Comment("종가")
     var close: BigDecimal = close
         protected set
 
-    @Column(name = "open", nullable = false)
+    @Column(name = "open", nullable = false, precision = 12)
     @Comment("시가")
     var open: BigDecimal = open
         protected set
 
-    @Column(name = "high", nullable = false)
+    @Column(name = "high", nullable = false, precision = 12)
     @Comment("고가")
     var high: BigDecimal = high
         protected set
 
-    @Column(name = "low", nullable = false)
+    @Column(name = "low", nullable = false, precision = 12)
     @Comment("저가")
     var low: BigDecimal = low
         protected set
@@ -47,21 +44,6 @@ class StockPrice private constructor(
     @Column(name = "volume", nullable = false)
     @Comment("거래량")
     var volume: Long = volume
-        protected set
-
-    @Column(name = "volume_total_price", nullable = false)
-    @Comment("거래대금")
-    var volumeTotalPrice: BigDecimal = volumeTotalPrice
-        protected set
-
-    @Column(name = "before_gap_price", nullable = false)
-    @Comment("전일대비가격")
-    var beforeGapPrice: BigDecimal = beforeGapPrice
-        protected set
-
-    @Column(name = "before_gap_sign", nullable = false)
-    @Comment("전일대비부호")
-    var beforeGapSign: BigDecimal = beforeGapSign
         protected set
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -77,9 +59,6 @@ class StockPrice private constructor(
             high: BigDecimal,
             low: BigDecimal,
             volume: Long,
-            volumeTotalPrice: BigDecimal,
-            beforeGapPrice: BigDecimal,
-            beforeGapSign: BigDecimal,
             stockInfo: StockInfo
         ): StockPrice {
             val stockPrice = StockPrice(
@@ -88,10 +67,7 @@ class StockPrice private constructor(
                 open = open,
                 high = high,
                 low = low,
-                volume = volume,
-                volumeTotalPrice = volumeTotalPrice,
-                beforeGapPrice = beforeGapPrice,
-                beforeGapSign = beforeGapSign
+                volume = volume
             )
             stockInfo.addStockPrice(stockPrice)
 
@@ -109,18 +85,12 @@ class StockPrice private constructor(
         high: BigDecimal,
         low: BigDecimal,
         volume: Long,
-        volumeTotalPrice: BigDecimal,
-        beforeGapPrice: BigDecimal,
-        beforeGapSign: BigDecimal
     ): Boolean {
         if (this.close == close &&
             this.open == open &&
             this.high == high &&
             this.low == low &&
-            this.volume == volume &&
-            this.volumeTotalPrice == volumeTotalPrice &&
-            this.beforeGapPrice == beforeGapPrice &&
-            this.beforeGapSign == beforeGapSign
+            this.volume == volume
         ) return false
 
         this.close = close
@@ -128,9 +98,6 @@ class StockPrice private constructor(
         this.high = high
         this.low = low
         this.volume = volume
-        this.volumeTotalPrice = volumeTotalPrice
-        this.beforeGapPrice = beforeGapPrice
-        this.beforeGapSign = beforeGapSign
 
         return true
     }

@@ -67,4 +67,8 @@ class StockInfoService(
         stockInfoJoinRepository.bulkInsert(stockInfoSaveList)
         stockInfoJoinRepository.bulkUpdate(stockInfoUpdateList)
     }
+
+    fun getStockInfoList(stockCodeList: List<String>): List<StockInfo> {
+        return stockInfoRepository.findByCodeIn(stockCodeList)
+    }
 }
