@@ -5,6 +5,7 @@ import com.zeki.kisvolkotlin.db.repository.StockPriceJoinRepository
 import com.zeki.kisvolkotlin.db.repository.StockPriceRepository
 import com.zeki.kisvolkotlin.domain.kis.stock_info.StockInfoService
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
 @Service
@@ -17,6 +18,7 @@ class StockPriceService(
     private val crawlNaverFinanceService: CrawlNaverFinanceService
 ) {
 
+    @Transactional
     fun upsertStockPrice(
         stockCodeList: List<String>,
         standardDate: LocalDate,
