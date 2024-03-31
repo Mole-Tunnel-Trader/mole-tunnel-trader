@@ -39,3 +39,4 @@ out/
 ### my ###
 /src/main/resources/*.yml
 /docker/mysql/data/
+/src/main/resources/logback-spring.xml
