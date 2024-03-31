@@ -12,4 +12,8 @@ class TradeQueueService(
 
         return listOf()
     }
+
+    fun removeTradeQueue(tradeQueueDtoList: List<TradeQueueDto>) {
+
+    }
 }

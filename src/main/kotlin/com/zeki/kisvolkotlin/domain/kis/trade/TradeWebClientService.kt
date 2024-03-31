@@ -28,7 +28,7 @@ class TradeWebClientService(
         orderType: OrderType,
         stockCode: String,
         orderPrice: BigDecimal,
-        orderAmount: Int
+        orderAmount: Double
     ): KisOrderStockResDto {
         val token = TokenHolder.getToken()
 

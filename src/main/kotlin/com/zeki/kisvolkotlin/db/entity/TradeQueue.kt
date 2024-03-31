@@ -20,7 +20,7 @@ class TradeQueue(
     orderDate: LocalDate,
     orderType: OrderType,
     orderPrice: BigDecimal,
-    orderAmount: Long,
+    orderAmount: Double,
     orderBy: String
 ) : BaseEntity() {
     @Column(name = "stock_code", nullable = false, length = 20)
@@ -45,7 +45,7 @@ class TradeQueue(
         protected set
 
     @Column(name = "order_amount", nullable = false)
-    var orderAmount: Long = orderAmount
+    var orderAmount: Double = orderAmount
         protected set
 
     @Column(name = "order_by", nullable = false, length = 20)

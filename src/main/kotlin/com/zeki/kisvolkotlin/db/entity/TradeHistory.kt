@@ -16,22 +16,21 @@ import java.time.LocalDate
 )
 class TradeHistory(
     stockCode: String,
-    stockName: String,
     orderDate: LocalDate,
     orderState: OrderState,
+    kisOrderNum: String,
+    krxOrderNum: String,
+    kisOrderTime: String,
+    orderBy: String,
     orderType: OrderType,
     orderPrice: BigDecimal,
-    orderAmount: Long,
+    orderAmount: Double,
     resultCode: String,
     messageCode: String,
     message: String
 ) : BaseEntity() {
     @Column(name = "stock_code", nullable = false, length = 20)
     var stockCode: String = stockCode
-        protected set
-
-    @Column(name = "stock_name", nullable = false, length = 50)
-    var stockName: String = stockName
         protected set
 
     @Column(name = "order_date", nullable = false)
@@ -41,6 +40,22 @@ class TradeHistory(
     @Enumerated(EnumType.STRING)
     @Column(name = "order_state", nullable = false)
     var orderState: OrderState = orderState
+        protected set
+
+    @Column(name = "kis_order_num", nullable = false, length = 50)
+    var kisOrderNum: String = kisOrderNum
+        protected set
+
+    @Column(name = "krx_order_num", nullable = false, length = 50)
+    var krxOrderNum: String = krxOrderNum
+        protected set
+
+    @Column(name = "kis_order_time", nullable = false, length = 50)
+    var kisOrderTime: String = kisOrderTime
+        protected set
+
+    @Column(name = "order_by", nullable = false, length = 20)
+    var orderBy: String = orderBy
         protected set
 
     @Enumerated(EnumType.STRING)
@@ -53,7 +68,7 @@ class TradeHistory(
         protected set
 
     @Column(name = "order_amount", nullable = false)
-    var orderAmount: Long = orderAmount
+    var orderAmount: Double = orderAmount
         protected set
 
     @Column(name = "result_code", nullable = false, length = 20)
