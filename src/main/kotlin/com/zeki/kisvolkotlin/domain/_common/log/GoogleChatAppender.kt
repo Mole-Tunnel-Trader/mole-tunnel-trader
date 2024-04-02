@@ -1,4 +1,4 @@
-package com.zeki.kisvolkotlin.domain._common.webhook
+package com.zeki.kisvolkotlin.domain._common.log
 
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.AppenderBase

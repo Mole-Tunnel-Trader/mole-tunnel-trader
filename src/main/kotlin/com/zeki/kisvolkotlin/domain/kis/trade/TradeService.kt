@@ -3,7 +3,6 @@ package com.zeki.kisvolkotlin.domain.kis.trade
 import com.zeki.kisvolkotlin.db.entity.em.OrderState
 import com.zeki.kisvolkotlin.domain.kis.trade.dto.KisOrderStockResDto
 import com.zeki.kisvolkotlin.domain.kis.trade.dto.TradeQueueDto
-import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -16,7 +15,7 @@ class TradeService(
 ) {
 
     @Transactional
-    fun orderStock() {
+    fun orderStockByTradeQueue() {
         val tradeQueueDtoList = tradeQueueService.getTradeQueue()
 
         for (tradeQueueDto in tradeQueueDtoList) {
@@ -29,11 +28,18 @@ class TradeService(
             }
         }
 
-        // FIXME : 주문 성공 및 실패에 따라 삭제할지 말지 결정? 비동기로 작업되어서 가능한가..? DB커넥션 부분은 비동기가 아니게 처리 하도록 변경
-        tradeQueueService.removeTradeQueue(tradeQueueDtoList)
+        tradeQueueService.removeTradeQueue(
+            tradeQueueDtoList.stream()
+                .map { tradeQueueDto ->
+                    tradeQueueDto.items.stream()
+                        .map { item ->
+                            item.id
+                        }.toList()
+                }.toList()
+                .flatten()
+        )
     }
 
-    @Async
     fun checkOrderResponse(
         kisOrderStockResDto: KisOrderStockResDto,
         tradeQueueDtoItem: TradeQueueDto.Item,
@@ -41,10 +47,11 @@ class TradeService(
     ) {
 
         val orderState = when (kisOrderStockResDto.rtCd) {
-            // TODO : webHook으로 성공 및 실패 알림
             "0" -> OrderState.SUCCESS
             else -> OrderState.FAIL
         }
+
+        // TODO : webHook으로 성공 및 실패 알림 (비동기)
 
         tradeHistoryService.createTradeHistory(kisOrderStockResDto, tradeQueueDtoItem, orderState, orderBy)
     }

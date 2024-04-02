@@ -13,7 +13,7 @@ class TradeQueueService(
         return listOf()
     }
 
-    fun removeTradeQueue(tradeQueueDtoList: List<TradeQueueDto>) {
-
+    fun removeTradeQueue(tradeQueueIdList: List<Long>) {
+        tradeQueueRepository.deleteAllByIdInBatch(tradeQueueIdList)
     }
 }

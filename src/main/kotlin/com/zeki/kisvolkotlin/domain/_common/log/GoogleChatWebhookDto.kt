@@ -1,4 +1,4 @@
-package com.zeki.kisvolkotlin.domain._common.webhook;
+package com.zeki.kisvolkotlin.domain._common.log;
 
 data class GoogleChatWebhookDto(
     val text: String,

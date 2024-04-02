@@ -1,4 +1,4 @@
-package com.zeki.kisvolkotlin.domain._common.webhook
+package com.zeki.kisvolkotlin.domain._common.log
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.kisvolkotlin.exception.ApiException

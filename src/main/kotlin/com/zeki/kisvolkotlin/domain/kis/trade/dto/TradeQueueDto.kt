@@ -8,6 +8,7 @@ data class TradeQueueDto(
     val items: List<Item> = listOf(),
 ) {
     data class Item(
+        val id: Long,
         val stockCode: String,
         val orderType: OrderType,
         val orderPrice: BigDecimal,
