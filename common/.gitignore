@@ -36,12 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-
-### my ###
-
-### docker ###
-/docker/mysql/data/
-
-### kis-server ###
-/kis-server/src/main/resources/*.yml
-/kis-server/src/main/resources/logback-spring.xml
+### Kotlin ###
+.kotlin

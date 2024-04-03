@@ -1,12 +1,17 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.2.2"
+    id("org.springframework.boot") version "3.2.4"
     id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "1.9.22"
-    kotlin("plugin.spring") version "1.9.22"
-    kotlin("plugin.jpa") version "1.9.22"
-    kotlin("kapt") version "1.9.22"
+    kotlin("jvm") version "1.9.23"
+    kotlin("plugin.spring") version "1.9.23"
+    kotlin("plugin.jpa") version "1.9.23"
+    kotlin("kapt") version "1.9.23"
+}
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 allOpen {
@@ -15,68 +20,68 @@ allOpen {
     annotation("jakarta.persistence.Embeddable")
 }
 
-group = "com.zeki"
-version = "0.0.1-SNAPSHOT"
-var exposedVersion: String = "0.46.0"
+allprojects {
+    group = "com.zeki"
+    version = "0.0.1-SNAPSHOT"
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-}
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs += "-Xjsr305=strict"
+            jvmTarget = "17"
+        }
+    }
 
-repositories {
-    mavenCentral()
-}
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
-    // jpa
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
-    // querydsl
-    implementation("com.querydsl:querydsl-core:5.1.0")
-    implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
-    kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
-
-
-    // test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testRuntimeOnly("com.h2database:h2")    // test db
-
-    // db
-    runtimeOnly("com.mysql:mysql-connector-j")
-
-    // kotlin
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-    // swagger
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-
-    // log
-    implementation("io.github.microutils:kotlin-logging:3.0.5")
-
-    // logback & webclient
-    implementation("io.netty:netty-all") // mac
-    implementation("io.micrometer:micrometer-core") // mac
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "17"
+    repositories {
+        mavenCentral()
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+subprojects {
+    apply(plugin = "kotlin")
+    apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
+    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+    apply(plugin = "org.jetbrains.kotlin.kapt")
+
+
+    dependencies {
+        // spring boot
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        // kotlin
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+    }
 }
+
+project(":kis-server") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":webclient"))
+    }
+}
+
+project(":webclient") {
+    dependencies {
+        implementation(project(":common"))
+    }
+}
+
+project(":common") {
+    dependencies {
+
+    }
+}
+
 
 // subModule
 tasks.register<Copy>("copyYmlFiles") {
     description = "yml 파일 복사"
     group = "my tasks"
     from("kis-vol-kotlin-yml")
-    into("src/main/resources")
+    into("kis-server/src/main/resources")
 }
