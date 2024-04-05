@@ -9,8 +9,6 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
     // jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
@@ -18,7 +16,7 @@ dependencies {
     implementation("com.querydsl:querydsl-core:5.1.0")
     implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
     kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
-
+    
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -32,4 +30,6 @@ dependencies {
     // logback & webclient
     implementation("io.netty:netty-all") // mac
     implementation("io.micrometer:micrometer-core") // mac
+
+
 }

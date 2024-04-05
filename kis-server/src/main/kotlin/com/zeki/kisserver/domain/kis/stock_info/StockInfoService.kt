@@ -1,14 +1,14 @@
 package com.zeki.kisserver.domain.kis.stock_info
 
-import com.zeki.kisserver.db.entity.StockInfo
-import com.zeki.kisvolkotlin.db.entity.StockInfo
-import com.zeki.kisvolkotlin.db.repository.StockInfoJoinRepository
+import com.zeki.stockdata.stock_info.StockInfo
+import com.zeki.stockdata.stock_info.StockInfoJoinRepository
+import com.zeki.stockdata.stock_info.StockInfoRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class StockInfoService(
-    private val stockInfoRepository: com.zeki.kisserver.db.repository.StockInfoRepository,
+    private val stockInfoRepository: StockInfoRepository,
     private val stockInfoJoinRepository: StockInfoJoinRepository,
 
     private val stockInfoWebClientService: StockInfoWebClientService

@@ -1,7 +1,7 @@
 package com.zeki.common.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.zeki.exception.ResponseCode
+import com.zeki.common.exception.ResponseCode
 import java.io.Serializable
 
 data class CommonResDto<T>(

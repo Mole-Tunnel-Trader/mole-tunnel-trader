@@ -1,4 +1,4 @@
-package com.zeki.exception
+package com.zeki.common.exception
 
 import com.zeki.common.dto.CommonResDto
 import com.zeki.common.util.CustomUtils

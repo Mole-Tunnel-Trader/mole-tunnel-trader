@@ -45,3 +45,6 @@ out/
 ### kis-server ###
 /kis-server/src/main/resources/*.yml
 /kis-server/src/main/resources/logback-spring.xml
+
+### log ###
+/logs/

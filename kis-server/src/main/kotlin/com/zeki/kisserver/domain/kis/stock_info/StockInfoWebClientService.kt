@@ -1,16 +1,12 @@
 package com.zeki.kisserver.domain.kis.stock_info
 
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
 import com.zeki.kisserver.domain._common.aop.GetToken
-import com.zeki.kisserver.domain._common.webclient.ApiStatics
-import com.zeki.kisserver.domain._common.webclient.WebClientConnector
-import com.zeki.kisserver.domain.kis.stock_info.dto.KisStockInfoResDto
-import com.zeki.kisserver.domain.kis.token.TokenHolder
-import com.zeki.kisserver.exception.ResponseCode
-import com.zeki.kisvolkotlin.domain._common.webclient.ApiStatics
-import com.zeki.kisvolkotlin.domain.kis.stock_info.dto.KisStockInfoResDto
-import com.zeki.kisvolkotlin.domain.kis.token.TokenHolder
-import com.zeki.kisvolkotlin.exception.ResponseCode
+import com.zeki.kisserver.domain._common.aop.TokenHolder
+import com.zeki.stockdata.stock_info.KisStockInfoResDto
 import com.zeki.webclient.ApiStatics
+import com.zeki.webclient.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
@@ -79,7 +75,7 @@ class StockInfoWebClientService(
             retryDelay = 510
         )
 
-        val result = responseDatas?.body ?: throw com.zeki.kisserver.exception.ApiException(
+        val result = responseDatas?.body ?: throw ApiException(
             ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
             "KIS 주식 정보 조회 실패, 종목코드 : $stockCode"
         )

@@ -1,10 +1,10 @@
 package com.zeki.kisserver.domain.kis.stock_price
 
-import com.zeki.kisserver.db.entity.StockPrice
-import com.zeki.kisvolkotlin.db.entity.StockPrice
-import com.zeki.kisvolkotlin.db.repository.StockPriceJoinRepository
-import com.zeki.kisvolkotlin.db.repository.StockPriceRepository
-import com.zeki.kisvolkotlin.domain.kis.stock_info.StockInfoService
+
+import com.zeki.kisserver.domain.kis.stock_info.StockInfoService
+import com.zeki.stockdata.stock_price.StockPrice
+import com.zeki.stockdata.stock_price.StockPriceJoinRepository
+import com.zeki.stockdata.stock_price.StockPriceRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate

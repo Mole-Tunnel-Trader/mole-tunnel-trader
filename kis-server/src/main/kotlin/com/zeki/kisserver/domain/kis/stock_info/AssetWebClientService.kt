@@ -1,14 +1,14 @@
 package com.zeki.kisserver.domain.kis.stock_info
 
 import com.zeki.common.em.TradeMode
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
-import com.zeki.exception.ResponseCode
 import com.zeki.kisserver.domain._common.aop.GetToken
-import com.zeki.kisserver.domain._common.webclient.ApiStatics
-import com.zeki.kisserver.domain._common.webclient.WebClientConnector
+import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.kisserver.domain.kis.stock_info.dto.KisAssetResDto
-import com.zeki.kisserver.domain.kis.token.TokenHolder
-import com.zeki.kisvolkotlin.db.entity.em.TradeMode
+import com.zeki.webclient.ApiStatics
+import com.zeki.webclient.WebClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
@@ -66,7 +66,7 @@ class AssetWebClientService(
                 retryDelay = 510
             )
 
-            val kisAssetResDto = responseDatas?.body ?: throw com.zeki.kisserver.exception.ApiException(
+            val kisAssetResDto = responseDatas?.body ?: throw ApiException(
                 ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
                 "WebClient 통신 에러"
             )

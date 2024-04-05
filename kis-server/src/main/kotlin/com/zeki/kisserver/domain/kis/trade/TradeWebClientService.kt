@@ -2,14 +2,13 @@ package com.zeki.kisserver.domain.kis.trade
 
 import com.zeki.common.em.OrderType
 import com.zeki.common.em.TradeMode
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
-import com.zeki.exception.ResponseCode
 import com.zeki.kisserver.domain._common.aop.GetToken
-import com.zeki.kisserver.domain._common.webclient.ApiStatics
-import com.zeki.kisserver.domain._common.webclient.WebClientConnector
-import com.zeki.kisserver.domain.kis.token.TokenHolder
-import com.zeki.kisserver.domain.kis.trade.dto.KisOrderStockResDto
-import com.zeki.kisvolkotlin.db.entity.em.TradeMode
+import com.zeki.kisserver.domain._common.aop.TokenHolder
+import com.zeki.trade.dto.KisOrderStockResDto
+import com.zeki.webclient.ApiStatics
 import com.zeki.webclient.WebClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
@@ -66,7 +65,7 @@ class TradeWebClientService(
             retryDelay = 0,
         )
 
-        return responsesDatas?.body ?: throw com.zeki.kisserver.exception.ApiException(
+        return responsesDatas?.body ?: throw ApiException(
             ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
             "주식 주문 실패. 주식코드: $stockCode, 주문타입: ${orderType.name}, 주문가격: $orderPrice, 주문수량: $orderAmount"
         )

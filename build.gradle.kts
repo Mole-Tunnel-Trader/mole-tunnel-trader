@@ -14,11 +14,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
-allOpen {
-    annotation("jakarta.persistence.Entity")
-    annotation("jakarta.persistence.MappedSuperclass")
-    annotation("jakarta.persistence.Embeddable")
-}
 
 allprojects {
     group = "com.zeki"
@@ -49,6 +44,12 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.kapt")
 
 
+    allOpen {
+        annotation("jakarta.persistence.Entity")
+        annotation("jakarta.persistence.MappedSuperclass")
+        annotation("jakarta.persistence.Embeddable")
+    }
+
     dependencies {
         // spring boot
         implementation("org.springframework.boot:spring-boot-starter-web")
@@ -60,8 +61,49 @@ subprojects {
 
 project(":kis-server") {
     dependencies {
+        implementation(project(":stock-data"))
+        implementation(project(":holiday"))
+        implementation(project(":stock-code"))
+        implementation(project(":token"))
+        implementation(project(":trade"))
+
+        implementation(project(":webclient"))
+        implementation(project(":common"))
+    }
+}
+
+
+project(":stock-data") {
+    dependencies {
         implementation(project(":common"))
         implementation(project(":webclient"))
+    }
+}
+
+project(":holiday") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":webclient"))
+    }
+}
+
+project(":stock-code") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":webclient"))
+    }
+}
+
+project(":token") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":webclient"))
+    }
+}
+
+project(":trade") {
+    dependencies {
+        implementation(project(":common"))
     }
 }
 

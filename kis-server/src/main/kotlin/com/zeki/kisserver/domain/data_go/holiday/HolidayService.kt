@@ -1,10 +1,12 @@
 package com.zeki.kisserver.domain.data_go.holiday
 
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toLocalDate
-import com.zeki.exception.ApiException
-import com.zeki.exception.ResponseCode
-import com.zeki.kisserver.db.entity.Holiday
-import com.zeki.kisserver.db.repository.HolidayRepository
+import com.zeki.holiday.DataGoHolidayResDto
+import com.zeki.holiday.Holiday
+import com.zeki.holiday.HolidayJoinRepository
+import com.zeki.holiday.HolidayRepository
 import com.zeki.webclient.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
@@ -16,7 +18,7 @@ import java.time.LocalDate
 @Service
 class HolidayService(
     private val holidayRepository: HolidayRepository,
-    private val holidayJoinRepository: com.zeki.kisserver.db.repository.HolidayJoinRepository,
+    private val holidayJoinRepository: HolidayJoinRepository,
 
     private val holidayDateService: HolidayDateService,
 
@@ -42,7 +44,7 @@ class HolidayService(
     }
 
     fun getHolidaysFromDataGo(standardYear: Int = holidayDateService.getAvailableDate().year)
-            : com.zeki.kisserver.domain.data_go.holiday.dto.DataGoHolidayResDto {
+            : DataGoHolidayResDto {
         val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>()
             .apply {
                 add("solYear", standardYear.toString())
@@ -51,18 +53,18 @@ class HolidayService(
             }
 
         val responseDatas =
-            webClientConnector.connect<Unit, com.zeki.kisserver.domain.data_go.holiday.dto.DataGoHolidayResDto>(
+            webClientConnector.connect<Unit, DataGoHolidayResDto>(
                 WebClientConnector.WebClientType.DATA_GO,
                 HttpMethod.GET,
                 "B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
                 requestParams = queryParams,
-                responseClassType = com.zeki.kisserver.domain.data_go.holiday.dto.DataGoHolidayResDto::class.java,
+                responseClassType = DataGoHolidayResDto::class.java,
                 retryCount = 3,
                 retryDelay = 510
             )
 
         val dataGoHolidayResDto =
-            responseDatas?.body ?: com.zeki.kisserver.domain.data_go.holiday.dto.DataGoHolidayResDto()
+            responseDatas?.body ?: DataGoHolidayResDto()
 
         if (dataGoHolidayResDto.response.header.resultCode != "00") {
             throw ApiException(

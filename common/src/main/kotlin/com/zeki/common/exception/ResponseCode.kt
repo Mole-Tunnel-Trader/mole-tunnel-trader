@@ -1,4 +1,4 @@
-package com.zeki.exception
+package com.zeki.common.exception
 
 import org.springframework.http.HttpStatus
 

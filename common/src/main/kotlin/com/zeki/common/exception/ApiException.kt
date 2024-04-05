@@ -1,4 +1,4 @@
-package com.zeki.exception
+package com.zeki.common.exception
 
 data class ApiException(
     val responseCode: ResponseCode,

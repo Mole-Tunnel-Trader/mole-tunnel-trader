@@ -1,15 +1,13 @@
 package com.zeki.kisserver.domain.kis.token
 
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
-import com.zeki.exception.ResponseCode
-import com.zeki.kisserver.db.repository.TokenRepository
-import com.zeki.kisserver.domain._common.util.CustomUtils
-import com.zeki.kisserver.domain._common.webclient.ApiStatics
-import com.zeki.kisserver.domain._common.webclient.WebClientConnector
-import com.zeki.kisserver.domain.kis.token.dto.KisTokenResDto
-import com.zeki.kisserver.exception.ResponseCode
-import com.zeki.kisvolkotlin.domain._common.util.CustomUtils
-import com.zeki.kisvolkotlin.exception.ResponseCode
+import com.zeki.token.KisTokenResDto
+import com.zeki.token.Token
+import com.zeki.token.TokenRepository
+import com.zeki.webclient.ApiStatics
+import com.zeki.webclient.WebClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
@@ -29,7 +27,7 @@ class TokenService(
 
     // TODO : cache 적용
     @Transactional
-    fun getOrCreateToken(): com.zeki.kisserver.db.entity.Token {
+    fun getOrCreateToken(): Token {
         val tradeMode = CustomUtils.nowTradeMode(env)
 
         val token = tokenRepository.findFirstByTradeModeOrderByExpiredDateDesc(tradeMode)
@@ -38,10 +36,10 @@ class TokenService(
             ?: createToken()
     }
 
-    fun createToken(): com.zeki.kisserver.db.entity.Token {
+    fun createToken(): Token {
         val kisTokenResDto = this.getTokenFromKis()
 
-        val token = com.zeki.kisserver.db.entity.Token(
+        val token = Token(
             tokenType = kisTokenResDto.tokenType,
             tokenValue = kisTokenResDto.accessToken,
             tradeMode = CustomUtils.nowTradeMode(env),
@@ -69,7 +67,7 @@ class TokenService(
             responseClassType = KisTokenResDto::class.java
         )
 
-        return responseDatas?.body ?: throw com.zeki.kisserver.exception.ApiException(
+        return responseDatas?.body ?: throw ApiException(
             ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
             "토큰 발급 실패"
         )

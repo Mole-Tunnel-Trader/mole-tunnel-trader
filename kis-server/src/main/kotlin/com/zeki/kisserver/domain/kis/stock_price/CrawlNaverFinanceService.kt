@@ -1,14 +1,11 @@
 package com.zeki.kisserver.domain.kis.stock_price
 
-import com.zeki.kisserver.domain._common.util.CustomUtils.toLocalDate
-import com.zeki.kisserver.domain._common.util.CustomUtils.toStringDate
-import com.zeki.kisserver.domain._common.webclient.WebClientConnector
-import com.zeki.kisserver.domain.kis.stock_price.dto.NaverStockPriceResDto
-import com.zeki.kisserver.exception.ResponseCode
-import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toLocalDate
-import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toStringDate
-import com.zeki.kisvolkotlin.domain._common.webclient.WebClientConnector
-import com.zeki.kisvolkotlin.exception.ResponseCode
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
+import com.zeki.common.util.CustomUtils.toLocalDate
+import com.zeki.common.util.CustomUtils.toStringDate
+import com.zeki.stockdata.stock_price.NaverStockPriceResDto
+import com.zeki.webclient.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
@@ -47,7 +44,7 @@ class CrawlNaverFinanceService(
         )
 
         val result =
-            responseDatas?.body ?: throw com.zeki.kisserver.exception.ApiException(
+            responseDatas?.body ?: throw ApiException(
                 ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
                 "네이버 금융 API 호출 실패"
             )

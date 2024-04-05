@@ -1,16 +1,12 @@
 package com.zeki.kisserver.domain.data_go.stock_code
 
 import com.zeki.common.em.StockMarket
-import com.zeki.exception.ResponseCode
-import com.zeki.kisserver.db.repository.StockCodeJoinRepository
-import com.zeki.kisserver.db.repository.StockCodeRepository
-import com.zeki.kisserver.domain._common.webclient.WebClientConnector
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
+import com.zeki.common.util.CustomUtils.toStringDate
 import com.zeki.kisserver.domain.data_go.holiday.HolidayDateService
-import com.zeki.kisserver.domain.data_go.stock_code.dto.DataGoStockCodeResDto
-import com.zeki.kisserver.domain.data_go.stock_code.dto.StockCodeItem
-import com.zeki.kisserver.exception.ResponseCode
-import com.zeki.kisvolkotlin.domain._common.util.CustomUtils.toStringDate
-import com.zeki.kisvolkotlin.exception.ResponseCode
+import com.zeki.stockcode.*
+import com.zeki.webclient.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -34,9 +30,9 @@ class StockCodeService(
         standardTime: LocalTime = LocalTime.now(),
         standardDeltaDate: Int = 10
     ) {
-        val stockCodeSaveList = mutableListOf<com.zeki.kisserver.db.entity.StockCode>()
-        val stockCodeUpdateList = mutableListOf<com.zeki.kisserver.db.entity.StockCode>()
-        val stockCodeDeleteSet = mutableSetOf<com.zeki.kisserver.db.entity.StockCode>()
+        val stockCodeSaveList = mutableListOf<StockCode>()
+        val stockCodeUpdateList = mutableListOf<StockCode>()
+        val stockCodeDeleteSet = mutableSetOf<StockCode>()
 
         val dataGoStockCodeItemList =
             this.getStockCodesFromDataGo(
@@ -57,7 +53,7 @@ class StockCodeService(
             when (val stockCodeEntity = stockCodeMap[stockCode]) {
                 null -> {
                     stockCodeSaveList.add(
-                        com.zeki.kisserver.db.entity.StockCode(
+                        StockCode(
                             code = stockCode,
                             name = stockName,
                             market = StockMarket.valueOf(stockMarket)
@@ -125,7 +121,7 @@ class StockCodeService(
             )
 
             val dataGoStockCodeResDto =
-                responseDatas?.body ?: throw com.zeki.kisserver.exception.ApiException(
+                responseDatas?.body ?: throw ApiException(
                     ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
                     "통신에러 queryParams: $queryParams"
                 )

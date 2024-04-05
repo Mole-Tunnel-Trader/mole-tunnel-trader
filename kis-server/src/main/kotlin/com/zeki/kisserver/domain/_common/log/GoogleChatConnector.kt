@@ -1,8 +1,8 @@
 package com.zeki.kisserver.domain._common.log
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.zeki.kisserver.exception.ResponseCode
-import com.zeki.kisvolkotlin.exception.ResponseCode
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
 import org.springframework.stereotype.Component
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -44,7 +44,7 @@ class GoogleChatConnector(
 
             return builder.toString()
         } catch (e: Exception) {
-            throw com.zeki.kisserver.exception.ApiException(ResponseCode.GOOGLE_CHAT_CONNECT_ERROR)
+            throw ApiException(ResponseCode.GOOGLE_CHAT_CONNECT_ERROR)
         } finally {
             conn?.disconnect()
         }
