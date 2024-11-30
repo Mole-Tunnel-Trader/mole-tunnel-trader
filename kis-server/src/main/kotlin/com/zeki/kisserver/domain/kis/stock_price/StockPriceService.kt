@@ -75,6 +75,17 @@ class StockPriceService(
         stockPriceJoinRepository.bulkInsert(stockPriceSaveList)
         stockPriceJoinRepository.bulkUpdate(stockPriceUpdateList)
         stockPriceRepository.deleteAllInBatch(stockPriceDeleteSet)
-
     }
+
+    @Transactional(readOnly = true)
+    fun getStockPriceByDate(
+        baseDate: LocalDate,
+        stockCodeList: List<String>
+    ): List<StockPrice> {
+        return stockPriceRepository.findAllByDateAndStockInfoCodeIn(
+            baseDate = baseDate,
+            stockCodeList = stockCodeList
+        )
+    }
+
 }

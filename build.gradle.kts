@@ -1,37 +1,37 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.2.4"
-    id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "1.9.23"
-    kotlin("plugin.spring") version "1.9.23"
-    kotlin("plugin.jpa") version "1.9.23"
-    kotlin("kapt") version "1.9.23"
+    kotlin("jvm") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25" apply false
+    kotlin("plugin.jpa") version "1.9.25" apply false
+    kotlin("kapt") version "1.9.25" apply false
+    id("org.springframework.boot") version "3.3.5" apply false
+    id("io.spring.dependency-management") version "1.1.6" apply false
 }
-
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-}
-
 
 allprojects {
     group = "com.zeki"
     version = "0.0.1-SNAPSHOT"
 
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
+    }
+
     tasks.withType<KotlinCompile> {
         kotlinOptions {
-            freeCompilerArgs += "-Xjsr305=strict"
+            freeCompilerArgs = listOf("-Xjsr305=strict")
             jvmTarget = "17"
         }
     }
 
     tasks.withType<Test> {
         useJUnitPlatform()
-    }
-
-    repositories {
-        mavenCentral()
     }
 }
 
@@ -42,13 +42,6 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.kapt")
-
-
-    allOpen {
-        annotation("jakarta.persistence.Entity")
-        annotation("jakarta.persistence.MappedSuperclass")
-        annotation("jakarta.persistence.Embeddable")
-    }
 
     dependencies {
         // spring boot

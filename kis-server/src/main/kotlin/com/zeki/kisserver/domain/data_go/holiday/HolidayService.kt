@@ -150,11 +150,13 @@ class HolidayService(
                 }
             }
 
-
             currentDate = currentDate.plusDays(1)
         }
-
         holidayDeleteSet.addAll(savedHolidayMap.values)
     }
 
+    @Transactional(readOnly = true)
+    fun getHolidayList(startDate: LocalDate, endDate: LocalDate): List<Holiday> {
+        return holidayRepository.findByDateBetweenOrderByDateAsc(startDate, endDate)
+    }
 }

@@ -9,4 +9,5 @@ interface HolidayRepository : JpaRepository<Holiday, Long> {
 
     @Suppress("SpringDataMethodInconsistencyInspection") // IsHoliday를 Holiday로 인식함
     fun findByDateBetweenAndIsHoliday(startDate: LocalDate, endDate: LocalDate, isHoliday: Boolean): List<Holiday>
+    fun findByDateBetweenOrderByDateAsc(startDate: LocalDate, endDate: LocalDate): List<Holiday>
 }

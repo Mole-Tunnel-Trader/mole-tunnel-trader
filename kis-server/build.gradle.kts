@@ -16,7 +16,7 @@ dependencies {
     implementation("com.querydsl:querydsl-core:5.1.0")
     implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
     kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
-    
+
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -30,6 +30,7 @@ dependencies {
     // logback & webclient
     implementation("io.netty:netty-all") // mac
     implementation("io.micrometer:micrometer-core") // mac
-
+//    implementation("ch.qos.logback:logback-classic")
+//    implementation("ch.qos.logback:logback-core")
 
 }

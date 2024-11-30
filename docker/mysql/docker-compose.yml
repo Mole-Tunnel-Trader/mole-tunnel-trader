@@ -2,7 +2,6 @@ services:
   db:
     image: mysql
     environment:
-      # Local에서만 사용할 예정 입니다.
       MYSQL_ROOT_PASSWORD: 80256406186
     volumes:
       - ./data:/var/lib/mysql
