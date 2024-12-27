@@ -26,7 +26,7 @@ class StockInfoService(
         val kisStockInfoDtoList = stockInfoWebClientService.getKisStockInfoDtoList(stockCodeList)
 
         kisStockInfoDtoList.forEach { kisStockInfoDto ->
-            val output1 = kisStockInfoDto.output1
+            val output1 = kisStockInfoDto.output1 ?: return@forEach
             when (val stockInfo = savedStockInfoMap[output1.stockCode]) {
                 null -> {
                     stockInfoSaveList.add(

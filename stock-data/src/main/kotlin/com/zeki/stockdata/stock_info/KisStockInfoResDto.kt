@@ -9,9 +9,9 @@ data class KisStockInfoResDto(
     @JsonProperty("msg_cd")
     val msgCd: String,
     @JsonProperty("output1")
-    val output1: Output1,
+    val output1: Output1?,
     @JsonProperty("output2")
-    val output2: List<Output2>,
+    val output2: List<Output2> = emptyList(),
     @JsonProperty("rt_cd")
     val rtCd: String
 ) {

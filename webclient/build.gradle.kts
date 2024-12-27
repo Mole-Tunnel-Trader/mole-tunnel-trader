@@ -9,9 +9,9 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    api("org.springframework.boot:spring-boot-starter-webflux")
 
     // logback & webclient
-    implementation("io.netty:netty-all") // mac
-    implementation("io.micrometer:micrometer-core") // mac
+    api("io.netty:netty-all") // mac
+    api("io.micrometer:micrometer-core") // mac
 }

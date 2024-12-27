@@ -74,7 +74,44 @@ class StockPriceService(
 
         stockPriceJoinRepository.bulkInsert(stockPriceSaveList)
         stockPriceJoinRepository.bulkUpdate(stockPriceUpdateList)
-        stockPriceRepository.deleteAllInBatch(stockPriceDeleteSet)
+    }
+
+    @Transactional
+    fun updateRsi(
+        stockCodeList: List<String>,
+        standardDate: LocalDate
+    ) {
+        val stockPriceList = stockPriceRepository.findAllByDateGreaterThanEqualAndStockInfoCodeInOrderByDateAsc(
+            baseDate = standardDate,
+            stockCodeList = stockCodeList
+        )
+
+        for (i in stockPriceList.indices) {
+            val stockPrice = stockPriceList[i]
+
+            var rsi: Float? = null
+            if (i >= 14) {
+                val periodData = stockPriceList.subList(i - 14, i)
+
+                val differences = periodData.map { (it.close - it.open).toLong() }
+
+                val gains = differences.filter { it > 0 }
+                val losses = differences.filter { it < 0 }.map { kotlin.math.abs(it) } // 절댓값으로 전환
+
+                val avgGain = if (gains.isNotEmpty()) gains.sum().toDouble() / 14 else 0.0
+                val avgLoss = if (losses.isNotEmpty()) losses.sum().toDouble() / 14 else 0.0
+
+                rsi = if (avgLoss == 0.0) {
+                    // 손실이 없으므로 상승만 있었던 경우 => RSI는 100에 근접
+                    100f
+                } else {
+                    val rs = avgGain / avgLoss
+                    (100.0 - (100.0 / (1.0 + rs))).toFloat()
+                }
+            }
+
+            stockPrice.rsi = rsi
+        }
     }
 
     @Transactional(readOnly = true)
@@ -84,6 +121,30 @@ class StockPriceService(
     ): List<StockPrice> {
         return stockPriceRepository.findAllByDateAndStockInfoCodeIn(
             baseDate = baseDate,
+            stockCodeList = stockCodeList
+        )
+    }
+
+    @Transactional(readOnly = true)
+    fun getStockPriceList(
+        startLocalDate: LocalDate,
+        endLocalDate: LocalDate,
+        stockCodeList: List<String>
+    ): List<StockPrice> {
+        return stockPriceRepository.findAllByDateBetweenAndStockInfoCodeIn(
+            startDate = startLocalDate,
+            endDate = endLocalDate,
+            stockCodeList = stockCodeList
+        )
+    }
+
+    @Transactional(readOnly = true)
+    fun getStockPriceList(
+        startLocalDate: LocalDate,
+        stockCodeList: List<String>
+    ): List<StockPrice> {
+        return stockPriceRepository.findAllByDateGreaterThanEqualAndStockInfoCodeInOrderByDateAsc(
+            baseDate = startLocalDate,
             stockCodeList = stockCodeList
         )
     }

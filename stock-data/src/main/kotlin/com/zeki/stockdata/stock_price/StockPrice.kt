@@ -16,6 +16,7 @@ class StockPrice private constructor(
     high: BigDecimal,
     low: BigDecimal,
     volume: Long,
+    rsi: Float? = null
 ) : BaseEntity() {
 
     @Column(name = "date", nullable = false)
@@ -48,6 +49,10 @@ class StockPrice private constructor(
     var volume: Long = volume
         protected set
 
+    @Column(name = "rsi", nullable = true, precision = 12)
+    @Comment("RSI")
+    var rsi: Float? = rsi
+
     @ManyToOne(fetch = FetchType.LAZY)
     @Comment("주식정보 ID")
     lateinit var stockInfo: StockInfo
@@ -69,7 +74,7 @@ class StockPrice private constructor(
                 open = open,
                 high = high,
                 low = low,
-                volume = volume
+                volume = volume,
             )
             stockInfo.addStockPrice(stockPrice)
 
@@ -86,7 +91,7 @@ class StockPrice private constructor(
         open: BigDecimal,
         high: BigDecimal,
         low: BigDecimal,
-        volume: Long,
+        volume: Long
     ): Boolean {
         if (this.close == close &&
             this.open == open &&

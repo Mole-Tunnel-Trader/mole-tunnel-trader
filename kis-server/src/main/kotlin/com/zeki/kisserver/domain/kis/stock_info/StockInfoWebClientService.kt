@@ -1,7 +1,6 @@
 package com.zeki.kisserver.domain.kis.stock_info
 
-import com.zeki.common.exception.ApiException
-import com.zeki.common.exception.ResponseCode
+import com.zeki.common.exception.ExceptionUtils.log
 import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.stockdata.stock_info.KisStockInfoResDto
@@ -30,11 +29,14 @@ class StockInfoWebClientService(
 
         val token = TokenHolder.getToken()
 
-        return stockCodeList.stream()
-            .map { stockCode ->
-                this.getStockInfoFromKis(stockCode, endDate, startDate, token.tokenType, token.tokenValue)
-            }
-            .toList()
+        val stockInfoList = mutableListOf<KisStockInfoResDto>()
+        for (stockCode in stockCodeList) {
+            val stockInfoResDto =
+                this.getStockInfoFromKis(stockCode, endDate, startDate, token.tokenType, token.tokenValue) ?: continue
+            stockInfoList.add(stockInfoResDto)
+        }
+
+        return stockInfoList
     }
 
     // 2600건 정보 조회하므로 @GetToken은 상위 메서드에 작성
@@ -44,7 +46,7 @@ class StockInfoWebClientService(
         startDate: LocalDate = endDate.minusDays(1),
         tokenType: String,
         tokenValue: String
-    ): KisStockInfoResDto {
+    ): KisStockInfoResDto? {
 
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>()
             .apply {
@@ -75,10 +77,12 @@ class StockInfoWebClientService(
             retryDelay = 510
         )
 
-        val result = responseDatas?.body ?: throw ApiException(
-            ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
-            "KIS 주식 정보 조회 실패, 종목코드 : $stockCode"
-        )
+        if (responseDatas == null || responseDatas.body == null) {
+            log.warn { "KIS 주식 정보 조회 실패, 종목코드 : $stockCode" }
+            return null
+        }
+
+        val result = responseDatas!!.body!!
 
         if (result.rtCd != "0") {
             // TODO : 에러 발생시 전체 장애로 이어지므로 WebHook 처리

@@ -81,8 +81,7 @@ class StockCodeService(
         stockCodeRepository.deleteAllInBatch(stockCodeDeleteSet)
     }
 
-
-    fun getStockCodesFromDataGo(
+    private fun getStockCodesFromDataGo(
         standardDate: LocalDate = LocalDate.now(),
         standardTime: LocalTime = LocalTime.now(),
         standardDeltaDate: Int = 10
@@ -133,5 +132,10 @@ class StockCodeService(
         }
 
         return dataGoStockCodeItemList
+    }
+
+    @Transactional(readOnly = true)
+    fun getStockCodeList(): List<String> {
+        return stockCodeRepository.findAll().map { it.code }
     }
 }

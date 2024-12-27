@@ -26,7 +26,8 @@ class HolidayService(
 ) {
 
     @Transactional
-    fun upsertHoliday(standardYear: Int = holidayDateService.getAvailableDate().year) {
+    fun upsertHoliday(standardYear: Int? = null) {
+        val standardYear = standardYear ?: holidayDateService.getAvailableDate().year
         val holidaySaveList = mutableListOf<Holiday>()
         val holidayUpdateList = mutableListOf<Holiday>()
         val holidayDeleteSet = mutableSetOf<Holiday>()
@@ -43,8 +44,10 @@ class HolidayService(
         holidayRepository.deleteAllInBatch(holidayDeleteSet)
     }
 
-    fun getHolidaysFromDataGo(standardYear: Int = holidayDateService.getAvailableDate().year)
+    fun getHolidaysFromDataGo(standardYear: Int? = null)
             : DataGoHolidayResDto {
+        val standardYear = standardYear ?: holidayDateService.getAvailableDate().year
+
         val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>()
             .apply {
                 add("solYear", standardYear.toString())

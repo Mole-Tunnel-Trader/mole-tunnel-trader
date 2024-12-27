@@ -10,4 +10,15 @@ interface StockPriceRepository : JpaRepository<StockPrice, Long> {
         baseDate: LocalDate,
         stockCodeList: List<String>
     ): List<StockPrice>
+
+    fun findAllByDateGreaterThanEqualAndStockInfoCodeInOrderByDateAsc(
+        baseDate: LocalDate,
+        stockCodeList: List<String>
+    ): List<StockPrice>
+
+    fun findAllByDateBetweenAndStockInfoCodeIn(
+        startDate: LocalDate,
+        endDate: LocalDate,
+        stockCodeList: List<String>
+    ): List<StockPrice>
 }

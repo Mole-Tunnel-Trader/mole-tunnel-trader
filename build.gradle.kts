@@ -45,10 +45,10 @@ subprojects {
 
     dependencies {
         // spring boot
-        implementation("org.springframework.boot:spring-boot-starter-web")
+        api("org.springframework.boot:spring-boot-starter-web")
         // kotlin
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        api("com.fasterxml.jackson.module:jackson-module-kotlin")
+        api("org.jetbrains.kotlin:kotlin-reflect")
     }
 }
 
@@ -59,6 +59,7 @@ project(":kis-server") {
         implementation(project(":stock-code"))
         implementation(project(":token"))
         implementation(project(":trade"))
+        implementation(project(":elphago"))
 
         implementation(project(":webclient"))
         implementation(project(":common"))
@@ -95,6 +96,12 @@ project(":token") {
 }
 
 project(":trade") {
+    dependencies {
+        implementation(project(":common"))
+    }
+}
+
+project(":elphago") {
     dependencies {
         implementation(project(":common"))
     }
