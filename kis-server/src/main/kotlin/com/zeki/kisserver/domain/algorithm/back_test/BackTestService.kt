@@ -12,6 +12,7 @@ import com.zeki.kisserver.domain.kis.stock_price.StockPriceService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.LocalDate
 
 @Service
@@ -34,19 +35,43 @@ class BackTestService(
             stockInfos = mutableMapOf()
         )
         val accountHistoryDto = AccountHistoryDto()
+        // 초기 자산을 저장
+        var previousTotalPrice = accountDto.totalPrice
 
         val dateList = holidayService.getHolidayList(startDate, endDate)
+        val dateMap = dateList.associateBy { it.date }
 
-        for (dateEntity in dateList) {
-            if (dateEntity.isHoliday) continue
-            val baseDate = dateEntity.date
+        val allDateList = startDate.datesUntil(endDate).toList()
+
+        for (baseDate in allDateList) {
+            if (dateMap[baseDate] != null) continue
             kisAlgorithm.runAlgorithm(baseDate, stockCodeList, accountDto)
 
-            val buyStocks = kisAlgorithm.getBuyStocks(dateEntity.date)
-            val sellStocks = kisAlgorithm.getSellStocks(dateEntity.date)
+            val buyStocks = kisAlgorithm.getBuyStocks(baseDate)
+            val sellStocks = kisAlgorithm.getSellStocks(baseDate)
 
             this.buyStocks(baseDate, buyStocks, accountDto)
             this.sellStocks(baseDate, sellStocks, accountDto, accountHistoryDto)
+            val dailyReturn = ((accountDto.totalPrice - previousTotalPrice) / previousTotalPrice * BigDecimal(100))
+            val totalReturn =
+                ((accountDto.totalPrice - BigDecimal(10_000_000)) / BigDecimal(10_000_000) * BigDecimal(100))
+
+            log.info(
+                "Date: $baseDate | Daily Return: ${
+                    dailyReturn.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                    )
+                }% | Total Return: ${
+                    totalReturn.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                    )
+                }% | Total Asset: ${accountDto.totalPrice}"
+            )
+
+            // 다음 날의 수익률 계산을 위해 현재 총자산 저장
+            previousTotalPrice = accountDto.totalPrice
         }
 
         // TODO : 덽타 값 부여 (실제 수익률은 테스트 결과에 따라 다름)
@@ -151,8 +176,12 @@ class BackTestService(
                     )
                 )
                 accountStockInfoDto.stockAmount -= it.sellTargetAmount
-                accountStockInfoDto.stockAvgPrice =
-                    (accountStockInfoDto.stockAvgPrice * (accountStockInfoDto.stockAmount + it.sellTargetAmount) - stockClosePrice * it.sellTargetAmount) / accountStockInfoDto.stockAmount
+                if (accountStockInfoDto.stockAmount != BigDecimal.ZERO) {
+                    accountStockInfoDto.stockAvgPrice =
+                        (accountStockInfoDto.stockAvgPrice * (accountStockInfoDto.stockAmount + it.sellTargetAmount) - stockClosePrice * it.sellTargetAmount) / accountStockInfoDto.stockAmount
+                } else {
+                    accountStockInfoDto.stockAvgPrice = BigDecimal.ZERO
+                }
 
                 val sellTotalPrice = it.sellTargetPrice * it.sellTargetAmount
                 accountDto.totalPrice += sellTotalPrice

@@ -1,6 +1,7 @@
 package com.zeki.kisserver.domain._common.scheduler
 
 import com.zeki.common.exception.ExceptionUtils
+import com.zeki.common.exception.ExceptionUtils.log
 import com.zeki.kisserver.domain.data_go.holiday.HolidayDateService
 import com.zeki.kisserver.domain.data_go.holiday.HolidayService
 import com.zeki.kisserver.domain.data_go.stock_code.StockCodeService
@@ -31,9 +32,9 @@ class CommonScheduler(
 
     @Scheduled(cron = "0 0 7 * * *")
     @Transactional
-    fun updateHolidayByDaily() {
+    fun updateHolidayByDaily(year: Int) {
 
-        holidayService.upsertHoliday()
+        holidayService.upsertHoliday(year)
 //        if (!holidayDateService.isHoliday(LocalDate.now())) {
 //            stockCodeService.upsertStockCode()
 //        }
@@ -48,7 +49,16 @@ class CommonScheduler(
 
 //        stockInfoService.upsertStockInfo(stockCodeList)
 //        stockPriceService.upsertStockPrice(stockCodeList, nowDate, 3000)
-        stockPriceService.updateRsi(listOf("000020"), LocalDate.of(2000, 1, 1))
+
+
+        val stockCodeList = stockCodeService.getStockCodeList()
+
+        // 100개씩 분할
+        stockCodeList.chunked(100).forEachIndexed { index, chunkedList ->
+            log.info { "start index: $index" }
+            stockPriceService.updateRsi(chunkedList, LocalDate.of(2000, 1, 1))
+            log.info { "end index: $index" }
+        }
 
     }
 }

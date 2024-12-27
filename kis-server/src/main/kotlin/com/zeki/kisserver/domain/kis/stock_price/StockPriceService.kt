@@ -149,4 +149,11 @@ class StockPriceService(
         )
     }
 
+    fun getStockPriceListByDate(baseDate: LocalDate, stockCodeList: List<String>): List<StockPrice> {
+        return stockPriceRepository.findAllByDateAndStockInfoCodeIn(
+            baseDate = baseDate,
+            stockCodeList = stockCodeList
+        )
+    }
+
 }

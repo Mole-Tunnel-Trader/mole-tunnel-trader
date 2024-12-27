@@ -33,11 +33,11 @@ class ElphagoService(
     @Transactional
     override fun runAlgorithm(baseDate: LocalDate, stockCodeList: List<String>, accountDto: AccountDto) {
         // 필요한 기간의 주가 데이터를 조회
-        val codeList = stockCodeService.getStockCodeList()
+
         val elphagoMap = elphagoRepository.findByCodeIn(stockCodeList).associateBy { it.code }
 
-        for (code in codeList) {
-            val stockPrices = stockPriceService.getStockPriceList(baseDate, listOf(code))
+        for (code in stockCodeList) {
+            val stockPrices = stockPriceService.getStockPriceListByDate(baseDate, listOf(code))
 
             val stockName = stockPrices.firstOrNull()?.stockInfo?.name
             val elphago = elphagoMap[code] ?: Elphago(
@@ -141,6 +141,7 @@ class ElphagoService(
                                     stockName = stockName ?: "",
                                     buyTargetPrice = stockPrice.close,
                                     detectedDate = stockPrice.date,
+                                    buyTargetAmount = BigDecimal.ONE // FIXME : 1말고 의미 있는숫자로 변경
                                 )
                             }
                         }
