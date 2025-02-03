@@ -1,8 +1,8 @@
 package com.zeki.kisserver.domain.kis.trade
 
 import com.zeki.common.em.OrderState
-import com.zeki.trade.dto.KisOrderStockResDto
-import com.zeki.trade.dto.TradeQueueDto
+import com.zeki.mole_tunnel_db.dto.KisOrderStockResDto
+import com.zeki.mole_tunnel_db.dto.TradeQueueDto
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

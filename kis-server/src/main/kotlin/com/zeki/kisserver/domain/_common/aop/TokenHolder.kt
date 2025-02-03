@@ -2,7 +2,7 @@ package com.zeki.kisserver.domain._common.aop
 
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
-import com.zeki.token.Token
+import com.zeki.mole_tunnel_db.entity.Token
 
 object TokenHolder {
     private val tokenThreadLocal = ThreadLocal<Token>()

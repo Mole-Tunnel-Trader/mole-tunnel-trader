@@ -1,8 +1,8 @@
 package com.zeki.kisserver.domain.kis.stock_info
 
-import com.zeki.stockdata.stock_info.StockInfo
-import com.zeki.stockdata.stock_info.StockInfoJoinRepository
-import com.zeki.stockdata.stock_info.StockInfoRepository
+import com.zeki.mole_tunnel_db.entity.StockInfo
+import com.zeki.mole_tunnel_db.repository.StockInfoRepository
+import com.zeki.mole_tunnel_db.repository.join.StockInfoJoinRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

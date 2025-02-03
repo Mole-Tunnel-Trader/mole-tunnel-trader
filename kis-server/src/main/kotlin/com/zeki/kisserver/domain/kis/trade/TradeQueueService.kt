@@ -1,7 +1,7 @@
 package com.zeki.kisserver.domain.kis.trade
 
-import com.zeki.trade.TradeQueueRepository
-import com.zeki.trade.dto.TradeQueueDto
+import com.zeki.mole_tunnel_db.dto.TradeQueueDto
+import com.zeki.mole_tunnel_db.repository.TradeQueueRepository
 import org.springframework.stereotype.Service
 
 @Service

@@ -1,7 +1,7 @@
 package com.zeki.kisserver.domain.data_go.holiday
 
 import com.zeki.common.util.CustomUtils
-import com.zeki.holiday.HolidayRepository
+import com.zeki.mole_tunnel_db.repository.HolidayRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate

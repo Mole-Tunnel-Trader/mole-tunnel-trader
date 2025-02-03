@@ -54,6 +54,7 @@ subprojects {
 
 project(":kis-server") {
     dependencies {
+        implementation(project(":mole-tunnel-db"))
         implementation(project(":stock-data"))
         implementation(project(":holiday"))
         implementation(project(":stock-code"))
@@ -62,6 +63,12 @@ project(":kis-server") {
         implementation(project(":elphago"))
 
         implementation(project(":webclient"))
+        implementation(project(":common"))
+    }
+}
+
+project(":mole-tunnel-db") {
+    dependencies {
         implementation(project(":common"))
     }
 }

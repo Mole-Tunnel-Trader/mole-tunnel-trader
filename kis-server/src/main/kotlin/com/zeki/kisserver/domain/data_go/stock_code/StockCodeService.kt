@@ -5,8 +5,11 @@ import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toStringDate
 import com.zeki.kisserver.domain.data_go.holiday.HolidayDateService
-import com.zeki.stockcode.*
 import com.zeki.webclient.WebClientConnector
+import com.zeki.mole_tunnel_db.dto.DataGoStockCodeResDto
+import com.zeki.mole_tunnel_db.entity.StockCode
+import com.zeki.mole_tunnel_db.repository.StockCodeRepository
+import com.zeki.mole_tunnel_db.repository.join.StockCodeJoinRepository
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -85,7 +88,7 @@ class StockCodeService(
         standardDate: LocalDate = LocalDate.now(),
         standardTime: LocalTime = LocalTime.now(),
         standardDeltaDate: Int = 10
-    ): List<StockCodeItem> {
+    ): List<DataGoStockCodeResDto.StockCodeItem> {
         var pageNo = 1
         var totalCount = Int.MAX_VALUE
 
@@ -105,7 +108,7 @@ class StockCodeService(
                 add("pageNo", pageNo.toString())
             }
 
-        val dataGoStockCodeItemList = mutableListOf<StockCodeItem>()
+        val dataGoStockCodeItemList = mutableListOf<DataGoStockCodeResDto.StockCodeItem>()
         while ((pageNo - 1) * batchSize < totalCount) {
             queryParams["pageNo"] = pageNo.toString()
 

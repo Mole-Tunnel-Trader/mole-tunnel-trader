@@ -3,11 +3,11 @@ package com.zeki.kisserver.domain.kis.token
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
-import com.zeki.token.KisTokenResDto
-import com.zeki.token.Token
-import com.zeki.token.TokenRepository
 import com.zeki.webclient.ApiStatics
 import com.zeki.webclient.WebClientConnector
+import com.zeki.mole_tunnel_db.dto.KisTokenResDto
+import com.zeki.mole_tunnel_db.entity.Token
+import com.zeki.mole_tunnel_db.repository.TokenRepository
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
