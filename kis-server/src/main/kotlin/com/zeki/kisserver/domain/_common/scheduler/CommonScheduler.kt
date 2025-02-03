@@ -1,6 +1,5 @@
 package com.zeki.kisserver.domain._common.scheduler
 
-import com.zeki.common.exception.ExceptionUtils
 import com.zeki.common.exception.ExceptionUtils.log
 import com.zeki.kisserver.domain.data_go.holiday.HolidayDateService
 import com.zeki.kisserver.domain.data_go.holiday.HolidayService
@@ -27,7 +26,7 @@ class CommonScheduler(
     @Scheduled(fixedRate = 60000 * 60)
     fun connection() {
         jdbcTemplate.execute("SELECT 1")
-        ExceptionUtils.log.info("Connection Check")
+        log.info("Connection Check")
     }
 
     @Scheduled(cron = "0 0 7 * * *")

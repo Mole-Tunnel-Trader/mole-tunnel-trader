@@ -19,6 +19,7 @@ class Elphago(
     var lineCnt: Int = 0,
     var signalFlag: Int = 0,
     var buyPrice: BigDecimal = BigDecimal.ONE,
+    var buyCnt: BigDecimal = BigDecimal.ZERO,
     var buyDate: LocalDate? = null,
     var buyDateCnt: Int = 0,
     var volStack: Int = 0,
