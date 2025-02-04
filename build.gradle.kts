@@ -73,47 +73,6 @@ project(":mole-tunnel-db") {
     }
 }
 
-
-project(":stock-data") {
-    dependencies {
-        implementation(project(":common"))
-        implementation(project(":webclient"))
-    }
-}
-
-project(":holiday") {
-    dependencies {
-        implementation(project(":common"))
-        implementation(project(":webclient"))
-    }
-}
-
-project(":stock-code") {
-    dependencies {
-        implementation(project(":common"))
-        implementation(project(":webclient"))
-    }
-}
-
-project(":token") {
-    dependencies {
-        implementation(project(":common"))
-        implementation(project(":webclient"))
-    }
-}
-
-project(":trade") {
-    dependencies {
-        implementation(project(":common"))
-    }
-}
-
-project(":elphago") {
-    dependencies {
-        implementation(project(":common"))
-    }
-}
-
 project(":webclient") {
     dependencies {
         implementation(project(":common"))
