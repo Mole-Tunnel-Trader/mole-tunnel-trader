@@ -142,6 +142,7 @@ subprojects {
         }
 
         // 빌드가 완료된 후 yml 및 xml 파일 삭제 작업
+        // *** 여기 부분 주석 하면 개발환경에도 Yml 셋팅할 수 있음 ( 커밋할 때 설정 파일 안 들어가도록 주의 )
         tasks.matching { it.name == "build" }.configureEach {
             finalizedBy(rootProject.tasks.named("deleteYmlFilesFor${project.name}"))
         }
