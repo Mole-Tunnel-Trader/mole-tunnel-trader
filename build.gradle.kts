@@ -79,11 +79,71 @@ project(":common") {
     }
 }
 
-
 // subModule
 tasks.register<Copy>("copyYmlFiles") {
     description = "yml 파일 복사"
     group = "my tasks"
     from("kis-vol-kotlin-yml")
     into("kis-server/src/main/resources")
+}
+
+// 복사 및 빌드 관련 작업 정의 코드
+// 모듈 추가 되면 여기도 추가
+val targetModules = listOf("mole-tunnel-db", "webclient")
+val sourceResourcesPath = "kis-server/src/main/resources"
+val destinationResourcesPath = "src/main/resources"
+
+targetModules.forEach { moduleName ->
+    tasks.register<Copy>("copyYmlFilesTo$moduleName") {
+        description = "모듈 $moduleName 에 yml 및 xml 파일 복사"
+        group = "my tasks"
+
+        val modulePath = file("$moduleName/$destinationResourcesPath")
+
+        // 디렉터리 생성
+        doFirst {
+            if (!modulePath.exists()) {
+                modulePath.mkdirs()
+            }
+        }
+
+        // 파일 복사
+        from(file(sourceResourcesPath)) {
+            include("*.yml", "*.xml")
+        }
+        into(modulePath)
+
+        // 기존에 파일이 있으면 덮어쓰기
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    // 파일 복사 후, 빌드가 끝난 후에 파일 삭제 작업
+    tasks.register("deleteYmlFilesFor$moduleName") {
+        doLast {
+            val modulePath = file("$moduleName/$destinationResourcesPath")
+            if (modulePath.exists()) {
+                println("복사된 yml 및 xml 파일 삭제 시작: ${modulePath.path}")
+                modulePath.deleteRecursively()
+            }
+        }
+    }
+}
+
+subprojects {
+    if (project.name in targetModules) {
+        tasks.matching { it.name == "build" }.configureEach {
+            // 'build' 작업이 실행되기 전에 'copyYmlFilesTo<module>' 작업이 실행되도록 설정
+            dependsOn(rootProject.tasks.named("copyYmlFilesTo${project.name}"))
+        }
+
+        // 'processResources' 작업이 실행되기 전에 yml 파일 복사를 완료하도록 보장
+        tasks.matching { it.name == "processResources" }.configureEach {
+            dependsOn(rootProject.tasks.named("copyYmlFilesTo${project.name}"))
+        }
+
+        // 빌드가 완료된 후 yml 및 xml 파일 삭제 작업
+        tasks.matching { it.name == "build" }.configureEach {
+            finalizedBy(rootProject.tasks.named("deleteYmlFilesFor${project.name}"))
+        }
+    }
 }
