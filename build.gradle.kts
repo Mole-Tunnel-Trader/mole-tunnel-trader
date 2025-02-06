@@ -116,17 +116,6 @@ targetModules.forEach { moduleName ->
         // 기존에 파일이 있으면 덮어쓰기
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
-
-    // 파일 복사 후, 빌드가 끝난 후에 파일 삭제 작업
-    tasks.register("deleteYmlFilesFor$moduleName") {
-        doLast {
-            val modulePath = file("$moduleName/$destinationResourcesPath")
-            if (modulePath.exists()) {
-                println("복사된 yml 및 xml 파일 삭제 시작: ${modulePath.path}")
-                modulePath.deleteRecursively()
-            }
-        }
-    }
 }
 
 subprojects {
@@ -136,15 +125,16 @@ subprojects {
             dependsOn(rootProject.tasks.named("copyYmlFilesTo${project.name}"))
         }
 
+        // 'run' 작업을 kis-server 모듈에만 설정하도록
+        if (project.name == "kis-server") {
+            tasks.named("run").configure {
+                dependsOn(targetModules.map { rootProject.tasks.named("copyYmlFilesTo$it") })
+            }
+        }
+
         // 'processResources' 작업이 실행되기 전에 yml 파일 복사를 완료하도록 보장
         tasks.matching { it.name == "processResources" }.configureEach {
             dependsOn(rootProject.tasks.named("copyYmlFilesTo${project.name}"))
-        }
-
-        // 빌드가 완료된 후 yml 및 xml 파일 삭제 작업
-        // *** 여기 부분 주석 하면 개발환경에도 Yml 셋팅할 수 있음 ( 커밋할 때 설정 파일 안 들어가도록 주의 )
-        tasks.matching { it.name == "build" }.configureEach {
-            finalizedBy(rootProject.tasks.named("deleteYmlFilesFor${project.name}"))
         }
     }
 }
