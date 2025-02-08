@@ -13,7 +13,7 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 
 @Component
-class GoogleChatConnector(
+class WebhookConnector(
     private val objectMapper: ObjectMapper
 ) {
 

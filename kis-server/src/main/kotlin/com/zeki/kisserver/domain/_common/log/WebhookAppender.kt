@@ -10,15 +10,19 @@ import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-class GoogleChatAppender() : AppenderBase<ILoggingEvent>() {
-    private val webhookUri: String? = null
+class WebhookAppender() : AppenderBase<ILoggingEvent>() {
+    private var webhookUri: String? = null
     private val layout: LayoutBase<ILoggingEvent?> = defaultLayout
     private val timeout: Int = 30000
+
+    fun setWebhookUri(webhookUri: String) {
+        this.webhookUri = webhookUri
+    }
 
     override fun append(evt: ILoggingEvent) {
         try {
             if (!webhookUri.isNullOrBlank()) {
-                sendMessageWithWebhookUri(webhookUri, evt)
+                sendMessageWithWebhookUri(webhookUri!!, evt)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -30,7 +34,7 @@ class GoogleChatAppender() : AppenderBase<ILoggingEvent>() {
     private fun sendMessageWithWebhookUri(webhookUri: String, evt: ILoggingEvent) {
         val text: String = layout.doLayout(evt)
 
-        val webhookDto: GoogleChatWebhookDto = GoogleChatWebhookDto(text)
+        val webhookDto: DiscordWebhookDto = DiscordWebhookDto(text)
         val bytes: ByteArray = ObjectMapper().writeValueAsBytes(webhookDto)
 
         postMessage(webhookUri, "application/json", bytes)
