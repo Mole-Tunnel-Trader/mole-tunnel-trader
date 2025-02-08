@@ -10,6 +10,7 @@ class HealthCheckController {
 
     @GetMapping("")
     fun healthCheck(): CommonResDto<String> {
+
         return CommonResDto.success(
             LocalDateTime.now().toString()
         )
