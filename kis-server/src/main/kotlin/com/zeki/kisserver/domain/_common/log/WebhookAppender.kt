@@ -7,12 +7,14 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.util.IPUtils
 import io.netty.util.internal.logging.MessageFormatter
 import java.io.IOException
+import java.io.OutputStream
+import java.net.HttpURLConnection
+import java.net.URI
 
-class WebhookAppender(
-    private val webhookConnector: WebhookConnector
-) : AppenderBase<ILoggingEvent>() {
+class WebhookAppender() : AppenderBase<ILoggingEvent>() {
     private var webhookUri: String? = null
     private val layout: LayoutBase<ILoggingEvent?> = defaultLayout
+    private val timeout: Int = 30000
 
     fun setWebhookUri(webhookUri: String) {
         this.webhookUri = webhookUri
@@ -52,11 +54,18 @@ class WebhookAppender(
 
     @Throws(IOException::class)
     private fun postMessage(uri: String, contentType: String, bytes: ByteArray) {
-        val reqBody = mapOf(
-            "content-type" to contentType,
-            "data" to String(bytes)
-        )
-        webhookConnector.connect("POST", uri, reqBody)
+        val conn: HttpURLConnection = URI(uri).toURL().openConnection() as HttpURLConnection
+        conn.connectTimeout = timeout
+        conn.readTimeout = timeout
+        conn.doOutput = true
+        conn.requestMethod = "POST"
+        conn.setFixedLengthStreamingMode(bytes.size)
+        conn.setRequestProperty("Content-Type", contentType)
+
+        val os: OutputStream = conn.outputStream
+        os.write(bytes)
+        os.flush()
+        os.close()
     }
 
     companion object {
