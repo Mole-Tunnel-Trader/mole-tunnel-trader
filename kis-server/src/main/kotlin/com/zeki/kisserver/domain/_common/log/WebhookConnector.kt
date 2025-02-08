@@ -9,7 +9,7 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.net.HttpURLConnection
-import java.net.URL
+import java.net.URI
 import java.nio.charset.StandardCharsets
 
 @Component
@@ -22,7 +22,7 @@ class WebhookConnector(
         try {
             val body = objectMapper.writeValueAsString(reqBody)
 
-            conn = URL(url).openConnection() as HttpURLConnection
+            conn = URI(url).toURL().openConnection() as HttpURLConnection
 
             conn.requestMethod = httpMethod
             conn.setRequestProperty("Content-Type", "application/json")
