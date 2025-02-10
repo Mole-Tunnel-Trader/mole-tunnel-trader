@@ -1,0 +1,3 @@
+[submodule "kis-server/src/main/resources"]
+	path = kis-server/src/main/resources
+	url = git@github.com-ojy:Mole-Tunnel-Trader/mole-tunnel-trader-yml.git
