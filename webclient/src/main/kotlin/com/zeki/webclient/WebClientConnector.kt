@@ -1,19 +1,16 @@
 package com.zeki.webclient
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.zeki.common.exception.ApiException
+import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
-import org.springframework.beans.factory.annotation.Qualifier
+import io.netty.handler.codec.http.HttpHeaders.addHeader
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
 import org.springframework.core.env.Environment
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpMethod
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
-import org.springframework.web.reactive.function.client.ClientResponse
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.util.UriBuilder
-import reactor.core.publisher.Mono
-import reactor.util.retry.Retry
 import java.time.Instant
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.TimeUnit
@@ -22,10 +19,9 @@ import kotlin.concurrent.withLock
 
 @Component
 class WebClientConnector(
-    @Qualifier("WebClientKIS") private val webClientKis: WebClient,
-    @Qualifier("WebClientDataGo") private val webClientDataGo: WebClient,
-    @Qualifier("WebClient") private val webClient: WebClient,
-    private val env: Environment
+    private val env: Environment,
+    private val client: OkHttpClient,  // 빈으로 주입된 OkHttpClient 사용
+    private val objectMapper: ObjectMapper // JSON 직렬화를 위한 ObjectMapper
 ) {
     enum class WebClientType {
         KIS, DATA_GO, DEFAULT
@@ -53,45 +49,75 @@ class WebClientConnector(
      */
     fun <Q, S> connect(
         webClientType: WebClientType,
-        method: HttpMethod,
+        method: String,
         path: String,
         requestHeaders: Map<String, String> = mapOf(),
         requestParams: MultiValueMap<String, String> = LinkedMultiValueMap(),
         requestBody: Q? = null,
         responseClassType: Class<S>,
-        retryCount: Long = 0,
-        retryDelay: Long = 0
-    ): ResponseEntity<S>? {
-        // 요청 제한 로직 적용
-        this.enforceRateLimit()
+        retryCount: Int = 0,
+        retryDelayMillis: Long = 0,
+        isRealTrade: Boolean = false
+    ): S? {
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val body = requestBody?.let { RequestBody.create(mediaType, it.toString()) }
 
-        val selectedWebClient = when (webClientType) {
-            WebClientType.KIS -> webClientKis
-            WebClientType.DATA_GO -> webClientDataGo
-            WebClientType.DEFAULT -> webClient
+
+        val keyKisAccountNum = env.getProperty("keys.kis.account-number")
+            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
+        val requestBuilder = when (webClientType) {
+            WebClientType.KIS -> {
+                Request.Builder()
+                    .url(
+                        env.getProperty("keys.kis.url")
+                            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
+                    )
+                    .method(method, body)
+                    .addHeader(
+                        "appkey",
+                        env.getProperty("keys.kis.app-key")
+                            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
+                    )
+                    .addHeader(
+                        "appsecret",
+                        env.getProperty("keys.kis.app-secret")
+                            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
+                    )
+            }
+
+            WebClientType.DATA_GO -> "http://localhost:8081$path"
+            WebClientType.DEFAULT -> "http://localhost:8082$path"
         }
 
-        val retrySpec = Retry.fixedDelay(retryCount, java.time.Duration.ofMillis(retryDelay))
-
-        val responseMono: Mono<ResponseEntity<S>> = selectedWebClient
-            .method(method)
-            .uri { uriBuilder: UriBuilder ->
-                uriBuilder.path(path).queryParams(requestParams).build()
+        requestBuilder.apply {
+            requestHeaders.forEach { (key, value) ->
+                addHeader(key, value)
             }
-            .headers { httpHeaders: HttpHeaders -> httpHeaders.setAll(requestHeaders) }
-            .bodyValue(requestBody ?: mapOf<String, String>())
-            .exchangeToMono { clientResponse: ClientResponse ->
-                clientResponse.toEntity(responseClassType)
-            }
-            .retryWhen(retrySpec)
-
-        return try {
-            responseMono.block()
-        } catch (e: Exception) {
-            println("Error during WebClient request: ${e.message}")
-            null
         }
+
+
+        val request = requestBuilder.build()
+
+        repeat(retryCount + 1) { attempt ->
+            try {
+                client.newCall(request).execute().use { response ->
+                    if (response.isSuccessful) {
+                        return response.body?.string()?.let {
+                            objectMapper.readValue(it, responseClassType)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                println("Request failed on attempt ${attempt + 1}: ${e.message}")
+                if (attempt < retryCount) {
+                    Thread.sleep(retryDelayMillis)
+                }
+            }
+        }
+
+        return null
     }
+
 
     /**
      * 초당 20건의 요청 제한을 강제합니다.

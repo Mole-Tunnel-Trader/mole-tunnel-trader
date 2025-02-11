@@ -3,7 +3,6 @@ package com.zeki.kisserver.domain.kis.token
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
-import com.zeki.webclient.ApiStatics
 import com.zeki.webclient.WebClientConnector
 import com.zeki.mole_tunnel_db.dto.KisTokenResDto
 import com.zeki.mole_tunnel_db.entity.Token

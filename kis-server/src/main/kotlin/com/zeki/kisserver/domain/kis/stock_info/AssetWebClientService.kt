@@ -7,7 +7,6 @@ import com.zeki.common.util.CustomUtils
 import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.kisserver.domain.kis.stock_info.dto.KisAssetResDto
-import com.zeki.webclient.ApiStatics
 import com.zeki.webclient.WebClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
