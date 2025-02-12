@@ -7,6 +7,7 @@ import com.zeki.common.util.CustomUtils
 import io.netty.handler.codec.http.HttpHeaders.addHeader
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
@@ -48,45 +49,47 @@ class WebClientConnector(
      * @return 응답 객체 또는 null
      */
     fun <Q, S> connect(
-        webClientType: WebClientType,
-        method: String,
-        path: String,
-        requestHeaders: Map<String, String> = mapOf(),
-        requestParams: MultiValueMap<String, String> = LinkedMultiValueMap(),
-        requestBody: Q? = null,
-        responseClassType: Class<S>,
-        retryCount: Int = 0,
-        retryDelayMillis: Long = 0,
-        isRealTrade: Boolean = false
+            webClientType: WebClientType,
+            method: String,
+            path: String,
+            requestHeaders: Map<String, String> = mapOf(),
+            requestParams: MultiValueMap<String, String> = LinkedMultiValueMap(),
+            requestBody: Q? = null,
+            responseClassType: Class<S>,
+            retryCount: Int = 0,
+            retryDelayMillis: Long = 0,
+            isRealTrade: Boolean = false
     ): S? {
         val mediaType = "application/json; charset=utf-8".toMediaType()
-        val body = requestBody?.let { RequestBody.create(mediaType, it.toString()) }
 
+        // GET, DELETE 요청의 경우 body 사용하지 않도록 처리
+        val body: RequestBody? = if (method == "GET" || method == "DELETE") {
+            null
+        } else {
+            requestBody?.toString()?.toRequestBody(mediaType)
+        }
 
-        val keyKisAccountNum = env.getProperty("keys.kis.account-number")
-            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
         val requestBuilder = when (webClientType) {
             WebClientType.KIS -> {
-                Request.Builder()
-                    .url(
-                        env.getProperty("keys.kis.url")
-                            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
-                    )
-                    .method(method, body)
-                    .addHeader(
-                        "appkey",
-                        env.getProperty("keys.kis.app-key")
-                            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
-                    )
-                    .addHeader(
-                        "appsecret",
-                        env.getProperty("keys.kis.app-secret")
-                            ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR)
-                    )
-            }
+                val url = env.getProperty("keys.kis.url")
+                        ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR, "URL is missing")
+                val appKey = env.getProperty("keys.kis.app-key")
+                        ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR, "App key is missing")
+                val appSecret = env.getProperty("keys.kis.app-secret")
+                        ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR, "App secret is missing")
 
-            WebClientType.DATA_GO -> "http://localhost:8081$path"
-            WebClientType.DEFAULT -> "http://localhost:8082$path"
+                Request.Builder()
+                        .url(url)
+                        .method(method, body)
+                        .addHeader("appkey", appKey)
+                        .addHeader("appsecret", appSecret)
+            }
+            WebClientType.DATA_GO -> {
+                Request.Builder().url("https://data.go.kr") // 예제 URL
+            }
+            WebClientType.DEFAULT -> {
+                Request.Builder().url("https://default.com") // 예제 URL
+            }
         }
 
         requestBuilder.apply {
@@ -94,7 +97,6 @@ class WebClientConnector(
                 addHeader(key, value)
             }
         }
-
 
         val request = requestBuilder.build()
 
@@ -117,6 +119,7 @@ class WebClientConnector(
 
         return null
     }
+
 
 
     /**
