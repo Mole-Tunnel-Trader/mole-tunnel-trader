@@ -1,0 +1,5939 @@
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "NORMAL SERVICE."
+    },
+    "body": {
+      "numOfRows": 1000,
+      "pageNo": 3,
+      "totalCount": 2658,
+      "items": {
+        "item": [
+          {
+            "basDt": "20240304",
+            "srtnCd": "A242040",
+            "isinCd": "KR7242040004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "나무기술",
+            "crno": "1101116016673",
+            "corpNm": "나무기술(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A243070",
+            "isinCd": "KR7243070000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "휴온스",
+            "crno": "1311110446029",
+            "corpNm": "(주)휴온스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A243840",
+            "isinCd": "KR7243840006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신흥에스이씨",
+            "crno": "1348110178873",
+            "corpNm": "신흥에스이씨(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A243870",
+            "isinCd": "KR7243870003",
+            "mrktCtg": "KONEX",
+            "itmsNm": "굿센",
+            "crno": "1101113091107",
+            "corpNm": "(주)굿센"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A244460",
+            "isinCd": "KR7244460002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "올리패스",
+            "crno": "1101113562570",
+            "corpNm": "올리패스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A244880",
+            "isinCd": "KR7244880001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "나눔테크",
+            "crno": "2001110214745",
+            "corpNm": "(주)나눔테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A244920",
+            "isinCd": "KR7244920005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "에이플러스에셋",
+            "crno": "1101113691973",
+            "corpNm": "주식회사 에이플러스에셋어드바이저"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A245450",
+            "isinCd": "KR7245450002",
+            "mrktCtg": "KONEX",
+            "itmsNm": "씨앤에스링크",
+            "crno": "1101112072869",
+            "corpNm": "(주)씨앤에스링크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A245620",
+            "isinCd": "KR7245620000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "EDGC",
+            "crno": "1201110658289",
+            "corpNm": "이원다이애그노믹스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A246250",
+            "isinCd": "KR7246250005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스엘에스바이오",
+            "crno": "1101113602524",
+            "corpNm": "(주)에스엘에스바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A246690",
+            "isinCd": "KR7246690002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "TS인베스트먼트",
+            "crno": "1101113840843",
+            "corpNm": "주식회사 티에스인베스트먼트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A246710",
+            "isinCd": "KR7246710008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티앤알바이오팹",
+            "crno": "1355110249041",
+            "corpNm": "(주)티앤알바이오팹"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A246720",
+            "isinCd": "KR7246720007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아스타",
+            "crno": "1311110157098",
+            "corpNm": "(주)아스타"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A246960",
+            "isinCd": "KR7246960009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이노테라피",
+            "crno": "1101114327915",
+            "corpNm": "(주)이노테라피"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A247540",
+            "isinCd": "KR7247540008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에코프로비엠",
+            "crno": "1501110219184",
+            "corpNm": "(주)에코프로비엠"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A247660",
+            "isinCd": "KR7247660004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "나노씨엠에스",
+            "crno": "1648110026753",
+            "corpNm": "나노씨엠에스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A248020",
+            "isinCd": "KR7248020000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "젬",
+            "crno": "1101114160779",
+            "corpNm": "(주)젬"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A248070",
+            "isinCd": "KR7248070005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "솔루엠",
+            "crno": "1358110272682",
+            "corpNm": "주식회사 솔루엠"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A248170",
+            "isinCd": "KR7248170003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "샘표식품",
+            "crno": "1101116110045",
+            "corpNm": "샘표식품(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A249420",
+            "isinCd": "KR7249420001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "일동제약",
+            "crno": "1101116139277",
+            "corpNm": "일동제약(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A250000",
+            "isinCd": "KR7250000007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "보라티알",
+            "crno": "1101115879030",
+            "corpNm": "(주)보라티알"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A250030",
+            "isinCd": "KR7250030004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "진코스텍",
+            "crno": "1314110243742",
+            "corpNm": "주식회사 진코스텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A250060",
+            "isinCd": "KR7250060001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "모비스",
+            "crno": "1101116108587",
+            "corpNm": "(주)모비스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A250930",
+            "isinCd": "KR7250930005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "예선테크",
+            "crno": "1101116122470",
+            "corpNm": "(주)예선테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A251120",
+            "isinCd": "KR7251120002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "바이오에프디엔씨",
+            "crno": "1201110388092",
+            "corpNm": "주식회사 바이오에프디엔씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A251270",
+            "isinCd": "KR7251270005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "넷마블",
+            "crno": "1101114731299",
+            "corpNm": "넷마블(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A251280",
+            "isinCd": "KR7251280004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "안지오랩",
+            "crno": "1601110082795",
+            "corpNm": "(주)안지오랩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A251370",
+            "isinCd": "KR7251370003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "와이엠티",
+            "crno": "1201110185810",
+            "corpNm": "와이엠티(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A251630",
+            "isinCd": "KR7251630000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "브이원텍",
+            "crno": "1311110164978",
+            "corpNm": "(주)브이원텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A251970",
+            "isinCd": "KR7251970000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "펌텍코리아",
+            "crno": "1211110088451",
+            "corpNm": "펌텍코리아 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A252500",
+            "isinCd": "KR7252500004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "세화피앤씨",
+            "crno": "1101116153095",
+            "corpNm": "(주)세화피앤씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A252990",
+            "isinCd": "KR7252990007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "샘씨엔에스",
+            "crno": "1311110449718",
+            "corpNm": "(주)샘씨엔에스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A253450",
+            "isinCd": "KR7253450001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "스튜디오드래곤",
+            "crno": "1101116052164",
+            "corpNm": "스튜디오드래곤(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A253590",
+            "isinCd": "KR7253590004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "네오셈",
+            "crno": "1101116168614",
+            "corpNm": "(주)네오셈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A253610",
+            "isinCd": "KR7253610000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "루트락",
+            "crno": "1211110269473",
+            "corpNm": "(주)루트락"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A253840",
+            "isinCd": "KR7253840003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "수젠텍",
+            "crno": "1601110312126",
+            "corpNm": "(주)수젠텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A254120",
+            "isinCd": "KR7254120009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "자비스",
+            "crno": "1101116178564",
+            "corpNm": "(주)자비스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A254160",
+            "isinCd": "KR7254160005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "제이엠멀티",
+            "crno": "1101113865643",
+            "corpNm": "(주)제이엠멀티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A254490",
+            "isinCd": "KR7254490006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "미래반도체",
+            "crno": "1101111228364",
+            "corpNm": "미래반도체(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A255220",
+            "isinCd": "KR7255220006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "SG",
+            "crno": "1201110517154",
+            "corpNm": "에스지이(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A255440",
+            "isinCd": "KR7255440000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "야스",
+            "crno": "1101112494451",
+            "corpNm": "(주)야스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A256150",
+            "isinCd": "KR7256150004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한독크린텍",
+            "crno": "1601110165806",
+            "corpNm": "(주)한독크린텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A256630",
+            "isinCd": "KR7256630005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "포인트엔지니어링",
+            "crno": "1101116201737",
+            "corpNm": "(주)포인트엔지니어링"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A256840",
+            "isinCd": "KR7256840000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한국비엔씨",
+            "crno": "1101116202305",
+            "corpNm": "(주)한국비엔씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A256940",
+            "isinCd": "KR7256940008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "케이피에스",
+            "crno": "1101112063743",
+            "corpNm": "(주)케이피에스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A257370",
+            "isinCd": "KR7257370007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "피엔티엠에스",
+            "crno": "1701110207177",
+            "corpNm": "(주)피엔티 엠에스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A257720",
+            "isinCd": "KR7257720003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "실리콘투",
+            "crno": "1101112425448",
+            "corpNm": "주식회사 실리콘투"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A257990",
+            "isinCd": "KR7257990002",
+            "mrktCtg": "KONEX",
+            "itmsNm": "나우코스",
+            "crno": "1211110074525",
+            "corpNm": "(주)나우코스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A258050",
+            "isinCd": "KR7258050004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "테크트랜스",
+            "crno": "1748110058069",
+            "corpNm": "(주)테크트랜스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A258250",
+            "isinCd": "KR7258250000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "셀젠텍",
+            "crno": "2001110168265",
+            "corpNm": "(주)셀젠텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A258540",
+            "isinCd": "KR7258540004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "에스엘테라퓨틱스",
+            "crno": "1101114643626",
+            "corpNm": "(주)에스엘테라퓨틱스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A258610",
+            "isinCd": "KR7258610005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "케일럼",
+            "crno": "1101114097518",
+            "corpNm": "(주)케일럼"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A258790",
+            "isinCd": "KR7258790005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "소프트캠프",
+            "crno": "1101116219037",
+            "corpNm": "소프트캠프(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A258830",
+            "isinCd": "KR7258830009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "세종메디칼",
+            "crno": "2849110088798",
+            "corpNm": "(주)세종메디칼"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A259630",
+            "isinCd": "KR7259630002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엠플러스",
+            "crno": "1341110106357",
+            "corpNm": "(주)엠플러스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A259960",
+            "isinCd": "KR7259960003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "크래프톤",
+            "crno": "1101113645772",
+            "corpNm": "주식회사 크래프톤"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A260660",
+            "isinCd": "KR7260660006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "알리코제약",
+            "crno": "1350110038048",
+            "corpNm": "알리코제약(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A260870",
+            "isinCd": "KR7260870001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "SK시그넷",
+            "crno": "2058110018148",
+            "corpNm": "SK시그넷(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A260930",
+            "isinCd": "KR7260930003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨티케이",
+            "crno": "1101112233560",
+            "corpNm": "(주)씨티케이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A260970",
+            "isinCd": "KR7260970009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스앤디",
+            "crno": "1615110028766",
+            "corpNm": "(주)에스앤디"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A261200",
+            "isinCd": "KR7261200000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "덴티스",
+            "crno": "1101116246759",
+            "corpNm": "주식회사 덴티스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A261780",
+            "isinCd": "KR7261780001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "차백신연구소",
+            "crno": "1101111992670",
+            "corpNm": "(주)차백신연구소"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A262260",
+            "isinCd": "KR7262260003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이프로",
+            "crno": "1351110053143",
+            "corpNm": "(주)에이프로"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A262840",
+            "isinCd": "KR7262840002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이퀘스트",
+            "crno": "1101111346439",
+            "corpNm": "(주)아이퀘스트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263020",
+            "isinCd": "KR7263020000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디케이앤디",
+            "crno": "1101111967243",
+            "corpNm": "(주)디케이앤디"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263050",
+            "isinCd": "KR7263050007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유틸렉스",
+            "crno": "2850110287959",
+            "corpNm": "(주)유틸렉스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263540",
+            "isinCd": "KR7263540007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "어스앤에어로스페이스",
+            "crno": "1954110007985",
+            "corpNm": "주식회사 어스앤에어로스페이스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263600",
+            "isinCd": "KR7263600009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "덕우전자",
+            "crno": "1760110006963",
+            "corpNm": "덕우전자(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263690",
+            "isinCd": "KR7263690000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디알젬",
+            "crno": "1101112863789",
+            "corpNm": "(주)디알젬"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263700",
+            "isinCd": "KR7263700007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "케어랩스",
+            "crno": "1201110607278",
+            "corpNm": "(주)케어랩스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263720",
+            "isinCd": "KR7263720005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디앤씨미디어",
+            "crno": "1101114767153",
+            "corpNm": "주식회사 디앤씨미디어"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263750",
+            "isinCd": "KR7263750002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "펄어비스",
+            "crno": "1341110195582",
+            "corpNm": "주식회사 펄어비스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263770",
+            "isinCd": "KR7263770000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유에스티",
+            "crno": "1101116298148",
+            "corpNm": "(주)유에스티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263800",
+            "isinCd": "KR7263800005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "데이타솔루션",
+            "crno": "1101114504901",
+            "corpNm": "(주)데이타솔루션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263810",
+            "isinCd": "KR7263810004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "상신전자",
+            "crno": "1341110025060",
+            "corpNm": "상신전자(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263860",
+            "isinCd": "KR7263860009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지니언스",
+            "crno": "1311110131159",
+            "corpNm": "지니언스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A263920",
+            "isinCd": "KR7263920001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "휴엠앤씨",
+            "crno": "1201110290289",
+            "corpNm": "(주)휴엠앤씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A264450",
+            "isinCd": "KR7264450008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유비쿼스",
+            "crno": "1311110475341",
+            "corpNm": "(주)유비쿼스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A264660",
+            "isinCd": "KR7264660002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨앤지하이테크",
+            "crno": "1348110072786",
+            "corpNm": "씨앤지하이테크(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A264850",
+            "isinCd": "KR7264850009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이랜시스",
+            "crno": "1101116314449",
+            "corpNm": "(주)이랜시스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A264900",
+            "isinCd": "KR7264900002",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "크라운제과",
+            "crno": "1101116332590",
+            "corpNm": "(주)크라운제과"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A265520",
+            "isinCd": "KR7265520007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "AP시스템",
+            "crno": "1348110400341",
+            "corpNm": "에이피시스템(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A265560",
+            "isinCd": "KR7265560003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "영화테크",
+            "crno": "1615110038129",
+            "corpNm": "영화테크(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A265740",
+            "isinCd": "KR7265740001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에프씨",
+            "crno": "1201110608755",
+            "corpNm": "주식회사엔에프씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A266170",
+            "isinCd": "KR7266170000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "뿌리깊은나무들",
+            "crno": "1101114339316",
+            "corpNm": "뿌리깊은나무들(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A266470",
+            "isinCd": "KR7266470004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "바이오인프라생명과학",
+            "crno": "1246110241808",
+            "corpNm": "(주)바이오인프라생명과학"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A266870",
+            "isinCd": "KR7266870005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "파워풀엑스",
+            "crno": "1101115569079",
+            "corpNm": "(주)파워풀엑스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267080",
+            "isinCd": "KR7267080000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "세븐브로이맥주",
+            "crno": "2845110012696",
+            "corpNm": "세븐브로이맥주 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267250",
+            "isinCd": "KR7267250009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "HD현대",
+            "crno": "1701110638661",
+            "corpNm": "에이치디현대(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267260",
+            "isinCd": "KR7267260008",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "HD현대일렉트릭",
+            "crno": "1101116363850",
+            "corpNm": "에이치디현대일렉트릭(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267270",
+            "isinCd": "KR7267270007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "HD현대건설기계",
+            "crno": "1101116363868",
+            "corpNm": "에이치디현대건설기계(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267290",
+            "isinCd": "KR7267290005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "경동도시가스",
+            "crno": "2301110274751",
+            "corpNm": "(주)경동도시가스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267320",
+            "isinCd": "KR7267320000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "나인테크",
+            "crno": "1101116353116",
+            "corpNm": "(주)나인테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267790",
+            "isinCd": "KR7267790004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "배럴",
+            "crno": "1101114256924",
+            "corpNm": "(주)배럴"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267850",
+            "isinCd": "KR7267850006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "아시아나IDT",
+            "crno": "1101110801848",
+            "corpNm": "아시아나아이디티(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A267980",
+            "isinCd": "KR7267980001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "매일유업",
+            "crno": "1101116390770",
+            "corpNm": "매일유업 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A268280",
+            "isinCd": "KR7268280005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "미원에스씨",
+            "crno": "2101110123944",
+            "corpNm": "미원스페셜티케미칼(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A268600",
+            "isinCd": "KR7268600004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "셀리버리",
+            "crno": "1801110902791",
+            "corpNm": "(주)셀리버리"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A269620",
+            "isinCd": "KR7269620001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "시스웍",
+            "crno": "1601110176572",
+            "corpNm": "(주)시스웍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A270210",
+            "isinCd": "KR7270210008",
+            "mrktCtg": "KONEX",
+            "itmsNm": "에스알바이오텍",
+            "crno": "1311110188085",
+            "corpNm": "(주)에스알바이오텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A270520",
+            "isinCd": "KR7270520000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지오릿에너지",
+            "crno": "1101116383543",
+            "corpNm": "지오릿에너지(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A270660",
+            "isinCd": "KR7270660004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에브리봇",
+            "crno": "1311110396927",
+            "corpNm": "에브리봇(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A270870",
+            "isinCd": "KR7270870009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "뉴트리",
+            "crno": "1101112214429",
+            "corpNm": "(주)뉴트리"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A271560",
+            "isinCd": "KR7271560005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "오리온",
+            "crno": "1101116417805",
+            "corpNm": "(주)오리온"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A271830",
+            "isinCd": "KR7271830002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "팸텍",
+            "crno": "1348110110148",
+            "corpNm": "팸텍주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A271940",
+            "isinCd": "KR7271940009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "일진하이솔루스",
+            "crno": "2101110086548",
+            "corpNm": "일진하이솔루스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A271980",
+            "isinCd": "KR7271980005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "제일약품",
+            "crno": "1101116420361",
+            "corpNm": "제일약품(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A272110",
+            "isinCd": "KR7272110008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "케이엔제이",
+            "crno": "1348110106600",
+            "corpNm": "(주)케이엔제이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A272210",
+            "isinCd": "KR7272210006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "한화시스템",
+            "crno": "1760110020640",
+            "corpNm": "한화시스템(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A272290",
+            "isinCd": "KR7272290008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이녹스첨단소재",
+            "crno": "1648110105010",
+            "corpNm": "(주)이녹스첨단소재"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A272450",
+            "isinCd": "KR7272450008",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "진에어",
+            "crno": "1201110454976",
+            "corpNm": "주식회사 진에어"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A272550",
+            "isinCd": "KR7272550005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "삼양패키징",
+            "crno": "1101115554418",
+            "corpNm": "주식회사 삼양패키징"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A273060",
+            "isinCd": "KR7273060004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "와이즈버즈",
+            "crno": "1101116417590",
+            "corpNm": "(주)와이즈버즈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A273640",
+            "isinCd": "KR7273640003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "와이엠텍",
+            "crno": "1501110081963",
+            "corpNm": "(주)와이엠텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A274090",
+            "isinCd": "KR7274090000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "켄코아에어로스페이스",
+            "crno": "1954110024732",
+            "corpNm": "켄코아에어로스페이스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A274400",
+            "isinCd": "KR7274400001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이노시뮬레이션",
+            "crno": "1101111977937",
+            "corpNm": "(주)이노시뮬레이션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A275630",
+            "isinCd": "KR7275630002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스에스알",
+            "crno": "1101114422103",
+            "corpNm": "(주)에스에스알"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A276040",
+            "isinCd": "KR7276040003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "스코넥",
+            "crno": "1101112499641",
+            "corpNm": "(주)스코넥엔터테인먼트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A276240",
+            "isinCd": "KR7276240009",
+            "mrktCtg": "KONEX",
+            "itmsNm": "엘리비젼",
+            "crno": "1201110336596",
+            "corpNm": "(주)엘리비젼"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A276730",
+            "isinCd": "KR7276730009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "제주맥주",
+            "crno": "2201110123463",
+            "corpNm": "제주맥주(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A277070",
+            "isinCd": "KR7277070009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "린드먼아시아",
+            "crno": "1101113489154",
+            "corpNm": "린드먼아시아인베스트먼트(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A277410",
+            "isinCd": "KR7277410007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "인산가",
+            "crno": "1101116471554",
+            "corpNm": "(주)인산가"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A277810",
+            "isinCd": "KR7277810008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "레인보우로보틱스",
+            "crno": "1601110293889",
+            "corpNm": "(주)레인보우로보틱스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A277880",
+            "isinCd": "KR7277880001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티에스아이",
+            "crno": "1313110109110",
+            "corpNm": "주식회사 티에스아이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A278280",
+            "isinCd": "KR7278280003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "천보",
+            "crno": "1511110031157",
+            "corpNm": "(주)천보"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A278470",
+            "isinCd": "KR7278470000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "에이피알",
+            "crno": "1101115535012",
+            "corpNm": "(주)에이피알"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A278650",
+            "isinCd": "KR7278650007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "HLB바이오스텝",
+            "crno": "2842110063231",
+            "corpNm": "에이치엘비바이오스텝(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A278990",
+            "isinCd": "KR7278990007",
+            "mrktCtg": "KONEX",
+            "itmsNm": "EMB",
+            "crno": "1341110364153",
+            "corpNm": "(주)이엠비"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A279060",
+            "isinCd": "KR7279060008",
+            "mrktCtg": "KONEX",
+            "itmsNm": "이노벡스",
+            "crno": "1358110239187",
+            "corpNm": "(주)이노벡스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A279600",
+            "isinCd": "KR7279600001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "미디어젠",
+            "crno": "1101112001842",
+            "corpNm": "미디어젠(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A280360",
+            "isinCd": "KR7280360009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "롯데웰푸드",
+            "crno": "1101116536481",
+            "corpNm": "롯데웰푸드(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A281740",
+            "isinCd": "KR7281740001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "레이크머티리얼즈",
+            "crno": "1101116525723",
+            "corpNm": "(주)레이크머티리얼즈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A281820",
+            "isinCd": "KR7281820001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "케이씨텍",
+            "crno": "1346110087565",
+            "corpNm": "(주)케이씨텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A282330",
+            "isinCd": "KR7282330000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "BGF리테일",
+            "crno": "1101116555770",
+            "corpNm": "(주)비지에프리테일"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A282690",
+            "isinCd": "KR7282690007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "동아타이어",
+            "crno": "2341110096698",
+            "corpNm": "동아타이어공업주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A282720",
+            "isinCd": "KR7282720002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "금양그린파워",
+            "crno": "1812110025384",
+            "corpNm": "금양그린파워(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A282880",
+            "isinCd": "KR7282880004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코윈테크",
+            "crno": "1351110047419",
+            "corpNm": "주식회사 코윈테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A283100",
+            "isinCd": "KR7283100006",
+            "mrktCtg": "KONEX",
+            "itmsNm": "노보믹스",
+            "crno": "1101114296029",
+            "corpNm": "(주)노보믹스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A284620",
+            "isinCd": "KR7284620002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "카이노스메드",
+            "crno": "1101116558469",
+            "corpNm": "주식회사 카이노스메드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A284740",
+            "isinCd": "KR7284740008",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "쿠쿠홈시스",
+            "crno": "1355110319406",
+            "corpNm": "쿠쿠홈시스 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A285130",
+            "isinCd": "KR7285130001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "SK케미칼",
+            "crno": "1311110501021",
+            "corpNm": "에스케이케미칼(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A285490",
+            "isinCd": "KR7285490009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "노바텍",
+            "crno": "1351110083661",
+            "corpNm": "(주)노바텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A285800",
+            "isinCd": "KR7285800009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "진영",
+            "crno": "1201110127961",
+            "corpNm": "(주)진영"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A286000",
+            "isinCd": "KR7286000005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "씨엔티드림",
+            "crno": "1601110294176",
+            "corpNm": "(주)씨엔티드림"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A286750",
+            "isinCd": "KR7286750005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "나노브릭",
+            "crno": "1358110139600",
+            "corpNm": "(주)나노브릭"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A286940",
+            "isinCd": "KR7286940002",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "롯데정보통신",
+            "crno": "1101116557114",
+            "corpNm": "롯데정보통신(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A287410",
+            "isinCd": "KR7287410005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "제이시스메디칼",
+            "crno": "1101116585826",
+            "corpNm": "(주)제이시스메디칼"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A288330",
+            "isinCd": "KR7288330004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "브릿지바이오",
+            "crno": "1311110423499",
+            "corpNm": "브릿지바이오테라퓨틱스 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A288490",
+            "isinCd": "KR7288490006",
+            "mrktCtg": "KONEX",
+            "itmsNm": "나라소프트",
+            "crno": "1101112669369",
+            "corpNm": "(주)나라소프트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A288620",
+            "isinCd": "KR7288620008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스퓨얼셀",
+            "crno": "1311110367986",
+            "corpNm": "에스퓨얼셀(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A288980",
+            "isinCd": "KR7288980006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "모아데이타",
+            "crno": "1101115373933",
+            "corpNm": "(주)모아데이타"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A289010",
+            "isinCd": "KR7289010001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이스크림에듀",
+            "crno": "1101115125649",
+            "corpNm": "(주)아이스크림에듀"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A289080",
+            "isinCd": "KR7289080004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "SV인베스트먼트",
+            "crno": "1101113433440",
+            "corpNm": "에스브이인베스트먼트 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A289170",
+            "isinCd": "KR7289170003",
+            "mrktCtg": "KONEX",
+            "itmsNm": "바이오텐",
+            "crno": "2112110013457",
+            "corpNm": "바이오텐(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A289220",
+            "isinCd": "KR7289220006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "자이언트스텝",
+            "crno": "1101113909839",
+            "corpNm": "(주)자이언트스텝"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A289860",
+            "isinCd": "KR7289860009",
+            "mrktCtg": "KONEX",
+            "itmsNm": "지슨",
+            "crno": "1801110317619",
+            "corpNm": "(주)지슨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290090",
+            "isinCd": "KR7290090000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "트윔",
+            "crno": "1501110132344",
+            "corpNm": "(주)트윔"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290120",
+            "isinCd": "KR7290120005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "DH오토리드",
+            "crno": "2101110118854",
+            "corpNm": "(주)디에이치오토리드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290270",
+            "isinCd": "KR7290270008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "휴네시온",
+            "crno": "1101112919938",
+            "corpNm": "주식회사 휴네시온"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290380",
+            "isinCd": "KR7290380005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대유",
+            "crno": "1748110000309",
+            "corpNm": "(주)대유"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290520",
+            "isinCd": "KR7290520006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신도기연",
+            "crno": "1211110078395",
+            "corpNm": "(주)신도기연"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290550",
+            "isinCd": "KR7290550003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디케이티",
+            "crno": "1201110615990",
+            "corpNm": "(주)디케이티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290560",
+            "isinCd": "KR7290560002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신시웨이",
+            "crno": "1341110125604",
+            "corpNm": "(주)신시웨이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290650",
+            "isinCd": "KR7290650001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엘앤씨바이오",
+            "crno": "1311110288992",
+            "corpNm": "(주)엘앤씨바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290660",
+            "isinCd": "KR7290660000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "네오펙트",
+            "crno": "1101114362531",
+            "corpNm": "(주)네오펙트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290670",
+            "isinCd": "KR7290670009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대보마그네틱",
+            "crno": "1101111114589",
+            "corpNm": "대보마그네틱(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290690",
+            "isinCd": "KR7290690007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "소룩스",
+            "crno": "1211110051797",
+            "corpNm": "(주)소룩스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290720",
+            "isinCd": "KR7290720002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "푸드나무",
+            "crno": "1101115045045",
+            "corpNm": "(주)푸드나무"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A290740",
+            "isinCd": "KR7290740000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "액트로",
+            "crno": "1352110033862",
+            "corpNm": "(주)액트로"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A291230",
+            "isinCd": "KR7291230001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔피",
+            "crno": "1101116652790",
+            "corpNm": "(주)엔피"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A291650",
+            "isinCd": "KR7291650000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "압타머사이언스",
+            "crno": "1717110093010",
+            "corpNm": "주식회사 압타머사이언스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A291810",
+            "isinCd": "KR7291810000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "핀텔",
+            "crno": "1101115829944",
+            "corpNm": "(주)핀텔"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A293480",
+            "isinCd": "KR7293480000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "하나제약",
+            "crno": "1311110002409",
+            "corpNm": "하나제약(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A293490",
+            "isinCd": "KR7293490009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "카카오게임즈",
+            "crno": "1311110351682",
+            "corpNm": "(주)카카오게임즈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A293580",
+            "isinCd": "KR7293580007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "나우IB",
+            "crno": "1101113731563",
+            "corpNm": "나우아이비캐피탈(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A293780",
+            "isinCd": "KR7293780003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "압타바이오",
+            "crno": "1358110168906",
+            "corpNm": "압타바이오(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A293940",
+            "isinCd": "KR7293940003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "신한알파리츠",
+            "crno": "1101116601135",
+            "corpNm": "(주)신한알파위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A294090",
+            "isinCd": "KR7294090006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이오플로우",
+            "crno": "1101114694679",
+            "corpNm": "이오플로우(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A294140",
+            "isinCd": "KR7294140009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "레몬",
+            "crno": "1760110078920",
+            "corpNm": "(주)레몬"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A294570",
+            "isinCd": "KR7294570007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "쿠콘",
+            "crno": "1101113579947",
+            "corpNm": "(주)쿠콘"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A294630",
+            "isinCd": "KR7294630009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "서남",
+            "crno": "1311110128338",
+            "corpNm": "(주)서남"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A294870",
+            "isinCd": "KR7294870001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "HDC현대산업개발",
+            "crno": "1101116740008",
+            "corpNm": "에이치디씨현대산업개발(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A296160",
+            "isinCd": "KR7296160005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "프로젠",
+            "crno": "1345110030227",
+            "corpNm": "(주)프로젠"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A296520",
+            "isinCd": "KR7296520000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "가이아코퍼레이션",
+            "crno": "2850110181903",
+            "corpNm": "(주)가이아코퍼레이션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A296640",
+            "isinCd": "KR7296640006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이노룰스",
+            "crno": "1101113598616",
+            "corpNm": "(주)이노룰스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A297090",
+            "isinCd": "KR7297090003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨에스베어링",
+            "crno": "1801110611863",
+            "corpNm": "씨에스베어링 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A297570",
+            "isinCd": "KR7297570004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "알로이스",
+            "crno": "1101116735067",
+            "corpNm": "(주)알로이스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A297890",
+            "isinCd": "KR7297890006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "HB솔루션",
+            "crno": "1311110065514",
+            "corpNm": "에이치비솔루션(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298000",
+            "isinCd": "KR7298000001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "효성화학",
+            "crno": "1101116770188",
+            "corpNm": "효성화학(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298020",
+            "isinCd": "KR7298020009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "효성티앤씨",
+            "crno": "1101116770138",
+            "corpNm": "효성티앤씨(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298040",
+            "isinCd": "KR7298040007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "효성중공업",
+            "crno": "1101116770154",
+            "corpNm": "효성중공업(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298050",
+            "isinCd": "KR7298050006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "효성첨단소재",
+            "crno": "1101116770170",
+            "corpNm": "효성첨단소재(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298060",
+            "isinCd": "KR7298060005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스씨엠생명과학",
+            "crno": "1201110715352",
+            "corpNm": "에스씨엠생명과학(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298380",
+            "isinCd": "KR7298380007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이비엘바이오",
+            "crno": "1101115974020",
+            "corpNm": "에이비엘바이오(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298540",
+            "isinCd": "KR7298540006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "더네이쳐홀딩스",
+            "crno": "1101112958259",
+            "corpNm": "(주)더네이쳐홀딩스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298690",
+            "isinCd": "KR7298690009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "에어부산",
+            "crno": "1801110605121",
+            "corpNm": "에어부산 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A298830",
+            "isinCd": "KR7298830001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "슈어소프트테크",
+            "crno": "1101112462002",
+            "corpNm": "슈어소프트테크 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A299030",
+            "isinCd": "KR7299030007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나기술",
+            "crno": "1348110080937",
+            "corpNm": "(주)하나기술"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A299170",
+            "isinCd": "KR7299170001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "더블유에스아이",
+            "crno": "1101116748507",
+            "corpNm": "(주)더블유에스아이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A299480",
+            "isinCd": "KR7299480004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "지앤이헬스케어",
+            "crno": "1357110098741",
+            "corpNm": "(주)지앤이헬스케어"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A299660",
+            "isinCd": "KR7299660001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "셀리드",
+            "crno": "1101113572636",
+            "corpNm": "(주)셀리드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A299670",
+            "isinCd": "KR7299670000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "에스엠비나",
+            "crno": "1101115928366",
+            "corpNm": "(주)에스엠비나"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A299900",
+            "isinCd": "KR7299900001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "위지윅스튜디오",
+            "crno": "1101116033833",
+            "corpNm": "(주)위지윅스튜디오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A299910",
+            "isinCd": "KR7299910000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "베스파",
+            "crno": "1101115131886",
+            "corpNm": "(주)베스파"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A300080",
+            "isinCd": "KR7300080009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "플리토",
+            "crno": "1101114945246",
+            "corpNm": "(주)플리토"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A300120",
+            "isinCd": "KR7300120003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "라온피플",
+            "crno": "1311110246859",
+            "corpNm": "라온피플 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A300720",
+            "isinCd": "KR7300720000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "한일시멘트",
+            "crno": "1101116799203",
+            "corpNm": "한일시멘트(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A301300",
+            "isinCd": "KR7301300000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "바이브컴퍼니",
+            "crno": "1101112021501",
+            "corpNm": "(주)바이브컴퍼니"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A302430",
+            "isinCd": "KR7302430004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이노메트리",
+            "crno": "1345110127040",
+            "corpNm": "(주)이노메트리"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A302440",
+            "isinCd": "KR7302440003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "SK바이오사이언스",
+            "crno": "1311110523736",
+            "corpNm": "에스케이바이오사이언스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A302550",
+            "isinCd": "KR7302550009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "리메드",
+            "crno": "1311110100021",
+            "corpNm": "(주)리메드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A302920",
+            "isinCd": "KR7302920004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "더콘텐츠온",
+            "crno": "1101115017614",
+            "corpNm": "(주)더콘텐츠온"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A303030",
+            "isinCd": "KR7303030001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지니틱스",
+            "crno": "1101116793007",
+            "corpNm": "(주)지니틱스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A303360",
+            "isinCd": "KR7303360002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "프로티아",
+            "crno": "1101111915094",
+            "corpNm": "주식회사 프로티아"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A303530",
+            "isinCd": "KR7303530000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이노뎁",
+            "crno": "1101113820738",
+            "corpNm": "이노뎁(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A304100",
+            "isinCd": "KR7304100001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "솔트룩스",
+            "crno": "1101110301632",
+            "corpNm": "(주)솔트룩스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A304360",
+            "isinCd": "KR7304360001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스바이오메딕스",
+            "crno": "1101112838477",
+            "corpNm": "주식회사 에스바이오메딕스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A304840",
+            "isinCd": "KR7304840002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "피플바이오",
+            "crno": "1101112606171",
+            "corpNm": "(주)피플바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A305090",
+            "isinCd": "KR7305090003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "마이크로디지탈",
+            "crno": "1348110073536",
+            "corpNm": "(주)마이크로디지탈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A306040",
+            "isinCd": "KR7306040007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스제이그룹",
+            "crno": "1101113856618",
+            "corpNm": "주식회사 에스제이그룹"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A306200",
+            "isinCd": "KR7306200007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "세아제강",
+            "crno": "1101116860640",
+            "corpNm": "(주)세아제강"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A306620",
+            "isinCd": "KR7306620006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "네온테크",
+            "crno": "1101116852431",
+            "corpNm": "(주)네온테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A307180",
+            "isinCd": "KR7307180000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이엘사이언스",
+            "crno": "1101116859099",
+            "corpNm": "(주)아이엘사이언스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A307280",
+            "isinCd": "KR7307280008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "원바이오젠",
+            "crno": "1101116860442",
+            "corpNm": "(주)원바이오젠"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A307750",
+            "isinCd": "KR7307750000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "국전약품",
+            "crno": "1101116868529",
+            "corpNm": "(주)국전약품"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A307870",
+            "isinCd": "KR7307870006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "비투엔",
+            "crno": "1101116869965",
+            "corpNm": "(주)비투엔"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A307930",
+            "isinCd": "KR7307930008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "컴퍼니케이",
+            "crno": "1101113544263",
+            "corpNm": "컴퍼니케이파트너스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A307950",
+            "isinCd": "KR7307950006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "현대오토에버",
+            "crno": "1101111935638",
+            "corpNm": "현대오토에버(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A308080",
+            "isinCd": "KR7308080001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "바이젠셀",
+            "crno": "1101115059773",
+            "corpNm": "바이젠셀 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A308100",
+            "isinCd": "KR7308100007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "까스텔바작",
+            "crno": "1101116136877",
+            "corpNm": "(주)까스텔바작"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A308170",
+            "isinCd": "KR7308170000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "씨티알모빌리티",
+            "crno": "1942110014431",
+            "corpNm": "(주)씨티알모빌리티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A308700",
+            "isinCd": "KR7308700004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "테크엔",
+            "crno": "1701110378746",
+            "corpNm": "(주)테크엔"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A309930",
+            "isinCd": "KR7309930006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오하임앤컴퍼니",
+            "crno": "1101116891801",
+            "corpNm": "(주)오하임앤컴퍼니"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A309960",
+            "isinCd": "KR7309960003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엘비인베스트먼트",
+            "crno": "1101111293531",
+            "corpNm": "엘비인베스트먼트(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A310200",
+            "isinCd": "KR7310200001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "애니플러스",
+            "crno": "1101116895217",
+            "corpNm": "(주)애니플러스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A310210",
+            "isinCd": "KR7310210000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "보로노이",
+            "crno": "1348110326191",
+            "corpNm": "보로노이(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A310870",
+            "isinCd": "KR7310870001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디와이씨",
+            "crno": "1101116902393",
+            "corpNm": "디와이씨(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A311060",
+            "isinCd": "KR7311060008",
+            "mrktCtg": "KONEX",
+            "itmsNm": "엘에이티",
+            "crno": "1358110251222",
+            "corpNm": "(주)엘에이티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A311320",
+            "isinCd": "KR7311320006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지오엘리먼트",
+            "crno": "1313110059571",
+            "corpNm": "(주)지오엘리먼트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A311390",
+            "isinCd": "KR7311390009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "네오크레마",
+            "crno": "1101113594763",
+            "corpNm": "(주)네오크레마"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A311690",
+            "isinCd": "KR7311690002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "CJ 바이오사이언스",
+            "crno": "1101114222503",
+            "corpNm": "씨제이바이오사이언스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A311960",
+            "isinCd": "KR7311960009",
+            "mrktCtg": "KONEX",
+            "itmsNm": "에이아이더뉴트리진",
+            "crno": "1101114969006",
+            "corpNm": "주식회사 에이아이더뉴트리진"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A312610",
+            "isinCd": "KR7312610009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이에프더블류",
+            "crno": "1752110007968",
+            "corpNm": "에이에프더블류(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A313760",
+            "isinCd": "KR7313760001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "윌링스",
+            "crno": "1314110144073",
+            "corpNm": "(주)윌링스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A314130",
+            "isinCd": "KR7314130006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지놈앤컴퍼니",
+            "crno": "1341110422240",
+            "corpNm": "(주)지놈앤컴퍼니"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A314140",
+            "isinCd": "KR7314140005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "알피바이오",
+            "crno": "1101116142668",
+            "corpNm": "(주)알피바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A314930",
+            "isinCd": "KR7314930009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "바이오다인",
+            "crno": "1101111786057",
+            "corpNm": "주식회사 바이오다인"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A315640",
+            "isinCd": "KR7315640003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "딥노이드",
+            "crno": "1101113841627",
+            "corpNm": "주식회사 딥노이드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A316140",
+            "isinCd": "KR7316140003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "우리금융지주",
+            "crno": "1101116981206",
+            "corpNm": "(주)우리금융지주"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317120",
+            "isinCd": "KR7317120004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "라닉스",
+            "crno": "1311110103158",
+            "corpNm": "주식회사 라닉스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317240",
+            "isinCd": "KR7317240000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "TS트릴리온",
+            "crno": "1101116982139",
+            "corpNm": "(주)티에스트릴리온"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317330",
+            "isinCd": "KR7317330009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "덕산테코피아",
+            "crno": "2301110120607",
+            "corpNm": "(주)덕산테코피아"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317400",
+            "isinCd": "KR7317400000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "자이에스앤디",
+            "crno": "1101111934557",
+            "corpNm": "자이에스앤디(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317530",
+            "isinCd": "KR7317530004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "캐리소프트",
+            "crno": "1101115551646",
+            "corpNm": "주식회사 캐리소프트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317690",
+            "isinCd": "KR7317690006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "퀀타매트릭스",
+            "crno": "1101114481274",
+            "corpNm": "주식회사 퀀타매트릭스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317770",
+            "isinCd": "KR7317770006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엑스페릭스",
+            "crno": "1311110478436",
+            "corpNm": "(주)엑스페릭스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317830",
+            "isinCd": "KR7317830008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스피시스템스",
+            "crno": "1801110078534",
+            "corpNm": "주식회사 에스피시스템스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317850",
+            "isinCd": "KR7317850006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대모",
+            "crno": "1101110633556",
+            "corpNm": "대모엔지니어링주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317860",
+            "isinCd": "KR7317860005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "노드메이슨",
+            "crno": "1101115209310",
+            "corpNm": "주식회사 노드메이슨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A317870",
+            "isinCd": "KR7317870004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔바이오니아",
+            "crno": "1101112152067",
+            "corpNm": "(주)엔바이오니아"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A318000",
+            "isinCd": "KR7318000007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "KBG",
+            "crno": "1615110041619",
+            "corpNm": "(주)케이비지"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A318010",
+            "isinCd": "KR7318010006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "팜스빌",
+            "crno": "1101111908338",
+            "corpNm": "주식회사 팜스빌"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A318020",
+            "isinCd": "KR7318020005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "포인트모바일",
+            "crno": "1101113501601",
+            "corpNm": "(주)포인트모바일"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A318160",
+            "isinCd": "KR7318160009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "셀바이오휴먼텍",
+            "crno": "1314110346786",
+            "corpNm": "주식회사 셀바이오휴먼텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A318410",
+            "isinCd": "KR7318410008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "비비씨",
+            "crno": "1601110243678",
+            "corpNm": "비비씨 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A318660",
+            "isinCd": "KR7318660008",
+            "mrktCtg": "KONEX",
+            "itmsNm": "타임기술",
+            "crno": "1942110291237",
+            "corpNm": "주식회사 타임기술"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A319400",
+            "isinCd": "KR7319400008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "현대무벡스",
+            "crno": "1101117016870",
+            "corpNm": "현대무벡스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A319660",
+            "isinCd": "KR7319660007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "피에스케이",
+            "crno": "1348110493354",
+            "corpNm": "피에스케이 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A320000",
+            "isinCd": "KR7320000003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "윈텍",
+            "crno": "1101117032545",
+            "corpNm": "윈텍 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A321260",
+            "isinCd": "KR7321260002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "프로이천",
+            "crno": "1101117042271",
+            "corpNm": "(주)프로이천"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A321370",
+            "isinCd": "KR7321370009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "센서뷰",
+            "crno": "1201110764789",
+            "corpNm": "주식회사 센서뷰"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A321550",
+            "isinCd": "KR7321550006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티움바이오",
+            "crno": "1101116250940",
+            "corpNm": "주식회사 티움바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A321820",
+            "isinCd": "KR7321820003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "와이더플래닛",
+            "crno": "1101114391837",
+            "corpNm": "(주)와이더플래닛"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A322000",
+            "isinCd": "KR7322000001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "HD현대에너지솔루션",
+            "crno": "1101116265410",
+            "corpNm": "에이치디현대에너지솔루션(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A322180",
+            "isinCd": "KR7322180001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티라유텍",
+            "crno": "1101113516105",
+            "corpNm": "주식회사 티라유텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A322190",
+            "isinCd": "KR7322190000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "베른",
+            "crno": "1648110113039",
+            "corpNm": "베른 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A322310",
+            "isinCd": "KR7322310004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오로스테크놀로지",
+            "crno": "1311110104403",
+            "corpNm": "(주)오로스테크놀로지"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A322510",
+            "isinCd": "KR7322510009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "제이엘케이",
+            "crno": "1101115340065",
+            "corpNm": "(주)제이엘케이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A322780",
+            "isinCd": "KR7322780008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코퍼스코리아",
+            "crno": "1101117062716",
+            "corpNm": "(주)코퍼스코리아"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A322970",
+            "isinCd": "KR7322970005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "무진메디",
+            "crno": "1101116098324",
+            "corpNm": "주식회사 무진메디"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A323230",
+            "isinCd": "KR7323230003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엠에프엠코리아",
+            "crno": "1101117067138",
+            "corpNm": "엠에프엠코리아(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A323280",
+            "isinCd": "KR7323280008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "태성",
+            "crno": "1101117067972",
+            "corpNm": "(주)태성"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A323350",
+            "isinCd": "KR7323350009",
+            "mrktCtg": "KONEX",
+            "itmsNm": "다원넥스뷰",
+            "crno": "1101114224020",
+            "corpNm": "주식회사 다원넥스뷰"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A323410",
+            "isinCd": "KR7323410001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "카카오뱅크",
+            "crno": "1311110435767",
+            "corpNm": "주식회사 카카오뱅크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A323990",
+            "isinCd": "KR7323990002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "박셀바이오",
+            "crno": "2052110029832",
+            "corpNm": "주식회사 박셀바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A326030",
+            "isinCd": "KR7326030004",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "에스케이바이오팜",
+            "crno": "1101114570720",
+            "corpNm": "에스케이바이오팜 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A327260",
+            "isinCd": "KR7327260006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "RF머트리얼즈",
+            "crno": "1355110186996",
+            "corpNm": "알에프머트리얼즈(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A327610",
+            "isinCd": "KR7327610002",
+            "mrktCtg": "KONEX",
+            "itmsNm": "펨토바이오메드",
+            "crno": "1717110094696",
+            "corpNm": "주식회사 펨토바이오메드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A328130",
+            "isinCd": "KR7328130000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "루닛",
+            "crno": "1601110354045",
+            "corpNm": "주식회사 루닛"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A328380",
+            "isinCd": "KR7328380001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "솔트웨어",
+            "crno": "1101117128211",
+            "corpNm": "솔트웨어 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A329180",
+            "isinCd": "KR7329180004",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "HD현대중공업",
+            "crno": "2301110312741",
+            "corpNm": "에이치디현대중공업(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A330350",
+            "isinCd": "KR7330350000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "위더스제약",
+            "crno": "1101113069534",
+            "corpNm": "위더스제약(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A330590",
+            "isinCd": "KR7330590001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "롯데리츠",
+            "crno": "1101117061081",
+            "corpNm": "롯데위탁관리부동산투자회사 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A330730",
+            "isinCd": "KR7330730003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "스톤브릿지벤처스",
+            "crno": "1101116416683",
+            "corpNm": "스톤브릿지벤처스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A330860",
+            "isinCd": "KR7330860008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "네패스아크",
+            "crno": "1501110267365",
+            "corpNm": "주식회사 네패스아크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A331380",
+            "isinCd": "KR7331380006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "포커스에이치엔에스",
+            "crno": "1101117167128",
+            "corpNm": "(주)포커스에이치엔에스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A331520",
+            "isinCd": "KR7331520007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "밸로프",
+            "crno": "1101117171731",
+            "corpNm": "(주)밸로프"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A331660",
+            "isinCd": "KR7331660001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "한국미라클피플사",
+            "crno": "2844110077460",
+            "corpNm": "(주)한국미라클피플사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A331920",
+            "isinCd": "KR7331920009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "셀레믹스",
+            "crno": "1101114481282",
+            "corpNm": "주식회사 셀레믹스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A332290",
+            "isinCd": "KR7332290006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "누보",
+            "crno": "1101117182655",
+            "corpNm": "(주)누보"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A332370",
+            "isinCd": "KR7332370006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이디피",
+            "crno": "1101113356410",
+            "corpNm": "아이디피(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A332570",
+            "isinCd": "KR7332570001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "와이팜",
+            "crno": "1717110071503",
+            "corpNm": "(주)와이팜"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A333050",
+            "isinCd": "KR7333050003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "모코엠시스",
+            "crno": "1101117189544",
+            "corpNm": "(주)모코엠시스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A333430",
+            "isinCd": "KR7333430007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "일승",
+            "crno": "1101117196523",
+            "corpNm": "(주)일승"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A333620",
+            "isinCd": "KR7333620003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔시스",
+            "crno": "1615110077268",
+            "corpNm": "(주)엔시스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A334890",
+            "isinCd": "KR7334890001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "이지스밸류플러스리츠",
+            "crno": "1101117173224",
+            "corpNm": "주식회사 이지스밸류플러스위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A334970",
+            "isinCd": "KR7334970001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "프레스티지바이오로직",
+            "crno": "1101115739804",
+            "corpNm": "프레스티지바이오로직스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A335810",
+            "isinCd": "KR7335810008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "프리시젼바이오",
+            "crno": "1601110265995",
+            "corpNm": "프리시젼바이오(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A335870",
+            "isinCd": "KR7335870002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "윙스풋",
+            "crno": "1101117222352",
+            "corpNm": "(주)윙스풋"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A335890",
+            "isinCd": "KR7335890000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "비올",
+            "crno": "1101117221677",
+            "corpNm": "(주)비올"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A336040",
+            "isinCd": "KR7336040001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "타스컴",
+            "crno": "1101115361566",
+            "corpNm": "주식회사 타스컴"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A336060",
+            "isinCd": "KR7336060009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "웨이버스",
+            "crno": "1101117224647",
+            "corpNm": "(주)웨이버스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A336260",
+            "isinCd": "KR7336260005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "두산퓨얼셀",
+            "crno": "2149110058935",
+            "corpNm": "두산퓨얼셀 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A336370",
+            "isinCd": "KR7336370002",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "솔루스첨단소재",
+            "crno": "2149110058927",
+            "corpNm": "솔루스첨단소재 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A336570",
+            "isinCd": "KR7336570007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "원텍",
+            "crno": "1101117232799",
+            "corpNm": "원텍(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A337840",
+            "isinCd": "KR7337840003",
+            "mrktCtg": "KONEX",
+            "itmsNm": "유엑스엔",
+            "crno": "1311110312428",
+            "corpNm": "주식회사 유엑스엔"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A337930",
+            "isinCd": "KR7337930002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "브랜드엑스코퍼레이션",
+            "crno": "1101116496172",
+            "corpNm": "주식회사 브랜드엑스코퍼레이션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A338100",
+            "isinCd": "KR7338100001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "NH프라임리츠",
+            "crno": "1101117123732",
+            "corpNm": "주식회사 엔에이치프라임위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A338220",
+            "isinCd": "KR7338220007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "뷰노",
+            "crno": "1348110319279",
+            "corpNm": "주식회사 뷰노"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A338840",
+            "isinCd": "KR7338840002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "와이바이오로직스",
+            "crno": "1601110235641",
+            "corpNm": "(주)와이바이오로직스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A339770",
+            "isinCd": "KR7339770000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "교촌에프앤비",
+            "crno": "1752110009005",
+            "corpNm": "교촌에프앤비(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A339950",
+            "isinCd": "KR7339950008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이비김영",
+            "crno": "1101117257507",
+            "corpNm": "(주)아이비김영"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A340360",
+            "isinCd": "KR7340360007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "다보링크",
+            "crno": "1101117263174",
+            "corpNm": "주식회사 다보링크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A340440",
+            "isinCd": "KR7340440007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "세림B&G",
+            "crno": "1101117262754",
+            "corpNm": "(주)세림비앤지"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A340570",
+            "isinCd": "KR7340570001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티앤엘",
+            "crno": "1345110028404",
+            "corpNm": "(주)티앤엘"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A340810",
+            "isinCd": "KR7340810001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨유박스",
+            "crno": "1101114361161",
+            "corpNm": "주식회사 씨유박스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A340930",
+            "isinCd": "KR7340930007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유일에너테크",
+            "crno": "1358110211565",
+            "corpNm": "유일에너테크(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A341170",
+            "isinCd": "KR7341170009",
+            "mrktCtg": "KONEX",
+            "itmsNm": "퓨쳐메디신",
+            "crno": "1101115742831",
+            "corpNm": "퓨쳐메디신 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A341310",
+            "isinCd": "KR7341310001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "이앤에치",
+            "crno": "1154110026255",
+            "corpNm": "주식회사 이앤에치"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A343090",
+            "isinCd": "KR7343090007",
+            "mrktCtg": "KONEX",
+            "itmsNm": "HLB사이언스",
+            "crno": "1101116042363",
+            "corpNm": "에이치엘비사이언스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A344820",
+            "isinCd": "KR7344820006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "KCC글라스",
+            "crno": "1101117342473",
+            "corpNm": "(주)케이씨씨글라스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A344860",
+            "isinCd": "KR7344860002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이노진",
+            "crno": "1101113301944",
+            "corpNm": "(주)이노진"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A346010",
+            "isinCd": "KR7346010002",
+            "mrktCtg": "KONEX",
+            "itmsNm": "타이드",
+            "crno": "1101114449694",
+            "corpNm": "(주)타이드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A347000",
+            "isinCd": "KR7347000002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "센코",
+            "crno": "1411110025962",
+            "corpNm": "주식회사 센코"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A347700",
+            "isinCd": "KR7347700007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "라이프시맨틱스",
+            "crno": "1101114969189",
+            "corpNm": "주식회사 라이프시맨틱스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A347740",
+            "isinCd": "KR7347740003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "피엔케이피부임상연구센타",
+            "crno": "1101114445725",
+            "corpNm": "피엔케이피부임상연구센타(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A347770",
+            "isinCd": "KR7347770000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "핌스",
+            "crno": "1201110799950",
+            "corpNm": "주식회사 핌스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A347860",
+            "isinCd": "KR7347860009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "알체라",
+            "crno": "1101116080032",
+            "corpNm": "주식회사 알체라"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A347890",
+            "isinCd": "KR7347890006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엠투아이",
+            "crno": "1351110048798",
+            "corpNm": "주식회사 엠투아이코퍼레이션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348030",
+            "isinCd": "KR7348030008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "모비릭스",
+            "crno": "1211110160415",
+            "corpNm": "주식회사 모비릭스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348080",
+            "isinCd": "KR7348080003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "큐라티스",
+            "crno": "1101116122983",
+            "corpNm": "(주)큐라티스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348150",
+            "isinCd": "KR7348150004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "고바이오랩",
+            "crno": "1101115487437",
+            "corpNm": "주식회사 고바이오랩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348210",
+            "isinCd": "KR7348210006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "넥스틴",
+            "crno": "1344110044981",
+            "corpNm": "주식회사 넥스틴"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348340",
+            "isinCd": "KR7348340001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "뉴로메카",
+            "crno": "2841110112915",
+            "corpNm": "주식회사 뉴로메카"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348350",
+            "isinCd": "KR7348350000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "위드텍",
+            "crno": "1601110166341",
+            "corpNm": "(주)위드텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348370",
+            "isinCd": "KR7348370008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔켐",
+            "crno": "1512110026289",
+            "corpNm": "(주)엔켐"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A348950",
+            "isinCd": "KR7348950007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "제이알글로벌리츠",
+            "crno": "1101117263728",
+            "corpNm": "(주)제이알글로벌위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A350520",
+            "isinCd": "KR7350520003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "이지스레지던스리츠",
+            "crno": "1101117375375",
+            "corpNm": "주식회사 이지스레지던스위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A351020",
+            "isinCd": "KR7351020003",
+            "mrktCtg": "KONEX",
+            "itmsNm": "미쥬",
+            "crno": "1101115060754",
+            "corpNm": "(주)미쥬"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A351320",
+            "isinCd": "KR7351320007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스에이티이엔지",
+            "crno": "1101117417458",
+            "corpNm": "(주)에스에이티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A351330",
+            "isinCd": "KR7351330006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이삭엔지니어링",
+            "crno": "1101113569865",
+            "corpNm": "이삭엔지니어링(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A352090",
+            "isinCd": "KR7352090005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "스톰테크",
+            "crno": "1101111785710",
+            "corpNm": "(주)스톰테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A352480",
+            "isinCd": "KR7352480008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨앤씨인터내셔널",
+            "crno": "1358110238402",
+            "corpNm": "(주)씨앤씨인터내셔널"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A352700",
+            "isinCd": "KR7352700009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨앤투스",
+            "crno": "2301110096064",
+            "corpNm": "주식회사 씨앤투스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A352770",
+            "isinCd": "KR7352770002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "클리노믹스",
+            "crno": "1358110198797",
+            "corpNm": "주식회사 클리노믹스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A352820",
+            "isinCd": "KR7352820005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "하이브",
+            "crno": "1101113166546",
+            "corpNm": "(주)하이브"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A352910",
+            "isinCd": "KR7352910004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오비고",
+            "crno": "1101112739998",
+            "corpNm": "(주)오비고"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A352940",
+            "isinCd": "KR7352940001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "인바이오",
+            "crno": "1512110004847",
+            "corpNm": "인바이오주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A353190",
+            "isinCd": "KR7353190002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "휴럼",
+            "crno": "1101117442710",
+            "corpNm": "(주)휴럼"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A353200",
+            "isinCd": "KR7353200009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "대덕전자",
+            "crno": "1314110460809",
+            "corpNm": "대덕전자(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A353590",
+            "isinCd": "KR7353590003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오토앤",
+            "crno": "1352110032202",
+            "corpNm": "오토앤(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A353810",
+            "isinCd": "KR7353810005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이지바이오",
+            "crno": "1101117474424",
+            "corpNm": "(주)이지바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A354200",
+            "isinCd": "KR7354200008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔젠바이오",
+            "crno": "1101115877480",
+            "corpNm": "주식회사 엔젠바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A354320",
+            "isinCd": "KR7354320004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "알멕",
+            "crno": "1942110050823",
+            "corpNm": "(주)알멕"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A354390",
+            "isinCd": "KR7354390007",
+            "mrktCtg": "KONEX",
+            "itmsNm": "바스칸바이오제약",
+            "crno": "1101110422090",
+            "corpNm": "주식회사 바스칸바이오제약"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A355150",
+            "isinCd": "KR7355150004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코스텍시스",
+            "crno": "1101117471470",
+            "corpNm": "(주)코스텍시스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A355390",
+            "isinCd": "KR7355390006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "크라우드웍스",
+            "crno": "1101116384963",
+            "corpNm": "주식회사 크라우드웍스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A355690",
+            "isinCd": "KR7355690009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이텀",
+            "crno": "1101115972652",
+            "corpNm": "(주)에이텀"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A356680",
+            "isinCd": "KR7356680009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엑스게이트",
+            "crno": "1101114495598",
+            "corpNm": "(주)엑스게이트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A356860",
+            "isinCd": "KR7356860007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티엘비",
+            "crno": "1314110255979",
+            "corpNm": "(주)티엘비"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A356890",
+            "isinCd": "KR7356890004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "싸이버원",
+            "crno": "1101113149287",
+            "corpNm": "주식회사 싸이버원"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357120",
+            "isinCd": "KR7357120005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "코람코라이프인프라리츠",
+            "crno": "1101117320320",
+            "corpNm": "(주)코람코라이프인프라위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357230",
+            "isinCd": "KR7357230002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이치피오",
+            "crno": "1101114838516",
+            "corpNm": "주식회사 에이치피오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357250",
+            "isinCd": "KR7357250000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "미래에셋맵스리츠",
+            "crno": "1101117323259",
+            "corpNm": "㈜미래에셋맵스제1호위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357430",
+            "isinCd": "KR7357430008",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "마스턴프리미어리츠",
+            "crno": "1101117408720",
+            "corpNm": "주식회사 마스턴프리미어제1호위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357550",
+            "isinCd": "KR7357550003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "석경에이티",
+            "crno": "1350110108445",
+            "corpNm": "주식회사 석경에이티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357580",
+            "isinCd": "KR7357580000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아모센스",
+            "crno": "1244110093120",
+            "corpNm": "주식회사 아모센스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357780",
+            "isinCd": "KR7357780006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "솔브레인",
+            "crno": "1311110597525",
+            "corpNm": "솔브레인 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A357880",
+            "isinCd": "KR7357880004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "비트나인",
+            "crno": "1101115255214",
+            "corpNm": "(주)비트나인"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A358570",
+            "isinCd": "KR7358570000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지아이이노베이션",
+            "crno": "1452110021112",
+            "corpNm": "(주)지아이이노베이션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A359090",
+            "isinCd": "KR7359090008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨엔알리서치",
+            "crno": "1101117525110",
+            "corpNm": "(주)씨엔알리서치"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A360070",
+            "isinCd": "KR7360070007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "탑머티리얼",
+            "crno": "1311110304011",
+            "corpNm": "주식회사 탑머티리얼"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A360350",
+            "isinCd": "KR7360350003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코셈",
+            "crno": "1601110226195",
+            "corpNm": "주식회사 코셈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A361390",
+            "isinCd": "KR7361390008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "제노코",
+            "crno": "1311110127512",
+            "corpNm": "주식회사 제노코"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A361570",
+            "isinCd": "KR7361570005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "알비더블유",
+            "crno": "1101114297944",
+            "corpNm": "주식회사 알비더블유"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A361610",
+            "isinCd": "KR7361610009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "SK아이이테크놀로지",
+            "crno": "1101117064217",
+            "corpNm": "에스케이아이이테크놀로지 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A361670",
+            "isinCd": "KR7361670003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "삼영에스앤씨",
+            "crno": "1311110050086",
+            "corpNm": "주식회사 삼영에스앤씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A362320",
+            "isinCd": "KR7362320004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "청담글로벌",
+            "crno": "1201110905317",
+            "corpNm": "주식회사 청담글로벌"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A362990",
+            "isinCd": "KR7362990004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "드림인사이트",
+            "crno": "1101114941038",
+            "corpNm": "주식회사 드림인사이트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A363250",
+            "isinCd": "KR7363250002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "진시스템",
+            "crno": "1615110116305",
+            "corpNm": "주식회사 진시스템"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A363260",
+            "isinCd": "KR7363260001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "모비데이즈",
+            "crno": "1101117588506",
+            "corpNm": "(주)모비데이즈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A363280",
+            "isinCd": "KR7363280009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "티와이홀딩스",
+            "crno": "1101117608502",
+            "corpNm": "(주)티와이홀딩스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A365270",
+            "isinCd": "KR7365270008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "큐라클",
+            "crno": "1101116058485",
+            "corpNm": "(주)큐라클"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A365330",
+            "isinCd": "KR7365330000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스와이스틸텍",
+            "crno": "1511110053458",
+            "corpNm": "에스와이스틸텍(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A365340",
+            "isinCd": "KR7365340009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "성일하이텍",
+            "crno": "2111110049793",
+            "corpNm": "성일하이텍 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A365550",
+            "isinCd": "KR7365550003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "ESR켄달스퀘어리츠",
+            "crno": "1101117398989",
+            "corpNm": "이에스알켄달스퀘어위탁관리부동산투자회사주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A365590",
+            "isinCd": "KR7365590009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하이딥",
+            "crno": "1101117616620",
+            "corpNm": "(주)하이딥"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A365900",
+            "isinCd": "KR7365900000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "브이씨",
+            "crno": "1101113197088",
+            "corpNm": "(주)브이씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A366030",
+            "isinCd": "KR7366030005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "공구우먼",
+            "crno": "2801110078161",
+            "corpNm": "주식회사 공구우먼"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A367000",
+            "isinCd": "KR7367000007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "플래티어",
+            "crno": "1101113175969",
+            "corpNm": "(주)플래티어"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A368600",
+            "isinCd": "KR7368600003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이씨에이치",
+            "crno": "1348110250671",
+            "corpNm": "(주)아이씨에이치"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A368770",
+            "isinCd": "KR7368770004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "파이버프로",
+            "crno": "1101117648186",
+            "corpNm": "(주)파이버프로"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A368970",
+            "isinCd": "KR7368970000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오에스피",
+            "crno": "1613110017531",
+            "corpNm": "주식회사 오에스피"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A369370",
+            "isinCd": "KR7369370002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "블리츠웨이",
+            "crno": "1101117655868",
+            "corpNm": "(주)블리츠웨이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A370090",
+            "isinCd": "KR7370090003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "퓨런티어",
+            "crno": "1311110230307",
+            "corpNm": "주식회사 퓨런티어"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A371950",
+            "isinCd": "KR7371950007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "풍원정밀",
+            "crno": "1350110049673",
+            "corpNm": "풍원정밀(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A372170",
+            "isinCd": "KR7372170001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "윤성에프앤씨",
+            "crno": "1355110102249",
+            "corpNm": "주식회사 윤성에프앤씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A372320",
+            "isinCd": "KR7372320002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "큐로셀",
+            "crno": "1311110466283",
+            "corpNm": "주식회사 큐로셀"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A372800",
+            "isinCd": "KR7372800003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이티아이즈",
+            "crno": "1101114934273",
+            "corpNm": "주식회사 아이티아이즈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A372910",
+            "isinCd": "KR7372910000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "한컴라이프케어",
+            "crno": "1345110021549",
+            "corpNm": "주식회사 한컴라이프케어"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A373170",
+            "isinCd": "KR7373170000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엠아이큐브솔루션",
+            "crno": "1101113292086",
+            "corpNm": "엠아이큐브솔루션 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A373200",
+            "isinCd": "KR7373200005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하인크코리아",
+            "crno": "1101117695210",
+            "corpNm": "하인크코리아(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A373220",
+            "isinCd": "KR7373220003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "LG에너지솔루션",
+            "crno": "1101117701356",
+            "corpNm": "(주)엘지에너지솔루션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A375500",
+            "isinCd": "KR7375500006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "DL이앤씨",
+            "crno": "1101117736808",
+            "corpNm": "디엘이앤씨 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A376180",
+            "isinCd": "KR7376180006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "피코그램",
+            "crno": "1101112463654",
+            "corpNm": "주식회사 피코그램"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A376190",
+            "isinCd": "KR7376190005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "LB루셈",
+            "crno": "1760110038073",
+            "corpNm": "주식회사 엘비루셈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A376290",
+            "isinCd": "KR7376290003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "씨유테크",
+            "crno": "1313110055652",
+            "corpNm": "씨유테크 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A376300",
+            "isinCd": "KR7376300000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디어유",
+            "crno": "1101116450615",
+            "corpNm": "주식회사 디어유"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A376930",
+            "isinCd": "KR7376930004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "노을",
+            "crno": "1101115906974",
+            "corpNm": "노을 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A376980",
+            "isinCd": "KR7376980009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "원티드랩",
+            "crno": "1311110405166",
+            "corpNm": "(주)원티드랩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377030",
+            "isinCd": "KR7377030002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "맥스트",
+            "crno": "1101114445072",
+            "corpNm": "주식회사 맥스트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377190",
+            "isinCd": "KR7377190004",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "디앤디플랫폼리츠",
+            "crno": "1101117420211",
+            "corpNm": "주식회사 디앤디플랫폼위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377220",
+            "isinCd": "KR7377220009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "프롬바이오",
+            "crno": "1358110127754",
+            "corpNm": "주식회사 프롬바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377300",
+            "isinCd": "KR7377300009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "카카오페이",
+            "crno": "1311110478337",
+            "corpNm": "주식회사 카카오페이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377330",
+            "isinCd": "KR7377330006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이지트로닉스",
+            "crno": "1345110132792",
+            "corpNm": "주식회사 이지트로닉스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377450",
+            "isinCd": "KR7377450002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "리파인",
+            "crno": "1101112564478",
+            "corpNm": "주식회사 리파인"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377460",
+            "isinCd": "KR7377460001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "위니아에이드",
+            "crno": "2001110418983",
+            "corpNm": "주식회사 위니아에이드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377480",
+            "isinCd": "KR7377480009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "마음AI",
+            "crno": "1601110362866",
+            "corpNm": "(주)마음에이아이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A377740",
+            "isinCd": "KR7377740006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "바이오노트",
+            "crno": "1348110324294",
+            "corpNm": "(주)바이오노트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A378340",
+            "isinCd": "KR7378340004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "필에너지",
+            "crno": "1358110389651",
+            "corpNm": "주식회사 필에너지"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A378800",
+            "isinCd": "KR7378800007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "샤페론",
+            "crno": "1101113977050",
+            "corpNm": "주식회사 샤페론"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A378850",
+            "isinCd": "KR7378850002",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "화승알앤에이",
+            "crno": "2341110120538",
+            "corpNm": "주식회사 화승알앤에이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A379390",
+            "isinCd": "KR7379390008",
+            "mrktCtg": "KONEX",
+            "itmsNm": "이성씨엔아이",
+            "crno": "1801111059509",
+            "corpNm": "이성씨엔아이(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A380540",
+            "isinCd": "KR7380540005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "옵티코어",
+            "crno": "1358110286766",
+            "corpNm": "주식회사 옵티코어"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A381970",
+            "isinCd": "KR7381970003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "케이카",
+            "crno": "1101116583490",
+            "corpNm": "케이카 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A382480",
+            "isinCd": "KR7382480002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지아이텍",
+            "crno": "1648110065785",
+            "corpNm": "주식회사 지아이텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A382800",
+            "isinCd": "KR7382800001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지앤비에스 에코",
+            "crno": "1348110105579",
+            "corpNm": "(주)지앤비에스 에코"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A382840",
+            "isinCd": "KR7382840007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "원준",
+            "crno": "1348110166589",
+            "corpNm": "주식회사 원준"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A382900",
+            "isinCd": "KR7382900009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "범한퓨얼셀",
+            "crno": "1942110310912",
+            "corpNm": "범한퓨얼셀 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A383220",
+            "isinCd": "KR7383220001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "에프앤에프",
+            "crno": "1101117875440",
+            "corpNm": "주식회사 에프앤에프"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A383310",
+            "isinCd": "KR7383310000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에코프로에이치엔",
+            "crno": "1501110307674",
+            "corpNm": "주식회사 에코프로에이치엔"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A383800",
+            "isinCd": "KR7383800000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "LX홀딩스",
+            "crno": "1101117875359",
+            "corpNm": "주식회사 엘엑스홀딩스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A383930",
+            "isinCd": "KR7383930005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디티앤씨알오",
+            "crno": "1101116363313",
+            "corpNm": "주식회사 디티앤씨알오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A384470",
+            "isinCd": "KR7384470001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코어라인소프트",
+            "crno": "1101114962092",
+            "corpNm": "주식회사 코어라인소프트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A386580",
+            "isinCd": "KR7386580005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한화플러스제2호스팩",
+            "crno": "1101117866803",
+            "corpNm": "한화플러스제2호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A388050",
+            "isinCd": "KR7388050007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지투파워",
+            "crno": "1351110102065",
+            "corpNm": "지투파워(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A388610",
+            "isinCd": "KR7388610008",
+            "mrktCtg": "KONEX",
+            "itmsNm": "지에프씨생명과학",
+            "crno": "1101112548993",
+            "corpNm": "(주)지에프씨생명과학"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A388720",
+            "isinCd": "KR7388720005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유일로보틱스",
+            "crno": "1201110592130",
+            "corpNm": "(주)유일로보틱스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A388790",
+            "isinCd": "KR7388790008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "라이콤",
+            "crno": "1101117889821",
+            "corpNm": "주식회사 라이콤"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A388800",
+            "isinCd": "KR7388800005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유진스팩7호",
+            "crno": "1101117885499",
+            "corpNm": "유진기업인수목적7호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A388870",
+            "isinCd": "KR7388870008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "파로스아이바이오",
+            "crno": "1311110444346",
+            "corpNm": "주식회사 파로스아이바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A389020",
+            "isinCd": "KR7389020009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "자람테크놀로지",
+            "crno": "1101111864829",
+            "corpNm": "(주)자람테크놀로지"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A389030",
+            "isinCd": "KR7389030008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "지니너스",
+            "crno": "1101116728781",
+            "corpNm": "지니너스 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A389140",
+            "isinCd": "KR7389140005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "포바이포",
+            "crno": "1101116501830",
+            "corpNm": "주식회사 포바이포"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A389260",
+            "isinCd": "KR7389260001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대명에너지",
+            "crno": "1311110051935",
+            "corpNm": "대명에너지 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A389470",
+            "isinCd": "KR7389470006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "인벤티지랩",
+            "crno": "1311110409481",
+            "corpNm": "주식회사 인벤티지랩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A389500",
+            "isinCd": "KR7389500000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스비비테크",
+            "crno": "1101112113142",
+            "corpNm": "(주)에스비비테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A390110",
+            "isinCd": "KR7390110005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "애니메디솔루션",
+            "crno": "1101116259174",
+            "corpNm": "애니메디솔루션(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A391060",
+            "isinCd": "KR7391060001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩20호",
+            "crno": "1101117912309",
+            "corpNm": "엔에이치기업인수목적20호(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A391710",
+            "isinCd": "KR7391710001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코닉오토메이션",
+            "crno": "1101117914785",
+            "corpNm": "코닉오토메이션(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A393210",
+            "isinCd": "KR7393210000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "토마토시스템",
+            "crno": "1101112099425",
+            "corpNm": "(주)토마토시스템"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A393360",
+            "isinCd": "KR7393360003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신한제8호스팩",
+            "crno": "1101117923934",
+            "corpNm": "신한제8호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A393890",
+            "isinCd": "KR7393890009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "더블유씨피",
+            "crno": "1511110058698",
+            "corpNm": "더블유씨피(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A394280",
+            "isinCd": "KR7394280002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오픈엣지테크놀로지",
+            "crno": "1311110501435",
+            "corpNm": "오픈엣지테크놀로지 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A395400",
+            "isinCd": "KR7395400005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "SK리츠",
+            "crno": "1101117815446",
+            "corpNm": "에스케이위탁관리부동산투자회사 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A396270",
+            "isinCd": "KR7396270001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "넥스트칩",
+            "crno": "1311110541069",
+            "corpNm": "(주)넥스트칩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A396300",
+            "isinCd": "KR7396300006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "세아메카닉스",
+            "crno": "1760110019792",
+            "corpNm": "(주)세아메카닉스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A396470",
+            "isinCd": "KR7396470007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "워트",
+            "crno": "1601110172108",
+            "corpNm": "워트 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A396690",
+            "isinCd": "KR7396690000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "미래에셋글로벌리츠",
+            "crno": "1101117896090",
+            "corpNm": "주식회사 미래에셋글로벌위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A397030",
+            "isinCd": "KR7397030008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이프릴바이오",
+            "crno": "1401110050944",
+            "corpNm": "주식회사 에이프릴바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A397880",
+            "isinCd": "KR7397880006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "교보11호스팩",
+            "crno": "1101117980158",
+            "corpNm": "교보11호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A399720",
+            "isinCd": "KR7399720002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "가온칩스",
+            "crno": "1311110319656",
+            "corpNm": "(주)가온칩스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A400760",
+            "isinCd": "KR7400760005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "NH올원리츠",
+            "crno": "1101117299294",
+            "corpNm": "㈜엔에이치올원위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A400840",
+            "isinCd": "KR7400840005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하이제7호스팩",
+            "crno": "1101118009072",
+            "corpNm": "하이제7호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A402030",
+            "isinCd": "KR7402030001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코난테크놀로지",
+            "crno": "1101111682932",
+            "corpNm": "주식회사 코난테크놀로지"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A402340",
+            "isinCd": "KR7402340004",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "SK스퀘어",
+            "crno": "1101118077821",
+            "corpNm": "에스케이스퀘어 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A402420",
+            "isinCd": "KR7402420004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "켈스",
+            "crno": "1311110511690",
+            "corpNm": "주식회사 켈스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A402490",
+            "isinCd": "KR7402490007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "그린리소스",
+            "crno": "1615110128011",
+            "corpNm": "주식회사 그린리소스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A403360",
+            "isinCd": "KR7403360001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "라피치",
+            "crno": "1101113334101",
+            "corpNm": "(주)라피치"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A403490",
+            "isinCd": "KR7403490006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "우듬지팜",
+            "crno": "1643110019980",
+            "corpNm": "농업회사법인 우듬지팜 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A403550",
+            "isinCd": "KR7403550007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "쏘카",
+            "crno": "2201110087049",
+            "corpNm": "(주)쏘카"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A403870",
+            "isinCd": "KR7403870009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "HPSP",
+            "crno": "1348110401886",
+            "corpNm": "주식회사 에이치피에스피"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A404990",
+            "isinCd": "KR7404990004",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "신한서부티엔디리츠",
+            "crno": "1101117343356",
+            "corpNm": "주식회사 신한서부티엔디위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A405000",
+            "isinCd": "KR7405000001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "플라즈맵",
+            "crno": "1601110395297",
+            "corpNm": "주식회사 플라즈맵"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A405100",
+            "isinCd": "KR7405100009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "큐알티",
+            "crno": "1344110059857",
+            "corpNm": "큐알티 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A405640",
+            "isinCd": "KR7405640004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신한제9호스팩",
+            "crno": "1101118048781",
+            "corpNm": "신한제9호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A405920",
+            "isinCd": "KR7405920000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "나라셀라",
+            "crno": "1101110668579",
+            "corpNm": "나라셀라(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A406760",
+            "isinCd": "KR7406760009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나금융21호스팩",
+            "crno": "1101118051990",
+            "corpNm": "하나금융21호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A406820",
+            "isinCd": "KR7406820001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "뷰티스킨",
+            "crno": "1201110590960",
+            "corpNm": "(주)뷰티스킨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A407400",
+            "isinCd": "KR7407400001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "꿈비",
+            "crno": "1601110383490",
+            "corpNm": "주식회사 꿈비"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A408900",
+            "isinCd": "KR7408900009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "스튜디오미르",
+            "crno": "1101114460046",
+            "corpNm": "주식회사 스튜디오미르"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A408920",
+            "isinCd": "KR7408920007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "메쎄이상",
+            "crno": "1101118073613",
+            "corpNm": "(주)메쎄이상"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A411080",
+            "isinCd": "KR7411080005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "샌즈랩",
+            "crno": "1101113108465",
+            "corpNm": "주식회사 샌즈랩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A412350",
+            "isinCd": "KR7412350001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "레이저쎌",
+            "crno": "1311110405091",
+            "corpNm": "레이저쎌 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A412930",
+            "isinCd": "KR7412930000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "미래에셋비전스팩1호",
+            "crno": "1101118103501",
+            "corpNm": "미래에셋비전기업인수목적1호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A413300",
+            "isinCd": "KR7413300005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "티엘엔지니어링",
+            "crno": "1101112669260",
+            "corpNm": "(주)티엘엔지니어링"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A413600",
+            "isinCd": "KR7413600008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "키움제6호스팩",
+            "crno": "1101118113691",
+            "corpNm": "키움제6호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A413630",
+            "isinCd": "KR7413630005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유진스팩8호",
+            "crno": "1101118112669",
+            "corpNm": "유진기업인수목적8호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A413640",
+            "isinCd": "KR7413640004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "비아이매트릭스",
+            "crno": "1101113200360",
+            "corpNm": "(주)비아이매트릭스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A415380",
+            "isinCd": "KR7415380005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "스튜디오삼익",
+            "crno": "1101116511425",
+            "corpNm": "주식회사 스튜디오삼익"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A415580",
+            "isinCd": "KR7415580000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "상상인제3호스팩",
+            "crno": "1101118127733",
+            "corpNm": "상상인제3호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A416180",
+            "isinCd": "KR7416180008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신성에스티",
+            "crno": "1942110068066",
+            "corpNm": "신성에스티(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417010",
+            "isinCd": "KR7417010006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "나노팀",
+            "crno": "1601110444581",
+            "corpNm": "나노팀 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417180",
+            "isinCd": "KR7417180007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "핑거스토리",
+            "crno": "1101116679992",
+            "corpNm": "(주)핑거스토리"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417200",
+            "isinCd": "KR7417200003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "LS머트리얼즈",
+            "crno": "1341110570437",
+            "corpNm": "엘에스머트리얼즈 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417310",
+            "isinCd": "KR7417310000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "코람코더원리츠",
+            "crno": "1101115837294",
+            "corpNm": "(주)코람코더원위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417500",
+            "isinCd": "KR7417500006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "제이아이테크",
+            "crno": "2111110040569",
+            "corpNm": "(주)제이아이테크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417790",
+            "isinCd": "KR7417790003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "트루엔",
+            "crno": "1101113161306",
+            "corpNm": "주식회사 트루엔"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417840",
+            "isinCd": "KR7417840006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "저스템",
+            "crno": "1101116042066",
+            "corpNm": "주식회사 저스템"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417860",
+            "isinCd": "KR7417860004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오브젠",
+            "crno": "1101111955008",
+            "corpNm": "오브젠 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A417970",
+            "isinCd": "KR7417970001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "모델솔루션",
+            "crno": "1101113176925",
+            "corpNm": "모델솔루션 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A418170",
+            "isinCd": "KR7418170007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나금융22호스팩",
+            "crno": "1101118164959",
+            "corpNm": "하나금융22호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A418210",
+            "isinCd": "KR7418210001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신한제10호스팩",
+            "crno": "1101118155015",
+            "corpNm": "신한제10호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A418250",
+            "isinCd": "KR7418250007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "시큐레터",
+            "crno": "1201110780818",
+            "corpNm": "시큐레터 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A418420",
+            "isinCd": "KR7418420006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "라온텍",
+            "crno": "1311110241362",
+            "corpNm": "주식회사 라온텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A418470",
+            "isinCd": "KR7418470001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "밀리의서재",
+            "crno": "1101116114451",
+            "corpNm": "(주)밀리의서재"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A418550",
+            "isinCd": "KR7418550000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "제이오",
+            "crno": "1244110019788",
+            "corpNm": "(주)제이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A418620",
+            "isinCd": "KR7418620001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이에이트",
+            "crno": "1101114861971",
+            "corpNm": "이에이트 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A419050",
+            "isinCd": "KR7419050000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "삼기이브이",
+            "crno": "1614110049889",
+            "corpNm": "주식회사 삼기이브이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A419080",
+            "isinCd": "KR7419080007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔젯",
+            "crno": "1101114175728",
+            "corpNm": "엔젯 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A419120",
+            "isinCd": "KR7419120001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "산돌",
+            "crno": "1101116908870",
+            "corpNm": "(주)산돌"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A419270",
+            "isinCd": "KR7419270004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신영스팩7호",
+            "crno": "1101118173760",
+            "corpNm": "신영해피투모로우제7호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A419530",
+            "isinCd": "KR7419530001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "SAMG엔터",
+            "crno": "1101112034562",
+            "corpNm": "(주)에스에이엠지엔터테인먼트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A419540",
+            "isinCd": "KR7419540000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "비스토스",
+            "crno": "1101112317653",
+            "corpNm": "주식회사 비스토스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A419700",
+            "isinCd": "KR7419700000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "이브이파킹서비스",
+            "crno": "1101118011754",
+            "corpNm": "이브이파킹서비스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A420770",
+            "isinCd": "KR7420770000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "기가비스",
+            "crno": "1345110078029",
+            "corpNm": "기가비스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A421800",
+            "isinCd": "KR7421800004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "교보12호스팩",
+            "crno": "1101118199592",
+            "corpNm": "교보12호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A422040",
+            "isinCd": "KR7422040006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩23호",
+            "crno": "1101118203195",
+            "corpNm": "엔에이치기업인수목적23호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A424140",
+            "isinCd": "KR7424140002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "케이비제21호스팩",
+            "crno": "1101118228987",
+            "corpNm": "케이비제21호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A424760",
+            "isinCd": "KR7424760007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "벨로크",
+            "crno": "1101118233415",
+            "corpNm": "주식회사 벨로크"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A424960",
+            "isinCd": "KR7424960003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "스마트레이더시스템",
+            "crno": "1311110496206",
+            "corpNm": "(주)스마트레이더시스템"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A424980",
+            "isinCd": "KR7424980001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "마이크로투나노",
+            "crno": "1101112059031",
+            "corpNm": "(주)마이크로투나노"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A425040",
+            "isinCd": "KR7425040003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티이엠씨",
+            "crno": "1501110198453",
+            "corpNm": "티이엠씨 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A425290",
+            "isinCd": "KR7425290004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "삼성스팩6호",
+            "crno": "1101118237201",
+            "corpNm": "삼성기업인수목적6호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A425420",
+            "isinCd": "KR7425420007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "티에프이",
+            "crno": "1201110330051",
+            "corpNm": "(주)티에프이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A429270",
+            "isinCd": "KR7429270002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "시지트로닉스",
+            "crno": "2101110058935",
+            "corpNm": "주식회사 시지트로닉스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A430220",
+            "isinCd": "KR7430220004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신영스팩8호",
+            "crno": "1101118282032",
+            "corpNm": "신영해피투모로우제8호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A430230",
+            "isinCd": "KR7430230003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나금융24호스팩",
+            "crno": "1101118277942",
+            "corpNm": "하나금융24호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A430460",
+            "isinCd": "KR7430460006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한화플러스제3호스팩",
+            "crno": "1101118282602",
+            "corpNm": "한화플러스제3호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A430690",
+            "isinCd": "KR7430690008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "(주)한싹",
+            "crno": "1101112003640",
+            "corpNm": "(주)한싹"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A430700",
+            "isinCd": "KR7430700005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유안타제9호스팩",
+            "crno": "1101118289856",
+            "corpNm": "유안타제9호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A432320",
+            "isinCd": "KR7432320000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "KB스타리츠",
+            "crno": "1101118191613",
+            "corpNm": "(주)케이비스타위탁관리부동산투자회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A432430",
+            "isinCd": "KR7432430007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "와이랩",
+            "crno": "1101114474659",
+            "corpNm": "주식회사 와이랩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A432470",
+            "isinCd": "KR7432470003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "케이엔에스",
+            "crno": "1348110121012",
+            "corpNm": "(주)케이엔에스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A432720",
+            "isinCd": "KR7432720001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "퀄리타스반도체",
+            "crno": "1101116743763",
+            "corpNm": "(주)퀄리타스반도체"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A433530",
+            "isinCd": "KR7433530003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "키움제7호스팩",
+            "crno": "1101118306949",
+            "corpNm": "키움제7호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A434190",
+            "isinCd": "KR7434190005",
+            "mrktCtg": "KONEX",
+            "itmsNm": "탈로스",
+            "crno": "2811110093358",
+            "corpNm": "(주) 탈로스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A434480",
+            "isinCd": "KR7434480000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "모니터랩",
+            "crno": "1101113173351",
+            "corpNm": "(주)모니터랩"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A435380",
+            "isinCd": "KR7435380001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유안타제10호스팩",
+            "crno": "1101118325329",
+            "corpNm": "유안타제10호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A435620",
+            "isinCd": "KR7435620000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나금융25호스팩",
+            "crno": "1101118321054",
+            "corpNm": "하나금융25호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A435870",
+            "isinCd": "KR7435870001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "SK증권제8호스팩",
+            "crno": "1101118327721",
+            "corpNm": "에스케이증권제8호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A436530",
+            "isinCd": "KR7436530000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "케이비제22호스팩",
+            "crno": "1101118336946",
+            "corpNm": "케이비제22호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A436610",
+            "isinCd": "KR7436610000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한국제11호스팩",
+            "crno": "1101118337697",
+            "corpNm": "한국제11호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A437780",
+            "isinCd": "KR7437780000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩24호",
+            "crno": "1101118349676",
+            "corpNm": "엔에이치기업인수목적24호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A438220",
+            "isinCd": "KR7438220006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대신밸런스제13호스팩",
+            "crno": "1101118357934",
+            "corpNm": "대신밸런스제13호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A438580",
+            "isinCd": "KR7438580003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩25호",
+            "crno": "1101118358453",
+            "corpNm": "엔에이치기업인수목적25호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A438700",
+            "isinCd": "KR7438700007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "버넥트",
+            "crno": "2055110049363",
+            "corpNm": "(주)버넥트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A439090",
+            "isinCd": "KR7439090002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "마녀공장",
+            "crno": "1101114810308",
+            "corpNm": "(주)마녀공장"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A439250",
+            "isinCd": "KR7439250002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "삼성스팩7호",
+            "crno": "1101118365862",
+            "corpNm": "삼성기업인수목적7호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A439410",
+            "isinCd": "KR7439410002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩26호",
+            "crno": "1101118367313",
+            "corpNm": "엔에이치기업인수목적26호"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A439580",
+            "isinCd": "KR7439580002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "블루엠텍",
+            "crno": "1358110266776",
+            "corpNm": "(주)블루엠텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A439730",
+            "isinCd": "KR7439730003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "IBKS제20호스팩",
+            "crno": "1101118370168",
+            "corpNm": "아이비케이에스제20호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A440110",
+            "isinCd": "KR7440110005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "파두",
+            "crno": "1101115767269",
+            "corpNm": "(주)파두"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A440290",
+            "isinCd": "KR7440290005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이치비인베스트먼트",
+            "crno": "1101111806409",
+            "corpNm": "에이치비인베스트먼트(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A440320",
+            "isinCd": "KR7440320000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "오픈놀",
+            "crno": "1101114846056",
+            "corpNm": "주식회사 오픈놀"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A440790",
+            "isinCd": "KR7440790004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "교보13호스팩",
+            "crno": "1101118381529",
+            "corpNm": "교보13호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A440820",
+            "isinCd": "KR7440820009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩27호",
+            "crno": "1101118382428",
+            "corpNm": "엔에이치기업인수목적27호(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A441270",
+            "isinCd": "KR7441270006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "파인엠텍",
+            "crno": "1341110618279",
+            "corpNm": "(주)파인엠텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A442130",
+            "isinCd": "KR7442130001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유진스팩9호",
+            "crno": "1101118399366",
+            "corpNm": "유진기업인수목적9호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A442310",
+            "isinCd": "KR7442310009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대신밸런스제14호스팩",
+            "crno": "1101118400014",
+            "corpNm": "대신밸런스제14호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A442770",
+            "isinCd": "KR7442770004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "IBKS제21호스팩",
+            "crno": "1101118406509",
+            "corpNm": "아이비케이에스제21호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A442900",
+            "isinCd": "KR7442900007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "미래에셋드림스팩1호",
+            "crno": "1101118406781",
+            "corpNm": "미래에셋드림기업인수목적1호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A443250",
+            "isinCd": "KR7443250006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "레뷰코퍼레이션",
+            "crno": "1101115576438",
+            "corpNm": "(주)레뷰코퍼레이션"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A443670",
+            "isinCd": "KR7443670005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에스피소프트",
+            "crno": "1101115055284",
+            "corpNm": "주식회사 에스피소프트"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A444920",
+            "isinCd": "KR7444920003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유안타제11호스팩",
+            "crno": "1101118421317",
+            "corpNm": "유안타제11호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A445090",
+            "isinCd": "KR7445090004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이직랜드",
+            "crno": "1358110290105",
+            "corpNm": "(주)에이직랜드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A445180",
+            "isinCd": "KR7445180003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "퓨릿",
+            "crno": "1101114253681",
+            "corpNm": "(주)퓨릿"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A445360",
+            "isinCd": "KR7445360001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "비엔케이제1호스팩",
+            "crno": "1101118424600",
+            "corpNm": "비엔케이제1호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A445680",
+            "isinCd": "KR7445680002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "큐리옥스바이오시스템즈",
+            "crno": "1101116865103",
+            "corpNm": "큐리옥스바이오시스템즈(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A445970",
+            "isinCd": "KR7445970007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신영스팩9호",
+            "crno": "1101118431035",
+            "corpNm": "신영해피투모로우제9호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446070",
+            "isinCd": "KR7446070005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "유니드비티플러스",
+            "crno": "1101118466280",
+            "corpNm": "(주)유니드비티플러스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446150",
+            "isinCd": "KR7446150005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유안타제12호스팩",
+            "crno": "1101118431689",
+            "corpNm": "유안타제12호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446190",
+            "isinCd": "KR7446190001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "미래에셋비전스팩2호",
+            "crno": "1101118431803",
+            "corpNm": "미래에셋비전기업인수목적2호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446440",
+            "isinCd": "KR7446440000",
+            "mrktCtg": "KONEX",
+            "itmsNm": "에피바이오텍",
+            "crno": "1201110795817",
+            "corpNm": "(주)에피바이오텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446540",
+            "isinCd": "KR7446540007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "메가터치",
+            "crno": "1615110121601",
+            "corpNm": "(주)메가터치"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446600",
+            "isinCd": "KR7446600009",
+            "mrktCtg": "KONEX",
+            "itmsNm": "카이바이오텍",
+            "crno": "2101110087512",
+            "corpNm": "(주)카이바이오텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446750",
+            "isinCd": "KR7446750002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나26호스팩",
+            "crno": "1101118442818",
+            "corpNm": "하나26호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A446840",
+            "isinCd": "KR7446840001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "키움제8호스팩",
+            "crno": "1101118444707",
+            "corpNm": "키움제8호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A447690",
+            "isinCd": "KR7447690009",
+            "mrktCtg": "KONEX",
+            "itmsNm": "아이오바이오",
+            "crno": "1101114665266",
+            "corpNm": "(주)아이오바이오"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448280",
+            "isinCd": "KR7448280008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에코아이",
+            "crno": "1601110188262",
+            "corpNm": "주식회사 에코아이"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448370",
+            "isinCd": "KR7448370007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나27호스팩",
+            "crno": "1101118457304",
+            "corpNm": "하나27호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448710",
+            "isinCd": "KR7448710004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "코츠테크놀로지",
+            "crno": "1350110089265",
+            "corpNm": "코츠테크놀로지(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448730",
+            "isinCd": "KR7448730002",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "삼성FN리츠",
+            "crno": "1101118376893",
+            "corpNm": "삼성에프엔위탁관리부동산투자회사 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448740",
+            "isinCd": "KR7448740001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "삼성스팩8호",
+            "crno": "1101118463442",
+            "corpNm": "삼성기업인수목적8호(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448760",
+            "isinCd": "KR7448760009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "IBKS제22호스팩",
+            "crno": "1101118462379",
+            "corpNm": "아이비케이에스제22호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448780",
+            "isinCd": "KR7448780007",
+            "mrktCtg": "KONEX",
+            "itmsNm": "마이크로엔엑스",
+            "crno": "1701110200585",
+            "corpNm": "(주)마이크로엔엑스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448830",
+            "isinCd": "KR7448830000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "미래에셋비전스팩3호",
+            "crno": "1101118465331",
+            "corpNm": "미래에셋비전기업인수목적3호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A448900",
+            "isinCd": "KR7448900001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "한국피아이엠",
+            "crno": "1748110026107",
+            "corpNm": "한국피아이엠(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A449020",
+            "isinCd": "KR7449020007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유안타제13호스팩",
+            "crno": "1101118468989",
+            "corpNm": "유안타제13호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A450050",
+            "isinCd": "KR7450050000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하이제8호스팩",
+            "crno": "1101118481410",
+            "corpNm": "하이제8호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A450080",
+            "isinCd": "KR7450080007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "에코프로머티",
+            "crno": "1717110132339",
+            "corpNm": "주식회사 에코프로머티리얼즈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A450140",
+            "isinCd": "KR7450140009",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "코오롱모빌리티그룹",
+            "crno": "1341110627048",
+            "corpNm": "코오롱모빌리티그룹(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A450520",
+            "isinCd": "KR7450520002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "인스웨이브시스템즈",
+            "crno": "1101112498312",
+            "corpNm": "(주)인스웨이브시스템즈"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A450940",
+            "isinCd": "KR7450940002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유안타제14호스팩",
+            "crno": "1101118498069",
+            "corpNm": "유안타제14호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A451220",
+            "isinCd": "KR7451220008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "아이엠티",
+            "crno": "1345110044939",
+            "corpNm": "(주)아이엠티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A451700",
+            "isinCd": "KR7451700009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩29호",
+            "crno": "1101118519055",
+            "corpNm": "엔에이치기업인수목적29호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A451760",
+            "isinCd": "KR7451760003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "컨텍",
+            "crno": "1601110387525",
+            "corpNm": "(주)컨텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A451800",
+            "isinCd": "KR7451800007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "한화리츠",
+            "crno": "1101118294037",
+            "corpNm": "한화위탁관리부동산투자회사(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452160",
+            "isinCd": "KR7452160005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "제이엔비",
+            "crno": "1348110105438",
+            "corpNm": "(주)제이엔비"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452190",
+            "isinCd": "KR7452190002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한빛레이저",
+            "crno": "1601110066145",
+            "corpNm": "(주)한빛레이저"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452260",
+            "isinCd": "KR7452260003",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "한화갤러리아",
+            "crno": "1101118570891",
+            "corpNm": "한화갤러리아(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452280",
+            "isinCd": "KR7452280001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한선엔지니어링",
+            "crno": "1801110796665",
+            "corpNm": "한선엔지니어링(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452300",
+            "isinCd": "KR7452300007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "캡스톤파트너스",
+            "crno": "1101116929959",
+            "corpNm": "캡스톤파트너스(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452400",
+            "isinCd": "KR7452400005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "이닉스",
+            "crno": "1801110053411",
+            "corpNm": "(주)이닉스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452430",
+            "isinCd": "KR7452430002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "사피엔반도체",
+            "crno": "2301110281186",
+            "corpNm": "(주)사피엔반도체"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452670",
+            "isinCd": "KR7452670003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "상상인제4호스팩",
+            "crno": "1101118542791",
+            "corpNm": "상상인제4호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A452980",
+            "isinCd": "KR7452980006",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신한제11호스팩",
+            "crno": "1101118546719",
+            "corpNm": "신한제11호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A453340",
+            "isinCd": "KR7453340002",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "현대그린푸드",
+            "crno": "1345110623337",
+            "corpNm": "주식회사 현대그린푸드"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A453860",
+            "isinCd": "KR7453860009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이에스텍",
+            "crno": "1351110074800",
+            "corpNm": "(주)에이에스텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A454640",
+            "isinCd": "KR7454640004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나29호스팩",
+            "crno": "1101118573366",
+            "corpNm": "하나29호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A454750",
+            "isinCd": "KR7454750001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나28호스팩",
+            "crno": "1101118573704",
+            "corpNm": "하나28호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A454910",
+            "isinCd": "KR7454910001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "두산로보틱스",
+            "crno": "1101115798272",
+            "corpNm": "두산로보틱스 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A455250",
+            "isinCd": "KR7455250001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "KB제25호스팩",
+            "crno": "1101118581369",
+            "corpNm": "케이비제25호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A455310",
+            "isinCd": "KR7455310003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한화플러스제4호스팩",
+            "crno": "1101118582664",
+            "corpNm": "한화플러스제4호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A455910",
+            "isinCd": "KR7455910000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "SK증권제9호스팩",
+            "crno": "1101118590568",
+            "corpNm": "에스케이증권제9호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A456040",
+            "isinCd": "KR7456040005",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "OCI",
+            "crno": "1101118626793",
+            "corpNm": "OCI(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A456190",
+            "isinCd": "KR7456190008",
+            "mrktCtg": "KONEX",
+            "itmsNm": "큐라켐",
+            "crno": "1244110096794",
+            "corpNm": "(주)큐라켐"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A456440",
+            "isinCd": "KR7456440007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "디비금융스팩11호",
+            "crno": "1101118599833",
+            "corpNm": "디비금융제11호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A456490",
+            "isinCd": "KR7456490002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "교보14호스팩",
+            "crno": "1101118597639",
+            "corpNm": "교보14호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A456570",
+            "isinCd": "KR7456570001",
+            "mrktCtg": "KONEX",
+            "itmsNm": "아이엠지티",
+            "crno": "1311110252575",
+            "corpNm": "(주)아이엠지티"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A456700",
+            "isinCd": "KR7456700004",
+            "mrktCtg": "KONEX",
+            "itmsNm": "길교이앤씨",
+            "crno": "1101113101097",
+            "corpNm": "(주)길교이앤씨"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A457190",
+            "isinCd": "KR7457190007",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "이수스페셜티케미컬",
+            "crno": "1101118626561",
+            "corpNm": "주식회사 이수스페셜티케미컬"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A457390",
+            "isinCd": "KR7457390003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대신밸런스제15호스팩",
+            "crno": "1101118606422",
+            "corpNm": "대신밸런스제15호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A457550",
+            "isinCd": "KR7457550002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "우진엔텍",
+            "crno": "1348110260331",
+            "corpNm": "(주)우진엔텍"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A457630",
+            "isinCd": "KR7457630002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대신밸런스제16호스팩",
+            "crno": "1101118611934",
+            "corpNm": "대신밸런스제16호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A457940",
+            "isinCd": "KR7457940005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "SK증권제10호스팩",
+            "crno": "1101118617502",
+            "corpNm": "에스케이증권제10호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A458320",
+            "isinCd": "KR7458320009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "KB제26호스팩",
+            "crno": "1101118620787",
+            "corpNm": "케이비제26호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A458610",
+            "isinCd": "KR7458610003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한국제12호스팩",
+            "crno": "1101118627642",
+            "corpNm": "한국제12호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A460850",
+            "isinCd": "KR7460850001",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "동국씨엠",
+            "crno": "1101118651659",
+            "corpNm": "동국씨엠 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A460860",
+            "isinCd": "KR7460860000",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "동국제강",
+            "crno": "1101118651633",
+            "corpNm": "동국제강(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A460930",
+            "isinCd": "KR7460930001",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "현대힘스",
+            "crno": "2301110143443",
+            "corpNm": "현대힘스 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A462020",
+            "isinCd": "KR7462020009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "에이치엠씨제6호스팩",
+            "crno": "1101118657029",
+            "corpNm": "에이치엠씨아이비제6호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A462520",
+            "isinCd": "KR7462520008",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "조선내화",
+            "crno": "2046110071943",
+            "corpNm": "조선내화 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A464440",
+            "isinCd": "KR7464440007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "한국제13호스팩",
+            "crno": "1101118692504",
+            "corpNm": "한국제13호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A464680",
+            "isinCd": "KR7464680008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "KB제27호스팩",
+            "crno": "1101118699047",
+            "corpNm": "케이비제27호기업인수목적(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A465320",
+            "isinCd": "KR7465320000",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "교보15호스팩",
+            "crno": "1101118711974",
+            "corpNm": "교보15호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A465770",
+            "isinCd": "KR7465770006",
+            "mrktCtg": "KOSPI",
+            "itmsNm": "STX그린로지스",
+            "crno": "1801111522465",
+            "corpNm": "(주)STX 그린 로지스"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A466910",
+            "isinCd": "KR7466910007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "엔에이치스팩30호",
+            "crno": "1101118734116",
+            "corpNm": "엔에이치기업인수목적30호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A467930",
+            "isinCd": "KR7467930004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "IBKS제23호스팩",
+            "crno": "1101118739827",
+            "corpNm": "아이비케이에스제23호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A468510",
+            "isinCd": "KR7468510003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "삼성스팩9호",
+            "crno": "1101118743802",
+            "corpNm": "삼성기업인수목적9호(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A468760",
+            "isinCd": "KR7468760004",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유진스팩10호",
+            "crno": "1101118744488",
+            "corpNm": "유진기업인수목적10호 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A469480",
+            "isinCd": "KR7469480008",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "IBKS제24호스팩",
+            "crno": "1101118753330",
+            "corpNm": "아이비케이에스제24호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A469880",
+            "isinCd": "KR7469880009",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "하나30호스팩",
+            "crno": "1101118761630",
+            "corpNm": "하나30호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A471050",
+            "isinCd": "KR7471050005",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "대신밸런스제17호스팩",
+            "crno": "1101118766820",
+            "corpNm": "대신밸런스제17호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A472220",
+            "isinCd": "KR7472220003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "신영스팩10호",
+            "crno": "1101118781779",
+            "corpNm": "신영해피투모로우제10호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A472230",
+            "isinCd": "KR7472230002",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "SK증권제11호스팩",
+            "crno": "1101118782032",
+            "corpNm": "에스케이증권제11호기업인수목적 주식회사"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A472850",
+            "isinCd": "KR7472850007",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "폰드그룹",
+            "crno": "1101118828068",
+            "corpNm": "폰드그룹(주)"
+          },
+          {
+            "basDt": "20240304",
+            "srtnCd": "A473050",
+            "isinCd": "KR7473050003",
+            "mrktCtg": "KOSDAQ",
+            "itmsNm": "유안타제15호스팩",
+            "crno": "1101118796596",
+            "corpNm": "유안타제15호기업인수목적 주식회사"
+          }
+        ]
+      }
+    }
+  }
+}
