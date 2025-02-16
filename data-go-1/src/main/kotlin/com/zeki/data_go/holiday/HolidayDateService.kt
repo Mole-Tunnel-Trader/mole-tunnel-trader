@@ -1,4 +1,4 @@
-package com.zeki.kisserver.domain.data_go.holiday
+package com.zeki.data_go.holiday
 
 import com.zeki.common.util.CustomUtils
 import com.zeki.mole_tunnel_db.repository.HolidayRepository

@@ -1,4 +1,4 @@
-package com.zeki.kisserver.domain.data_go.stock_code
+package com.zeki.data_go.stock_code
 
 import com.zeki.common.em.StockMarket
 import com.zeki.common.exception.ApiException
