@@ -7,6 +7,7 @@ import com.zeki.common.util.CustomUtils
 import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.kisserver.domain.kis.stock_info.dto.KisAssetResDto
+import com.zeki.webclient.ApiStatics
 import com.zeki.webclient.WebClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
@@ -70,9 +71,8 @@ class AssetWebClientService(
                 "WebClient 통신 에러"
             )
 
-            val tempTrCont = responseDatas.headers.getOrDefault("tr_cont", listOf(""))
-            trCont = tempTrCont[0]
-
+            val tempTrCont = responseDatas.headers?.getOrDefault("tr_cont", listOf(""))
+            trCont = tempTrCont?.get(0) ?: "0"
             resultList.addAll(kisAssetResDto.output1)
 
             reqParams["CTX_AREA_FK100"] = if (trCont == "F" || trCont == "M") kisAssetResDto.ctxAreaFk100 else ""

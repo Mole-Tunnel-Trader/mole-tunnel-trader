@@ -1,14 +1,14 @@
 package com.zeki.webclient
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.zeki.common.exception.ApiException
-import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
-import io.netty.handler.codec.http.HttpHeaders.addHeader
-import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.springframework.core.env.Environment
+import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
@@ -20,50 +20,41 @@ import kotlin.concurrent.withLock
 
 @Component
 class WebClientConnector(
-    private val env: Environment,
-    private val client: OkHttpClient,  // 빈으로 주입된 OkHttpClient 사용
-    private val objectMapper: ObjectMapper // JSON 직렬화를 위한 ObjectMapper
+    private val apiStatics: ApiStatics,
+    private val client: OkHttpClient,  // OkHttpClient 사용
+    private val objectMapper: ObjectMapper,
+    private val env: Environment
 ) {
     enum class WebClientType {
         KIS, DATA_GO, DEFAULT
     }
 
-    // 최근 1초 내의 요청 타임스탬프를 저장하는 큐
-    private val requestTimestamps: ConcurrentLinkedQueue<Long> = ConcurrentLinkedQueue()
+    data class ApiResponse<S>(
+        val body: S?,
+        val headers: Map<String, List<String>>?
+    )
 
-    // 동시성 제어를 위한 락
+    private val requestTimestamps: ConcurrentLinkedQueue<Long> = ConcurrentLinkedQueue()
     private val lock = ReentrantLock()
 
     /**
-     * WebClient를 이용하여 API 호출을 수행합니다.
-     *
-     * @param webClientType 사용하려는 WebClient의 타입 (KIS, DATA_GO, DEFAULT)
-     * @param method HTTP 메서드 (GET, POST 등)
-     * @param path API 엔드포인트 경로
-     * @param requestHeaders 요청 헤더
-     * @param requestParams 요청 쿼리 파라미터
-     * @param requestBody 요청 본문
-     * @param responseClassType 응답을 매핑할 클래스 타입
-     * @param retryCount 재시도 횟수
-     * @param retryDelay 재시도 간 대기 시간 (밀리초)
-     * @return 응답 객체 또는 null
+     * OkHttpClient를 이용한 API 호출
      */
-    fun <Q, S> connect(
-            webClientType: WebClientType,
-            method: String,
-            path: String,
-            requestHeaders: Map<String, String> = mapOf(),
-            requestParams: MultiValueMap<String, String> = LinkedMultiValueMap(),
-            requestBody: Q? = null,
-            responseClassType: Class<S>,
-            retryCount: Int = 0,
-            retryDelayMillis: Long = 0,
-            isRealTrade: Boolean = false
-    ): S? {
+    fun <Q, S : Any> connect(
+        webClientType: WebClientType,
+        method: HttpMethod,
+        path: String,
+        requestHeaders: Map<String, String> = mapOf(),
+        requestParams: MultiValueMap<String, String> = LinkedMultiValueMap(),
+        requestBody: Q? = null,
+        responseClassType: Class<S>,
+        retryCount: Int = 0,
+        retryDelay: Long = 0
+    ): ApiResponse<S>? {
         val mediaType = "application/json; charset=utf-8".toMediaType()
 
-        // GET, DELETE 요청의 경우 body 사용하지 않도록 처리
-        val body: RequestBody? = if (method == "GET" || method == "DELETE") {
+        // GET, DELETE 요청 시 body는 null
+        val body: RequestBody? = if (method.name() == "GET" || method.name() == "DELETE") {
             null
         } else {
             requestBody?.toString()?.toRequestBody(mediaType)
@@ -71,24 +62,24 @@ class WebClientConnector(
 
         val requestBuilder = when (webClientType) {
             WebClientType.KIS -> {
-                val url = env.getProperty("keys.kis.url")
-                        ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR, "URL is missing")
-                val appKey = env.getProperty("keys.kis.app-key")
-                        ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR, "App key is missing")
-                val appSecret = env.getProperty("keys.kis.app-secret")
-                        ?: throw ApiException(ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR, "App secret is missing")
+                val url = apiStatics.kis.url + "/" + path
+                val appKey = apiStatics.kis.appKey
+                val appSecret = apiStatics.kis.appSecret
 
                 Request.Builder()
-                        .url(url)
-                        .method(method, body)
-                        .addHeader("appkey", appKey)
-                        .addHeader("appsecret", appSecret)
+                    .url(url)
+                    .method(method.name(), body)
+                    .addHeader("appkey", appKey)
+                    .addHeader("appsecret", appSecret)
             }
+
             WebClientType.DATA_GO -> {
-                Request.Builder().url("https://data.go.kr") // 예제 URL
+                val url = apiStatics.dataGo.url + "/" + path + "?serviceKey=" + apiStatics.dataGo.encoding
+                Request.Builder().url(url)
             }
+
             WebClientType.DEFAULT -> {
-                Request.Builder().url("https://default.com") // 예제 URL
+                Request.Builder().url(path)
             }
         }
 
@@ -102,24 +93,28 @@ class WebClientConnector(
 
         repeat(retryCount + 1) { attempt ->
             try {
+                // OkHttpClient의 동기 요청 처리
                 client.newCall(request).execute().use { response ->
                     if (response.isSuccessful) {
-                        return response.body?.string()?.let {
+                        val body = response.body?.string()?.let {
                             objectMapper.readValue(it, responseClassType)
                         }
+                        val headers = response.headers.toMultimap()
+                        return ApiResponse(body, headers)
+                    } else {
+                        println("Request failed with status: ${response.code}")
                     }
                 }
             } catch (e: Exception) {
                 println("Request failed on attempt ${attempt + 1}: ${e.message}")
                 if (attempt < retryCount) {
-                    Thread.sleep(retryDelayMillis)
+                    Thread.sleep(retryDelay)
                 }
             }
         }
 
         return null
     }
-
 
 
     /**
@@ -130,7 +125,6 @@ class WebClientConnector(
             val currentTime = Instant.now().toEpochMilli()
 
             lock.withLock {
-                // 1초 이전의 타임스탬프 제거
                 while (requestTimestamps.isNotEmpty() && currentTime - requestTimestamps.peek() > 1000) {
                     requestTimestamps.poll()
                 }
@@ -138,12 +132,10 @@ class WebClientConnector(
                 val cnt: Int = if (CustomUtils.isProdProfile(env)) 19 else 2
 
                 if (requestTimestamps.size < cnt) {
-                    // 퍼밋 허용
                     requestTimestamps.add(currentTime)
                     return
                 }
 
-                // 제한을 초과한 경우 대기 시간 계산
                 val earliestTimestamp = requestTimestamps.peek() ?: currentTime
                 val waitTime = 1100 - (currentTime - earliestTimestamp)
 
