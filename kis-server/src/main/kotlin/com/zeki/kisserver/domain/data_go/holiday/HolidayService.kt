@@ -3,11 +3,11 @@ package com.zeki.kisserver.domain.data_go.holiday
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toLocalDate
-import com.zeki.webclient.WebClientConnector
 import com.zeki.mole_tunnel_db.dto.DataGoHolidayResDto
 import com.zeki.mole_tunnel_db.entity.Holiday
 import com.zeki.mole_tunnel_db.repository.HolidayRepository
 import com.zeki.mole_tunnel_db.repository.join.HolidayJoinRepository
+import com.zeki.webclient.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -60,10 +60,12 @@ class HolidayService(
                 WebClientConnector.WebClientType.DATA_GO,
                 HttpMethod.GET,
                 "B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
+                requestHeaders = mapOf(),
                 requestParams = queryParams,
+                requestBody = null,
                 responseClassType = DataGoHolidayResDto::class.java,
                 retryCount = 3,
-                retryDelay = 510
+                retryDelay = 510,
             )
 
         val dataGoHolidayResDto =

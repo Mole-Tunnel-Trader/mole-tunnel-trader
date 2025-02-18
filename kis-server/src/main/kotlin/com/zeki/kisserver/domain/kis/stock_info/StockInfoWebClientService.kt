@@ -3,9 +3,9 @@ package com.zeki.kisserver.domain.kis.stock_info
 import com.zeki.common.exception.ExceptionUtils.log
 import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
+import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
 import com.zeki.webclient.ApiStatics
 import com.zeki.webclient.WebClientConnector
-import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
@@ -77,7 +77,7 @@ class StockInfoWebClientService(
             retryDelay = 510
         )
 
-        if (responseDatas == null || responseDatas.body == null) {
+        if (responseDatas?.body == null) {
             log.warn { "KIS 주식 정보 조회 실패, 종목코드 : $stockCode" }
             return null
         }
