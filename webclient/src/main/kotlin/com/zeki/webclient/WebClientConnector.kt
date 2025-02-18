@@ -53,69 +53,73 @@ class WebClientConnector(
     ): ApiResponse<S>? {
         val mediaType = "application/json; charset=utf-8".toMediaType()
 
-        // GET, DELETE 요청 시 body는 null
-        val body: RequestBody? = if (method.name() == "GET" || method.name() == "DELETE") {
-            null
-        } else {
-            requestBody?.toString()?.toRequestBody(mediaType)
+        // 요청 파라미터를 URL 쿼리 스트링으로 변환
+        val queryString = requestParams.entries.joinToString("&") { (key, values) ->
+            values.joinToString("&") { "$key=${it}" }
+        }.takeIf { it.isNotEmpty() }?.let { "?$it" } ?: ""
+
+        // 요청 URL 구성
+        val baseUrl = when (webClientType) {
+            WebClientType.KIS -> apiStatics.kis.url
+            WebClientType.DATA_GO -> apiStatics.dataGo.url
+            WebClientType.DEFAULT -> ""
+        }
+        var url = "$baseUrl/$path$queryString"
+
+        if (webClientType == WebClientType.DATA_GO) {
+            url = url + "&serviceKey=" + apiStatics.dataGo.encoding
         }
 
-        val requestBuilder = when (webClientType) {
-            WebClientType.KIS -> {
-                val url = apiStatics.kis.url + "/" + path
-                val appKey = apiStatics.kis.appKey
-                val appSecret = apiStatics.kis.appSecret
+        // GET, DELETE 요청 시 body는 null, 그 외에는 JSON 변환 후 RequestBody 생성
+        val body: RequestBody? = when (method) {
+            HttpMethod.GET, HttpMethod.DELETE -> null
+            else -> requestBody?.let {
+                objectMapper.writeValueAsString(it).toRequestBody(mediaType)
+            }
+        }
 
-                Request.Builder()
-                    .url(url)
-                    .method(method.name(), body)
-                    .addHeader("appkey", appKey)
-                    .addHeader("appsecret", appSecret)
+        // Request.Builder 생성
+        val requestBuilder = Request.Builder().url(url).method(method.name(), body)
+
+        // WebClientType에 따라 추가 헤더 설정
+        when (webClientType) {
+            WebClientType.KIS -> {
+                requestBuilder.addHeader("appkey", apiStatics.kis.appKey)
+                requestBuilder.addHeader("appsecret", apiStatics.kis.appSecret)
             }
 
             WebClientType.DATA_GO -> {
-                val url = apiStatics.dataGo.url + "/" + path + "?serviceKey=" + apiStatics.dataGo.encoding
-                Request.Builder().url(url)
+                requestBuilder.addHeader("Content-Type", "application/json")
             }
 
-            WebClientType.DEFAULT -> {
-                Request.Builder().url(path)
-            }
+            WebClientType.DEFAULT -> {}
         }
 
-        requestBuilder.apply {
-            requestHeaders.forEach { (key, value) ->
-                addHeader(key, value)
-            }
+        // 요청 헤더 추가
+        requestHeaders.forEach { (key, value) ->
+            requestBuilder.addHeader(key, value)
         }
 
         val request = requestBuilder.build()
 
-        repeat(retryCount + 1) { attempt ->
-            try {
-                // OkHttpClient의 동기 요청 처리
-                client.newCall(request).execute().use { response ->
-                    if (response.isSuccessful) {
-                        val body = response.body?.string()?.let {
-                            objectMapper.readValue(it, responseClassType)
-                        }
-                        val headers = response.headers.toMultimap()
-                        return ApiResponse(body, headers)
-                    } else {
-                        println("Request failed with status: ${response.code}")
+        try {
+            client.newCall(request).execute().use { response ->
+                if (response.isSuccessful) {
+                    val responseBody = response.body?.string()?.let {
+                        objectMapper.readValue(it, responseClassType)
                     }
-                }
-            } catch (e: Exception) {
-                println("Request failed on attempt ${attempt + 1}: ${e.message}")
-                if (attempt < retryCount) {
-                    Thread.sleep(retryDelay)
+                    val headers = response.headers.toMultimap()
+                    return ApiResponse(responseBody, headers)
+                } else {
+                    println("Request failed with status: ${response.code}")
                 }
             }
+        } catch (e: Exception) {
+            println("Request failed: ${e.message}")
         }
 
         return null
     }
-
 
     /**
      * 초당 20건의 요청 제한을 강제합니다.
