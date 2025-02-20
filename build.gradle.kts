@@ -63,7 +63,6 @@ project(":kis-server") {
 project(":data-go") {
     dependencies {
         implementation(project(":mole-tunnel-db"))
-        implementation(project(":webclient"))
         implementation(project(":common"))
     }
 }
