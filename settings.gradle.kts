@@ -4,8 +4,9 @@ plugins {
 rootProject.name = "kis-vol-kotlin"
 
 include(
-    "kis-server",
-    "common",
-    "webclient",
+        "kis-server",
+        "common",
+        "webclient",
+        "data-go"
 )
 include("mole-tunnel-db")

@@ -55,7 +55,14 @@ subprojects {
 project(":kis-server") {
     dependencies {
         implementation(project(":mole-tunnel-db"))
+        implementation(project(":webclient"))
+        implementation(project(":common"))
+    }
+}
 
+project(":data-go") {
+    dependencies {
+        implementation(project(":mole-tunnel-db"))
         implementation(project(":webclient"))
         implementation(project(":common"))
     }
@@ -85,4 +92,5 @@ tasks.register<Copy>("copyYmlFiles") {
     group = "my tasks"
     from("kis-vol-kotlin-yml")
     into("kis-server/src/main/resources")
+    into("data-go/src/main/resources")
 }
