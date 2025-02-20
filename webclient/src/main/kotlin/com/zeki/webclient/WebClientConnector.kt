@@ -1,19 +1,17 @@
 package com.zeki.webclient
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.util.CustomUtils
-import org.springframework.beans.factory.annotation.Qualifier
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.springframework.core.env.Environment
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
-import org.springframework.web.reactive.function.client.ClientResponse
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.util.UriBuilder
-import reactor.core.publisher.Mono
-import reactor.util.retry.Retry
 import java.time.Instant
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.TimeUnit
@@ -22,36 +20,27 @@ import kotlin.concurrent.withLock
 
 @Component
 class WebClientConnector(
-    @Qualifier("WebClientKIS") private val webClientKis: WebClient,
-    @Qualifier("WebClientDataGo") private val webClientDataGo: WebClient,
-    @Qualifier("WebClient") private val webClient: WebClient,
+    private val apiStatics: ApiStatics,
+    private val client: OkHttpClient,  // OkHttpClient 사용
+    private val objectMapper: ObjectMapper,
     private val env: Environment
 ) {
     enum class WebClientType {
         KIS, DATA_GO, DEFAULT
     }
 
-    // 최근 1초 내의 요청 타임스탬프를 저장하는 큐
-    private val requestTimestamps: ConcurrentLinkedQueue<Long> = ConcurrentLinkedQueue()
+    data class ApiResponse<S>(
+        val body: S?,
+        val headers: Map<String, List<String>>?
+    )
 
-    // 동시성 제어를 위한 락
+    private val requestTimestamps: ConcurrentLinkedQueue<Long> = ConcurrentLinkedQueue()
     private val lock = ReentrantLock()
 
     /**
-     * WebClient를 이용하여 API 호출을 수행합니다.
-     *
-     * @param webClientType 사용하려는 WebClient의 타입 (KIS, DATA_GO, DEFAULT)
-     * @param method HTTP 메서드 (GET, POST 등)
-     * @param path API 엔드포인트 경로
-     * @param requestHeaders 요청 헤더
-     * @param requestParams 요청 쿼리 파라미터
-     * @param requestBody 요청 본문
-     * @param responseClassType 응답을 매핑할 클래스 타입
-     * @param retryCount 재시도 횟수
-     * @param retryDelay 재시도 간 대기 시간 (밀리초)
-     * @return 응답 객체 또는 null
+     * OkHttpClient를 이용한 API 호출
      */
-    fun <Q, S> connect(
+    fun <Q, S : Any> connect(
         webClientType: WebClientType,
         method: HttpMethod,
         path: String,
@@ -59,38 +48,77 @@ class WebClientConnector(
         requestParams: MultiValueMap<String, String> = LinkedMultiValueMap(),
         requestBody: Q? = null,
         responseClassType: Class<S>,
-        retryCount: Long = 0,
+        retryCount: Int = 0,
         retryDelay: Long = 0
-    ): ResponseEntity<S>? {
-        // 요청 제한 로직 적용
-        this.enforceRateLimit()
+    ): ApiResponse<S>? {
+        val mediaType = "application/json; charset=utf-8".toMediaType()
 
-        val selectedWebClient = when (webClientType) {
-            WebClientType.KIS -> webClientKis
-            WebClientType.DATA_GO -> webClientDataGo
-            WebClientType.DEFAULT -> webClient
+        // 요청 파라미터를 URL 쿼리 스트링으로 변환
+        val queryString = requestParams.entries.joinToString("&") { (key, values) ->
+            values.joinToString("&") { "$key=${it}" }
+        }.takeIf { it.isNotEmpty() }?.let { "?$it" } ?: ""
+
+        // 요청 URL 구성
+        val baseUrl = when (webClientType) {
+            WebClientType.KIS -> apiStatics.kis.url
+            WebClientType.DATA_GO -> apiStatics.dataGo.url
+            WebClientType.DEFAULT -> ""
+        }
+        var url = "$baseUrl/$path$queryString"
+
+        if (webClientType == WebClientType.DATA_GO) {
+            url = url + "&serviceKey=" + apiStatics.dataGo.encoding
         }
 
-        val retrySpec = Retry.fixedDelay(retryCount, java.time.Duration.ofMillis(retryDelay))
-
-        val responseMono: Mono<ResponseEntity<S>> = selectedWebClient
-            .method(method)
-            .uri { uriBuilder: UriBuilder ->
-                uriBuilder.path(path).queryParams(requestParams).build()
+        // GET, DELETE 요청 시 body는 null, 그 외에는 JSON 변환 후 RequestBody 생성
+        val body: RequestBody? = when (method) {
+            HttpMethod.GET, HttpMethod.DELETE -> null
+            else -> requestBody?.let {
+                objectMapper.writeValueAsString(it).toRequestBody(mediaType)
             }
-            .headers { httpHeaders: HttpHeaders -> httpHeaders.setAll(requestHeaders) }
-            .bodyValue(requestBody ?: mapOf<String, String>())
-            .exchangeToMono { clientResponse: ClientResponse ->
-                clientResponse.toEntity(responseClassType)
-            }
-            .retryWhen(retrySpec)
+        }
 
-        return try {
-            responseMono.block()
+        // Request.Builder 생성
+        val requestBuilder = Request.Builder().url(url).method(method.name(), body)
+
+        // WebClientType에 따라 추가 헤더 설정
+        when (webClientType) {
+            WebClientType.KIS -> {
+                requestBuilder.addHeader("appkey", apiStatics.kis.appKey)
+                requestBuilder.addHeader("appsecret", apiStatics.kis.appSecret)
+            }
+
+            WebClientType.DATA_GO -> {
+                requestBuilder.addHeader("Content-Type", "application/json")
+            }
+
+            WebClientType.DEFAULT -> {}
+        }
+
+        // 요청 헤더 추가
+        requestHeaders.forEach { (key, value) ->
+            requestBuilder.addHeader(key, value)
+        }
+
+        val request = requestBuilder.build()
+
+        try {
+            client.newCall(request).execute().use { response ->
+                if (response.isSuccessful) {
+                    val responseBody = response.body?.string()?.let {
+                        objectMapper.readValue(it, responseClassType)
+                    }
+                    val headers = response.headers.toMultimap()
+                    return ApiResponse(responseBody, headers)
+                } else {
+                    println("Request failed with status: ${response.code}")
+                }
+            }
         } catch (e: Exception) {
-            println("Error during WebClient request: ${e.message}")
-            null
+            println("Request failed: ${e.message}")
         }
+
+        return null
     }
 
     /**
@@ -101,7 +129,6 @@ class WebClientConnector(
             val currentTime = Instant.now().toEpochMilli()
 
             lock.withLock {
-                // 1초 이전의 타임스탬프 제거
                 while (requestTimestamps.isNotEmpty() && currentTime - requestTimestamps.peek() > 1000) {
                     requestTimestamps.poll()
                 }
@@ -109,12 +136,10 @@ class WebClientConnector(
                 val cnt: Int = if (CustomUtils.isProdProfile(env)) 19 else 2
 
                 if (requestTimestamps.size < cnt) {
-                    // 퍼밋 허용
                     requestTimestamps.add(currentTime)
                     return
                 }
 
-                // 제한을 초과한 경우 대기 시간 계산
                 val earliestTimestamp = requestTimestamps.peek() ?: currentTime
                 val waitTime = 1100 - (currentTime - earliestTimestamp)
 

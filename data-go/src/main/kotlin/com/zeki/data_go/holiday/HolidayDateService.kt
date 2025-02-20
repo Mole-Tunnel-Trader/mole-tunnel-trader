@@ -9,15 +9,15 @@ import java.time.LocalTime
 
 @Service
 class HolidayDateService(
-    private val holidayRepository: HolidayRepository
+        private val holidayRepository: HolidayRepository
 ) {
 
     @Transactional(readOnly = true)
     // TODO : cache 처리
     fun getAvailableDate(
-        standardDate: LocalDate = LocalDate.now(),
-        standardTime: LocalTime = LocalTime.now(),
-        standardDeltaDate: Int = 0
+            standardDate: LocalDate = LocalDate.now(),
+            standardTime: LocalTime = LocalTime.now(),
+            standardDeltaDate: Int = 0
     ): LocalDate {
 
         var availableDate = when {

@@ -9,7 +9,8 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
-    api("org.springframework.boot:spring-boot-starter-webflux")
+//    api("org.springframework.boot:spring-boot-starter-webflux")
+    api("com.squareup.okhttp3:okhttp:4.12.0")
 
     // logback & webclient
     api("io.netty:netty-all") // mac

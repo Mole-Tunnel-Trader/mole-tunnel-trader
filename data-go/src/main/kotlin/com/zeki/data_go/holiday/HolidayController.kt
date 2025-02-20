@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class HolidayController(
-    private val holidayService: HolidayService
+        private val holidayService: HolidayService
 ) {
 
     @GetMapping("/holiday/update")
