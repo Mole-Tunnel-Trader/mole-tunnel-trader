@@ -4,8 +4,8 @@ import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toLocalDate
 import com.zeki.common.util.CustomUtils.toStringDate
-import com.zeki.webclient.WebClientConnector
 import com.zeki.mole_tunnel_db.dto.NaverStockPriceResDto
+import com.zeki.ok_http_client.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap

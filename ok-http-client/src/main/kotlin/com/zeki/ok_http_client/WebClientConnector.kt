@@ -1,4 +1,4 @@
-package com.zeki.webclient
+package com.zeki.ok_http_client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.util.CustomUtils

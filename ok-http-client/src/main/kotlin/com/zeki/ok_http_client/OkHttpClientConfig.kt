@@ -1,4 +1,4 @@
-package com.zeki.webclient
+package com.zeki.ok_http_client
 
 import okhttp3.OkHttpClient
 import org.springframework.context.annotation.Bean

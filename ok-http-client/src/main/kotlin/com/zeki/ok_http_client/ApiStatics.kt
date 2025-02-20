@@ -1,4 +1,4 @@
-package com.zeki.webclient
+package com.zeki.ok_http_client
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration

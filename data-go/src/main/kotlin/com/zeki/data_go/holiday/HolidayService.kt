@@ -11,7 +11,7 @@ import com.zeki.mole_tunnel_db.dto.DataGoHolidayResDto
 import com.zeki.mole_tunnel_db.entity.Holiday
 import com.zeki.mole_tunnel_db.repository.HolidayRepository
 import com.zeki.mole_tunnel_db.repository.join.HolidayJoinRepository
-import com.zeki.webclient.WebClientConnector
+import com.zeki.ok_http_client.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -22,12 +22,12 @@ import java.time.LocalDate
 
 @Service
 class HolidayService(
-        private val holidayRepository: HolidayRepository,
-        private val holidayJoinRepository: HolidayJoinRepository,
+    private val holidayRepository: HolidayRepository,
+    private val holidayJoinRepository: HolidayJoinRepository,
 
-        private val holidayDateService: HolidayDateService,
+    private val holidayDateService: HolidayDateService,
 
-        private val webClientConnector: WebClientConnector,
+    private val webClientConnector: WebClientConnector,
 ) {
 
     @Transactional
@@ -54,30 +54,30 @@ class HolidayService(
         val standardYear = standardYear ?: holidayDateService.getAvailableDate().year
 
         val queryParams: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>()
-                .apply {
-                    add("solYear", standardYear.toString())
-                    add("_type", "json")
-                    add("numOfRows", "100")
-                }
+            .apply {
+                add("solYear", standardYear.toString())
+                add("_type", "json")
+                add("numOfRows", "100")
+            }
 
         val responseDatas =
-                webClientConnector.connect<Unit, DataGoHolidayResDto>(
-                        WebClientConnector.WebClientType.DATA_GO,
-                        HttpMethod.GET,
-                        "B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
-                        requestParams = queryParams,
-                        responseClassType = DataGoHolidayResDto::class.java,
-                        retryCount = 3,
-                        retryDelay = 510
-                )
+            webClientConnector.connect<Unit, DataGoHolidayResDto>(
+                WebClientConnector.WebClientType.DATA_GO,
+                HttpMethod.GET,
+                "B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
+                requestParams = queryParams,
+                responseClassType = DataGoHolidayResDto::class.java,
+                retryCount = 3,
+                retryDelay = 510
+            )
 
         val dataGoHolidayResDto =
-                responseDatas?.body ?: DataGoHolidayResDto()
+            responseDatas?.body ?: DataGoHolidayResDto()
 
         if (dataGoHolidayResDto.response.header.resultCode != "00") {
             throw ApiException(
-                    ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
-                    "유효한 결과값이 아닙니다. ${dataGoHolidayResDto.response.header.resultMsg}"
+                ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+                "유효한 결과값이 아닙니다. ${dataGoHolidayResDto.response.header.resultMsg}"
             )
         }
 
@@ -85,10 +85,10 @@ class HolidayService(
     }
 
     fun upsertHolidayByDataGo(
-            standardYear: Int,
-            holidaySaveList: MutableCollection<Holiday>,
-            holidayUpdateList: MutableCollection<Holiday>,
-            holidayDeleteSet: MutableCollection<Holiday>
+        standardYear: Int,
+        holidaySaveList: MutableCollection<Holiday>,
+        holidayUpdateList: MutableCollection<Holiday>,
+        holidayDeleteSet: MutableCollection<Holiday>
     ) {
         val dataGoHolidayResDto = this.getHolidaysFromDataGo(standardYear)
         val targetHolidayDataList = dataGoHolidayResDto.response.body.items.item
@@ -97,7 +97,7 @@ class HolidayService(
         val endDate = LocalDate.of(standardYear, 12, 31)
 
         val savedHolidayMap = holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, true)
-                .associateBy { "${it.date} ${it.name} ${it.isHoliday}" }.toMutableMap()
+            .associateBy { "${it.date} ${it.name} ${it.isHoliday}" }.toMutableMap()
 
         for (item in targetHolidayDataList) {
             val localDate = item.locdate.toLocalDate()
@@ -105,20 +105,20 @@ class HolidayService(
             when (val holiday = savedHolidayMap["$localDate ${item.dateName} ${item.isHoliday == "Y"}"]) {
                 null -> {
                     holidaySaveList.add(
-                            Holiday(
-                                    name = item.dateName,
-                                    date = localDate,
-                                    isHoliday = item.isHoliday == "Y"
-                            )
+                        Holiday(
+                            name = item.dateName,
+                            date = localDate,
+                            isHoliday = item.isHoliday == "Y"
+                        )
                     )
                 }
 
                 else -> {
                     if (holiday.updateHoliday(
-                                    item.dateName,
-                                    localDate,
-                                    item.isHoliday == "Y"
-                            )
+                            item.dateName,
+                            localDate,
+                            item.isHoliday == "Y"
+                        )
                     ) holidayUpdateList.add(holiday)
                     savedHolidayMap.remove("$localDate ${item.dateName} ${item.isHoliday == "Y"}")
                 }
@@ -131,15 +131,15 @@ class HolidayService(
 
 
     fun upsertHolidayByWeekend(
-            standardYear: Int,
-            holidaySaveList: MutableCollection<Holiday>,
-            holidayDeleteSet: MutableCollection<Holiday>
+        standardYear: Int,
+        holidaySaveList: MutableCollection<Holiday>,
+        holidayDeleteSet: MutableCollection<Holiday>
     ) {
         val startDate = LocalDate.of(standardYear, 1, 1)
         val endDate = LocalDate.of(standardYear, 12, 31)
 
         val savedHolidayMap = holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, false)
-                .associateBy { it.date }.toMutableMap()
+            .associateBy { it.date }.toMutableMap()
 
         var currentDate = startDate
         while (currentDate.isBefore(endDate) || currentDate.isEqual(endDate)) {
@@ -147,11 +147,11 @@ class HolidayService(
                 when (savedHolidayMap[currentDate]) {
                     null ->
                         holidaySaveList.add(
-                                Holiday(
-                                        name = "주말",
-                                        date = currentDate,
-                                        isHoliday = false
-                                )
+                            Holiday(
+                                name = "주말",
+                                date = currentDate,
+                                isHoliday = false
+                            )
                         )
 
                     else -> savedHolidayMap.remove(currentDate)

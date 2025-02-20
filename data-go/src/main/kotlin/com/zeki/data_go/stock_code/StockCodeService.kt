@@ -10,7 +10,7 @@ import com.zeki.mole_tunnel_db.dto.DataGoStockCodeResDto.StockCodeItem
 import com.zeki.mole_tunnel_db.entity.StockCode
 import com.zeki.mole_tunnel_db.repository.StockCodeRepository
 import com.zeki.mole_tunnel_db.repository.join.StockCodeJoinRepository
-import com.zeki.webclient.WebClientConnector
+import com.zeki.ok_http_client.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,34 +21,34 @@ import java.time.LocalTime
 
 @Service
 class StockCodeService(
-        private val stockCodeRepository: StockCodeRepository,
-        private val stockCodeJoinRepository: StockCodeJoinRepository,
+    private val stockCodeRepository: StockCodeRepository,
+    private val stockCodeJoinRepository: StockCodeJoinRepository,
 
-        private val holidayDateService: HolidayDateService,
+    private val holidayDateService: HolidayDateService,
 
-        private val webClientConnector: WebClientConnector
+    private val webClientConnector: WebClientConnector
 ) {
 
     @Transactional
     fun upsertStockCode(
-            standardDate: LocalDate = LocalDate.now(),
-            standardTime: LocalTime = LocalTime.now(),
-            standardDeltaDate: Int = 10
+        standardDate: LocalDate = LocalDate.now(),
+        standardTime: LocalTime = LocalTime.now(),
+        standardDeltaDate: Int = 10
     ) {
         val stockCodeSaveList = mutableListOf<StockCode>()
         val stockCodeUpdateList = mutableListOf<StockCode>()
         val stockCodeDeleteSet = mutableSetOf<StockCode>()
 
         val dataGoStockCodeItemList =
-                this.getStockCodesFromDataGo(
-                        standardDate = standardDate,
-                        standardTime = standardTime,
-                        standardDeltaDate = standardDeltaDate
-                )
+            this.getStockCodesFromDataGo(
+                standardDate = standardDate,
+                standardTime = standardTime,
+                standardDeltaDate = standardDeltaDate
+            )
 
         val stockCodeMap = stockCodeRepository.findAll()
-                .associateBy { it.code }
-                .toMutableMap()
+            .associateBy { it.code }
+            .toMutableMap()
 
         for (item in dataGoStockCodeItemList) {
             val stockCode = item.srtnCd.substring(1)
@@ -58,18 +58,18 @@ class StockCodeService(
             when (val stockCodeEntity = stockCodeMap[stockCode]) {
                 null -> {
                     stockCodeSaveList.add(
-                            StockCode(
-                                    code = stockCode,
-                                    name = stockName,
-                                    market = StockMarket.valueOf(stockMarket)
-                            )
+                        StockCode(
+                            code = stockCode,
+                            name = stockName,
+                            market = StockMarket.valueOf(stockMarket)
+                        )
                     )
                 }
 
                 else -> {
                     val isUpdate = stockCodeEntity.updateStockCode(
-                            name = stockName,
-                            market = StockMarket.valueOf(stockMarket)
+                        name = stockName,
+                        market = StockMarket.valueOf(stockMarket)
                     )
                     if (isUpdate) {
                         stockCodeUpdateList.add(stockCodeEntity)
@@ -87,48 +87,48 @@ class StockCodeService(
     }
 
     private fun getStockCodesFromDataGo(
-            standardDate: LocalDate = LocalDate.now(),
-            standardTime: LocalTime = LocalTime.now(),
-            standardDeltaDate: Int = 10
+        standardDate: LocalDate = LocalDate.now(),
+        standardTime: LocalTime = LocalTime.now(),
+        standardDeltaDate: Int = 10
     ): List<StockCodeItem> {
         var pageNo = 1
         var totalCount = Int.MAX_VALUE
 
         val batchSize = 1000
         val deltaOfToday: String =
-                holidayDateService.getAvailableDate(
-                        standardDate = standardDate,
-                        standardTime = standardTime,
-                        standardDeltaDate = standardDeltaDate
-                ).toStringDate()
+            holidayDateService.getAvailableDate(
+                standardDate = standardDate,
+                standardTime = standardTime,
+                standardDeltaDate = standardDeltaDate
+            ).toStringDate()
 
         val queryParams = LinkedMultiValueMap<String, String>()
-                .apply {
-                    add("resultType", "json")
-                    add("numOfRows", batchSize.toString())
-                    add("basDt", deltaOfToday)
-                    add("pageNo", pageNo.toString())
-                }
+            .apply {
+                add("resultType", "json")
+                add("numOfRows", batchSize.toString())
+                add("basDt", deltaOfToday)
+                add("pageNo", pageNo.toString())
+            }
 
         val dataGoStockCodeItemList = mutableListOf<StockCodeItem>()
         while ((pageNo - 1) * batchSize < totalCount) {
             queryParams["pageNo"] = pageNo.toString()
 
             val responseDatas = webClientConnector.connect<Unit, DataGoStockCodeResDto>(
-                    WebClientConnector.WebClientType.DATA_GO,
-                    HttpMethod.GET,
-                    "1160100/service/GetKrxListedInfoService/getItemInfo",
-                    requestParams = queryParams,
-                    responseClassType = DataGoStockCodeResDto::class.java,
-                    retryCount = 3,
-                    retryDelay = 510
+                WebClientConnector.WebClientType.DATA_GO,
+                HttpMethod.GET,
+                "1160100/service/GetKrxListedInfoService/getItemInfo",
+                requestParams = queryParams,
+                responseClassType = DataGoStockCodeResDto::class.java,
+                retryCount = 3,
+                retryDelay = 510
             )
 
             val dataGoStockCodeResDto =
-                    responseDatas?.body ?: throw ApiException(
-                            ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
-                            "통신에러 queryParams: $queryParams"
-                    )
+                responseDatas?.body ?: throw ApiException(
+                    ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+                    "통신에러 queryParams: $queryParams"
+                )
 
             totalCount = dataGoStockCodeResDto.response.body.totalCount
             pageNo += 1

@@ -55,7 +55,7 @@ subprojects {
 project(":kis-server") {
     dependencies {
         implementation(project(":mole-tunnel-db"))
-        implementation(project(":webclient"))
+        implementation(project(":ok-http-client"))
         implementation(project(":common"))
     }
 }
@@ -63,7 +63,7 @@ project(":kis-server") {
 project(":data-go") {
     dependencies {
         implementation(project(":mole-tunnel-db"))
-        implementation(project(":webclient"))
+        implementation(project(":ok-http-client"))
         implementation(project(":common"))
     }
 }
@@ -74,7 +74,7 @@ project(":mole-tunnel-db") {
     }
 }
 
-project(":webclient") {
+project(":ok-http-client") {
     dependencies {
         implementation(project(":common"))
     }

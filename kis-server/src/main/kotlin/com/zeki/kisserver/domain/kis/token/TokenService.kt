@@ -6,8 +6,8 @@ import com.zeki.common.util.CustomUtils
 import com.zeki.mole_tunnel_db.dto.KisTokenResDto
 import com.zeki.mole_tunnel_db.entity.Token
 import com.zeki.mole_tunnel_db.repository.TokenRepository
-import com.zeki.webclient.ApiStatics
-import com.zeki.webclient.WebClientConnector
+import com.zeki.ok_http_client.ApiStatics
+import com.zeki.ok_http_client.WebClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service

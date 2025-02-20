@@ -4,8 +4,8 @@ import com.zeki.common.exception.ExceptionUtils.log
 import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
-import com.zeki.webclient.ApiStatics
-import com.zeki.webclient.WebClientConnector
+import com.zeki.ok_http_client.ApiStatics
+import com.zeki.ok_http_client.WebClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
