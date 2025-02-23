@@ -1,11 +1,11 @@
-name: kis-server CI
+name: data-go-server CI
 
 on:
   pull_request:
     branches: [ "main" ]
     paths:
-      - "kis-server/**"
-      - ".github/workflows/kis-server.yml"
+      - "data-go/**"
+      - ".github/workflows/data-go-server.yml"
       - "common/**"
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
@@ -21,9 +21,9 @@ on:
 env:
   SERVICE_NAME: kis-server
 
-  BLUE_PORT: 48011
-  GREEN_PORT: 38011
-  INNER_PORT: 8080
+  BLUE_PORT: 48012
+  GREEN_PORT: 38012
+  INNER_PORT: 8081
   TIME_DELATE: 300
 
 
@@ -34,12 +34,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Checkout yml private repository - kis-server
+      - name: Checkout yml private repository - data-go-server
         run: |
-          git clone https://x-access-token:${{ secrets.SECRET_TOKEN }}@github.com/Mole-Tunnel-Trader/mole-tunnel-trader-yml.git
-          cd mole-tunnel-trader-yml
-          sudo mkdir -p ../kis-server/src/main/resources
-          sudo cp * ../kis-server/src/main/resources/
+          git clone https://x-access-token:${{ secrets.SECRET_TOKEN }}@github.com/Mole-Tunnel-Trader/data-go-yml.git
+          cd data-go-yml
+          sudo mkdir -p ../data-go/src/main/resources
+          sudo cp * ../data-go/src/main/resources/
 
       - name: Checkout yml private repository - webhook
         run: |

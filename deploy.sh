@@ -92,8 +92,7 @@ echo "create docker compose"
 URL="https://hub.docker.com/v2/repositories/$NAMESPACE/$REPO_NAME/tags"
 
 # 태그 정보 가져오기
-BEFORE_TAG=$(curl -s -H "Authorization: Bearer $TOKEN" "$URL" | jq -r '
-           .results[].name' | grep -v '^latest$' | sort -n | tail -2 | head -1)
+BEFORE_TAG=":$(curl -s -H "Authorization: Bearer $TOKEN" "$URL" | jq -r '.results[].name' | grep -v '^latest$' | sort -n | tail -2 | head -1)"
 
 # 결과 출력
 echo "Before Tag: $BEFORE_TAG"
@@ -112,7 +111,7 @@ services:
     environment:
       - TZ=Asia/Seoul
   ${LIVE_COLOR}:
-    image: ${NAMESPACE}/${REPO_NAME}:${BEFORE_TAG}
+    image: ${NAMESPACE}/${REPO_NAME}${:BEFORE_TAG}
     container_name: ${REPO_NAME}-${LIVE_COLOR}
     ports:
       - "${LIVE_PORT}:${INNER_PORT}"
