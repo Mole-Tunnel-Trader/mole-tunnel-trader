@@ -10,15 +10,7 @@ on:
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
       - "deploy.sh"
-  push:
-    branches: [ "feature/cicd" ]
-    paths:
-      - "data-go/**"
-      - ".github/workflows/data-go.yml"
-      - "common/**"
-      - "ok-http-client/**"
-      - "mole-tunnel-db/**"
-      - "deploy.sh"
+ 
 env:
   SERVICE_NAME: data-go
 

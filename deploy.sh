@@ -90,7 +90,12 @@ echo "create docker compose"
 URL="https://hub.docker.com/v2/repositories/$NAMESPACE/$REPO_NAME/tags"
 
 # 태그 정보 가져오기
-BEFORE_TAG=":$(curl -s -H "Authorization: Bearer $TOKEN" "$URL" | jq -r '.results[].name' | grep -v '^latest$' | sort -n | tail -2 | head -1)"
+BEFORE_TAG="$(curl -s -H "Authorization: Bearer $TOKEN" "$URL" | jq -r '.results[].name' | grep -v '^latest$' | sort -n | tail -2 | head -1)"
+
+# BEFORE_TAG가 비어 있지 않으면 앞에 :를 붙임
+if [[ -n "$BEFORE_TAG" ]]; then
+    BEFORE_TAG=":${BEFORE_TAG}"
+fi
 
 # 결과 출력
 echo "Before Tag: $BEFORE_TAG"
