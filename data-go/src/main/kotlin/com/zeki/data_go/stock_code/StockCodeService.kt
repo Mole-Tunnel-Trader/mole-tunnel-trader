@@ -10,7 +10,7 @@ import com.zeki.mole_tunnel_db.dto.DataGoStockCodeResDto.StockCodeItem
 import com.zeki.mole_tunnel_db.entity.StockCode
 import com.zeki.mole_tunnel_db.repository.StockCodeRepository
 import com.zeki.mole_tunnel_db.repository.join.StockCodeJoinRepository
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -26,7 +26,7 @@ class StockCodeService(
 
     private val holidayDateService: HolidayDateService,
 
-    private val webClientConnector: WebClientConnector
+    private val okHttpClientConnector: OkHttpClientConnector
 ) {
 
     @Transactional
@@ -114,8 +114,8 @@ class StockCodeService(
         while ((pageNo - 1) * batchSize < totalCount) {
             queryParams["pageNo"] = pageNo.toString()
 
-            val responseDatas = webClientConnector.connect<Unit, DataGoStockCodeResDto>(
-                WebClientConnector.WebClientType.DATA_GO,
+            val responseDatas = okHttpClientConnector.connect<Unit, DataGoStockCodeResDto>(
+                OkHttpClientConnector.ClientType.DATA_GO,
                 HttpMethod.GET,
                 "1160100/service/GetKrxListedInfoService/getItemInfo",
                 requestParams = queryParams,
