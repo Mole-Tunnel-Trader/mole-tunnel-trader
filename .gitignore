@@ -55,5 +55,3 @@ out/
 /logs/
 /kis-server/src/main/kotlin/com/zeki/kisserver/domain/algorithm/elphago/elphago_old.py
 /**/logs/
-
-.gitmodules
