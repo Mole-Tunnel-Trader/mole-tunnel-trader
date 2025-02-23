@@ -80,7 +80,7 @@ class StockInfoWebClientService(
 
         val responseDatas = okHttpClientConnector.connect<Map<String, String>, KisStockInfoResDto>(
             clientType = OkHttpClientConnector.ClientType.KIS,
-            method = HttpMethod.POST,
+            method = HttpMethod.GET,
             requestHeaders = reqHeaders,
             requestParams = reqParams,
             path = "/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice",
