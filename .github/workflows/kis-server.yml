@@ -3,15 +3,20 @@ name: flip-sync-server CI
 on:
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "kis-server/**"
+      - ".github/workflows/kis-server.yml"
+      - "common/**"
+      - "ok-http-client/**"
+      - "mole-tunnel-db/**"
   push:
     branches: [ "feature/cicd" ]
-  paths:
-    - "kis-server/**"
-    - ".github/workflows/kis-server/yml"
-    - "common/**"
-    - "ok-http-client/**"
-    - "mole-tunnel-db/**"
-
+    paths:
+      - "kis-server/**"
+      - ".github/workflows/kis-server.yml"
+      - "common/**"
+      - "ok-http-client/**"
+      - "mole-tunnel-db/**"
 
 env:
   SERVICE_NAME: kis-server
