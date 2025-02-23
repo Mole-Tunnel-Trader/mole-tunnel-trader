@@ -7,3 +7,6 @@
 [submodule "ok-http-client/src/main/resources"]
 	path = ok-http-client/src/main/resources
 	url = https://github.com/Mole-Tunnel-Trader/ok-http-client-yml.git
+[submodule "back-test-server/src/main/resources"]
+	path = back-test-server/src/main/resources
+	url = https://github.com/Mole-Tunnel-Trader/back-test-server-yml.git

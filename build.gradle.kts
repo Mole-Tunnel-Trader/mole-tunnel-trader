@@ -68,6 +68,14 @@ project(":data-go") {
     }
 }
 
+project(":back-test-server") {
+    dependencies {
+        implementation(project(":mole-tunnel-db"))
+        implementation(project(":ok-http-client"))
+        implementation(project(":common"))
+    }
+}
+
 project(":mole-tunnel-db") {
     dependencies {
         implementation(project(":common"))
