@@ -12,14 +12,14 @@ on:
   push:
     branches: [ "feature/cicd" ]
     paths:
-      - "kis-server/**"
-      - ".github/workflows/kis-server.yml"
+      - "data-go/**"
+      - ".github/workflows/data-go-server.yml"
       - "common/**"
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
 
 env:
-  SERVICE_NAME: kis-server
+  SERVICE_NAME: data-go-server
 
   BLUE_PORT: 48012
   GREEN_PORT: 38012
@@ -111,5 +111,5 @@ jobs:
           scp ./deploy.sh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:$PROJECT_DIR
           
           # deploy.sh 실행
-          ssh -T ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "set -e; sudo bash $PROJECT_DIR/deploy.sh ${{ env.SERVICE_NAME }} $PROJECT_DIR '${{ env.BLUE_PORT }}' '${{ env.GREEN_PORT }}' '${{ env.INNER_PORT }}' '${{ env.TIME_DELATE }}' '${{ secrets.DOCKER_USERNAME }}' '${{ secrets.DOCKER_TOKEN }}' '${{ secrets.KIS_NGINX_DOMAIN }}' ''"
+          ssh -T ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "set -e; sudo bash $PROJECT_DIR/deploy.sh ${{ env.SERVICE_NAME }} $PROJECT_DIR '${{ env.BLUE_PORT }}' '${{ env.GREEN_PORT }}' '${{ env.INNER_PORT }}' '${{ env.TIME_DELATE }}' '${{ secrets.DOCKER_USERNAME }}' '${{ secrets.DOCKER_TOKEN }}' '${{ secrets.DATA_GO_NGINX_DOMAIN }}' ''"
         shell: bash
