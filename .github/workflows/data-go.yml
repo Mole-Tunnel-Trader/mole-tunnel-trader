@@ -1,0 +1,108 @@
+name: data-go CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "data-go/**"
+      - ".github/workflows/data-go.yml"
+      - "common/**"
+      - "ok-http-client/**"
+      - "mole-tunnel-db/**"
+      - "deploy.sh"
+ 
+env:
+  SERVICE_NAME: data-go
+
+  BLUE_PORT: 48012
+  GREEN_PORT: 38012
+  INNER_PORT: 8081
+  TIME_DELATE: 300
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Checkout yml private repository - data-go
+        run: |
+          git clone https://x-access-token:${{ secrets.SECRET_TOKEN }}@github.com/Mole-Tunnel-Trader/data-go-yml.git
+          cd data-go-yml
+          sudo mkdir -p ../data-go/src/main/resources
+          sudo cp * ../data-go/src/main/resources/
+
+      - name: Checkout yml private repository - webhook
+        run: |
+          git clone https://x-access-token:${{ secrets.SECRET_TOKEN }}@github.com/Mole-Tunnel-Trader/ok-http-client-yml.git
+          cd ok-http-client-yml
+          sudo mkdir -p ../ok-http-client/src/main/resources
+          sudo cp * ../ok-http-client/src/main/resources/
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: corretto
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+
+      - name: Build with Gradle
+        run: ./gradlew ${{ env.SERVICE_NAME }}:build --no-daemon
+        shell: bash
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        shell: bash
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:local ./${{ env.SERVICE_NAME }}
+
+          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:local ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:${{ github.run_number }}
+          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:local ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:latest
+
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:${{ github.run_number }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:latest
+
+          docker image rm ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:local
+          docker image rm ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:${{ github.run_number }}
+          docker image rm ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE_NAME }}:latest
+        shell: bash
+
+      - name: Deploy to Server
+        run: |
+          set -e
+          
+          # rsa 키 생성
+          # github secrets에 등록된 key를 .ssh/id_rsa에 저장
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SERVER_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+          chmod 600 ~/.ssh/id_rsa
+          chmod 644 ~/.ssh/id_rsa.pub
+          
+          
+          # known_hosts 파일에 내용 추가 (서버의 공개키 등록)
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+          
+          # PROJECT_DIR 정의
+          PROJECT_DIR=/home/${{ secrets.SERVER_USERNAME }}/docker/${{ env.SERVICE_NAME }}
+          
+          # 서버에 디렉토리 생성 및 권한 설정
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "sudo mkdir -p $PROJECT_DIR && sudo chmod -R 755 $PROJECT_DIR"
+          
+          # 소유권 변경
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "sudo chown -R ${{ secrets.SERVER_USERNAME }}:${{ secrets.SERVER_USERNAME }} $PROJECT_DIR"
+          
+          # deploy.sh 파일 전송
+          scp ./deploy.sh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:$PROJECT_DIR
+          
+          # deploy.sh 실행
+          ssh -T ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "set -e; sudo bash $PROJECT_DIR/deploy.sh ${{ env.SERVICE_NAME }} $PROJECT_DIR '${{ env.BLUE_PORT }}' '${{ env.GREEN_PORT }}' '${{ env.INNER_PORT }}' '${{ env.TIME_DELATE }}' '${{ secrets.DOCKER_USERNAME }}' '${{ secrets.DOCKER_TOKEN }}' '${{ secrets.DATA_GO_NGINX_DOMAIN }}' ''"
+        shell: bash
