@@ -1,4 +1,4 @@
-package com.zeki.kisserver.domain._common.log
+package com.zeki.webhook
 
 data class DiscordWebhookDto(
     val embeds: List<Embeds>

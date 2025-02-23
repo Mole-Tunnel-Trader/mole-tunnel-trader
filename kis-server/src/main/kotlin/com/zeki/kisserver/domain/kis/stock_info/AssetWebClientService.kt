@@ -8,7 +8,7 @@ import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.kisserver.domain.kis.stock_info.dto.KisAssetResDto
 import com.zeki.ok_http_client.ApiStatics
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
@@ -17,7 +17,7 @@ import org.springframework.util.MultiValueMap
 
 @Service
 class AssetWebClientService(
-    private val webClientConnector: WebClientConnector,
+    private val okHttpClientConnector: OkHttpClientConnector,
     private val apiStatics: ApiStatics,
     private val env: Environment
 ) {
@@ -32,7 +32,8 @@ class AssetWebClientService(
             this["authorization"] = "${token.tokenType} ${token.tokenValue}"
             this["appkey"] = apiStatics.kis.appKey
             this["appsecret"] = apiStatics.kis.appSecret
-            this["tr_id"] = if (CustomUtils.nowTradeMode(env) == TradeMode.REAL) "TTTC8434R" else "VTTC8434R"
+            this["tr_id"] =
+                if (CustomUtils.nowTradeMode(env) == TradeMode.REAL) "TTTC8434R" else "VTTC8434R"
 
         }
 
@@ -55,8 +56,8 @@ class AssetWebClientService(
         var trCont = "F"
 
         while (trCont == "F" || trCont == "M") {
-            val responseDatas = webClientConnector.connect<Unit, KisAssetResDto>(
-                WebClientConnector.WebClientType.KIS,
+            val responseDatas = okHttpClientConnector.connect<Unit, KisAssetResDto>(
+                OkHttpClientConnector.ClientType.KIS,
                 HttpMethod.GET,
                 "/uapi/domestic-stock/v1/trading/inquire-balance",
                 reqHeaders,
@@ -75,8 +76,10 @@ class AssetWebClientService(
             trCont = tempTrCont?.get(0) ?: "0"
             resultList.addAll(kisAssetResDto.output1)
 
-            reqParams["CTX_AREA_FK100"] = if (trCont == "F" || trCont == "M") kisAssetResDto.ctxAreaFk100 else ""
-            reqParams["CTX_AREA_NK100"] = if (trCont == "F" || trCont == "M") kisAssetResDto.ctxAreaNk100 else ""
+            reqParams["CTX_AREA_FK100"] =
+                if (trCont == "F" || trCont == "M") kisAssetResDto.ctxAreaFk100 else ""
+            reqParams["CTX_AREA_NK100"] =
+                if (trCont == "F" || trCont == "M") kisAssetResDto.ctxAreaNk100 else ""
         }
 
         return resultList

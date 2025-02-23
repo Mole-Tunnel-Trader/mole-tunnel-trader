@@ -19,13 +19,13 @@ import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
 @Component
-class WebClientConnector(
+class OkHttpClientConnector(
     private val apiStatics: ApiStatics,
     private val client: OkHttpClient,  // OkHttpClient 사용
     private val objectMapper: ObjectMapper,
     private val env: Environment
 ) {
-    enum class WebClientType {
+    enum class ClientType {
         KIS, DATA_GO, DEFAULT
     }
 
@@ -41,7 +41,7 @@ class WebClientConnector(
      * OkHttpClient를 이용한 API 호출
      */
     fun <Q, S : Any> connect(
-        webClientType: WebClientType,
+        clientType: ClientType,
         method: HttpMethod,
         path: String,
         requestHeaders: Map<String, String> = mapOf(),
@@ -59,14 +59,14 @@ class WebClientConnector(
         }.takeIf { it.isNotEmpty() }?.let { "?$it" } ?: ""
 
         // 요청 URL 구성
-        val baseUrl = when (webClientType) {
-            WebClientType.KIS -> apiStatics.kis.url
-            WebClientType.DATA_GO -> apiStatics.dataGo.url
-            WebClientType.DEFAULT -> ""
+        val baseUrl = when (clientType) {
+            ClientType.KIS -> apiStatics.kis.url
+            ClientType.DATA_GO -> apiStatics.dataGo.url
+            ClientType.DEFAULT -> ""
         }
         var url = "$baseUrl/$path$queryString"
 
-        if (webClientType == WebClientType.DATA_GO) {
+        if (clientType == ClientType.DATA_GO) {
             url = url + "&serviceKey=" + apiStatics.dataGo.encoding
         }
 
@@ -82,17 +82,17 @@ class WebClientConnector(
         val requestBuilder = Request.Builder().url(url).method(method.name(), body)
 
         // WebClientType에 따라 추가 헤더 설정
-        when (webClientType) {
-            WebClientType.KIS -> {
+        when (clientType) {
+            ClientType.KIS -> {
                 requestBuilder.addHeader("appkey", apiStatics.kis.appKey)
                 requestBuilder.addHeader("appsecret", apiStatics.kis.appSecret)
             }
 
-            WebClientType.DATA_GO -> {
+            ClientType.DATA_GO -> {
                 requestBuilder.addHeader("Content-Type", "application/json")
             }
 
-            WebClientType.DEFAULT -> {}
+            ClientType.DEFAULT -> {}
         }
 
         // 요청 헤더 추가

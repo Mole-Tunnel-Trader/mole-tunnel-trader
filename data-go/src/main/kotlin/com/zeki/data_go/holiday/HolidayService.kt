@@ -11,7 +11,7 @@ import com.zeki.mole_tunnel_db.dto.DataGoHolidayResDto
 import com.zeki.mole_tunnel_db.entity.Holiday
 import com.zeki.mole_tunnel_db.repository.HolidayRepository
 import com.zeki.mole_tunnel_db.repository.join.HolidayJoinRepository
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -27,7 +27,7 @@ class HolidayService(
 
     private val holidayDateService: HolidayDateService,
 
-    private val webClientConnector: WebClientConnector,
+    private val okHttpClientConnector: OkHttpClientConnector,
 ) {
 
     @Transactional
@@ -37,8 +37,18 @@ class HolidayService(
         val holidayUpdateList = mutableListOf<Holiday>()
         val holidayDeleteSet = mutableSetOf<Holiday>()
 
-        this.upsertHolidayByDataGo(standardYear, holidaySaveList, holidayUpdateList, holidayDeleteSet)
-        this.upsertHolidayByDataGo(standardYear + 1, holidaySaveList, holidayUpdateList, holidayDeleteSet)
+        this.upsertHolidayByDataGo(
+            standardYear,
+            holidaySaveList,
+            holidayUpdateList,
+            holidayDeleteSet
+        )
+        this.upsertHolidayByDataGo(
+            standardYear + 1,
+            holidaySaveList,
+            holidayUpdateList,
+            holidayDeleteSet
+        )
 
         this.upsertHolidayByWeekend(standardYear, holidaySaveList, holidayDeleteSet)
         this.upsertHolidayByWeekend(standardYear + 1, holidaySaveList, holidayDeleteSet)
@@ -61,8 +71,8 @@ class HolidayService(
             }
 
         val responseDatas =
-            webClientConnector.connect<Unit, DataGoHolidayResDto>(
-                WebClientConnector.WebClientType.DATA_GO,
+            okHttpClientConnector.connect<Unit, DataGoHolidayResDto>(
+                OkHttpClientConnector.ClientType.DATA_GO,
                 HttpMethod.GET,
                 "B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
                 requestParams = queryParams,
@@ -96,13 +106,15 @@ class HolidayService(
         val startDate = LocalDate.of(standardYear, 1, 1)
         val endDate = LocalDate.of(standardYear, 12, 31)
 
-        val savedHolidayMap = holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, true)
-            .associateBy { "${it.date} ${it.name} ${it.isHoliday}" }.toMutableMap()
+        val savedHolidayMap =
+            holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, true)
+                .associateBy { "${it.date} ${it.name} ${it.isHoliday}" }.toMutableMap()
 
         for (item in targetHolidayDataList) {
             val localDate = item.locdate.toLocalDate()
 
-            when (val holiday = savedHolidayMap["$localDate ${item.dateName} ${item.isHoliday == "Y"}"]) {
+            when (val holiday =
+                savedHolidayMap["$localDate ${item.dateName} ${item.isHoliday == "Y"}"]) {
                 null -> {
                     holidaySaveList.add(
                         Holiday(
@@ -138,8 +150,9 @@ class HolidayService(
         val startDate = LocalDate.of(standardYear, 1, 1)
         val endDate = LocalDate.of(standardYear, 12, 31)
 
-        val savedHolidayMap = holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, false)
-            .associateBy { it.date }.toMutableMap()
+        val savedHolidayMap =
+            holidayRepository.findByDateBetweenAndIsHoliday(startDate, endDate, false)
+                .associateBy { it.date }.toMutableMap()
 
         var currentDate = startDate
         while (currentDate.isBefore(endDate) || currentDate.isEqual(endDate)) {

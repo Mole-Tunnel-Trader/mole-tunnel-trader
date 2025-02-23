@@ -7,7 +7,7 @@ import com.zeki.mole_tunnel_db.dto.KisTokenResDto
 import com.zeki.mole_tunnel_db.entity.Token
 import com.zeki.mole_tunnel_db.repository.TokenRepository
 import com.zeki.ok_http_client.ApiStatics
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
@@ -20,7 +20,7 @@ class TokenService(
     private val tokenRepository: TokenRepository,
 
     private val apiStatics: ApiStatics,
-    private val webClientConnector: WebClientConnector,
+    private val okHttpClientConnector: OkHttpClientConnector,
 
     private val env: Environment,
 ) {
@@ -59,8 +59,8 @@ class TokenService(
             "appsecret" to apiStatics.kis.appSecret
         )
 
-        val responseDatas = webClientConnector.connect(
-            webClientType = WebClientConnector.WebClientType.KIS,
+        val responseDatas = okHttpClientConnector.connect(
+            clientType = OkHttpClientConnector.ClientType.KIS,
             method = HttpMethod.POST,
             path = "/oauth2/tokenP",
             requestBody = reqBody,
