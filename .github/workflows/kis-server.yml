@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: [ "main" ]
   push:
-    brandches: [ "feature/cicd" ]
-  path:
+    branches: [ "feature/cicd" ]
+  paths:
     - "kis-server/**"
     - ".github/workflows/kis-server/yml"
     - "common/**"
