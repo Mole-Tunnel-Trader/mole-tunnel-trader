@@ -85,12 +85,3 @@ project(":common") {
 
     }
 }
-
-// subModule
-tasks.register<Copy>("copyYmlFiles") {
-    description = "yml 파일 복사"
-    group = "my tasks"
-    from("kis-vol-kotlin-yml")
-    into("kis-server/src/main/resources")
-    into("data-go/src/main/resources")
-}
