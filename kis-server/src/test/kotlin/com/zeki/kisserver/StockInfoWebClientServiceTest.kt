@@ -4,14 +4,13 @@ import com.zeki.kisserver.domain.kis.stock_info.StockInfoWebClientService
 import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.time.LocalDate
 
 @SpringBootTest
-@ExtendWith(SpringExtension::class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StockInfoWebClientServiceTest @Autowired constructor(
     private val stockInfoService: StockInfoWebClientService
 ) {
