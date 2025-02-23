@@ -1,5 +1,5 @@
 name: kis-server CI
-  
+
 on:
   pull_request:
     branches: [ "main" ]
@@ -9,14 +9,7 @@ on:
       - "common/**"
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
-  push:
-    branches: [ "feature/cicd" ]
-    paths:
-      - "kis-server/**"
-      - ".github/workflows/kis-server.yml"
-      - "common/**"
-      - "ok-http-client/**"
-      - "mole-tunnel-db/**"
+      - "deploy.sh"
 
 env:
   SERVICE_NAME: kis-server
