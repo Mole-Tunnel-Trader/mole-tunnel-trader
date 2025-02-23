@@ -13,7 +13,6 @@ HEALTH_CHECK_PATH=${10}
 
 NAMESPACE=$DOCKER_HUB_USERNAME
 
-
 echo "===================="
 echo "실행중인 백그라운드 종료"
 if [ -f "$DIR_PROJECT/sh/down_live_after_delay.pid" ]; then
