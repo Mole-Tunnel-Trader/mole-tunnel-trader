@@ -85,7 +85,6 @@ echo "TARGET_PORT: $TARGET_PORT"
 echo "TARGET_COLOR: $TARGET_COLOR"
 echo "===================="
 
-
 echo "===================="
 echo "create docker compose"
 

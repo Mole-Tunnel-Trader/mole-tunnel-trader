@@ -1,11 +1,11 @@
-name: data-go-server CI
+name: data-go CI
 
 on:
   pull_request:
     branches: [ "main" ]
     paths:
       - "data-go/**"
-      - ".github/workflows/data-go-server.yml"
+      - ".github/workflows/data-go.yml"
       - "common/**"
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
@@ -13,13 +13,13 @@ on:
     branches: [ "feature/cicd" ]
     paths:
       - "data-go/**"
-      - ".github/workflows/data-go-server.yml"
+      - ".github/workflows/data-go.yml"
       - "common/**"
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
 
 env:
-  SERVICE_NAME: data-go-server
+  SERVICE_NAME: data-go
 
   BLUE_PORT: 48012
   GREEN_PORT: 38012
@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Checkout yml private repository - data-go-server
+      - name: Checkout yml private repository - data-go
         run: |
           git clone https://x-access-token:${{ secrets.SECRET_TOKEN }}@github.com/Mole-Tunnel-Trader/data-go-yml.git
           cd data-go-yml
