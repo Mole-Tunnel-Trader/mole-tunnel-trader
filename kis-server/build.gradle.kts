@@ -8,6 +8,10 @@ tasks.named<Jar>("jar") {
     isEnabled = true
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+
 dependencies {
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -18,5 +22,7 @@ dependencies {
 
     // swagger
     api("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2") // 최신 버전 확인
 
 }

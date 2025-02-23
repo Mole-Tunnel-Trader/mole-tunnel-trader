@@ -84,8 +84,8 @@ class OkHttpClientConnector(
         // WebClientType에 따라 추가 헤더 설정
         when (clientType) {
             ClientType.KIS -> {
-                requestBuilder.addHeader("appkey", apiStatics.kis.appKey)
-                requestBuilder.addHeader("appsecret", apiStatics.kis.appSecret)
+//                requestBuilder.addHeader("appkey", apiStatics.kis.appKey)
+//                requestBuilder.addHeader("appsecret", apiStatics.kis.appSecret)
             }
 
             ClientType.DATA_GO -> {
