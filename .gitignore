@@ -43,15 +43,8 @@ out/
 ### docker ###
 /docker/mysql/data/
 
-### kis-server ###
-/kis-server/src/main/resources/*.yml
-/kis-server/src/main/resources/logback-spring.xml
-
-### data-go ###
-/data-go/src/main/resources/*.yml
-/data-go/src/main/resources/logback-spring.xml
+/**/src/main/resources
 
 ### log ###
 /logs/
-/kis-server/src/main/kotlin/com/zeki/kisserver/domain/algorithm/elphago/elphago_old.py
 /**/logs/
