@@ -110,7 +110,7 @@ services:
     environment:
       - TZ=Asia/Seoul
   ${LIVE_COLOR}:
-    image: ${NAMESPACE}/${REPO_NAME}${:BEFORE_TAG}
+    image: ${NAMESPACE}/${REPO_NAME}${BEFORE_TAG}
     container_name: ${REPO_NAME}-${LIVE_COLOR}
     ports:
       - "${LIVE_PORT}:${INNER_PORT}"
