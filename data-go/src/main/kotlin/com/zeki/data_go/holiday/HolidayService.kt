@@ -7,6 +7,7 @@ package com.zeki.data_go.holiday
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toLocalDate
+import com.zeki.data_go.dto.report.UpsertReportDto
 import com.zeki.mole_tunnel_db.dto.DataGoHolidayResDto
 import com.zeki.mole_tunnel_db.entity.Holiday
 import com.zeki.mole_tunnel_db.repository.HolidayRepository
@@ -30,8 +31,11 @@ class HolidayService(
     private val okHttpClientConnector: OkHttpClientConnector,
 ) {
 
+    /**
+     * 2년치 휴일데이터 생성
+     */
     @Transactional
-    fun upsertHoliday(standardYear: Int? = null) {
+    fun upsertHoliday(standardYear: Int? = null): UpsertReportDto {
         val standardYear = standardYear ?: holidayDateService.getAvailableDate().year
         val holidaySaveList = mutableListOf<Holiday>()
         val holidayUpdateList = mutableListOf<Holiday>()
@@ -57,6 +61,12 @@ class HolidayService(
         holidayJoinRepository.bulkInsert(holidaySaveList)
         holidayJoinRepository.bulkUpdate(holidayUpdateList)
         holidayRepository.deleteAllInBatch(holidayDeleteSet)
+
+        return UpsertReportDto(
+            newCount = holidaySaveList.size,
+            updateCount = holidayUpdateList.size,
+            deleteCount = holidayDeleteSet.size
+        )
     }
 
     fun getHolidaysFromDataGo(standardYear: Int? = null)

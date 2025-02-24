@@ -17,9 +17,7 @@ class ApiStatics {
     }
 
     class Webhook {
-        lateinit var url: String
-        lateinit var key: String
-        lateinit var token: String
+        lateinit var reportUrl: String
     }
 
     class Kis {

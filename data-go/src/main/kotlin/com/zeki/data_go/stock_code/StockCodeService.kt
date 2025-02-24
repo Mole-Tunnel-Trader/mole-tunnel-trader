@@ -4,6 +4,7 @@ import com.zeki.common.em.StockMarket
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toStringDate
+import com.zeki.data_go.dto.report.UpsertReportDto
 import com.zeki.data_go.holiday.HolidayDateService
 import com.zeki.mole_tunnel_db.dto.DataGoStockCodeResDto
 import com.zeki.mole_tunnel_db.dto.DataGoStockCodeResDto.StockCodeItem
@@ -34,7 +35,7 @@ class StockCodeService(
         standardDate: LocalDate = LocalDate.now(),
         standardTime: LocalTime = LocalTime.now(),
         standardDeltaDate: Int = 10
-    ) {
+    ): UpsertReportDto {
         val stockCodeSaveList = mutableListOf<StockCode>()
         val stockCodeUpdateList = mutableListOf<StockCode>()
         val stockCodeDeleteSet = mutableSetOf<StockCode>()
@@ -84,6 +85,12 @@ class StockCodeService(
         stockCodeJoinRepository.bulkInsert(stockCodeSaveList)
         stockCodeJoinRepository.bulkUpdate(stockCodeUpdateList)
         stockCodeRepository.deleteAllInBatch(stockCodeDeleteSet)
+
+        return UpsertReportDto(
+            stockCodeSaveList.size,
+            stockCodeUpdateList.size,
+            stockCodeDeleteSet.size
+        )
     }
 
     private fun getStockCodesFromDataGo(

@@ -7,10 +7,11 @@ on:
       - "data-go/**"
       - ".github/workflows/data-go.yml"
       - "common/**"
+      - "report/**"
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
       - "deploy.sh"
- 
+
 env:
   SERVICE_NAME: data-go
 
