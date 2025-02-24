@@ -9,9 +9,5 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
-    api("com.squareup.okhttp3:okhttp:4.12.0")
-
-    // logback & webclient
-    api("io.netty:netty-all") // mac
-    api("io.micrometer:micrometer-core") // mac
+    api("org.springframework.boot:spring-boot-starter-web")
 }

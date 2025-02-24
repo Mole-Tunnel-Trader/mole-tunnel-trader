@@ -64,7 +64,11 @@ class OkHttpClientConnector(
             ClientType.DATA_GO -> apiStatics.dataGo.url
             ClientType.DEFAULT -> ""
         }
-        var url = "$baseUrl/$path$queryString"
+        var url = if (baseUrl.isBlank()) {
+            "$path$queryString"
+        } else {
+            "$baseUrl/$path$queryString"
+        }
 
         if (clientType == ClientType.DATA_GO) {
             url = url + "&serviceKey=" + apiStatics.dataGo.encoding
