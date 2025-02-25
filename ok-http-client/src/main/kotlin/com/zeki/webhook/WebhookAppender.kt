@@ -1,11 +1,11 @@
-package com.zeki.kisserver.domain._common.log
+package com.zeki.webhook
 
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.AppenderBase
 import ch.qos.logback.core.LayoutBase
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.util.IPUtils
-import io.netty.util.internal.logging.MessageFormatter
+import org.slf4j.helpers.MessageFormatter
 import java.io.IOException
 import java.io.OutputStream
 import java.net.HttpURLConnection
@@ -75,7 +75,10 @@ class WebhookAppender() : AppenderBase<ILoggingEvent>() {
                 override fun doLayout(event: ILoggingEvent?): String {
                     return ("[" + event?.level + "]" +
                             event?.loggerName + " - " +
-                            MessageFormatter.arrayFormat(event?.formattedMessage, event?.argumentArray).message
+                            MessageFormatter.arrayFormat(
+                                event?.formattedMessage,
+                                event?.argumentArray
+                            ).message
                                 .replace("\n", "\n\t"))
                 }
             }

@@ -4,13 +4,14 @@ import com.zeki.common.em.StockMarket
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toStringDate
+import com.zeki.data_go.dto.report.UpsertReportDto
 import com.zeki.data_go.holiday.HolidayDateService
 import com.zeki.mole_tunnel_db.dto.DataGoStockCodeResDto
 import com.zeki.mole_tunnel_db.dto.DataGoStockCodeResDto.StockCodeItem
 import com.zeki.mole_tunnel_db.entity.StockCode
 import com.zeki.mole_tunnel_db.repository.StockCodeRepository
 import com.zeki.mole_tunnel_db.repository.join.StockCodeJoinRepository
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -26,7 +27,7 @@ class StockCodeService(
 
     private val holidayDateService: HolidayDateService,
 
-    private val webClientConnector: WebClientConnector
+    private val okHttpClientConnector: OkHttpClientConnector
 ) {
 
     @Transactional
@@ -34,7 +35,7 @@ class StockCodeService(
         standardDate: LocalDate = LocalDate.now(),
         standardTime: LocalTime = LocalTime.now(),
         standardDeltaDate: Int = 10
-    ) {
+    ): UpsertReportDto {
         val stockCodeSaveList = mutableListOf<StockCode>()
         val stockCodeUpdateList = mutableListOf<StockCode>()
         val stockCodeDeleteSet = mutableSetOf<StockCode>()
@@ -84,6 +85,12 @@ class StockCodeService(
         stockCodeJoinRepository.bulkInsert(stockCodeSaveList)
         stockCodeJoinRepository.bulkUpdate(stockCodeUpdateList)
         stockCodeRepository.deleteAllInBatch(stockCodeDeleteSet)
+
+        return UpsertReportDto(
+            stockCodeSaveList.size,
+            stockCodeUpdateList.size,
+            stockCodeDeleteSet.size
+        )
     }
 
     private fun getStockCodesFromDataGo(
@@ -114,8 +121,8 @@ class StockCodeService(
         while ((pageNo - 1) * batchSize < totalCount) {
             queryParams["pageNo"] = pageNo.toString()
 
-            val responseDatas = webClientConnector.connect<Unit, DataGoStockCodeResDto>(
-                WebClientConnector.WebClientType.DATA_GO,
+            val responseDatas = okHttpClientConnector.connect<Unit, DataGoStockCodeResDto>(
+                OkHttpClientConnector.ClientType.DATA_GO,
                 HttpMethod.GET,
                 "1160100/service/GetKrxListedInfoService/getItemInfo",
                 requestParams = queryParams,

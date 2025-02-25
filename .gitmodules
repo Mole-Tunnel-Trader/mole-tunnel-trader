@@ -1,0 +1,12 @@
+[submodule "kis-server/src/main/resources"]
+	path = kis-server/src/main/resources
+	url = https://github.com/Mole-Tunnel-Trader/mole-tunnel-trader-yml.git
+[submodule "data-go/src/main/resources"]
+	path = data-go/src/main/resources
+	url = https://github.com/Mole-Tunnel-Trader/data-go-yml.git
+[submodule "ok-http-client/src/main/resources"]
+	path = ok-http-client/src/main/resources
+	url = https://github.com/Mole-Tunnel-Trader/ok-http-client-yml.git
+[submodule "back-test-server/src/main/resources"]
+	path = back-test-server/src/main/resources
+	url = https://github.com/Mole-Tunnel-Trader/back-test-server-yml.git

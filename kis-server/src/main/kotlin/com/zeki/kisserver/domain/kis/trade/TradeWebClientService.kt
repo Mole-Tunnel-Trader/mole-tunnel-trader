@@ -9,7 +9,7 @@ import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.mole_tunnel_db.dto.KisOrderStockResDto
 import com.zeki.ok_http_client.ApiStatics
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
@@ -18,7 +18,7 @@ import java.math.BigDecimal
 
 @Service
 class TradeWebClientService(
-    private val webClientConnector: WebClientConnector,
+    private val okHttpClientConnector: OkHttpClientConnector,
     private val apiStatics: ApiStatics,
     private val env: Environment
 ) {
@@ -54,16 +54,17 @@ class TradeWebClientService(
             }
         }
 
-        val responsesDatas = webClientConnector.connect<Map<String, String>, KisOrderStockResDto>(
-            WebClientConnector.WebClientType.KIS,
-            HttpMethod.POST,
-            "/uapi/domestic-stock/v1/trading/order-cash",
-            requestHeaders = reqHeader,
-            requestBody = reqBody,
-            responseClassType = KisOrderStockResDto::class.java,
-            retryCount = 0,
-            retryDelay = 0,
-        )
+        val responsesDatas =
+            okHttpClientConnector.connect<Map<String, String>, KisOrderStockResDto>(
+                OkHttpClientConnector.ClientType.KIS,
+                HttpMethod.POST,
+                "/uapi/domestic-stock/v1/trading/order-cash",
+                requestHeaders = reqHeader,
+                requestBody = reqBody,
+                responseClassType = KisOrderStockResDto::class.java,
+                retryCount = 0,
+                retryDelay = 0,
+            )
 
         return responsesDatas?.body ?: throw ApiException(
             ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,

@@ -10,10 +10,14 @@ class ApiStatics {
     lateinit var kis: Kis
     lateinit var dataGo: DataGo
 
-    class Webhook {
+    class DataGo {
         lateinit var url: String
-        lateinit var key: String
-        lateinit var token: String
+        lateinit var encoding: String
+        lateinit var decoding: String
+    }
+
+    class Webhook {
+        lateinit var reportUrl: String
     }
 
     class Kis {
@@ -23,9 +27,4 @@ class ApiStatics {
         lateinit var accountNumber: String
     }
 
-    class DataGo {
-        lateinit var url: String
-        lateinit var encoding: String
-        lateinit var decoding: String
-    }
 }

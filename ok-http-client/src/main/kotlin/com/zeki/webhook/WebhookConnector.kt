@@ -1,4 +1,4 @@
-package com.zeki.data_go.log
+package com.zeki.webhook
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.exception.ApiException
@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets
 
 @Component
 class WebhookConnector(
-        private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper
 ) {
 
     fun connect(httpMethod: String, url: String, reqBody: Map<String, String>): String {

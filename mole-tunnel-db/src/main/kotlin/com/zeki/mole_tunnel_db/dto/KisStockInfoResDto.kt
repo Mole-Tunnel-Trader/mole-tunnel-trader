@@ -2,7 +2,6 @@ package com.zeki.mole_tunnel_db.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-
 data class KisStockInfoResDto(
     @JsonProperty("msg1")
     val msg1: String,
@@ -33,7 +32,7 @@ data class KisStockInfoResDto(
         @JsonProperty("hts_kor_isnm")
         val stockName: String,
         @JsonProperty("itewhol_loan_rmnd_ratem name")
-        val itewholLoanRmndRatemName: String,
+        val itewholLoanRmndRatemName: String? = null, // nullable로 변경
         @JsonProperty("lstn_stcn")
         val lstnStcn: String,
         @JsonProperty("pbr")
@@ -80,30 +79,30 @@ data class KisStockInfoResDto(
 
     data class Output2(
         @JsonProperty("acml_tr_pbmn")
-        val acmlTrPbmn: String,
+        val acmlTrPbmn: String?,
         @JsonProperty("acml_vol")
-        val acmlVol: String,
+        val acmlVol: String?,
         @JsonProperty("flng_cls_code")
-        val flngClsCode: String,
+        val flngClsCode: String?,
         @JsonProperty("mod_yn")
-        val modYn: String,
+        val modYn: String?,
         @JsonProperty("prdy_vrss")
-        val prdyVrss: String,
+        val prdyVrss: String?,
         @JsonProperty("prdy_vrss_sign")
-        val prdyVrssSign: String,
+        val prdyVrssSign: String?,
         @JsonProperty("prtt_rate")
-        val prttRate: String,
+        val prttRate: String?,
         @JsonProperty("revl_issu_reas")
-        val revlIssuReas: String,
+        val revlIssuReas: String?,
         @JsonProperty("stck_bsop_date")
-        val stckBsopDate: String,
+        val stckBsopDate: String?,
         @JsonProperty("stck_clpr")
-        val stckClpr: String,
+        val stckClpr: String?,
         @JsonProperty("stck_hgpr")
-        val stckHgpr: String,
+        val stckHgpr: String?,
         @JsonProperty("stck_lwpr")
-        val stckLwpr: String,
+        val stckLwpr: String?,
         @JsonProperty("stck_oprc")
-        val stckOprc: String
+        val stckOprc: String?
     )
 }

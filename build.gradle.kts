@@ -30,9 +30,9 @@ allprojects {
         }
     }
 
-//    tasks.withType<Test> {
-//        useJUnitPlatform()
-//    }
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }
 
 subprojects {
@@ -54,6 +54,8 @@ subprojects {
 
 project(":kis-server") {
     dependencies {
+        implementation(project(":report"))
+
         implementation(project(":mole-tunnel-db"))
         implementation(project(":ok-http-client"))
         implementation(project(":common"))
@@ -62,9 +64,29 @@ project(":kis-server") {
 
 project(":data-go") {
     dependencies {
+        implementation(project(":report"))
+
         implementation(project(":mole-tunnel-db"))
         implementation(project(":ok-http-client"))
         implementation(project(":common"))
+    }
+}
+
+project(":back-test-server") {
+    dependencies {
+        implementation(project(":report"))
+
+        implementation(project(":mole-tunnel-db"))
+        implementation(project(":ok-http-client"))
+        implementation(project(":common"))
+    }
+}
+
+project(":report") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":mole-tunnel-db"))
+        implementation(project(":ok-http-client"))
     }
 }
 
@@ -84,13 +106,4 @@ project(":common") {
     dependencies {
 
     }
-}
-
-// subModule
-tasks.register<Copy>("copyYmlFiles") {
-    description = "yml 파일 복사"
-    group = "my tasks"
-    from("kis-vol-kotlin-yml")
-    into("kis-server/src/main/resources")
-    into("data-go/src/main/resources")
 }

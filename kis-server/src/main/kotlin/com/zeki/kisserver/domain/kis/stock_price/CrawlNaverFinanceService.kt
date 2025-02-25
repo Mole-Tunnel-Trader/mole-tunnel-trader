@@ -5,7 +5,7 @@ import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toLocalDate
 import com.zeki.common.util.CustomUtils.toStringDate
 import com.zeki.mole_tunnel_db.dto.NaverStockPriceResDto
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
@@ -16,7 +16,7 @@ import java.util.regex.Pattern
 
 @Service
 class CrawlNaverFinanceService(
-    private val webClientConnector: WebClientConnector
+    private val okHttpClientConnector: OkHttpClientConnector
 ) {
 
     fun crawlStockPrice(stockCode: String, stdDay: LocalDate, count: Int): NaverStockPriceResDto {
@@ -33,8 +33,8 @@ class CrawlNaverFinanceService(
         reqParam.add("startTime", startDate)
         reqParam.add("timeframe", timeframe)
 
-        val responseDatas = webClientConnector.connect<Unit, String>(
-            WebClientConnector.WebClientType.DEFAULT,
+        val responseDatas = okHttpClientConnector.connect<Unit, String>(
+            OkHttpClientConnector.ClientType.DEFAULT,
             HttpMethod.GET,
             "api.finance.naver.com/siseJson.naver",
             requestParams = reqParam,
@@ -68,7 +68,8 @@ class CrawlNaverFinanceService(
         }
 
         while (m.find()) {
-            val items = m.group(1).split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val items =
+                m.group(1).split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             val row: MutableList<Any> = ArrayList()
 
             for (i in 0 until items.size - 1) {

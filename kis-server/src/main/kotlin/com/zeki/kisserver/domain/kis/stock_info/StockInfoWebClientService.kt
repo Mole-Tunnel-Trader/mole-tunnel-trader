@@ -5,7 +5,7 @@ import com.zeki.kisserver.domain._common.aop.GetToken
 import com.zeki.kisserver.domain._common.aop.TokenHolder
 import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
 import com.zeki.ok_http_client.ApiStatics
-import com.zeki.ok_http_client.WebClientConnector
+import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 @Service
 class StockInfoWebClientService(
     private val apiStatics: ApiStatics,
-    private val webClientConnector: WebClientConnector
+    private val okHttpClientConnector: OkHttpClientConnector
 ) {
 
     @GetToken
@@ -32,7 +32,13 @@ class StockInfoWebClientService(
         val stockInfoList = mutableListOf<KisStockInfoResDto>()
         for (stockCode in stockCodeList) {
             val stockInfoResDto =
-                this.getStockInfoFromKis(stockCode, endDate, startDate, token.tokenType, token.tokenValue) ?: continue
+                this.getStockInfoFromKis(
+                    stockCode,
+                    endDate,
+                    startDate,
+                    token.tokenType,
+                    token.tokenValue
+                ) ?: continue
             stockInfoList.add(stockInfoResDto)
         }
 
@@ -60,15 +66,21 @@ class StockInfoWebClientService(
             .apply {
                 this.add("FID_COND_MRKT_DIV_CODE", "J")
                 this.add("FID_INPUT_ISCD", stockCode)
-                this.add("FID_INPUT_DATE_1", startDate.format(DateTimeFormatter.ofPattern("yyyyMMdd")))
-                this.add("FID_INPUT_DATE_2", endDate.format(DateTimeFormatter.ofPattern("yyyyMMdd")))
+                this.add(
+                    "FID_INPUT_DATE_1",
+                    startDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+                )
+                this.add(
+                    "FID_INPUT_DATE_2",
+                    endDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+                )
                 this.add("FID_PERIOD_DIV_CODE", "D")
                 this.add("FID_ORG_ADJ_PRC", "0")
             }
 
-        val responseDatas = webClientConnector.connect<Map<String, String>, KisStockInfoResDto>(
-            webClientType = WebClientConnector.WebClientType.KIS,
-            method = HttpMethod.POST,
+        val responseDatas = okHttpClientConnector.connect<Map<String, String>, KisStockInfoResDto>(
+            clientType = OkHttpClientConnector.ClientType.KIS,
+            method = HttpMethod.GET,
             requestHeaders = reqHeaders,
             requestParams = reqParams,
             path = "/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice",
