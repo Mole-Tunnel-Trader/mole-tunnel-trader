@@ -27,16 +27,4 @@ do
 
   cd - >/dev/null || exit
 done
-
-echo
-echo "[상위 리포지토리] 서브모듈 포인터 변경 반영"
-# 서브모듈 해시가 바뀌었을 수 있으므로 상위 리포지토리에도 반영
-git add .
-if ! git diff --cached --quiet; then
-  git commit -m "$COMMIT_MSG (Parent repo)"
-  git push origin main
-else
-  echo "  상위 리포지토리에 반영할 변경 없음"
-fi
-
 echo "===== Submodule push 완료 ====="
