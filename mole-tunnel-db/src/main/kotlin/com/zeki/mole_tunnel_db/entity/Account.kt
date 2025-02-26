@@ -29,7 +29,7 @@ class Account private constructor(
     var appKey: String = appKey
         protected set
 
-    @Column(name = "app_secret", nullable = false, length = 100)
+    @Column(name = "app_secret", nullable = false, length = 200)
     var appSecret: String = appSecret
         protected set
 
@@ -61,15 +61,15 @@ class Account private constructor(
 
     companion object {
         fun create(
-            grantType: String,
-            appKey: String,
-            appSecret: String,
-            accessToken: String,
-            tokenType: String,
-            expiredIn: Int,
-            accessTokenExpired: LocalDateTime,
-            accountNumber: String,
-            accountType: TradeMode
+                grantType: String,
+                appKey: String,
+                appSecret: String,
+                accessToken: String,
+                tokenType: String,
+                expiredIn: Int,
+                accessTokenExpired: LocalDateTime,
+                accountNumber: String,
+                accountType: TradeMode
         ): Account {
             return Account(
                 grantType = grantType,
