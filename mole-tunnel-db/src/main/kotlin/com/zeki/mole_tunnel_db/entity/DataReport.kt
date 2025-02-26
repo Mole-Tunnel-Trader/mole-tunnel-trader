@@ -8,7 +8,7 @@ import org.hibernate.type.SqlTypes
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "data_report", schema = "mole_tunnel_trader")
+@Table(name = "data_report")
 class DataReport private constructor(
     name: ReportType,
     url: String,
