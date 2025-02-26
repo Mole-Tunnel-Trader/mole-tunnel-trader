@@ -35,10 +35,11 @@ class DataReportService(
 
     @Transactional
     fun sendDataReport(now: LocalDateTime) {
-        val startDateTime = now.withSecond(0)
-        val endDateTime = now.withSecond(59)
+        val startDateTime = now.withSecond(0).withNano(0)
+        val endDateTime = now.withSecond(59).withNano(999999999)
         val dataReports =
             dataReportRepository.findByReportDateTimeBetween(startDateTime, endDateTime)
+        
         dataReports.forEach {
             val reqBody = objectMapper.readValue(it.content, DiscordWebhookDto::class.java)
             ExceptionUtils.log.info("sendDataReport reqBody: $reqBody")
