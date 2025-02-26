@@ -2,6 +2,7 @@ package com.zeki.data_go.schduler
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.em.ReportType
+import com.zeki.common.exception.ExceptionUtils
 import com.zeki.data_go.holiday.HolidayService
 import com.zeki.data_go.stock_code.StockCodeService
 import com.zeki.report.DataReportService
@@ -69,6 +70,7 @@ class Scheduler(
     @Transactional
     fun sendReportWebhook() {
         val now = LocalDateTime.now()
+        ExceptionUtils.log.info("sendReportWebhook: $now")
         dataReportService.sendDataReport(now)
     }
 }

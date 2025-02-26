@@ -2,6 +2,7 @@ package com.zeki.report
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.em.ReportType
+import com.zeki.common.exception.ExceptionUtils
 import com.zeki.mole_tunnel_db.entity.DataReport
 import com.zeki.mole_tunnel_db.repository.DataReportRepository
 import com.zeki.ok_http_client.ApiStatics
@@ -40,6 +41,7 @@ class DataReportService(
             dataReportRepository.findByReportDateTimeBetween(startDateTime, endDateTime)
         dataReports.forEach {
             val reqBody = objectMapper.readValue(it.content, DiscordWebhookDto::class.java)
+            ExceptionUtils.log.info("sendDataReport reqBody: $reqBody")
             okHttpClientConnector.connect(
                 clientType = OkHttpClientConnector.ClientType.DEFAULT,
                 method = HttpMethod.POST,
