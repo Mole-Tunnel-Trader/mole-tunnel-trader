@@ -1,7 +1,10 @@
 package com.zeki.ok_http_client
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ExceptionUtils
+import com.zeki.common.exception.ExceptionUtils.log
+import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -118,8 +121,10 @@ class OkHttpClientConnector(
                     objectMapper.readValue(it, responseClassType)
                 }
             } catch (e: IOException) {
-                ExceptionUtils.logError(e)
-                null // 파싱 오류가 발생한 경우 responseBody = null 반환
+                log.error(e.message)
+                throw ApiException(
+                    ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR
+                )
             }
 
             val headers = response.headers.toMultimap()

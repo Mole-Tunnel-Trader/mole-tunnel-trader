@@ -47,7 +47,7 @@ class AccountService(
         )
 
         return response.body ?: throw ApiException(
-            ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+            ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
             "Token retrieval failed for appKey=$appKey"
         )
     }

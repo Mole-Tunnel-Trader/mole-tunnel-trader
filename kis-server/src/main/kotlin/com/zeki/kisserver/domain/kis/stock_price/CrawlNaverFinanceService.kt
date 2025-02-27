@@ -44,8 +44,8 @@ class CrawlNaverFinanceService(
         )
 
         val result =
-            responseDatas?.body ?: throw ApiException(
-                ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+            responseDatas.body ?: throw ApiException(
+                ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
                 "네이버 금융 API 호출 실패"
             )
         return this.toNaverDto(result, stockCode)

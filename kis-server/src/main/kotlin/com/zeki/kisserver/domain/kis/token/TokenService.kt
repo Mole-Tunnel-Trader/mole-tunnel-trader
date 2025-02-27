@@ -68,8 +68,8 @@ class TokenService(
             retryDelay = 510
         )
 
-        return responseDatas?.body ?: throw ApiException(
-            ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+        return responseDatas.body ?: throw ApiException(
+            ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
             "토큰 발급 실패"
         )
     }
