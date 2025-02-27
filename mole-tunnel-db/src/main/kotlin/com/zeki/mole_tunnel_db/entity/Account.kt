@@ -23,7 +23,7 @@ class Account private constructor(
     accountType: TradeMode,
     accountName: String
 ) : BaseEntity() {
-
+    //    PSXPLzUchwGU7KQ48mTqnHK8pANFKeDnVojx
     @Column(name = "grant_type", nullable = false)
     var grantType: String = grantType
         protected set
@@ -68,16 +68,16 @@ class Account private constructor(
 
     companion object {
         fun create(
-                grantType: String,
-                appKey: String,
-                appSecret: String,
-                accessToken: String,
-                tokenType: String,
-                expiredIn: Int,
-                accessTokenExpired: LocalDateTime,
-                accountNumber: String,
-                accountType: TradeMode,
-                accountName: String
+            grantType: String,
+            appKey: String,
+            appSecret: String,
+            accessToken: String,
+            tokenType: String,
+            expiredIn: Int,
+            accessTokenExpired: LocalDateTime,
+            accountNumber: String,
+            accountType: TradeMode,
+            accountName: String
         ): Account {
             return Account(
                 grantType = grantType,
@@ -98,16 +98,10 @@ class Account private constructor(
         this.tokenType = kisTokenResDto.tokenType
         this.accessToken = kisTokenResDto.accessToken
         this.accessTokenExpired = LocalDateTime.parse(
-                kisTokenResDto.accessTokenTokenExpired,
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            kisTokenResDto.accessTokenTokenExpired,
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         ).minusHours(1)
     }
-
-    override fun equals(other: Any?): Boolean {
-        return this === other || (other is Account && id != null && id == other.id)
-    }
-
-    override fun hashCode(): Int = id?.hashCode() ?: 0
 
     fun isExpired(): Boolean {
         return LocalDateTime.now().isAfter(accessTokenExpired)
