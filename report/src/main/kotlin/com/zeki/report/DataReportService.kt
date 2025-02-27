@@ -1,5 +1,6 @@
 package com.zeki.report
 
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.em.ReportType
 import com.zeki.common.exception.ExceptionUtils
@@ -36,20 +37,26 @@ class DataReportService(
     @Transactional
     fun sendDataReport(now: LocalDateTime) {
         val startDateTime = now.withSecond(0).withNano(0)
-        val endDateTime = now.withSecond(59).withNano(999999999)
+        val endDateTime = now.withSecond(59)
         val dataReports =
-            dataReportRepository.findByReportDateTimeBetween(startDateTime, endDateTime)
-        
+            dataReportRepository.findByReportDateTimeBetweenAndName(
+                startDateTime,
+                endDateTime,
+                ReportType.DATA_GO
+            )
+
         dataReports.forEach {
+            ExceptionUtils.log.info { "sendDataReport: $it" }
             val reqBody = objectMapper.readValue(it.content, DiscordWebhookDto::class.java)
-            ExceptionUtils.log.info("sendDataReport reqBody: $reqBody")
-            okHttpClientConnector.connect(
+            val connect = okHttpClientConnector.connect(
                 clientType = OkHttpClientConnector.ClientType.DEFAULT,
                 method = HttpMethod.POST,
                 path = it.url,
                 requestBody = reqBody,
-                responseClassType = Unit::class.java,
+                responseClassType = JsonNode::class.java,
             )
+            //TODO: response 확인 후 isSend 값 변경
+            it.isSend = "Y"
         }
 
     }
