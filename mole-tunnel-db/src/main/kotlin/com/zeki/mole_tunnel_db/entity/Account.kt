@@ -2,8 +2,10 @@ package com.zeki.mole_tunnel_db.entity
 
 import com.zeki.common.em.TradeMode
 import com.zeki.common.entity.BaseEntity
+import com.zeki.mole_tunnel_db.dto.KisTokenResDto
 import jakarta.persistence.*
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Entity
 @Table(
@@ -18,7 +20,8 @@ class Account private constructor(
     expiredIn: Int,
     accessTokenExpired: LocalDateTime,
     accountNumber: String,
-    accountType: TradeMode
+    accountType: TradeMode,
+    accountName: String
 ) : BaseEntity() {
 
     @Column(name = "grant_type", nullable = false)
@@ -59,6 +62,10 @@ class Account private constructor(
     var accountType: TradeMode = accountType
         protected set
 
+    @Column(name = "account_name", nullable = false, length = 20)
+    var accountName: String = accountName
+        protected set
+
     companion object {
         fun create(
                 grantType: String,
@@ -69,7 +76,8 @@ class Account private constructor(
                 expiredIn: Int,
                 accessTokenExpired: LocalDateTime,
                 accountNumber: String,
-                accountType: TradeMode
+                accountType: TradeMode,
+                accountName: String
         ): Account {
             return Account(
                 grantType = grantType,
@@ -80,20 +88,19 @@ class Account private constructor(
                 expiredIn = expiredIn,
                 accessTokenExpired = accessTokenExpired,
                 accountNumber = accountNumber,
-                accountType = accountType
+                accountType = accountType,
+                accountName = accountName
             )
         }
     }
 
-    fun updateToken(newAccessToken: String, newExpiration: LocalDateTime, newExpiredIn: Int): Boolean {
-        return if (accessToken == newAccessToken && accessTokenExpired == newExpiration && expiredIn == newExpiredIn) {
-            false
-        } else {
-            accessToken = newAccessToken
-            accessTokenExpired = newExpiration
-            expiredIn = newExpiredIn
-            true
-        }
+    fun updateToken(kisTokenResDto: KisTokenResDto) {
+        this.tokenType = kisTokenResDto.tokenType
+        this.accessToken = kisTokenResDto.accessToken
+        this.accessTokenExpired = LocalDateTime.parse(
+                kisTokenResDto.accessTokenTokenExpired,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        ).minusHours(1)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -101,4 +108,8 @@ class Account private constructor(
     }
 
     override fun hashCode(): Int = id?.hashCode() ?: 0
+
+    fun isExpired(): Boolean {
+        return LocalDateTime.now().isAfter(accessTokenExpired)
+    }
 }

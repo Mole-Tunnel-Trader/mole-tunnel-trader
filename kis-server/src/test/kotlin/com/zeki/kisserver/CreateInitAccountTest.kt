@@ -8,13 +8,12 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.Commit
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @SpringBootTest
 @Transactional
-@Commit  // 롤백 방지 (테스트 실행 후 데이터가 DB에 반영됨)
+//@Commit  // 롤백 방지 (테스트 실행 후 데이터가 DB에 반영됨)
 class CreateInitAccountTest @Autowired constructor(
         val accountRepository: AccountRepository
 ) {
@@ -31,7 +30,8 @@ class CreateInitAccountTest @Autowired constructor(
                 expiredIn = 0,
                 accessTokenExpired = LocalDateTime.now().plusHours(6),
                 accountNumber = "",
-                accountType = TradeMode.TRAIN
+                accountType = TradeMode.TRAIN,
+                accountName = "test"
         )
 
         // When
