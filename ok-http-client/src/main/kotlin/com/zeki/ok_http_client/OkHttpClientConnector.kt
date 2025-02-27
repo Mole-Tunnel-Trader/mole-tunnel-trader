@@ -1,6 +1,7 @@
 package com.zeki.ok_http_client
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.zeki.common.exception.ExceptionUtils
 import com.zeki.common.util.CustomUtils
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -12,6 +13,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
+import java.io.IOException
 import java.time.Instant
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.TimeUnit
@@ -30,6 +32,7 @@ class OkHttpClientConnector(
     }
 
     data class ApiResponse<S>(
+        val isSuccess: Boolean,
         val body: S?,
         val headers: Map<String, List<String>>?
     )
@@ -50,7 +53,7 @@ class OkHttpClientConnector(
         responseClassType: Class<S>,
         retryCount: Int = 0,
         retryDelay: Long = 0
-    ): ApiResponse<S>? {
+    ): ApiResponse<S> {
         val mediaType = "application/json; charset=utf-8".toMediaType()
 
         // 요청 파라미터를 URL 쿼리 스트링으로 변환
@@ -106,23 +109,22 @@ class OkHttpClientConnector(
 
         val request = requestBuilder.build()
 
-        try {
-            client.newCall(request).execute().use { response ->
-                if (response.isSuccessful) {
-                    val responseBody = response.body?.string()?.let {
-                        objectMapper.readValue(it, responseClassType)
-                    }
-                    val headers = response.headers.toMultimap()
-                    return ApiResponse(responseBody, headers)
-                } else {
-                    println("Request failed with status: ${response.code}")
-                }
-            }
-        } catch (e: Exception) {
-            println("Request failed: ${e.message}")
-        }
+        enforceRateLimit()
 
-        return null
+        client.newCall(request).execute().use { response ->
+            val responseBody = try {
+                // JSON 파싱 시 예외 처리
+                response.body?.string()?.let {
+                    objectMapper.readValue(it, responseClassType)
+                }
+            } catch (e: IOException) {
+                ExceptionUtils.logError(e)
+                null // 파싱 오류가 발생한 경우 responseBody = null 반환
+            }
+
+            val headers = response.headers.toMultimap()
+            return ApiResponse(response.isSuccessful, responseBody, headers)
+        }
     }
 
     /**
@@ -152,7 +154,7 @@ class OkHttpClientConnector(
                         TimeUnit.MILLISECONDS.sleep(waitTime)
                     } catch (e: InterruptedException) {
                         Thread.currentThread().interrupt()
-                        println("Interrupted while waiting for rate limit: ${e.message}")
+                        ExceptionUtils.logError(e)
                         return
                     }
                 }
