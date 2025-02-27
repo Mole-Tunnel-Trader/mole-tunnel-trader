@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest(classes = [KisVolKotlinApplication::class]) // 애플리케이션 클래스 지정
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AssetWebClientServiceTest @Autowired constructor(
+class AssetOkHttpClientServiceTest @Autowired constructor(
     private val assetWebClientService: AssetWebClientService
 ) {
 

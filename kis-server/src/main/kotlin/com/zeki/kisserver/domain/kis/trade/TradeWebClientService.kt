@@ -66,8 +66,8 @@ class TradeWebClientService(
                 retryDelay = 0,
             )
 
-        return responsesDatas?.body ?: throw ApiException(
-            ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+        return responsesDatas.body ?: throw ApiException(
+            ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
             "주식 주문 실패. 주식코드: $stockCode, 주문타입: ${orderType.name}, 주문가격: $orderPrice, 주문수량: $orderAmount"
         )
     }

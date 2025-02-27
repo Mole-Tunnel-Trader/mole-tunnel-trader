@@ -14,6 +14,7 @@ class DataReport private constructor(
     url: String,
     reportDateTime: LocalDateTime,
     content: String,
+    isSend: String = "N"
 ) : BaseEntity() {
     @Enumerated(EnumType.STRING)
     @Column(name = "name", length = 30)
@@ -29,14 +30,18 @@ class DataReport private constructor(
     @Column(name = "content", nullable = false)
     var content: String = content
 
+    @Column(name = "is_send", nullable = false)
+    var isSend: String = isSend
+
     companion object {
         fun create(
             name: ReportType,
             url: String,
             reportDateTime: LocalDateTime,
             content: String,
+            isSend: String = "N"
         ): DataReport {
-            return DataReport(name, url, reportDateTime, content)
+            return DataReport(name, url, reportDateTime, content, isSend)
         }
     }
 }
