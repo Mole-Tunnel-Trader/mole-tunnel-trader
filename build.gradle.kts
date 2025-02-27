@@ -78,6 +78,7 @@ project(":back-test-server") {
 
         implementation(project(":mole-tunnel-db"))
         implementation(project(":ok-http-client"))
+        implementation(project(":algorithm-common"))
         implementation(project(":common"))
     }
 }
@@ -97,6 +98,12 @@ project(":mole-tunnel-db") {
 }
 
 project(":ok-http-client") {
+    dependencies {
+        implementation(project(":common"))
+    }
+}
+
+project(":algorithm-common") {
     dependencies {
         implementation(project(":common"))
     }
