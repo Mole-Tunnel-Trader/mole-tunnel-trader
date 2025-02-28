@@ -1,5 +1,6 @@
 package com.zeki.mole_tunnel_db.entity
 
+import com.zeki.common.em.OrderType
 import jakarta.persistence.*
 import java.math.BigDecimal
 
@@ -8,7 +9,7 @@ import java.math.BigDecimal
 class AlgorithmLogDateDetail(
     algorithmLogDate: AlgorithmLogDate,
     stockCode: String,
-    orderType: String,
+    orderType: OrderType,
     tradePrice: BigDecimal,
     totalTradePrice: BigDecimal
 ) {
@@ -22,7 +23,8 @@ class AlgorithmLogDateDetail(
         protected set
 
     @Column(name = "order_type", nullable = false, length = 10)
-    var orderType: String = orderType
+    @Enumerated(EnumType.STRING)
+    var orderType: OrderType = orderType
         protected set
 
     @Column(name = "trade_price", nullable = false, precision = 38, scale = 18)
@@ -41,7 +43,7 @@ class AlgorithmLogDateDetail(
         fun create(
             algorithmLogDate: AlgorithmLogDate,
             stockCode: String,
-            orderType: String,
+            orderType: OrderType,
             tradePrice: BigDecimal,
             totalTradePrice: BigDecimal
         ): AlgorithmLogDateDetail {

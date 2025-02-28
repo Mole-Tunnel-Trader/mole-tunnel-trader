@@ -1,4 +1,4 @@
-package com.zeki.data_go.dto.report
+package com.zeki.holiday.dto.report
 
 data class UpsertReportDto(
     val newCount: Int,

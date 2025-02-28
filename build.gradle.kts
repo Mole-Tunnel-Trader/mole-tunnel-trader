@@ -55,6 +55,7 @@ subprojects {
 project(":kis-server") {
     dependencies {
         implementation(project(":report"))
+        implementation(project(":holiday"))
 
         implementation(project(":mole-tunnel-db"))
         implementation(project(":ok-http-client"))
@@ -65,6 +66,7 @@ project(":kis-server") {
 project(":data-go") {
     dependencies {
         implementation(project(":report"))
+        implementation(project(":holiday"))
 
         implementation(project(":mole-tunnel-db"))
         implementation(project(":ok-http-client"))
@@ -75,15 +77,26 @@ project(":data-go") {
 project(":back-test-server") {
     dependencies {
         implementation(project(":report"))
+        implementation(project(":holiday"))
 
         implementation(project(":mole-tunnel-db"))
         implementation(project(":ok-http-client"))
         implementation(project(":algorithm-common"))
         implementation(project(":common"))
+
+        implementation(project(":_test_algo"))
     }
 }
 
 project(":report") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":mole-tunnel-db"))
+        implementation(project(":ok-http-client"))
+    }
+}
+
+project(":holiday") {
     dependencies {
         implementation(project(":common"))
         implementation(project(":mole-tunnel-db"))
@@ -97,9 +110,17 @@ project(":mole-tunnel-db") {
     }
 }
 
+
 project(":ok-http-client") {
     dependencies {
         implementation(project(":common"))
+    }
+}
+
+project(":_test_algo") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":algorithm-common"))
     }
 }
 
