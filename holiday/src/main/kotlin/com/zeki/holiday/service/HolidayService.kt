@@ -1,4 +1,4 @@
-package com.zeki.data_go.holiday
+package com.zeki.holiday.service
 
 // import com.zeki.holiday.Holiday
 // import com.zeki.holiday.HolidayJoinRepository
@@ -7,7 +7,7 @@ package com.zeki.data_go.holiday
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.common.util.CustomUtils.toLocalDate
-import com.zeki.data_go.dto.report.UpsertReportDto
+import com.zeki.holiday.dto.report.UpsertReportDto
 import com.zeki.mole_tunnel_db.dto.DataGoHolidayResDto
 import com.zeki.mole_tunnel_db.entity.Holiday
 import com.zeki.mole_tunnel_db.repository.HolidayRepository

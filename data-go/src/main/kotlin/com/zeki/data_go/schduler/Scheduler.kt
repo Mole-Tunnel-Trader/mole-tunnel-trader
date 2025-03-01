@@ -2,8 +2,8 @@ package com.zeki.data_go.schduler
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.em.ReportType
-import com.zeki.data_go.holiday.HolidayService
 import com.zeki.data_go.stock_code.StockCodeService
+import com.zeki.holiday.service.HolidayService
 import com.zeki.report.DataReportService
 import com.zeki.webhook.DiscordWebhookDto
 import org.springframework.scheduling.annotation.Scheduled
