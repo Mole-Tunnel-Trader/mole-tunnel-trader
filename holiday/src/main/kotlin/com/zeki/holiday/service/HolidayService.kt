@@ -92,11 +92,11 @@ class HolidayService(
             )
 
         val dataGoHolidayResDto =
-            responseDatas?.body ?: DataGoHolidayResDto()
+            responseDatas.body ?: DataGoHolidayResDto()
 
         if (dataGoHolidayResDto.response.header.resultCode != "00") {
             throw ApiException(
-                ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+                ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
                 "유효한 결과값이 아닙니다. ${dataGoHolidayResDto.response.header.resultMsg}"
             )
         }

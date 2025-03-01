@@ -67,8 +67,8 @@ class AssetWebClientService(
                 retryDelay = 510
             )
 
-            val kisAssetResDto = responseDatas?.body ?: throw ApiException(
-                ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+            val kisAssetResDto = responseDatas.body ?: throw ApiException(
+                ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
                 "WebClient 통신 에러"
             )
 

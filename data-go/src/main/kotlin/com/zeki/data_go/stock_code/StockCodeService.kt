@@ -132,8 +132,8 @@ class StockCodeService(
             )
 
             val dataGoStockCodeResDto =
-                responseDatas?.body ?: throw ApiException(
-                    ResponseCode.INTERNAL_SERVER_WEBCLIENT_ERROR,
+                responseDatas.body ?: throw ApiException(
+                    ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
                     "통신에러 queryParams: $queryParams"
                 )
 
