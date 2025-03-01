@@ -31,8 +31,9 @@ class BackTestTradeService(
         val preValuationPrice = backTestAsset.valuationPrice
 
         // 해당일자의 stockPrice 조회
-        val stockPriceMap = stockPriceRepository.findAllByStockCodeInAndDate(stockCodeList, nextDay)
-            .associateBy { it.stockInfo.code }
+        val stockPriceMap =
+            stockPriceRepository.findAllByStockInfo_CodeInAndDate(stockCodeList, nextDay)
+                .associateBy { it.stockInfo.code }
 
         // AlgorithmLogDate 생성
         val algorithmLogDate = AlgorithmLogDate.create(
