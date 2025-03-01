@@ -17,43 +17,43 @@ import java.time.LocalDate
 
 @Service
 class BackTestService(
-    private val moleAlgorithmFactory: MoleAlgorithmFactory,
+        private val moleAlgorithmFactory: MoleAlgorithmFactory,
 
-    private val stockCodeRepository: StockCodeRepository,
-    private val algorithmRepository: AlgorithmRepository,
-    private val algorithmLogRepository: AlgorithmLogRepository,
-    private val algorithmLogDateDetailRepository: AlgorithmLogDateDetailRepository,
+        private val stockCodeRepository: StockCodeRepository,
+        private val algorithmRepository: AlgorithmRepository,
+        private val algorithmLogRepository: AlgorithmLogRepository,
+        private val algorithmLogDateDetailRepository: AlgorithmLogDateDetailRepository,
 
-    private val holidayDateService: HolidayDateService,
-    private val backTestTradeService: BackTestTradeService
+        private val holidayDateService: HolidayDateService,
+        private val backTestTradeService: BackTestTradeService
 ) {
 
     @Transactional
     fun backTest(algorithmId: Long, startDate: LocalDate, endDate: LocalDate, deposit: BigDecimal) {
         // 알고리즘 존재여부 파악, 백테스트니 알고리즘 상태와 상관없이 가져 옴
         val algorithmEntity = algorithmRepository.findById(algorithmId)
-            .orElseThrow { ApiException(ResponseCode.RESOURCE_NOT_FOUND) }
+                .orElseThrow { ApiException(ResponseCode.RESOURCE_NOT_FOUND) }
 
         // 팩토리를 통해 해당 알고리즘 Bean 획득
         val algorithm = moleAlgorithmFactory.getAlgorithmById(algorithmId)
 
         // 현 자산 정보 생성
         val backTestAsset = BackTestAsset(
-            depositPrice = deposit,
-            valuationPrice = BigDecimal.ZERO
+                depositPrice = deposit,
+                valuationPrice = BigDecimal.ZERO
         )
 
         // 알고리즘 로그 생성
         val algorithmLog = AlgorithmLog.create(
-            algorithm = algorithmEntity,
-            startDate = startDate,
-            endDate = endDate,
-            depositPrice = backTestAsset.depositPrice,
-            valuationPrice = backTestAsset.valuationPrice
+                algorithm = algorithmEntity,
+                startDate = startDate,
+                endDate = endDate,
+                depositPrice = backTestAsset.depositPrice,
+                valuationPrice = backTestAsset.valuationPrice
         )
 
         // 주식 코드 리스트 조회
-        val findStockCode = stockCodeRepository.findAllProjectedBy()
+        val findStockCode = stockCodeRepository.findAllByIsAlive()
         val stockCodeList = findStockCode.map { it.code }
 
         // 휴일을 제외한 날짜 리스트 생성
@@ -68,17 +68,17 @@ class BackTestService(
 
             // 알고리즘 실행
             val algoTradeList =
-                algorithm.runAlgorithm(stockCodeList, today, algorithmLog.depositPrice)
+                    algorithm.runAlgorithm(stockCodeList, today, algorithmLog.depositPrice)
 
             // 매매 진행
             val algorithmLogDateDetailList =
-                backTestTradeService.trade(
-                    nextDay,
-                    stockCodeList,
-                    backTestAsset,
-                    algorithmLog,
-                    algoTradeList
-                )
+                    backTestTradeService.trade(
+                            nextDay,
+                            stockCodeList,
+                            backTestAsset,
+                            algorithmLog,
+                            algoTradeList
+                    )
 
             // 알고리즘 로그에 날짜별 상세 내역 저장
             // TODO : bulk insert 구현해야함

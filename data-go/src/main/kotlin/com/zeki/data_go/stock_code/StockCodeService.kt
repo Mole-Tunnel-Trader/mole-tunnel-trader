@@ -1,5 +1,6 @@
 package com.zeki.data_go.stock_code
 
+import com.zeki.common.em.Status
 import com.zeki.common.em.StockMarket
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
@@ -22,34 +23,34 @@ import java.time.LocalTime
 
 @Service
 class StockCodeService(
-    private val stockCodeRepository: StockCodeRepository,
-    private val stockCodeJoinRepository: StockCodeJoinRepository,
+        private val stockCodeRepository: StockCodeRepository,
+        private val stockCodeJoinRepository: StockCodeJoinRepository,
 
-    private val holidayDateService: HolidayDateService,
+        private val holidayDateService: HolidayDateService,
 
-    private val okHttpClientConnector: OkHttpClientConnector
+        private val okHttpClientConnector: OkHttpClientConnector
 ) {
 
     @Transactional
     fun upsertStockCode(
-        standardDate: LocalDate = LocalDate.now(),
-        standardTime: LocalTime = LocalTime.now(),
-        standardDeltaDate: Int = 10
+            standardDate: LocalDate = LocalDate.now(),
+            standardTime: LocalTime = LocalTime.now(),
+            standardDeltaDate: Int = 10
     ): UpsertReportDto {
         val stockCodeSaveList = mutableListOf<StockCode>()
         val stockCodeUpdateList = mutableListOf<StockCode>()
         val stockCodeDeleteSet = mutableSetOf<StockCode>()
 
-        val dataGoStockCodeItemList =
-            this.getStockCodesFromDataGo(
-                standardDate = standardDate,
-                standardTime = standardTime,
-                standardDeltaDate = standardDeltaDate
-            )
+        val dataGoStockCodeItemList: List<StockCodeItem> =
+                this.getStockCodesFromDataGo(
+                        standardDate = standardDate,
+                        standardTime = standardTime,
+                        standardDeltaDate = standardDeltaDate
+                )
 
-        val stockCodeMap = stockCodeRepository.findAll()
-            .associateBy { it.code }
-            .toMutableMap()
+        val stockCodeMap = stockCodeRepository.findByIsAlive()
+                .associateBy { it.code }
+                .toMutableMap()
 
         for (item in dataGoStockCodeItemList) {
             val stockCode = item.srtnCd.substring(1)
@@ -59,18 +60,20 @@ class StockCodeService(
             when (val stockCodeEntity = stockCodeMap[stockCode]) {
                 null -> {
                     stockCodeSaveList.add(
-                        StockCode(
-                            code = stockCode,
-                            name = stockName,
-                            market = StockMarket.valueOf(stockMarket)
-                        )
+                            StockCode(
+                                    code = stockCode,
+                                    name = stockName,
+                                    market = StockMarket.valueOf(stockMarket),
+                                    isAlive = Status.Y
+                            ),
                     )
                 }
 
                 else -> {
                     val isUpdate = stockCodeEntity.updateStockCode(
-                        name = stockName,
-                        market = StockMarket.valueOf(stockMarket)
+                            name = stockName,
+                            market = StockMarket.valueOf(stockMarket),
+                            isAlive = Status.Y
                     )
                     if (isUpdate) {
                         stockCodeUpdateList.add(stockCodeEntity)
@@ -79,63 +82,68 @@ class StockCodeService(
                 }
             }
         }
-
         stockCodeDeleteSet.addAll(stockCodeMap.values)
+
+        for (stockCode in stockCodeDeleteSet) {
+            stockCode.updateIsAlive(Status.D);
+        }
+        stockCodeUpdateList.addAll(stockCodeDeleteSet)
+
 
         stockCodeJoinRepository.bulkInsert(stockCodeSaveList)
         stockCodeJoinRepository.bulkUpdate(stockCodeUpdateList)
-        stockCodeRepository.deleteAllInBatch(stockCodeDeleteSet)
+
 
         return UpsertReportDto(
-            stockCodeSaveList.size,
-            stockCodeUpdateList.size,
-            stockCodeDeleteSet.size
+                stockCodeSaveList.size,
+                stockCodeUpdateList.size,
+                stockCodeDeleteSet.size
         )
     }
 
     private fun getStockCodesFromDataGo(
-        standardDate: LocalDate = LocalDate.now(),
-        standardTime: LocalTime = LocalTime.now(),
-        standardDeltaDate: Int = 10
+            standardDate: LocalDate = LocalDate.now(),
+            standardTime: LocalTime = LocalTime.now(),
+            standardDeltaDate: Int = 10
     ): List<StockCodeItem> {
         var pageNo = 1
         var totalCount = Int.MAX_VALUE
 
         val batchSize = 1000
         val deltaOfToday: String =
-            holidayDateService.getAvailableDate(
-                standardDate = standardDate,
-                standardTime = standardTime,
-                standardDeltaDate = standardDeltaDate
-            ).toStringDate()
+                holidayDateService.getAvailableDate(
+                        standardDate = standardDate,
+                        standardTime = standardTime,
+                        standardDeltaDate = standardDeltaDate
+                ).toStringDate()
 
         val queryParams = LinkedMultiValueMap<String, String>()
-            .apply {
-                add("resultType", "json")
-                add("numOfRows", batchSize.toString())
-                add("basDt", deltaOfToday)
-                add("pageNo", pageNo.toString())
-            }
+                .apply {
+                    add("resultType", "json")
+                    add("numOfRows", batchSize.toString())
+                    add("basDt", deltaOfToday)
+                    add("pageNo", pageNo.toString())
+                }
 
         val dataGoStockCodeItemList = mutableListOf<StockCodeItem>()
         while ((pageNo - 1) * batchSize < totalCount) {
             queryParams["pageNo"] = pageNo.toString()
 
             val responseDatas = okHttpClientConnector.connect<Unit, DataGoStockCodeResDto>(
-                OkHttpClientConnector.ClientType.DATA_GO,
-                HttpMethod.GET,
-                "1160100/service/GetKrxListedInfoService/getItemInfo",
-                requestParams = queryParams,
-                responseClassType = DataGoStockCodeResDto::class.java,
-                retryCount = 3,
-                retryDelay = 510
+                    OkHttpClientConnector.ClientType.DATA_GO,
+                    HttpMethod.GET,
+                    "1160100/service/GetKrxListedInfoService/getItemInfo",
+                    requestParams = queryParams,
+                    responseClassType = DataGoStockCodeResDto::class.java,
+                    retryCount = 3,
+                    retryDelay = 510
             )
 
             val dataGoStockCodeResDto =
-                responseDatas.body ?: throw ApiException(
-                    ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
-                    "통신에러 queryParams: $queryParams"
-                )
+                    responseDatas.body ?: throw ApiException(
+                            ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR,
+                            "통신에러 queryParams: $queryParams"
+                    )
 
             totalCount = dataGoStockCodeResDto.response.body.totalCount
             pageNo += 1
@@ -148,6 +156,6 @@ class StockCodeService(
 
     @Transactional(readOnly = true)
     fun getStockCodeList(): List<String> {
-        return stockCodeRepository.findAll().map { it.code }
+        return stockCodeRepository.findByIsAlive().map { it.code }
     }
 }
