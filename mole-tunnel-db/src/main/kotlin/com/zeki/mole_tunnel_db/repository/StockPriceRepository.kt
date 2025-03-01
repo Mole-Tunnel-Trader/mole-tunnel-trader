@@ -23,5 +23,8 @@ interface StockPriceRepository : JpaRepository<StockPrice, Long> {
         stockCodeList: List<String>
     ): List<StockPrice>
 
-    fun findAllByStockCodeInAndDate(stockCodeList: List<String>, date: LocalDate): List<StockPrice>
+    fun findAllByStockInfo_CodeInAndDate(
+        stockCodeList: List<String>,
+        date: LocalDate
+    ): List<StockPrice>
 }
