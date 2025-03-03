@@ -12,3 +12,6 @@ include(
 include("mole-tunnel-db")
 include("back-test-server")
 include("report")
+include("algorithm-common")
+include("_test_algo")
+include("holiday")
