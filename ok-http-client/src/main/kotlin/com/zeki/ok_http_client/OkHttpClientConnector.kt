@@ -115,6 +115,15 @@ class OkHttpClientConnector(
         enforceRateLimit()
 
         client.newCall(request).execute().use { response ->
+            val headers = response.headers.toMultimap()
+
+            if (responseClassType == Unit::class.java ||
+                responseClassType == Void::class.java ||
+                response.body?.string().isNullOrEmpty()
+            ) {
+                return ApiResponse(response.isSuccessful, null, headers)
+            }
+
             val responseBody = try {
                 // JSON 파싱 시 예외 처리
                 response.body?.string()?.let {
@@ -127,7 +136,6 @@ class OkHttpClientConnector(
                 )
             }
 
-            val headers = response.headers.toMultimap()
             return ApiResponse(response.isSuccessful, responseBody, headers)
         }
     }
