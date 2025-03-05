@@ -6,14 +6,13 @@ import com.zeki.common.em.OrderType
 import com.zeki.mole_tunnel_db.entity.AlgorithmLog
 import com.zeki.mole_tunnel_db.entity.AlgorithmLogDate
 import com.zeki.mole_tunnel_db.entity.AlgorithmLogStock
-import com.zeki.mole_tunnel_db.repository.StockPriceRepository
+import com.zeki.mole_tunnel_db.entity.StockPrice
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.time.LocalDate
 
 @Service
 class BackTestTradeService(
-    private val stockPriceRepository: StockPriceRepository
 ) {
 
     /**
@@ -33,32 +32,15 @@ class BackTestTradeService(
         backTestAsset: BackTestAsset,
         algorithmLog: AlgorithmLog,
         algoTradeList: List<MoleAlgorithmResult>,
-        originDeposit: BigDecimal
+        originDeposit: BigDecimal,
+        stockPriceMap: Map<String, StockPrice>
     ): TradeResult {
         // 전일대비 등락을 비교하기 위해 저장
         val preDepositPrice = backTestAsset.depositPrice
         val preValuationPrice = backTestAsset.valuationPrice
-
-        // 해당일자의 stockPrice 조회
-        val stockPriceMap =
-            stockPriceRepository.findAllByStockInfo_CodeInAndDate(stockCodeList, nextDay)
-                .associateBy { it.stockInfo.code }
-
+        
         // AlgorithmLogDateDetail List 생성
         val algorithmLogStockList = mutableListOf<AlgorithmLogStock>()
-
-        // 평가금 계산
-        for ((stockCode, stockAsset) in backTestAsset.stockMap.entries) {
-            // 당일 판매예정시 평가금 계산 제외
-            if (algoTradeList.any { it.stockCode == stockCode && it.orderType == OrderType.SELL }) continue
-
-            stockAsset.holdingDays += 1
-            stockAsset.currentStandardPrice =
-                stockPriceMap[stockCode]?.close ?: stockAsset.currentStandardPrice
-            val preTotalPrice = stockAsset.currentTotalPrice
-            stockAsset.currentTotalPrice = stockAsset.currentStandardPrice * stockAsset.quantity
-            backTestAsset.valuationPrice += stockAsset.currentTotalPrice - preTotalPrice
-        }
 
         // 알고리즘의 매매 내역 순회
         for (algoTrade in algoTradeList) {

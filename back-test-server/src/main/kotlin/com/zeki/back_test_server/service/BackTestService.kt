@@ -10,6 +10,7 @@ import com.zeki.mole_tunnel_db.entity.AlgorithmLogDate
 import com.zeki.mole_tunnel_db.entity.AlgorithmLogStock
 import com.zeki.mole_tunnel_db.repository.AlgorithmRepository
 import com.zeki.mole_tunnel_db.repository.StockCodeRepository
+import com.zeki.mole_tunnel_db.repository.StockPriceRepository
 import com.zeki.mole_tunnel_db.repository.join.AlgorithmLogDateJoinRepository
 import com.zeki.mole_tunnel_db.repository.join.AlgorithmLogStockJoinRepository
 import org.springframework.stereotype.Service
@@ -22,6 +23,7 @@ class BackTestService(
     private val moleAlgorithmFactory: MoleAlgorithmFactory,
 
     private val stockCodeRepository: StockCodeRepository,
+    private val stockPriceRepository: StockPriceRepository,
     private val algorithmRepository: AlgorithmRepository,
 
     private val algorithmLogDateRepository: AlgorithmLogDateJoinRepository,
@@ -67,10 +69,16 @@ class BackTestService(
         val algorithmLogStockSaveList = mutableListOf<AlgorithmLogStock>()
         // 날짜 리스트를 순회하며 알고리즘 실행
         for ((i, today) in dateList.withIndex()) {
-            // 다음날 시작가 가 없으므로 종료
+            // 다음날 시가가 없으므로 종료
             if (i == dateList.size - 1) break
 
             val nextDay = dateList[i + 1]
+
+            // 해당일자의 stockPrice 조회
+            val stockPriceMap =
+                stockPriceRepository.findAllByStockInfo_CodeInAndDate(stockCodeList, nextDay)
+                    .associateBy { it.stockInfo.code }
+
 
             // 알고리즘 실행
             val algoTradeList =
@@ -83,8 +91,19 @@ class BackTestService(
                 backTestAsset,
                 algorithmLog,
                 algoTradeList,
-                deposit
+                deposit,
+                stockPriceMap
             )
+
+            // 평가금 계산
+            for ((stockCode, stockAsset) in backTestAsset.stockMap.entries) {
+                stockAsset.holdingDays += 1
+                stockAsset.currentStandardPrice =
+                    stockPriceMap[stockCode]?.close ?: stockAsset.currentStandardPrice
+                val preTotalPrice = stockAsset.currentTotalPrice
+                stockAsset.currentTotalPrice = stockAsset.currentStandardPrice * stockAsset.quantity
+                backTestAsset.valuationPrice += stockAsset.currentTotalPrice - preTotalPrice
+            }
 
             algorithmLogDateSaveList.add(algorithmLogDate)
             algorithmLogStockSaveList.addAll(algorithmLogStockList)
