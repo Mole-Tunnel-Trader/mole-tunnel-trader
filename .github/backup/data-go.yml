@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
     paths:
       - "data-go/**"
-      - ".github/workflows/data-go.yml"
+      - "data-go.yml"
       - "common/**"
       - "report/**"
       - "ok-http-client/**"

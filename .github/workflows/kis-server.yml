@@ -8,6 +8,7 @@ on:
       - ".github/workflows/kis-server.yml"
       - "common/**"
       - "report/**"
+      - "holiday/**"
       - "ok-http-client/**"
       - "mole-tunnel-db/**"
       - "deploy.sh"

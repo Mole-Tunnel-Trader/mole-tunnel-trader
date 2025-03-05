@@ -7,7 +7,6 @@ include(
     "kis-server",
     "common",
     "ok-http-client",
-    "data-go"
 )
 include("mole-tunnel-db")
 include("back-test-server")
