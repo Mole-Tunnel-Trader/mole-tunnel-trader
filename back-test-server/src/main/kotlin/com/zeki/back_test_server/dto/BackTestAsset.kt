@@ -11,7 +11,7 @@ data class BackTestAsset(
     data class StockAsset(
         val stockCode: String, // 종목 코드
         val tradeStandardPrice: BigDecimal, // 매수가
-        val quantity: BigDecimal, // 보유 수량
+        var quantity: BigDecimal, // 보유 수량
         val tradeTotalPrice: BigDecimal, // 매수 총액
 
         var currentStandardPrice: BigDecimal, // 현재가

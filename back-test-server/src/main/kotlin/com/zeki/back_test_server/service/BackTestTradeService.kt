@@ -5,7 +5,7 @@ import com.zeki.back_test_server.dto.BackTestAsset
 import com.zeki.common.em.OrderType
 import com.zeki.mole_tunnel_db.entity.AlgorithmLog
 import com.zeki.mole_tunnel_db.entity.AlgorithmLogDate
-import com.zeki.mole_tunnel_db.entity.AlgorithmLogDateDetail
+import com.zeki.mole_tunnel_db.entity.AlgorithmLogStock
 import com.zeki.mole_tunnel_db.repository.StockPriceRepository
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
@@ -17,6 +17,14 @@ class BackTestTradeService(
 ) {
 
     /**
+     * trade함수 결과 DTO
+     */
+    data class TradeResult(
+        val algorithmLogDate: AlgorithmLogDate,
+        val algorithmLogStockList: List<AlgorithmLogStock>
+    )
+
+    /**
      * 1일 기준 매매 함수.
      */
     fun trade(
@@ -24,8 +32,9 @@ class BackTestTradeService(
         stockCodeList: List<String>,
         backTestAsset: BackTestAsset,
         algorithmLog: AlgorithmLog,
-        algoTradeList: List<MoleAlgorithmResult>
-    ): List<AlgorithmLogDateDetail> {
+        algoTradeList: List<MoleAlgorithmResult>,
+        originDeposit: BigDecimal
+    ): TradeResult {
         // 전일대비 등락을 비교하기 위해 저장
         val preDepositPrice = backTestAsset.depositPrice
         val preValuationPrice = backTestAsset.valuationPrice
@@ -35,19 +44,23 @@ class BackTestTradeService(
             stockPriceRepository.findAllByStockInfo_CodeInAndDate(stockCodeList, nextDay)
                 .associateBy { it.stockInfo.code }
 
-        // AlgorithmLogDate 생성
-        val algorithmLogDate = AlgorithmLogDate.create(
-            algorithmLog = algorithmLog,
-            date = nextDay,
-            depositPrice = BigDecimal.ZERO,
-            valuationPrice = BigDecimal.ZERO,
-            beforeAssetRate = 0f,
-            totalAssetRate = 0f,
-        )
-
         // AlgorithmLogDateDetail List 생성
-        val algorithmLogDateDetailList = mutableListOf<AlgorithmLogDateDetail>()
+        val algorithmLogStockList = mutableListOf<AlgorithmLogStock>()
 
+        // 평가금 계산
+        for ((stockCode, stockAsset) in backTestAsset.stockMap.entries) {
+            // 당일 판매예정시 평가금 계산 제외
+            if (algoTradeList.any { it.stockCode == stockCode && it.orderType == OrderType.SELL }) continue
+
+            stockAsset.holdingDays += 1
+            stockAsset.currentStandardPrice =
+                stockPriceMap[stockCode]?.close ?: stockAsset.currentStandardPrice
+            val preTotalPrice = stockAsset.currentTotalPrice
+            stockAsset.currentTotalPrice = stockAsset.currentStandardPrice * stockAsset.quantity
+            backTestAsset.valuationPrice += stockAsset.currentTotalPrice - preTotalPrice
+        }
+
+        // 알고리즘의 매매 내역 순회
         for (algoTrade in algoTradeList) {
             val stockCode = algoTrade.stockCode
 
@@ -60,47 +73,101 @@ class BackTestTradeService(
             /* 매매 타입에 따라 분기 */
             if (algoTrade.orderType == OrderType.BUY) {
                 /* 매수시 */
-                // 해당 날짜에 low ~ hgih 범위에 매매가 존재하지 않으면 continue
-                if (algoTrade.tradeStandardPrice < stockPriceEntity.low
-                    || algoTrade.tradeStandardPrice > stockPriceEntity.high
-                ) continue
+                var buyStandardPrice: BigDecimal
+                if (algoTrade.tradeStandardPrice == BigDecimal.ZERO) {
+                    // 기준금액이 0원으로 온다면 반드시 시가에 매수
+                    buyStandardPrice = stockPriceEntity.open
+                } else {
+                    // 해당 날짜에 low ~ hgih 범위에 매매가 존재하지 않으면 continue
+                    if (algoTrade.tradeStandardPrice < stockPriceEntity.low
+                        || algoTrade.tradeStandardPrice > stockPriceEntity.high
+                    ) continue
+                    else buyStandardPrice = algoTrade.tradeStandardPrice
+                }
 
                 // 매수 금액과 예수금 비교 후 초과시 continue
                 if (backTestAsset.depositPrice < algoTrade.tradeStandardPrice * algoTrade.quantity) continue
+
+                // 해당 종목 매수
+                backTestAsset.depositPrice -= algoTrade.tradeStandardPrice * algoTrade.quantity
+                backTestAsset.valuationPrice += algoTrade.tradeStandardPrice * algoTrade.quantity
+                backTestAsset.stockMap[stockCode] =
+                    BackTestAsset.StockAsset(
+                        stockCode = stockCode,
+                        tradeStandardPrice = buyStandardPrice,
+                        quantity = algoTrade.quantity,
+                        tradeTotalPrice = algoTrade.tradeStandardPrice * algoTrade.quantity,
+                        currentStandardPrice = buyStandardPrice,
+                        currentTotalPrice = algoTrade.tradeStandardPrice * algoTrade.quantity,
+                        holdingDays = 0
+                    )
+                algorithmLogStockList.add(
+                    AlgorithmLogStock.create(
+                        algorithmLog = algorithmLog,
+                        date = nextDay,
+                        stockCode = stockCode,
+                        orderType = OrderType.BUY,
+                        tradeStandardPrice = buyStandardPrice,
+                        quantity = algoTrade.quantity
+                    )
+                )
 
             } else {
                 /* 매도시 */
                 // 보유 종목에 해당 종목이 존재하지 않으면 continue
                 val stockAsset = backTestAsset.stockMap[stockCode] ?: continue
 
-                // 이전 총 매수금액
-                val preBuyTotalPrice = stockAsset.tradeTotalPrice
-
                 // TODO : 수수료 계산해야함
                 // 해당 날짜의 시가에 매도
-                val sellTotalPrice = stockPriceEntity.open * stockAsset.quantity
+                var sellStandardPrice: BigDecimal
+                if (algoTrade.tradeStandardPrice == BigDecimal.ZERO) {
+                    // 기준금액이 0원으로 온다면 반드시 시가에 매도
+                    sellStandardPrice = stockPriceEntity.open
+                } else {
+                    // 기준금액이 존재한다면 반드시 기준금액에 매도
+                    sellStandardPrice = algoTrade.tradeStandardPrice
+                }
+                val sellTotalPrice = sellStandardPrice * algoTrade.quantity
+
+                // 잔량 계산
+                val remainQuantity = stockAsset.quantity - algoTrade.quantity
+                if (remainQuantity < BigDecimal.ZERO) {
+                    backTestAsset.stockMap.remove(stockCode)
+                } else {
+                    stockAsset.quantity = remainQuantity
+                }
 
                 backTestAsset.depositPrice += sellTotalPrice
-                // 평가금은 한번에 계산
-
-
-                // FIXME : 이렇게 저정하면.. 매매 단건 당 수익률과 성공률 계산이 안되는데..
-                algorithmLogDateDetailList.add(
-                    AlgorithmLogDateDetail.create(
-                        algorithmLogDate = algorithmLogDate,
+                backTestAsset.valuationPrice -= sellTotalPrice
+                algorithmLogStockList.add(
+                    AlgorithmLogStock.create(
+                        algorithmLog = algorithmLog,
+                        date = nextDay,
                         stockCode = stockCode,
                         orderType = OrderType.SELL,
-                        tradePrice = stockPriceEntity.open,
-                        totalTradePrice = sellTotalPrice
+                        tradeStandardPrice = sellStandardPrice,
+                        quantity = algoTrade.quantity,
                     )
                 )
             }
-
         }
 
-        // TODO : 매매 로직 구현
+        // AlgorithmLogDate 생성, 날짜별 로그
+        val preTotalPrice = preDepositPrice + preValuationPrice
+        val nowTotalPrice = backTestAsset.depositPrice + backTestAsset.valuationPrice
+        val algorithmLogDate = AlgorithmLogDate.create(
+            algorithmLog = algorithmLog,
+            date = nextDay,
+            depositPrice = backTestAsset.depositPrice,
+            valuationPrice = backTestAsset.valuationPrice,
+            beforeAssetRate = (preTotalPrice / nowTotalPrice).toFloat(),
+            totalAssetRate = (nowTotalPrice / originDeposit).toFloat(),
+        )
 
-        return emptyList()
+        return TradeResult(
+            algorithmLogDate = algorithmLogDate,
+            algorithmLogStockList = algorithmLogStockList
+        )
     }
 
 }
