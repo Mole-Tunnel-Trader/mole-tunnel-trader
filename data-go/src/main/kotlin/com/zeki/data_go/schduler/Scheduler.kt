@@ -8,7 +8,6 @@ import com.zeki.report.DataReportService
 import com.zeki.webhook.DiscordWebhookDto
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -23,7 +22,6 @@ class Scheduler(
 ) {
 
     @Scheduled(cron = "0 30 7 * * *")
-    @Transactional
     fun updateHolidayAndStockCode() {
         val now = LocalDate.now()
 
@@ -66,7 +64,6 @@ class Scheduler(
     }
 
     @Scheduled(cron = "0 * * * * *")
-    @Transactional
     fun sendReportWebhook() {
         val now = LocalDateTime.now()
         dataReportService.sendDataReport(now)
