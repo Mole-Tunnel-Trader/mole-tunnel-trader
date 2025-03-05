@@ -11,7 +11,6 @@ class AlgorithmLog private constructor(
     startDate: LocalDate,
     endDate: LocalDate,
     depositPrice: BigDecimal,
-    valuationPrice: BigDecimal,
     algorithm: Algorithm
 ) : BaseEntity() {
     @Column(name = "start_date", nullable = false)
@@ -26,10 +25,6 @@ class AlgorithmLog private constructor(
     var depositPrice: BigDecimal = depositPrice
         protected set
 
-    @Column(name = "valuation_price", nullable = false, precision = 38, scale = 18)
-    var valuationPrice: BigDecimal = valuationPrice
-        protected set
-
     @JoinColumn(name = "algorithm_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE, CascadeType.PERSIST])
     var algorithm: Algorithm = algorithm
@@ -41,20 +36,31 @@ class AlgorithmLog private constructor(
     )
     var algorithmLogDateList: List<AlgorithmLogDate> = mutableListOf()
 
+    @OneToMany(
+        mappedBy = "algorithmLog",
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.MERGE, CascadeType.PERSIST]
+    )
+    var algorithmLogStockList: List<AlgorithmLogStock> = mutableListOf()
+
     companion object {
         fun create(
             startDate: LocalDate,
             endDate: LocalDate,
             depositPrice: BigDecimal,
-            valuationPrice: BigDecimal,
             algorithm: Algorithm
         ): AlgorithmLog {
-            return AlgorithmLog(startDate, endDate, depositPrice, valuationPrice, algorithm)
+            return AlgorithmLog(startDate, endDate, depositPrice, algorithm)
         }
     }
 
     fun addAlgorithmLogDate(algorithmLogDate: AlgorithmLogDate) {
         this.algorithmLogDateList += algorithmLogDate
         algorithmLogDate.algorithmLog = this
+    }
+
+    fun addAlgorithmLogStock(algorithmLogStock: AlgorithmLogStock) {
+        this.algorithmLogStockList += algorithmLogStock
+        algorithmLogStock.algorithmLog = this
     }
 }

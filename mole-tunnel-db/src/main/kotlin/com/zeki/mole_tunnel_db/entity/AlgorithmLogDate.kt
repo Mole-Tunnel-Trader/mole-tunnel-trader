@@ -1,6 +1,5 @@
 package com.zeki.mole_tunnel_db.entity
 
-import com.zeki.common.entity.BaseEntity
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -14,7 +13,12 @@ class AlgorithmLogDate(
     valuationPrice: BigDecimal,
     beforeAssetRate: Float,
     totalAssetRate: Float
-) : BaseEntity() {
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    var id: Long? = null
+
     @Column(name = "date", nullable = false)
     var date: LocalDate = date
         protected set
@@ -39,13 +43,6 @@ class AlgorithmLogDate(
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var algorithmLog: AlgorithmLog = algorithmLog
 
-    @OneToMany(
-        mappedBy = "algorithmLogDate",
-        fetch = FetchType.LAZY,
-        cascade = [CascadeType.MERGE, CascadeType.PERSIST]
-    )
-    var algorithmLogDateDetailList: List<AlgorithmLogDateDetail> = mutableListOf()
-
     companion object {
         fun create(
             algorithmLog: AlgorithmLog,
@@ -62,14 +59,7 @@ class AlgorithmLogDate(
                 valuationPrice,
                 beforeAssetRate,
                 totalAssetRate
-            ).apply {
-                algorithmLog.addAlgorithmLogDate(this)
-            }
+            )
         }
-    }
-
-    fun addAlgorithmLogDateDetail(algorithmLogDateDetail: AlgorithmLogDateDetail) {
-        this.algorithmLogDateDetailList += algorithmLogDateDetail
-        algorithmLogDateDetail.algorithmLogDate = this
     }
 }
