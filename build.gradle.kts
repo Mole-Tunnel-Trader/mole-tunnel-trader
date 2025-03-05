@@ -30,9 +30,9 @@ allprojects {
         }
     }
 
-    tasks.withType<Test> {
-        useJUnitPlatform()
-    }
+//    tasks.withType<Test> {
+//        useJUnitPlatform()
+//    }
 }
 
 subprojects {
@@ -53,17 +53,6 @@ subprojects {
 }
 
 project(":kis-server") {
-    dependencies {
-        implementation(project(":report"))
-        implementation(project(":holiday"))
-
-        implementation(project(":mole-tunnel-db"))
-        implementation(project(":ok-http-client"))
-        implementation(project(":common"))
-    }
-}
-
-project(":data-go") {
     dependencies {
         implementation(project(":report"))
         implementation(project(":holiday"))
