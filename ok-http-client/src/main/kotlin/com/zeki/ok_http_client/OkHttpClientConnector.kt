@@ -117,16 +117,17 @@ class OkHttpClientConnector(
         client.newCall(request).execute().use { response ->
             val headers = response.headers.toMultimap()
 
+            val responseBodyString = response.body?.string()
             if (responseClassType == Unit::class.java ||
                 responseClassType == Void::class.java ||
-                response.body?.string().isNullOrEmpty()
+                responseBodyString.isNullOrEmpty()
             ) {
                 return ApiResponse(response.isSuccessful, null, headers)
             }
 
             val responseBody = try {
                 // JSON 파싱 시 예외 처리
-                response.body?.string()?.let {
+                responseBodyString?.let {
                     objectMapper.readValue(it, responseClassType)
                 }
             } catch (e: IOException) {
