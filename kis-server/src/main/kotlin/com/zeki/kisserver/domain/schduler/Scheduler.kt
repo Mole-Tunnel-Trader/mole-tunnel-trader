@@ -21,7 +21,7 @@ class Scheduler(
     private val objectMapper: ObjectMapper
 ) {
 
-    @Scheduled(cron = "0 1 14 * * *")
+    @Scheduled(cron = "0 30 7 * * *")
     fun updateHolidayAndStockCode() {
         val now = LocalDate.now()
 
