@@ -31,12 +31,13 @@ class TokenService(
         val tradeMode = CustomUtils.nowTradeMode(env)
 
         val token = tokenRepository.findFirstByTradeModeOrderByExpiredDateDesc(tradeMode)
-
+        print("token : {$token}")
         return token?.takeIf { !it.isExpired() }
             ?: createToken()
     }
 
     fun createToken(): Token {
+        print("createToken")
         val kisTokenResDto = this.getTokenFromKis()
 
         val token = Token(
@@ -49,6 +50,7 @@ class TokenService(
             ).minusHours(1)
         )
 
+        // TODO. 없으면 insert 있으면 update
         return tokenRepository.save(token)
     }
 

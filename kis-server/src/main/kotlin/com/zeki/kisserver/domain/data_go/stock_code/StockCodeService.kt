@@ -85,7 +85,7 @@ class StockCodeService(
         stockCodeDeleteSet.addAll(stockCodeMap.values)
 
         for (stockCode in stockCodeDeleteSet) {
-            stockCode.updateIsAlive(Status.D);
+            stockCode.updateIsAlive(Status.D)
         }
         stockCodeUpdateList.addAll(stockCodeDeleteSet)
 
@@ -156,6 +156,8 @@ class StockCodeService(
 
     @Transactional(readOnly = true)
     fun getStockCodeList(): List<String> {
-        return stockCodeRepository.findByIsAlive().map { it.code }
+        val stockMarkets: MutableCollection<StockMarket> = mutableListOf(StockMarket.KOSPI, StockMarket.KOSDAQ)
+        return stockCodeRepository.findByIsAliveAndMarketIn(Status.Y, stockMarkets).map { it.code }
     }
+
 }

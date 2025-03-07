@@ -26,8 +26,19 @@ class StockInfoJoinRepository(
             repeat(stockInfoSaveList.size) {
                 append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?), ")
             }
+            append("ON DUPLICATE KEY UPDATE ")  // 중복된 code에 대해 UPDATE 수행
+            append("name = VALUES(name), ")
+            append("other_code = VALUES(other_code), ")
+            append("fcam = VALUES(fcam), ")
+            append("amount = VALUES(amount), ")
+            append("market_capital = VALUES(market_capital), ")
+            append("capital = VALUES(capital), ")
+            append("per = VALUES(per), ")
+            append("pbr = VALUES(pbr), ")
+            append("eps = VALUES(eps)")
         }
-        sql = sql.substring(0, sql.length - 2)
+
+        sql = sql.substring(0, sql.length - 2)  // 마지막 쉼표 제거
 
         jdbcTemplate.update(sql) { ps ->
             var i = 1
@@ -45,6 +56,7 @@ class StockInfoJoinRepository(
             }
         }
     }
+
 
     fun bulkUpdate(stockInfoUpdateList: Collection<StockInfo>) {
         stockInfoUpdateList.chunked(batchSize).forEach {

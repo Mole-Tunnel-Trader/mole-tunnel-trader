@@ -8,9 +8,9 @@ tasks.named<Jar>("jar") {
     isEnabled = true
 }
 
-//tasks.test {
-//    useJUnitPlatform()
-//}
+tasks.test {
+    useJUnitPlatform()
+}
 
 dependencies {
     // test

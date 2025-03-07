@@ -1,6 +1,7 @@
 package com.zeki.kisserver.domain.kis.stock_price
 
 
+import com.zeki.holiday.dto.report.UpsertReportDto
 import com.zeki.kisserver.domain.kis.stock_info.StockInfoService
 import com.zeki.mole_tunnel_db.entity.StockPrice
 import com.zeki.mole_tunnel_db.repository.StockPriceRepository
@@ -24,7 +25,7 @@ class StockPriceService(
         stockCodeList: List<String>,
         standardDate: LocalDate,
         count: Int
-    ) {
+    ): UpsertReportDto {
         val stockPriceSaveList = mutableListOf<StockPrice>()
         val stockPriceUpdateList = mutableListOf<StockPrice>()
         val stockPriceDeleteSet = mutableSetOf<StockPrice>()
@@ -74,6 +75,12 @@ class StockPriceService(
 
         stockPriceJoinRepository.bulkInsert(stockPriceSaveList)
         stockPriceJoinRepository.bulkUpdate(stockPriceUpdateList)
+
+        return UpsertReportDto(
+                stockPriceSaveList.size,
+                stockPriceUpdateList.size,
+                0
+        )
     }
 
     @Transactional
