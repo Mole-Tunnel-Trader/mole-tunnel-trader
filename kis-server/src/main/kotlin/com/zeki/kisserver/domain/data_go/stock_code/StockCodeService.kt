@@ -24,6 +24,7 @@ import java.time.LocalTime
 @Service
 class StockCodeService(
     private val stockCodeRepository: StockCodeRepository,
+    private val getSTockCodeService: GetStockCodeService,
     private val stockCodeJoinRepository: StockCodeJoinRepository,
 
     private val holidayDateService: HolidayDateService,
@@ -48,7 +49,7 @@ class StockCodeService(
                 standardDeltaDate = standardDeltaDate
             )
 
-        val stockCodeMap = stockCodeRepository.findByIsAlive()
+        val stockCodeMap = getSTockCodeService.getStockCodeList()
             .associateBy { it.code }
             .toMutableMap()
 
@@ -154,8 +155,4 @@ class StockCodeService(
         return dataGoStockCodeItemList
     }
 
-    @Transactional(readOnly = true)
-    fun getStockCodeList(): List<String> {
-        return stockCodeRepository.findByIsAlive().map { it.code }
-    }
 }
