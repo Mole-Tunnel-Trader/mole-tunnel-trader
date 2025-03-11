@@ -25,12 +25,9 @@ class StockInfoService(
             .toMutableMap()
 
         val kisStockInfoDtoList = stockInfoWebClientService.getKisStockInfoDtoList(stockCodeList)
-        var index = 0 // 인덱스를 수동으로 관리
 
         kisStockInfoDtoList.forEach { kisStockInfoDto ->
             val output1 = kisStockInfoDto.output1 ?: return@forEach
-
-            println("처리 중: ${index + 1}번째 항목 / 총 ${kisStockInfoDtoList.size}개 항목, 주식 이름: ${output1.stockName}")
 
             when (val stockInfo = savedStockInfoMap[output1.stockCode]) {
                 null -> {
@@ -67,7 +64,6 @@ class StockInfoService(
                     if (isUpdate) stockInfoUpdateList.add(stockInfo)
                 }
             }
-            index++ // 각 항목을 처리할 때마다 인덱스를 1씩 증가
         }
 
         stockInfoJoinRepository.bulkInsert(stockInfoSaveList)

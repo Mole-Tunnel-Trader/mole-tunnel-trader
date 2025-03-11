@@ -34,9 +34,9 @@ class CrawlNaverFinanceService(
         reqParam.add("timeframe", timeframe)
 
         val responseDatas = okHttpClientConnector.connect<Unit, String>(
-            OkHttpClientConnector.ClientType.DEFAULT,
+            OkHttpClientConnector.ClientType.NAVER_FINANCE,
             HttpMethod.GET,
-            "api.finance.naver.com/siseJson.naver",
+            "https://api.finance.naver.com/siseJson.naver",
             requestParams = reqParam,
             responseClassType = String::class.java,
             retryCount = 1,

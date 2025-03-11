@@ -31,7 +31,7 @@ class OkHttpClientConnector(
     private val env: Environment
 ) {
     enum class ClientType {
-        KIS, DATA_GO, DEFAULT
+        KIS, DATA_GO, NAVER_FINANCE, DEFAULT
     }
 
     data class ApiResponse<S>(
@@ -69,6 +69,7 @@ class OkHttpClientConnector(
             ClientType.KIS -> apiStatics.kis.url
             ClientType.DATA_GO -> apiStatics.dataGo.url
             ClientType.DEFAULT -> ""
+            ClientType.NAVER_FINANCE -> ""
         }
         var url = if (baseUrl.isBlank()) {
             "$path$queryString"
@@ -103,6 +104,8 @@ class OkHttpClientConnector(
             }
 
             ClientType.DEFAULT -> {}
+
+            ClientType.NAVER_FINANCE -> {}
         }
 
         // 요청 헤더 추가
@@ -117,7 +120,7 @@ class OkHttpClientConnector(
         client.newCall(request).execute().use { response ->
             val headers = response.headers.toMultimap()
 
-            val responseBodyString = response.body?.string()
+            val responseBodyString = response.body?.string()?.trim()
             if (responseClassType == Unit::class.java ||
                 responseClassType == Void::class.java ||
                 responseBodyString.isNullOrEmpty()
@@ -125,19 +128,24 @@ class OkHttpClientConnector(
                 return ApiResponse(response.isSuccessful, null, headers)
             }
 
-            val responseBody = try {
-                // JSON 파싱 시 예외 처리
-                responseBodyString?.let {
-                    objectMapper.readValue(it, responseClassType)
+            val contentType = response.header("Content-Type")?.lowercase() ?: ""
+
+            val responseBody: Any? = try {
+                // JSON 응답인지 확인 후 파싱
+                if (clientType != ClientType.NAVER_FINANCE) {
+                    objectMapper.readValue(responseBodyString, responseClassType)
+                } else {
+                    responseBodyString // JSON이 아니면 문자열 그대로 반환
                 }
             } catch (e: IOException) {
-                log.error(e.message)
+                log.error("JSON 파싱 오류: ${e.message}, 응답 내용: $responseBodyString")
                 throw ApiException(
-                    ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR
+                        ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR
                 )
             }
 
-            return ApiResponse(response.isSuccessful, responseBody, headers)
+            @Suppress("UNCHECKED_CAST")
+            return ApiResponse(response.isSuccessful, responseBody as S, headers)
         }
     }
 

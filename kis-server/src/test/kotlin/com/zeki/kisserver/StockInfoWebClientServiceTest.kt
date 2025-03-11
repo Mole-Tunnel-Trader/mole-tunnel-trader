@@ -31,8 +31,6 @@ class StockInfoWebClientServiceTest @Autowired constructor(
 
         println("📢 조회 결과:")
         resultList.forEach { stockInfo ->
-            // 각 종목의 이름과 메시지를 출력
-            println("📌 종목 코드: ${stockInfo.output1?.stockName}, 메시지: ${stockInfo.msg1}")
 
             // assert를 사용하여 종목명 검증
             when (stockInfo.output1?.stockCode) {
