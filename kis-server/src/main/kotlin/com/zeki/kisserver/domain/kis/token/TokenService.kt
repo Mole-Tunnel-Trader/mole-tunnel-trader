@@ -1,8 +1,8 @@
 package com.zeki.kisserver.domain.kis.token
 
+import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
-import com.zeki.common.util.CustomUtils
 import com.zeki.mole_tunnel_db.dto.KisTokenResDto
 import com.zeki.mole_tunnel_db.entity.Token
 import com.zeki.mole_tunnel_db.repository.TokenRepository
@@ -28,7 +28,7 @@ class TokenService(
     // TODO : cache 적용
     @Transactional
     fun getOrCreateToken(): Token {
-        val tradeMode = CustomUtils.nowTradeMode(env)
+        val tradeMode = TradeMode.REAL
 
         val token = tokenRepository.findFirstByTradeModeOrderByExpiredDateDesc(tradeMode)
         print("token : {$token}")
@@ -43,7 +43,7 @@ class TokenService(
         val token = Token(
             tokenType = kisTokenResDto.tokenType,
             tokenValue = kisTokenResDto.accessToken,
-            tradeMode = CustomUtils.nowTradeMode(env),
+            tradeMode = TradeMode.REAL,
             expiredDate = LocalDateTime.parse(
                 kisTokenResDto.accessTokenTokenExpired,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")

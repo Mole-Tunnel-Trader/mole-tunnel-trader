@@ -12,7 +12,7 @@ interface StockCodeRepository : JpaRepository<StockCode, Long> {
 
     fun findByIsAlive(status: Status = Status.Y): MutableList<StockCode>
 
-    fun findByIsAliveAndMarketIn(isAlive: Status, market: MutableCollection<StockMarket>): MutableList<StockCodeOnly>
+    fun findByIsAliveAndMarketIn(isAlive: Status, market: Collection<StockMarket>): MutableList<StockCodeOnly>
 
-    fun findByName(name: String) : MutableList<StockCodeOnly>
+    fun findByName(name: String): MutableList<StockCodeOnly>
 }

@@ -5,7 +5,6 @@ import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ExceptionUtils
 import com.zeki.common.exception.ExceptionUtils.log
 import com.zeki.common.exception.ResponseCode
-import com.zeki.common.util.CustomUtils
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -132,15 +131,15 @@ class OkHttpClientConnector(
 
             val responseBody: Any? = try {
                 // JSON 응답인지 확인 후 파싱
-                if (clientType != ClientType.NAVER_FINANCE) {
-                    objectMapper.readValue(responseBodyString, responseClassType)
-                } else {
+                if (clientType == ClientType.NAVER_FINANCE) {
                     responseBodyString // JSON이 아니면 문자열 그대로 반환
+                } else {
+                    objectMapper.readValue(responseBodyString, responseClassType)
                 }
             } catch (e: IOException) {
                 log.error("JSON 파싱 오류: ${e.message}, 응답 내용: $responseBodyString")
                 throw ApiException(
-                        ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR
+                    ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR
                 )
             }
 
@@ -161,7 +160,7 @@ class OkHttpClientConnector(
                     requestTimestamps.poll()
                 }
 
-                val cnt: Int = if (CustomUtils.isProdProfile(env)) 19 else 2
+                val cnt: Int = 18
 
                 if (requestTimestamps.size < cnt) {
                     requestTimestamps.add(currentTime)

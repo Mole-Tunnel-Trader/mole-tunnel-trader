@@ -30,7 +30,7 @@ class StockInfoWebClientService(
         val token = TokenHolder.getToken()
 
         val stockInfoList = mutableListOf<KisStockInfoResDto>()
-        for (stockCode in stockCodeList) {
+        for ((index, stockCode) in stockCodeList.withIndex()) {
             val stockInfoResDto =
                 this.getStockInfoFromKis(
                     stockCode,
@@ -39,6 +39,9 @@ class StockInfoWebClientService(
                     token.tokenType,
                     token.tokenValue
                 ) ?: continue
+            log.info {
+                "KIS 주식 정보 조회 성공, 종목코드 : $stockCode, ${index + 1} / ${stockCodeList.size}"
+            }
             stockInfoList.add(stockInfoResDto)
         }
 

@@ -81,12 +81,12 @@ class Scheduler(
 
         // report 내역 저장
         val discordWebhookDto = DiscordWebhookDto(
-                embeds = listOf(
-                        DiscordWebhookDto.Embeds(
-                                fields = listOf(
-                                        DiscordWebhookDto.Fields(
-                                                name = "주식정보 Report",
-                                                value = """
+            embeds = listOf(
+                DiscordWebhookDto.Embeds(
+                    fields = listOf(
+                        DiscordWebhookDto.Fields(
+                            name = "주식정보 Report",
+                            value = """
                                 **주식 정보**
                                 - 신규: ${upsertInfo.newCount}
                                 - 변경: ${upsertInfo.updateCount}
@@ -97,20 +97,20 @@ class Scheduler(
                                 - 변경: ${upsertPrice.updateCount}
                                 - 삭제: ${upsertPrice.deleteCount}
                             """.trimIndent()
-                                        )
-                                )
                         )
+                    )
                 )
+            )
         )
 
         val content = objectMapper.writeValueAsString(discordWebhookDto)
         dataReportService.createDataReport(
-                dateReport = ReportType.DATA_GO,
-                startDateTime = LocalDateTime.of(
-                        /* date = */ LocalDate.now(),
-                        /* time = */ LocalTime.of(21, 0)
-                ),
-                content = content
+            dateReport = ReportType.KIS,
+            startDateTime = LocalDateTime.of(
+                /* date = */ LocalDate.now(),
+                /* time = */ LocalTime.of(21, 0)
+            ),
+            content = content
         )
     }
 }

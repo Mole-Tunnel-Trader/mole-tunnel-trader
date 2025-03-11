@@ -156,8 +156,10 @@ class StockCodeService(
 
     @Transactional(readOnly = true)
     fun getStockCodeList(): List<String> {
-        val stockMarkets: MutableCollection<StockMarket> = mutableListOf(StockMarket.KOSPI, StockMarket.KOSDAQ)
-        return stockCodeRepository.findByIsAliveAndMarketIn(Status.Y, stockMarkets).map { it.code }
+        return stockCodeRepository.findByIsAliveAndMarketIn(
+            isAlive = Status.Y,
+            market = listOf(StockMarket.KOSPI, StockMarket.KOSDAQ)
+        ).map { it.code }
     }
 
 }
