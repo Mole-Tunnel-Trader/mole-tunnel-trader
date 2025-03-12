@@ -18,7 +18,7 @@ class AlgorithmLogStockJoinRepository(
 
     private fun bulkInsertUsingBatch(backTestLogStockSaveList: Collection<AlgorithmLogStock>) {
         var sql = buildString {
-            append("INSERT INTO algorithm_log_date (algorithm_log_id, date, stock_code, order_type, trade_standard_price, quantity) VALUES ")
+            append("INSERT INTO algorithm_log_stock (algorithm_log_id, date, stock_code, order_type, trade_standard_price, quantity) VALUES ")
 
             repeat(backTestLogStockSaveList.size) {
                 append("(?, ?, ?, ?, ?, ?), ")

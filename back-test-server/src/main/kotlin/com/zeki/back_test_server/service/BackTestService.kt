@@ -1,6 +1,6 @@
 package com.zeki.back_test_server.service
 
-import com.zeki.back_test_server.config.MoleAlgorithmFactory
+import com.zeki.algorithm.config.MoleAlgorithmFactory
 import com.zeki.back_test_server.dto.BackTestAsset
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
@@ -13,6 +13,7 @@ import com.zeki.mole_tunnel_db.repository.StockCodeRepository
 import com.zeki.mole_tunnel_db.repository.StockPriceRepository
 import com.zeki.mole_tunnel_db.repository.join.AlgorithmLogDateJoinRepository
 import com.zeki.mole_tunnel_db.repository.join.AlgorithmLogStockJoinRepository
+import jakarta.persistence.EntityManager
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
@@ -30,7 +31,9 @@ class BackTestService(
     private val algorithmLogStockRepository: AlgorithmLogStockJoinRepository,
 
     private val holidayDateService: HolidayDateService,
-    private val backTestTradeService: BackTestTradeService
+    private val backTestTradeService: BackTestTradeService,
+
+    private val entityManager: EntityManager,
 ) {
 
     @Transactional
@@ -55,6 +58,8 @@ class BackTestService(
             endDate = endDate,
             depositPrice = backTestAsset.depositPrice,
         )
+
+        entityManager.persist(algorithmLog)
 
         // 주식 코드 리스트 조회
         val findStockCode = stockCodeRepository.findAllByIsAlive()

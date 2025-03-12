@@ -1,4 +1,4 @@
-package com.zeki.back_test_server.config
+package com.zeki.algorithm.config
 
 import com.zeki.algorithm.MoleAlgorithm
 import com.zeki.common.exception.ApiException
