@@ -1,9 +1,11 @@
 package com.zeki.kisserver.domain.kis.account
 
+import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
 import com.zeki.mole_tunnel_db.dto.KisTokenResDto
 import com.zeki.mole_tunnel_db.entity.Account
+import com.zeki.mole_tunnel_db.repository.AccountRepository
 import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class AccountService(
     private val okHttpClientConnector: OkHttpClientConnector,
+    private val accountRepository: AccountRepository
 ) {
 
     companion object {
@@ -58,5 +61,11 @@ class AccountService(
             "appkey" to appKey,
             "appsecret" to appSecret
         )
+    }
+
+    @Transactional(readOnly = true)
+    public fun getBatchAccount(): Account {
+        return accountRepository.findByAccountType(TradeMode.BATCH).firstOrNull()
+            ?: throw ApiException(ResponseCode.RESOURCE_NOT_FOUND, "Batch 계좌를 찾을 수 없습니다.")
     }
 }

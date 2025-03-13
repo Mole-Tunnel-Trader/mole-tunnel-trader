@@ -1,6 +1,7 @@
 package com.zeki.mole_tunnel_db.dto
 
 import com.zeki.common.em.OrderType
+import com.zeki.mole_tunnel_db.entity.Account
 import java.math.BigDecimal
 
 data class TradeQueueDto(
@@ -13,5 +14,6 @@ data class TradeQueueDto(
         val orderType: OrderType,
         val orderPrice: BigDecimal,
         val orderAmount: Double,
+        val account: Account,
     )
 }

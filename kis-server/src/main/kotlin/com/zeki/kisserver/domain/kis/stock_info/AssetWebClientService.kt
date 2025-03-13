@@ -3,11 +3,9 @@ package com.zeki.kisserver.domain.kis.stock_info
 import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
-import com.zeki.common.util.CustomUtils
-import com.zeki.kisserver.domain._common.aop.GetToken
-import com.zeki.kisserver.domain._common.aop.TokenHolder
+import com.zeki.kisserver.domain.kis.account.AccountService
 import com.zeki.kisserver.domain.kis.stock_info.dto.KisAssetResDto
-import com.zeki.ok_http_client.ApiStatics
+import com.zeki.mole_tunnel_db.entity.Account
 import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
@@ -18,27 +16,25 @@ import org.springframework.util.MultiValueMap
 @Service
 class AssetWebClientService(
     private val okHttpClientConnector: OkHttpClientConnector,
-    private val apiStatics: ApiStatics,
+    private val accountService: AccountService,
     private val env: Environment
 ) {
 
-    @GetToken
-    fun getAccountData(): List<KisAssetResDto.Output1> {
+    fun getAccountData(account: Account): List<KisAssetResDto.Output1> {
 
         // TODO : 모의투자 주식 매매 후 테스트
-        val token = TokenHolder.getToken()
+        val accessToken = accountService.retrieveAccount(account)
 
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>().apply {
-            this["authorization"] = "${token.tokenType} ${token.tokenValue}"
-            this["appkey"] = apiStatics.kis.appKey
-            this["appsecret"] = apiStatics.kis.appSecret
+            this["authorization"] = "${account.tokenType} ${accessToken}"
+            this["appkey"] = account.appKey
+            this["appsecret"] = account.appSecret
             this["tr_id"] =
-                if (CustomUtils.nowTradeMode(env) == TradeMode.REAL) "TTTC8434R" else "VTTC8434R"
-
+                if (account.accountType == TradeMode.REAL) "TTTC8434R" else "VTTC8434R"
         }
 
         val reqParams: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>().apply {
-            add("CANO", apiStatics.kis.accountNumber)
+            add("CANO", account.accountNumber)
             add("ACNT_PRDT_CD", "01")
             add("AFHR_FLPR_YN", "N")
             add("OFL_YN", "")
