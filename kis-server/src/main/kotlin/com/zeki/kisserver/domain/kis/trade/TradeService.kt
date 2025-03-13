@@ -23,7 +23,13 @@ class TradeService(
 
             tradeQueueDtoItems.forEach {
                 val kisOrderStockResDto =
-                    tradeWebClientService.orderStock(it.orderType, it.stockCode, it.orderPrice, it.orderAmount)
+                    tradeWebClientService.orderStock(
+                        it.orderType,
+                        it.stockCode,
+                        it.orderPrice,
+                        it.orderAmount,
+                        it.account
+                    )
                 this.checkOrderResponse(kisOrderStockResDto, it, tradeQueueDto.orderBy)
             }
         }
