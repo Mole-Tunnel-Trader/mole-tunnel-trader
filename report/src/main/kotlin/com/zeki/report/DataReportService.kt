@@ -26,7 +26,7 @@ class DataReportService(
     fun createDataReport(dateReport: ReportType, startDateTime: LocalDateTime, content: String) {
         val data = DataReport.create(
             dateReport,
-            apiStatics.webhook.reportUrl,
+            apiStatics.discord.reportUrl,
             startDateTime,
             content
         )

@@ -1,6 +1,6 @@
 package com.zeki.kisserver
 
-import com.zeki.kisserver.domain.kis.stock_info.StockInfoWebClientService
+import com.zeki.kisserver.domain.kis.stock_info.StockInfoConnectService
 import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -11,8 +11,8 @@ import java.time.LocalDate
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class StockInfoWebClientServiceTest @Autowired constructor(
-    private val stockInfoService: StockInfoWebClientService
+class StockInfoConnectServiceTest @Autowired constructor(
+    private val stockInfoService: StockInfoConnectService
 ) {
 
 

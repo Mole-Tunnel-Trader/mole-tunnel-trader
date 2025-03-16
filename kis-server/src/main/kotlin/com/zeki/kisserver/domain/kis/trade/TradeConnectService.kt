@@ -4,36 +4,33 @@ import com.zeki.common.em.OrderType
 import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
-import com.zeki.common.util.CustomUtils
-import com.zeki.kisserver.domain._common.aop.GetToken
-import com.zeki.kisserver.domain._common.aop.TokenHolder
+import com.zeki.kisserver.domain.kis.account.AccountService
 import com.zeki.mole_tunnel_db.dto.KisOrderStockResDto
-import com.zeki.ok_http_client.ApiStatics
+import com.zeki.mole_tunnel_db.entity.Account
 import com.zeki.ok_http_client.OkHttpClientConnector
-import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 
 @Service
-class TradeWebClientService(
+class TradeConnectService(
     private val okHttpClientConnector: OkHttpClientConnector,
-    private val apiStatics: ApiStatics,
-    private val env: Environment
+    private val accountService: AccountService,
 ) {
 
-    @GetToken
     fun orderStock(
         orderType: OrderType,
         stockCode: String,
         orderPrice: BigDecimal,
-        orderAmount: Double
+        orderAmount: Double,
+        account: Account
     ): KisOrderStockResDto {
-        val token = TokenHolder.getToken()
+
+        accountService.retrieveAccount(account)
 
         val reqBody: MutableMap<String, String> = HashMap<String, String>().apply {
-            this["CANO"] = apiStatics.kis.accountNumber
+            this["CANO"] = account.accountNumber
             this["ACNT_PRDT_CD"] = "01"
             this["PDNO"] = stockCode
             this["ORD_DVSN"] = if (orderPrice == BigDecimal.ZERO) "01" else "00"
@@ -42,28 +39,26 @@ class TradeWebClientService(
         }
 
         val reqHeader: MutableMap<String, String> = HashMap<String, String>().apply {
-            this["authorization"] = "${token.tokenType} ${token.tokenValue}"
-            this["appkey"] = apiStatics.kis.appKey
-            this["appsecret"] = apiStatics.kis.appSecret
+            this["authorization"] = "${account.tokenType} ${account.accessToken}"
             when (orderType) {
                 OrderType.BUY -> this["tr_id"] =
-                    if (CustomUtils.nowTradeMode(env) == TradeMode.REAL) "TTTC0802U" else "VTTC0802U"
+                    if (account.accountType == TradeMode.REAL) "TTTC0802U" else "VTTC0802U"
 
                 OrderType.SELL -> this["tr_id"] =
-                    if (CustomUtils.nowTradeMode(env) == TradeMode.REAL) "TTTC0801U" else "VTTC0801U"
+                    if (account.accountType == TradeMode.REAL) "TTTC0801U" else "VTTC0801U"
             }
         }
 
         val responsesDatas =
-            okHttpClientConnector.connect<Map<String, String>, KisOrderStockResDto>(
-                OkHttpClientConnector.ClientType.KIS,
+            okHttpClientConnector.connectKis<Map<String, String>, KisOrderStockResDto>(
                 HttpMethod.POST,
                 "/uapi/domestic-stock/v1/trading/order-cash",
                 requestHeaders = reqHeader,
                 requestBody = reqBody,
                 responseClassType = KisOrderStockResDto::class.java,
-                retryCount = 0,
-                retryDelay = 0,
+                appkey = account.appKey,
+                appsecret = account.appSecret,
+                accountType = account.accountType,
             )
 
         return responsesDatas.body ?: throw ApiException(
