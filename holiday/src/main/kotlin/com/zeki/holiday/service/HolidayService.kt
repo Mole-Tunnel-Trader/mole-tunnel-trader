@@ -86,9 +86,7 @@ class HolidayService(
                 HttpMethod.GET,
                 "B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
                 requestParams = queryParams,
-                responseClassType = DataGoHolidayResDto::class.java,
-                retryCount = 3,
-                retryDelay = 510
+                responseClassType = DataGoHolidayResDto::class.java
             )
 
         val dataGoHolidayResDto =

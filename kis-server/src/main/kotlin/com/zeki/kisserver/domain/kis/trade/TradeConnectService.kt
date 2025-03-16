@@ -7,20 +7,16 @@ import com.zeki.common.exception.ResponseCode
 import com.zeki.kisserver.domain.kis.account.AccountService
 import com.zeki.mole_tunnel_db.dto.KisOrderStockResDto
 import com.zeki.mole_tunnel_db.entity.Account
-import com.zeki.ok_http_client.ApiStatics
 import com.zeki.ok_http_client.OkHttpClientConnector
-import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 
 @Service
-class TradeWebClientService(
+class TradeConnectService(
     private val okHttpClientConnector: OkHttpClientConnector,
     private val accountService: AccountService,
-    private val apiStatics: ApiStatics,
-    private val env: Environment
 ) {
 
     fun orderStock(
@@ -31,7 +27,7 @@ class TradeWebClientService(
         account: Account
     ): KisOrderStockResDto {
 
-        val accessToken = accountService.retrieveAccount(account)
+        accountService.retrieveAccount(account)
 
         val reqBody: MutableMap<String, String> = HashMap<String, String>().apply {
             this["CANO"] = account.accountNumber
@@ -43,9 +39,7 @@ class TradeWebClientService(
         }
 
         val reqHeader: MutableMap<String, String> = HashMap<String, String>().apply {
-            this["authorization"] = "${account.tokenType} ${accessToken}"
-            this["appkey"] = account.appKey
-            this["appsecret"] = account.appSecret
+            this["authorization"] = "${account.tokenType} ${account.accessToken}"
             when (orderType) {
                 OrderType.BUY -> this["tr_id"] =
                     if (account.accountType == TradeMode.REAL) "TTTC0802U" else "VTTC0802U"
@@ -56,15 +50,15 @@ class TradeWebClientService(
         }
 
         val responsesDatas =
-            okHttpClientConnector.connect<Map<String, String>, KisOrderStockResDto>(
-                OkHttpClientConnector.ClientType.KIS,
+            okHttpClientConnector.connectKis<Map<String, String>, KisOrderStockResDto>(
                 HttpMethod.POST,
                 "/uapi/domestic-stock/v1/trading/order-cash",
                 requestHeaders = reqHeader,
                 requestBody = reqBody,
                 responseClassType = KisOrderStockResDto::class.java,
-                retryCount = 0,
-                retryDelay = 0,
+                appkey = account.appKey,
+                appsecret = account.appSecret,
+                accountType = account.accountType,
             )
 
         return responsesDatas.body ?: throw ApiException(

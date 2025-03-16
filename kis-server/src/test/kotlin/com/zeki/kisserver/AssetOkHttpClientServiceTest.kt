@@ -1,6 +1,6 @@
 package com.zeki.kisserver
 
-import com.zeki.kisserver.domain.kis.stock_info.AssetWebClientService
+import com.zeki.kisserver.domain.kis.stock_info.AssetConnectService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest(classes = [KisVolKotlinApplication::class]) // 애플리케이션 클래스 지정
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AssetOkHttpClientServiceTest @Autowired constructor(
-    private val assetWebClientService: AssetWebClientService
+    private val assetConnectService: AssetConnectService
 ) {
 
     @Test

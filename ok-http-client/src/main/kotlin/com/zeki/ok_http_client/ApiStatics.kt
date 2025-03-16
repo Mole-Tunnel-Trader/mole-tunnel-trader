@@ -6,8 +6,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @ConfigurationProperties(prefix = "keys")
 class ApiStatics {
-    lateinit var webhook: Webhook
-    lateinit var kis: Kis
+    lateinit var discord: Discord
     lateinit var dataGo: DataGo
 
     class DataGo {
@@ -16,15 +15,8 @@ class ApiStatics {
         lateinit var decoding: String
     }
 
-    class Webhook {
+    class Discord {
         lateinit var reportUrl: String
-    }
-
-    class Kis {
-        lateinit var url: String
-        lateinit var appKey: String
-        lateinit var appSecret: String
-        lateinit var accountNumber: String
     }
 
 }

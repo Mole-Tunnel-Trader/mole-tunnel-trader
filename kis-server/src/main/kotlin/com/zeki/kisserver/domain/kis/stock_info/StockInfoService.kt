@@ -11,7 +11,7 @@ class StockInfoService(
     private val stockInfoRepository: StockInfoRepository,
     private val stockInfoJoinRepository: StockInfoJoinRepository,
 
-    private val stockInfoWebClientService: StockInfoWebClientService
+    private val stockInfoConnectService: StockInfoConnectService
 ) {
 
     @Transactional
@@ -23,7 +23,7 @@ class StockInfoService(
             .associateBy { it.code }
             .toMutableMap()
 
-        val kisStockInfoDtoList = stockInfoWebClientService.getKisStockInfoDtoList(stockCodeList)
+        val kisStockInfoDtoList = stockInfoConnectService.getKisStockInfoDtoList(stockCodeList)
 
         kisStockInfoDtoList.forEach { kisStockInfoDto ->
             val output1 = kisStockInfoDto.output1 ?: return@forEach

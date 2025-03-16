@@ -11,7 +11,7 @@ class TradeService(
     private val tradeQueueService: TradeQueueService,
     private val tradeHistoryService: TradeHistoryService,
 
-    private val tradeWebClientService: TradeWebClientService
+    private val tradeConnectService: TradeConnectService
 ) {
 
     @Transactional
@@ -23,7 +23,7 @@ class TradeService(
 
             tradeQueueDtoItems.forEach {
                 val kisOrderStockResDto =
-                    tradeWebClientService.orderStock(
+                    tradeConnectService.orderStock(
                         it.orderType,
                         it.stockCode,
                         it.orderPrice,
