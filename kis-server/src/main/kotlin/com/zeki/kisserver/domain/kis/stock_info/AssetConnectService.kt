@@ -3,42 +3,34 @@ package com.zeki.kisserver.domain.kis.stock_info
 import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
-import com.zeki.common.util.CustomUtils
-import com.zeki.kisserver.domain._common.aop.GetToken
-import com.zeki.kisserver.domain._common.aop.TokenHolder
+import com.zeki.kisserver.domain.kis.account.AccountService
 import com.zeki.kisserver.domain.kis.stock_info.dto.KisAssetResDto
-import com.zeki.ok_http_client.ApiStatics
+import com.zeki.mole_tunnel_db.entity.Account
 import com.zeki.ok_http_client.OkHttpClientConnector
-import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 
 @Service
-class AssetWebClientService(
+class AssetConnectService(
     private val okHttpClientConnector: OkHttpClientConnector,
-    private val apiStatics: ApiStatics,
-    private val env: Environment
+    private val accountService: AccountService,
 ) {
 
-    @GetToken
-    fun getAccountData(): List<KisAssetResDto.Output1> {
-
-        // TODO : 모의투자 주식 매매 후 테스트
-        val token = TokenHolder.getToken()
+    fun getAccountData(account: Account): List<KisAssetResDto.Output1> {
+        accountService.retrieveAccount(account)
 
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>().apply {
-            this["authorization"] = "${token.tokenType} ${token.tokenValue}"
-            this["appkey"] = apiStatics.kis.appKey
-            this["appsecret"] = apiStatics.kis.appSecret
+            this["authorization"] = "${account.tokenType} ${account.accountType}"
+            this["appkey"] = account.appKey
+            this["appsecret"] = account.appSecret
             this["tr_id"] =
-                if (CustomUtils.nowTradeMode(env) == TradeMode.REAL) "TTTC8434R" else "VTTC8434R"
-
+                if (account.accountType == TradeMode.REAL) "TTTC8434R" else "VTTC8434R"
         }
 
         val reqParams: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>().apply {
-            add("CANO", apiStatics.kis.accountNumber)
+            add("CANO", account.accountNumber)
             add("ACNT_PRDT_CD", "01")
             add("AFHR_FLPR_YN", "N")
             add("OFL_YN", "")
@@ -56,15 +48,15 @@ class AssetWebClientService(
         var trCont = "F"
 
         while (trCont == "F" || trCont == "M") {
-            val responseDatas = okHttpClientConnector.connect<Unit, KisAssetResDto>(
-                OkHttpClientConnector.ClientType.KIS,
+            val responseDatas = okHttpClientConnector.connectKis<Unit, KisAssetResDto>(
                 HttpMethod.GET,
                 "/uapi/domestic-stock/v1/trading/inquire-balance",
                 reqHeaders,
                 reqParams,
                 responseClassType = KisAssetResDto::class.java,
-                retryCount = 1,
-                retryDelay = 510
+                appkey = account.appKey,
+                appsecret = account.appSecret,
+                accountType = account.accountType,
             )
 
             val kisAssetResDto = responseDatas.body ?: throw ApiException(

@@ -18,10 +18,10 @@ class StockCodeJoinRepository(
 
     private fun bulkInsertUsingBatch(stockCodeSaveList: Collection<StockCode>) {
         var sql = buildString {
-            append("INSERT INTO stock_code (code, name, market) VALUES ")
+            append("INSERT INTO stock_code (code, name, market, is_alive) VALUES ")
 
             repeat(stockCodeSaveList.size) {
-                append("(?, ?, ?), ")
+                append("(?, ?, ?, ?), ")
             }
         }
         sql = sql.substring(0, sql.length - 2)
@@ -32,6 +32,7 @@ class StockCodeJoinRepository(
                 ps.setString(i++, stockCode.code)
                 ps.setString(i++, stockCode.name)
                 ps.setString(i++, stockCode.market.name)
+                ps.setString(i++, stockCode.isAlive.name)
             }
         }
     }
@@ -43,10 +44,10 @@ class StockCodeJoinRepository(
     }
 
     private fun bulkUpdateUsingBatch(stockCodeUpdateList: Collection<StockCode>) {
-        val sql = "UPDATE stock_code SET name = ?, market = ? WHERE id = ?"
+        val sql = "UPDATE stock_code SET name = ?, market = ?, is_alive = ? WHERE id = ?"
 
         jdbcTemplate.batchUpdate(sql, stockCodeUpdateList.map {
-            arrayOf(it.name, it.market.name, it.id)
+            arrayOf(it.name, it.market.name, it.isAlive.name, it.id)
         })
     }
 

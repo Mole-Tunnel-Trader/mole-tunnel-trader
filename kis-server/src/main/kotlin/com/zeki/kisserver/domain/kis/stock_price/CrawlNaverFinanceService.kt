@@ -38,9 +38,7 @@ class CrawlNaverFinanceService(
             HttpMethod.GET,
             "api.finance.naver.com/siseJson.naver",
             requestParams = reqParam,
-            responseClassType = String::class.java,
-            retryCount = 1,
-            retryDelay = 510
+            responseClassType = String::class.java
         )
 
         val result =
