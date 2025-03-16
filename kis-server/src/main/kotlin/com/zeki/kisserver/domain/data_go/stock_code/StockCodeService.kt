@@ -135,9 +135,7 @@ class StockCodeService(
                 HttpMethod.GET,
                 "1160100/service/GetKrxListedInfoService/getItemInfo",
                 requestParams = queryParams,
-                responseClassType = DataGoStockCodeResDto::class.java,
-                retryCount = 3,
-                retryDelay = 510
+                responseClassType = DataGoStockCodeResDto::class.java
             )
 
             val dataGoStockCodeResDto =

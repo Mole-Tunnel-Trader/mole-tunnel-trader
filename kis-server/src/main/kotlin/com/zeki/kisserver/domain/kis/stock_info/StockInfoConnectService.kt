@@ -1,8 +1,8 @@
 package com.zeki.kisserver.domain.kis.stock_info
 
+import com.zeki.common.em.TradeMode
 import com.zeki.kisserver.domain.kis.account.AccountService
 import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
-import com.zeki.ok_http_client.ApiStatics
 import com.zeki.ok_http_client.OkHttpClientConnector
 import mu.KotlinLogging
 import org.springframework.http.HttpMethod
@@ -14,8 +14,7 @@ import java.time.format.DateTimeFormatter
 
 // 셀프 인보케이션 문제로 분리
 @Service
-class StockInfoWebClientService(
-    private val apiStatics: ApiStatics,
+class StockInfoConnectService(
     private val okHttpClientConnector: OkHttpClientConnector,
     private val accountService: AccountService
 ) {
@@ -29,7 +28,7 @@ class StockInfoWebClientService(
 
 
         val batchAccount = accountService.getBatchAccount()
-        val accessToken = accountService.retrieveAccount(batchAccount)
+        accountService.retrieveAccount(batchAccount)
 
         val stockInfoList = mutableListOf<KisStockInfoResDto>()
         for (stockCode in stockCodeList) {
@@ -41,7 +40,8 @@ class StockInfoWebClientService(
                     appKey = batchAccount.appKey,
                     appSecret = batchAccount.appSecret,
                     tokenType = batchAccount.tokenType,
-                    tokenValue = accessToken
+                    tokenValue = batchAccount.accessToken,
+                    accountType = batchAccount.accountType
                 ) ?: continue
             stockInfoList.add(stockInfoResDto)
         }
@@ -56,7 +56,8 @@ class StockInfoWebClientService(
         appKey: String,
         appSecret: String,
         tokenType: String,
-        tokenValue: String
+        tokenValue: String,
+        accountType: TradeMode
     ): KisStockInfoResDto? {
 
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>()
@@ -83,15 +84,15 @@ class StockInfoWebClientService(
                 this.add("FID_ORG_ADJ_PRC", "0")
             }
 
-        val responseDatas = okHttpClientConnector.connect<Map<String, String>, KisStockInfoResDto>(
-            clientType = OkHttpClientConnector.ClientType.KIS,
+        val responseDatas = okHttpClientConnector.connectKis<Map<String, String>, KisStockInfoResDto>(
             method = HttpMethod.GET,
             requestHeaders = reqHeaders,
             requestParams = reqParams,
             path = "/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice",
             responseClassType = KisStockInfoResDto::class.java,
-            retryCount = 1,
-            retryDelay = 510
+            appkey = appKey,
+            appsecret = appSecret,
+            accountType = accountType,
         )
 
         if (responseDatas.body == null) {

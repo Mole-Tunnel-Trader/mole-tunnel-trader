@@ -7,26 +7,22 @@ import com.zeki.kisserver.domain.kis.account.AccountService
 import com.zeki.kisserver.domain.kis.stock_info.dto.KisAssetResDto
 import com.zeki.mole_tunnel_db.entity.Account
 import com.zeki.ok_http_client.OkHttpClientConnector
-import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 
 @Service
-class AssetWebClientService(
+class AssetConnectService(
     private val okHttpClientConnector: OkHttpClientConnector,
     private val accountService: AccountService,
-    private val env: Environment
 ) {
 
     fun getAccountData(account: Account): List<KisAssetResDto.Output1> {
-
-        // TODO : 모의투자 주식 매매 후 테스트
-        val accessToken = accountService.retrieveAccount(account)
+        accountService.retrieveAccount(account)
 
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>().apply {
-            this["authorization"] = "${account.tokenType} ${accessToken}"
+            this["authorization"] = "${account.tokenType} ${account.accountType}"
             this["appkey"] = account.appKey
             this["appsecret"] = account.appSecret
             this["tr_id"] =
@@ -52,15 +48,15 @@ class AssetWebClientService(
         var trCont = "F"
 
         while (trCont == "F" || trCont == "M") {
-            val responseDatas = okHttpClientConnector.connect<Unit, KisAssetResDto>(
-                OkHttpClientConnector.ClientType.KIS,
+            val responseDatas = okHttpClientConnector.connectKis<Unit, KisAssetResDto>(
                 HttpMethod.GET,
                 "/uapi/domestic-stock/v1/trading/inquire-balance",
                 reqHeaders,
                 reqParams,
                 responseClassType = KisAssetResDto::class.java,
-                retryCount = 1,
-                retryDelay = 510
+                appkey = account.appKey,
+                appsecret = account.appSecret,
+                accountType = account.accountType,
             )
 
             val kisAssetResDto = responseDatas.body ?: throw ApiException(
