@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
+import java.lang.Thread.sleep
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.regex.Pattern
@@ -20,6 +21,7 @@ class CrawlNaverFinanceService(
 ) {
 
     fun crawlStockPrice(stockCode: String, stdDay: LocalDate, count: Int): NaverStockPriceResDto {
+        sleep(100L)
 
         val requestType = "2"
         val startDate = stdDay.toStringDate("yyyyMMdd")

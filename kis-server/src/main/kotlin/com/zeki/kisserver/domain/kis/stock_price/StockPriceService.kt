@@ -1,6 +1,5 @@
 package com.zeki.kisserver.domain.kis.stock_price
 
-
 import com.zeki.holiday.dto.report.UpsertReportDto
 import com.zeki.kisserver.domain.kis.stock_info.StockInfoService
 import com.zeki.mole_tunnel_db.entity.StockPrice
@@ -14,13 +13,11 @@ import java.time.LocalDate
 class StockPriceService(
     private val stockPriceRepository: StockPriceRepository,
     private val stockPriceJoinRepository: StockPriceJoinRepository,
-
     private val stockInfoService: StockInfoService,
-
     private val crawlNaverFinanceService: CrawlNaverFinanceService
 ) {
+    private val log = mu.KotlinLogging.logger {}
 
-    @Transactional
     fun upsertStockPrice(
         stockCodeList: List<String>,
         standardDate: LocalDate,
@@ -34,11 +31,10 @@ class StockPriceService(
 
         for (stockInfo in stockInfoList) {
             val code = stockInfo.code
-            val stockPriceMap = stockInfo.stockPriceList
-                .associateBy { it.date }
-                .toMutableMap()
+            val stockPriceMap = stockInfo.stockPriceList.associateBy { it.date }.toMutableMap()
 
-            val crawlStockPriceDto = crawlNaverFinanceService.crawlStockPrice(code, standardDate, count)
+            val crawlStockPriceDto =
+                crawlNaverFinanceService.crawlStockPrice(code, standardDate, count)
 
             crawlStockPriceDto.items.forEach {
                 when (val stockPrice = stockPriceMap[it.date]) {
@@ -57,13 +53,14 @@ class StockPriceService(
                     }
 
                     else -> {
-                        val isUpdate = stockPrice.updateStockPrice(
-                            open = it.open,
-                            high = it.high,
-                            low = it.low,
-                            close = it.close,
-                            volume = it.volume,
-                        )
+                        val isUpdate =
+                            stockPrice.updateStockPrice(
+                                open = it.open,
+                                high = it.high,
+                                low = it.low,
+                                close = it.close,
+                                volume = it.volume,
+                            )
                         if (isUpdate) stockPriceUpdateList.add(stockPrice)
 
                         stockPriceMap.remove(it.date)
@@ -76,22 +73,17 @@ class StockPriceService(
         stockPriceJoinRepository.bulkInsert(stockPriceSaveList)
         stockPriceJoinRepository.bulkUpdate(stockPriceUpdateList)
 
-        return UpsertReportDto(
-                stockPriceSaveList.size,
-                stockPriceUpdateList.size,
-                0
-        )
+        return UpsertReportDto(stockPriceSaveList.size, stockPriceUpdateList.size, 0)
     }
 
     @Transactional
-    fun updateRsi(
-        stockCodeList: List<String>,
-        standardDate: LocalDate
-    ) {
-        val stockPriceList = stockPriceRepository.findAllByDateGreaterThanEqualAndStockInfoCodeInOrderByDateAsc(
-            baseDate = standardDate,
-            stockCodeList = stockCodeList
-        )
+    fun updateRsi(stockCodeList: List<String>, standardDate: LocalDate) {
+        val stockPriceList =
+            stockPriceRepository
+                .findAllByDateGreaterThanEqualAndStockInfoCodeInWithStockInfoOrderByDateAsc(
+                    baseDate = standardDate,
+                    stockCodeList = stockCodeList
+                )
 
         for (i in stockPriceList.indices) {
             val stockPrice = stockPriceList[i]
@@ -108,13 +100,14 @@ class StockPriceService(
                 val avgGain = if (gains.isNotEmpty()) gains.sum().toDouble() / 14 else 0.0
                 val avgLoss = if (losses.isNotEmpty()) losses.sum().toDouble() / 14 else 0.0
 
-                rsi = if (avgLoss == 0.0) {
-                    // 손실이 없으므로 상승만 있었던 경우 => RSI는 100에 근접
-                    100f
-                } else {
-                    val rs = avgGain / avgLoss
-                    (100.0 - (100.0 / (1.0 + rs))).toFloat()
-                }
+                rsi =
+                    if (avgLoss == 0.0) {
+                        // 손실이 없으므로 상승만 있었던 경우 => RSI는 100에 근접
+                        100f
+                    } else {
+                        val rs = avgGain / avgLoss
+                        (100.0 - (100.0 / (1.0 + rs))).toFloat()
+                    }
             }
 
             stockPrice.rsi = rsi
@@ -122,13 +115,10 @@ class StockPriceService(
     }
 
     @Transactional(readOnly = true)
-    fun getStockPriceByDate(
-        baseDate: LocalDate,
-        stockCodeList: List<String>
-    ): List<StockPrice> {
-        return stockPriceRepository.findAllByDateAndStockInfoCodeIn(
-            baseDate = baseDate,
-            stockCodeList = stockCodeList
+    fun getStockPriceByDate(baseDate: LocalDate, stockCodeList: List<String>): List<StockPrice> {
+        return stockPriceRepository.findAllByStockInfo_CodeInAndDateWithStockInfo(
+            stockCodeList = stockCodeList,
+            date = baseDate
         )
     }
 
@@ -138,7 +128,7 @@ class StockPriceService(
         endLocalDate: LocalDate,
         stockCodeList: List<String>
     ): List<StockPrice> {
-        return stockPriceRepository.findAllByDateBetweenAndStockInfoCodeIn(
+        return stockPriceRepository.findAllByDateBetweenAndStockInfoCodeInWithStockInfo(
             startDate = startLocalDate,
             endDate = endLocalDate,
             stockCodeList = stockCodeList
@@ -150,17 +140,20 @@ class StockPriceService(
         startLocalDate: LocalDate,
         stockCodeList: List<String>
     ): List<StockPrice> {
-        return stockPriceRepository.findAllByDateGreaterThanEqualAndStockInfoCodeInOrderByDateAsc(
-            baseDate = startLocalDate,
-            stockCodeList = stockCodeList
-        )
+        return stockPriceRepository
+            .findAllByDateGreaterThanEqualAndStockInfoCodeInWithStockInfoOrderByDateAsc(
+                baseDate = startLocalDate,
+                stockCodeList = stockCodeList
+            )
     }
 
-    fun getStockPriceListByDate(baseDate: LocalDate, stockCodeList: List<String>): List<StockPrice> {
-        return stockPriceRepository.findAllByDateAndStockInfoCodeIn(
-            baseDate = baseDate,
-            stockCodeList = stockCodeList
+    fun getStockPriceListByDate(
+        baseDate: LocalDate,
+        stockCodeList: List<String>
+    ): List<StockPrice> {
+        return stockPriceRepository.findAllByStockInfo_CodeInAndDateWithStockInfo(
+            stockCodeList = stockCodeList,
+            date = baseDate
         )
     }
-
 }

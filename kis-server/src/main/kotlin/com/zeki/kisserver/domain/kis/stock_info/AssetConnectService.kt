@@ -22,11 +22,9 @@ class AssetConnectService(
         accountService.retrieveAccount(account)
 
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>().apply {
-            this["authorization"] = "${account.tokenType} ${account.accountType}"
-            this["appkey"] = account.appKey
-            this["appsecret"] = account.appSecret
+            this["authorization"] = "${account.tokenType} ${account.accessToken}"
             this["tr_id"] =
-                if (account.accountType == TradeMode.REAL) "TTTC8434R" else "VTTC8434R"
+                if (account.accountType in listOf(TradeMode.REAL, TradeMode.BATCH)) "TTTC8434R" else "VTTC8434R"
         }
 
         val reqParams: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>().apply {

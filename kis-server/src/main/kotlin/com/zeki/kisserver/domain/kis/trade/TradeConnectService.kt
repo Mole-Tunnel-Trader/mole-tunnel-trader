@@ -42,10 +42,10 @@ class TradeConnectService(
             this["authorization"] = "${account.tokenType} ${account.accessToken}"
             when (orderType) {
                 OrderType.BUY -> this["tr_id"] =
-                    if (account.accountType == TradeMode.REAL) "TTTC0802U" else "VTTC0802U"
+                    if (account.accountType in listOf(TradeMode.REAL, TradeMode.BATCH)) "TTTC0802U" else "VTTC0802U"
 
                 OrderType.SELL -> this["tr_id"] =
-                    if (account.accountType == TradeMode.REAL) "TTTC0801U" else "VTTC0801U"
+                    if (account.accountType in listOf(TradeMode.REAL, TradeMode.BATCH)) "TTTC0801U" else "VTTC0801U"
             }
         }
 

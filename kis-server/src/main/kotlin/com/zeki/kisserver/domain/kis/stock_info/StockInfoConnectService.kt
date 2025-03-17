@@ -31,7 +31,7 @@ class StockInfoConnectService(
         accountService.retrieveAccount(batchAccount)
 
         val stockInfoList = mutableListOf<KisStockInfoResDto>()
-        for ((index, stockCode) in stockCodeList.withIndex()) {
+        for (stockCode in stockCodeList) {
             val stockInfoResDto =
                 this.getStockInfoFromKis(
                     stockCode = stockCode,
@@ -43,9 +43,7 @@ class StockInfoConnectService(
                     tokenValue = batchAccount.accessToken,
                     accountType = batchAccount.accountType
                 ) ?: continue
-            log.info {
-                "KIS 주식 정보 조회 성공, 종목코드 : $stockCode, ${index + 1} / ${stockCodeList.size}"
-            }
+
             stockInfoList.add(stockInfoResDto)
         }
 
@@ -66,8 +64,6 @@ class StockInfoConnectService(
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>()
             .apply {
                 this["authorization"] = "$tokenType $tokenValue"
-                this["appkey"] = appKey
-                this["appsecret"] = appSecret
                 this["tr_id"] = "FHKST03010100"
             }
 

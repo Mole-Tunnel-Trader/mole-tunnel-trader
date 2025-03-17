@@ -11,18 +11,18 @@ import org.springframework.transaction.annotation.Transactional
 class StockInfoService(
     private val stockInfoRepository: StockInfoRepository,
     private val stockInfoJoinRepository: StockInfoJoinRepository,
-
     private val stockInfoConnectService: StockInfoConnectService
 ) {
 
-    @Transactional
     fun upsertStockInfo(stockCodeList: List<String>): UpsertReportDto {
         val stockInfoSaveList = mutableListOf<StockInfo>()
         val stockInfoUpdateList = mutableListOf<StockInfo>()
 
-        val savedStockInfoMap = stockInfoRepository.findByCodeIn(stockCodeList)
-            .associateBy { it.code }
-            .toMutableMap()
+        val savedStockInfoMap =
+            stockInfoRepository
+                .findByCodeIn(stockCodeList)
+                .associateBy { it.code }
+                .toMutableMap()
 
         val kisStockInfoDtoList = stockInfoConnectService.getKisStockInfoDtoList(stockCodeList)
 
@@ -69,14 +69,11 @@ class StockInfoService(
         stockInfoJoinRepository.bulkInsert(stockInfoSaveList)
         stockInfoJoinRepository.bulkUpdate(stockInfoUpdateList)
 
-        return UpsertReportDto(
-                stockInfoSaveList.size,
-                stockInfoUpdateList.size,
-                0
-        )
+        return UpsertReportDto(stockInfoSaveList.size, stockInfoUpdateList.size, 0)
     }
 
+    @Transactional
     fun getStockInfoList(stockCodeList: List<String>): List<StockInfo> {
-        return stockInfoRepository.findByCodeIn(stockCodeList)
+        return stockInfoRepository.findByCodeInWithStockPrices(stockCodeList)
     }
 }
