@@ -17,8 +17,8 @@ class CacheConfig {
         val caffeineCacheManager = CaffeineCacheManager()
         caffeineCacheManager.setCaffeine(
                 Caffeine.newBuilder()
-                        .expireAfterWrite(1, TimeUnit.SECONDS) // 1초 후 만료
-                        .maximumSize(1000)
+                        .expireAfterWrite(1000, TimeUnit.MILLISECONDS)
+                        .maximumSize(10000)
         )
         caffeineCacheManager.setCacheNames(listOf("kisApiRequests"))
         return caffeineCacheManager

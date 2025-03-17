@@ -8,10 +8,9 @@ import java.time.format.DateTimeFormatter
 
 object CustomUtils {
     fun isProdProfile(environment: Environment): Boolean =
-        "prod" in environment.activeProfiles || "prod" in environment.defaultProfiles
+        true
 
-    fun nowTradeMode(environment: Environment): TradeMode =
-        if (isProdProfile(environment)) TradeMode.REAL else TradeMode.TRAIN
+    fun nowTradeMode(environment: Environment): TradeMode = TradeMode.REAL
 
     /**
      * 일봉 기준이므로

@@ -18,8 +18,6 @@ class AccountConnectService(
     fun retrieveTokenFromKis(appKey: String, appSecret: String, accountType: TradeMode): KisTokenResDto {
         val reqBody = mapOf(
             "grant_type" to GRANT_TYPE,
-            "appkey" to appKey,
-            "appsecret" to appSecret
         )
 
         val response = okHttpClientConnector.connectKis(

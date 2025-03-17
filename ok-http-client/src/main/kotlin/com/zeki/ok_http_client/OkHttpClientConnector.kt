@@ -27,6 +27,7 @@ class OkHttpClientConnector(
     enum class ClientType {
         DATA_GO,
         DISCORD,
+        NAVER_FINANCE,
         DEFAULT
     }
 
@@ -64,6 +65,7 @@ class OkHttpClientConnector(
             when (clientType) {
                 DATA_GO -> apiStatics.dataGo.url
                 DISCORD -> apiStatics.discord.reportUrl
+                NAVER_FINANCE -> ""
                 DEFAULT -> ""
             }
         var url =
@@ -108,14 +110,18 @@ class OkHttpClientConnector(
 
             val responseBody =
                 try {
-                    // JSON 파싱 시 예외 처리
-                    responseBodyString.let { objectMapper.readValue(it, responseClassType) }
+                    if (clientType == ClientType.NAVER_FINANCE) {
+                        responseBodyString // JSON이 아니면 문자열 그대로 반환
+                    } else {
+                        objectMapper.readValue(responseBodyString, responseClassType)
+                    }
                 } catch (e: IOException) {
                     log.error(e.message)
                     throw ApiException(ResponseCode.INTERNAL_SERVER_OK_CLIENT_ERROR)
                 }
 
-            return ApiResponse(response.isSuccessful, responseBody, headers)
+            @Suppress("UNCHECKED_CAST")
+            return ApiResponse(response.isSuccessful, responseBody as S, headers)
         }
     }
 
