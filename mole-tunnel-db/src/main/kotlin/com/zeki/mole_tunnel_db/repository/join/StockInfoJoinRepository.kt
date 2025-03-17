@@ -20,14 +20,25 @@ class StockInfoJoinRepository(
     }
 
     private fun bulkInsertUsingBatch(stockInfoSaveList: Collection<StockInfo>) {
-        var sql = buildString {
+        val sql = buildString {
             append("INSERT INTO stock_info (name, code, other_code, fcam, amount, market_capital, capital, per, pbr, eps) VALUES ")
 
             repeat(stockInfoSaveList.size) {
                 append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?), ")
             }
+
+            setLength(length - 2) // 마지막 쉼표 제거
+            append(" ON DUPLICATE KEY UPDATE ")
+            append("name = VALUES(name), ")
+            append("other_code = VALUES(other_code), ")
+            append("fcam = VALUES(fcam), ")
+            append("amount = VALUES(amount), ")
+            append("market_capital = VALUES(market_capital), ")
+            append("capital = VALUES(capital), ")
+            append("per = VALUES(per), ")
+            append("pbr = VALUES(pbr), ")
+            append("eps = VALUES(eps)")
         }
-        sql = sql.substring(0, sql.length - 2)
 
         jdbcTemplate.update(sql) { ps ->
             var i = 1
@@ -45,6 +56,7 @@ class StockInfoJoinRepository(
             }
         }
     }
+
 
     fun bulkUpdate(stockInfoUpdateList: Collection<StockInfo>) {
         stockInfoUpdateList.chunked(batchSize).forEach {

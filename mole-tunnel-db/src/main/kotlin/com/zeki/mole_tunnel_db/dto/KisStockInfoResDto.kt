@@ -16,65 +16,65 @@ data class KisStockInfoResDto(
 ) {
     data class Output1(
         @JsonProperty("acml_tr_pbmn")
-        val acmlTrPbmn: String,
+        val acmlTrPbmn: String? = null,
         @JsonProperty("acml_vol")
-        val acmlVol: String,
+        val acmlVol: String? = null,
         @JsonProperty("askp")
-        val askp: String,
+        val askp: String? = null,
         @JsonProperty("bidp")
-        val bidp: String,
+        val bidp: String? = null,
         @JsonProperty("cpfn")
-        val cpfn: String,
+        val cpfn: String? = null,
         @JsonProperty("eps")
-        val eps: String,
+        val eps: String? = null,
         @JsonProperty("hts_avls")
-        val htsAvls: String,
+        val htsAvls: String? = null,
         @JsonProperty("hts_kor_isnm")
-        val stockName: String,
+        val stockName: String? = null,
         @JsonProperty("itewhol_loan_rmnd_ratem name")
-        val itewholLoanRmndRatemName: String? = null, // nullable로 변경
+        val itewholLoanRmndRatemName: String? = null,
         @JsonProperty("lstn_stcn")
-        val lstnStcn: String,
+        val lstnStcn: String? = null,
         @JsonProperty("pbr")
-        val pbr: String,
+        val pbr: String? = null,
         @JsonProperty("per")
-        val per: String,
+        val per: String? = null,
         @JsonProperty("prdy_ctrt")
-        val prdyCtrt: String,
+        val prdyCtrt: String? = null,
         @JsonProperty("prdy_vol")
-        val prdyVol: String,
+        val prdyVol: String? = null,
         @JsonProperty("prdy_vrss")
-        val prdyVrss: String,
+        val prdyVrss: String? = null,
         @JsonProperty("prdy_vrss_sign")
-        val prdyVrssSign: String,
+        val prdyVrssSign: String? = null,
         @JsonProperty("prdy_vrss_vol")
-        val prdyVrssVol: String,
+        val prdyVrssVol: String? = null,
         @JsonProperty("stck_fcam")
-        val stckFcam: String,
+        val stckFcam: String? = null,
         @JsonProperty("stck_hgpr")
-        val stckHgpr: String,
+        val stckHgpr: String? = null,
         @JsonProperty("stck_llam")
-        val stckLlam: String,
+        val stckLlam: String? = null,
         @JsonProperty("stck_lwpr")
-        val stckLwpr: String,
+        val stckLwpr: String? = null,
         @JsonProperty("stck_mxpr")
-        val stckMxpr: String,
+        val stckMxpr: String? = null,
         @JsonProperty("stck_oprc")
-        val stckOprc: String,
+        val stckOprc: String? = null,
         @JsonProperty("stck_prdy_clpr")
-        val stckPrdyClpr: String,
+        val stckPrdyClpr: String? = null,
         @JsonProperty("stck_prdy_hgpr")
-        val stckPrdyHgpr: String,
+        val stckPrdyHgpr: String? = null,
         @JsonProperty("stck_prdy_lwpr")
-        val stckPrdyLwpr: String,
+        val stckPrdyLwpr: String? = null,
         @JsonProperty("stck_prdy_oprc")
-        val stckPrdyOprc: String,
+        val stckPrdyOprc: String? = null,
         @JsonProperty("stck_prpr")
-        val stckPrpr: String,
+        val stckPrpr: String? = null,
         @JsonProperty("stck_shrn_iscd")
-        val stockCode: String,
+        val stockCode: String? = null,
         @JsonProperty("vol_tnrt")
-        val volTnrt: String
+        val volTnrt: String? = null
     )
 
     data class Output2(

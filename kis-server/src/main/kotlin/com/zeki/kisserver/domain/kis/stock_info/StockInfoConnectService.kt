@@ -43,6 +43,7 @@ class StockInfoConnectService(
                     tokenValue = batchAccount.accessToken,
                     accountType = batchAccount.accountType
                 ) ?: continue
+
             stockInfoList.add(stockInfoResDto)
         }
 
@@ -63,8 +64,6 @@ class StockInfoConnectService(
         val reqHeaders: MutableMap<String, String> = HashMap<String, String>()
             .apply {
                 this["authorization"] = "$tokenType $tokenValue"
-                this["appkey"] = appKey
-                this["appsecret"] = appSecret
                 this["tr_id"] = "FHKST03010100"
             }
 
