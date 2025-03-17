@@ -8,10 +8,6 @@ tasks.named<Jar>("jar") {
     isEnabled = true
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
 //tasks.withType<Test> {
 //    useJUnitPlatform()
 //}
