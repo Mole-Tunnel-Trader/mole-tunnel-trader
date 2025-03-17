@@ -1,7 +1,5 @@
 package com.zeki.kisserver
 
-import com.zeki.common.em.Status
-import com.zeki.common.em.StockMarket
 import com.zeki.kisserver.domain.kis.stock_info.StockInfoService
 import com.zeki.kisserver.domain.kis.stock_price.StockPriceService
 import com.zeki.mole_tunnel_db.repository.StockCodeRepository
@@ -26,19 +24,6 @@ class StockInfoAndPriceServiceTest {
 
     @Autowired
     private lateinit var stockPriceService: StockPriceService
-
-    @Test
-    fun `주식 정보와 5년치 가격을 생성 및 업데이트 한다`() {
-        // Given
-        val stockCodeList =
-            stockCodeRepository.findByIsAliveAndMarketIn(Status.Y, listOf(StockMarket.KOSPI, StockMarket.KOSDAQ))
-                .map { it.code }
-
-        // When
-//        val upsertInfo = stockInfoService.upsertStockInfo(stockCodeList)
-        val upsertPrice = stockPriceService.upsertStockPrice(stockCodeList, LocalDate.now(), 5000)
-
-    }
 
     @Test
     fun `기아 주식 정보 5일치 가격을 생성 및 업데이트 한다`() {
