@@ -3,7 +3,6 @@ package com.zeki.kisserver.domain.kis.account
 import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
-import com.zeki.kisserver.domain.utils.KisUtils.GRANT_TYPE
 import com.zeki.mole_tunnel_db.dto.KisTokenResDto
 import com.zeki.ok_http_client.OkHttpClientConnector
 import org.springframework.http.HttpMethod
@@ -15,9 +14,16 @@ class AccountConnectService(
 ) {
 
 
-    fun retrieveTokenFromKis(appKey: String, appSecret: String, accountType: TradeMode): KisTokenResDto {
+    fun retrieveTokenFromKis(
+        appKey: String,
+        appSecret: String,
+        accountType: TradeMode,
+        grantType: String
+    ): KisTokenResDto {
         val reqBody = mapOf(
-            "grant_type" to GRANT_TYPE,
+            "appkey" to appKey,
+            "appsecret" to appSecret,
+            "grant_type" to grantType,
         )
 
         val response = okHttpClientConnector.connectKis(

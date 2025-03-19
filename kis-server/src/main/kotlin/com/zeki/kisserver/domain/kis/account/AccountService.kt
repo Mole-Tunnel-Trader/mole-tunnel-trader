@@ -24,7 +24,12 @@ class AccountService(
 
     private fun refreshAccountToken(account: Account): Account {
         val kisTokenResDto =
-            accountConnectService.retrieveTokenFromKis(account.appKey, account.appSecret, account.accountType)
+            accountConnectService.retrieveTokenFromKis(
+                account.appKey,
+                account.appSecret,
+                account.accountType,
+                account.grantType
+            )
         account.updateToken(kisTokenResDto)
         return account
     }
