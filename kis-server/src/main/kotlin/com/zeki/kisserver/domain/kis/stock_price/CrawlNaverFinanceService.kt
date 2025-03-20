@@ -34,7 +34,7 @@ class CrawlNaverFinanceService(
         reqParam.add("startTime", startDate)
         reqParam.add("timeframe", timeframe)
 
-        sleep(1100L)
+        sleep(110L)
         val responseDatas = okHttpClientConnector.connect<Unit, String>(
             OkHttpClientConnector.ClientType.NAVER_FINANCE,
             HttpMethod.GET,
