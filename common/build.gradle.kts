@@ -19,5 +19,8 @@ dependencies {
 
     // log
     api("io.github.microutils:kotlin-logging:3.0.5")
+
+    // monitoring
+    api("org.springframework.boot:spring-boot-starter-actuator")
 }
 

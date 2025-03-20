@@ -14,7 +14,7 @@ class SchedulerController(
     fun getDataGo() {
         scheduler.updateHolidayAndStockCode()
     }
-    
+
     @GetMapping("/stock-info")
     fun getStockInfo() {
         scheduler.updateStockInfo()
