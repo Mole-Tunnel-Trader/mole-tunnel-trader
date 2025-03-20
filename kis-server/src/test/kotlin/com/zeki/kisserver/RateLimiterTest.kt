@@ -3,22 +3,22 @@ package com.zeki.kisserver
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.zeki.common.em.TradeMode
 import com.zeki.ok_http_client.RateLimiter
-import java.util.concurrent.TimeUnit
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.cache.caffeine.CaffeineCacheManager
+import java.util.concurrent.TimeUnit
 
 class RateLimiterTest {
 
     private val cacheManager =
-            CaffeineCacheManager().apply {
-                setCaffeine(
-                        Caffeine.newBuilder()
-                                .expireAfterWrite(2, TimeUnit.SECONDS)
-                                .maximumSize(1000)
-                )
-                setCacheNames(listOf("kisApiRequests"))
-            }
+        CaffeineCacheManager().apply {
+            setCaffeine(
+                Caffeine.newBuilder()
+                    .expireAfterWrite(2, TimeUnit.SECONDS)
+                    .maximumSize(1000)
+            )
+            setCacheNames(listOf("kisApiRequests"))
+        }
 
     private val rateLimiter = RateLimiter(cacheManager)
 

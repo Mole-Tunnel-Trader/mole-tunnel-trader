@@ -14,76 +14,48 @@ class StockPriceService(
     private val stockPriceRepository: StockPriceRepository,
     private val stockPriceJoinRepository: StockPriceJoinRepository,
     private val stockInfoService: StockInfoService,
-    private val crawlNaverFinanceService: CrawlNaverFinanceService
+    private val crawlNaverFinanceService: CrawlNaverFinanceService,
+    private val stockPriceDataService: StockPriceDataService
 ) {
     private val log = mu.KotlinLogging.logger {}
+
+    // 배치 처리 사이즈 설정
+    private val batchSize = 500
 
     fun upsertStockPrice(
         stockCodeList: List<String>,
         standardDate: LocalDate,
         count: Int
     ): UpsertReportDto {
-        val stockPriceSaveList = mutableListOf<StockPrice>()
-        val stockPriceUpdateList = mutableListOf<StockPrice>()
-        val stockPriceDeleteSet = mutableSetOf<StockPrice>()
+        // 결과를 합산하기 위한 변수들
+        val totalStockPriceSaveList = mutableListOf<StockPrice>()
+        val totalStockPriceUpdateList = mutableListOf<StockPrice>()
 
-        val stockInfoList = stockInfoService.getStockInfoList(stockCodeList)
+        // 500개씩 나누어 처리
+        stockCodeList.chunked(batchSize).forEach { batchCodes ->
+            // 1. 데이터 준비 트랜잭션에서 데이터 조회 및 처리
+            val (stockPriceSaveList, stockPriceUpdateList) =
+                stockPriceDataService.prepareStockPriceData(batchCodes, standardDate, count)
 
-        for (stockInfo in stockInfoList) {
-            val code = stockInfo.code
-            val stockPriceMap = stockInfo.stockPriceList.associateBy { it.date }.toMutableMap()
-
-            val crawlStockPriceDto =
-                crawlNaverFinanceService.crawlStockPrice(code, standardDate, count)
-
-            crawlStockPriceDto.items.forEach {
-                when (val stockPrice = stockPriceMap[it.date]) {
-                    null -> {
-                        stockPriceSaveList.add(
-                            StockPrice.create(
-                                date = it.date,
-                                open = it.open,
-                                high = it.high,
-                                low = it.low,
-                                close = it.close,
-                                volume = it.volume,
-                                stockInfo = stockInfo,
-                            )
-                        )
-                    }
-
-                    else -> {
-                        val isUpdate =
-                            stockPrice.updateStockPrice(
-                                open = it.open,
-                                high = it.high,
-                                low = it.low,
-                                close = it.close,
-                                volume = it.volume,
-                            )
-                        if (isUpdate) stockPriceUpdateList.add(stockPrice)
-
-                        stockPriceMap.remove(it.date)
-                    }
-                }
-            }
-            stockPriceDeleteSet.addAll(stockPriceMap.values)
+            // 결과 리스트에 추가
+            totalStockPriceSaveList.addAll(stockPriceSaveList)
+            totalStockPriceUpdateList.addAll(stockPriceUpdateList)
         }
 
-        stockPriceJoinRepository.bulkInsert(stockPriceSaveList)
-        stockPriceJoinRepository.bulkUpdate(stockPriceUpdateList)
+        // 2. 모든 배치의 결과를 모아서 한 번에 벌크 작업 실행
+        stockPriceJoinRepository.bulkInsert(totalStockPriceSaveList)
+        stockPriceJoinRepository.bulkUpdate(totalStockPriceUpdateList)
 
-        return UpsertReportDto(stockPriceSaveList.size, stockPriceUpdateList.size, 0)
+        return UpsertReportDto(totalStockPriceSaveList.size, totalStockPriceUpdateList.size, 0)
     }
 
     @Transactional
     fun updateRsi(stockCodeList: List<String>, standardDate: LocalDate) {
         val stockPriceList =
-            stockPriceRepository
-                .findAllByDateGreaterThanEqualAndStockInfoCodeInWithStockInfoOrderByDateAsc(
-                    baseDate = standardDate,
-                    stockCodeList = stockCodeList
-                )
+            stockPriceRepository.findAllByDateGreaterThanEqualAndStockInfoCodeInOrderByDateAsc(
+                baseDate = standardDate,
+                stockCodeList = stockCodeList
+            )
 
         for (i in stockPriceList.indices) {
             val stockPrice = stockPriceList[i]
@@ -116,7 +88,7 @@ class StockPriceService(
 
     @Transactional(readOnly = true)
     fun getStockPriceByDate(baseDate: LocalDate, stockCodeList: List<String>): List<StockPrice> {
-        return stockPriceRepository.findAllByStockInfo_CodeInAndDateWithStockInfo(
+        return stockPriceRepository.findAllByStockInfo_CodeInAndDate(
             stockCodeList = stockCodeList,
             date = baseDate
         )
@@ -128,7 +100,7 @@ class StockPriceService(
         endLocalDate: LocalDate,
         stockCodeList: List<String>
     ): List<StockPrice> {
-        return stockPriceRepository.findAllByDateBetweenAndStockInfoCodeInWithStockInfo(
+        return stockPriceRepository.findAllByDateBetweenAndStockInfoCodeIn(
             startDate = startLocalDate,
             endDate = endLocalDate,
             stockCodeList = stockCodeList
@@ -140,18 +112,18 @@ class StockPriceService(
         startLocalDate: LocalDate,
         stockCodeList: List<String>
     ): List<StockPrice> {
-        return stockPriceRepository
-            .findAllByDateGreaterThanEqualAndStockInfoCodeInWithStockInfoOrderByDateAsc(
-                baseDate = startLocalDate,
-                stockCodeList = stockCodeList
-            )
+        return stockPriceRepository.findAllByDateGreaterThanEqualAndStockInfoCodeInOrderByDateAsc(
+            baseDate = startLocalDate,
+            stockCodeList = stockCodeList
+        )
     }
 
+    @Transactional(readOnly = true)
     fun getStockPriceListByDate(
         baseDate: LocalDate,
         stockCodeList: List<String>
     ): List<StockPrice> {
-        return stockPriceRepository.findAllByStockInfo_CodeInAndDateWithStockInfo(
+        return stockPriceRepository.findAllByStockInfo_CodeInAndDate(
             stockCodeList = stockCodeList,
             date = baseDate
         )

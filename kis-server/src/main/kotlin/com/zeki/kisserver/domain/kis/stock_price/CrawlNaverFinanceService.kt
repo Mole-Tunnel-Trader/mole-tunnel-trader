@@ -19,10 +19,9 @@ import java.util.regex.Pattern
 class CrawlNaverFinanceService(
     private val okHttpClientConnector: OkHttpClientConnector
 ) {
+    private val log = mu.KotlinLogging.logger {}
 
     fun crawlStockPrice(stockCode: String, stdDay: LocalDate, count: Int): NaverStockPriceResDto {
-        sleep(100L)
-
         val requestType = "2"
         val startDate = stdDay.toStringDate("yyyyMMdd")
         val timeframe = "day"
@@ -35,6 +34,7 @@ class CrawlNaverFinanceService(
         reqParam.add("startTime", startDate)
         reqParam.add("timeframe", timeframe)
 
+        sleep(1100L)
         val responseDatas = okHttpClientConnector.connect<Unit, String>(
             OkHttpClientConnector.ClientType.NAVER_FINANCE,
             HttpMethod.GET,

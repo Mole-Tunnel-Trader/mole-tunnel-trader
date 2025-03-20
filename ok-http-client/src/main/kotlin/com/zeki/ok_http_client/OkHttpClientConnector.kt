@@ -3,7 +3,6 @@ package com.zeki.ok_http_client
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
-import com.zeki.common.exception.ExceptionUtils.log
 import com.zeki.common.exception.ResponseCode
 import com.zeki.ok_http_client.OkHttpClientConnector.ClientType.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -24,6 +23,8 @@ class OkHttpClientConnector(
     private val objectMapper: ObjectMapper,
     private val rateLimiter: RateLimiter
 ) {
+    private val log = mu.KotlinLogging.logger {}
+
     enum class ClientType {
         DATA_GO,
         DISCORD,
