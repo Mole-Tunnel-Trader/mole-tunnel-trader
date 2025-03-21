@@ -73,13 +73,7 @@ class Scheduler(
         )
     }
 
-    @Scheduled(cron = "0 * * * * *")
-    fun sendReportWebhook() {
-        val now = LocalDateTime.now()
-        dataReportService.sendDataReport(now)
-    }
-
-    @Scheduled(cron = "0 0 19 * * *")
+    @Scheduled(cron = "0 1 18 * * *")
     fun updateStockInfo() {
         val stockCodeList = getStockCodeService.getStockCodeStringList()
         val upsertInfo = stockInfoService.upsertStockInfo(stockCodeList)
@@ -113,13 +107,13 @@ class Scheduler(
             startDateTime =
                 LocalDateTime.of(
                     /* date = */ LocalDate.now(),
-                    /* time = */ LocalTime.of(21, 0)
+                    /* time = */ LocalTime.of(20, 0)
                 ),
             content = content
         )
     }
 
-    @Scheduled(cron = "0 0 20 * * *")
+    @Scheduled(cron = "0 1 19 * * *")
     fun updateStockPrice() {
         val stockCodeList = getStockCodeService.getStockCodeStringList()
         val upsertPrice = stockPriceService.upsertStockPrice(stockCodeList, LocalDate.now(), 10)
@@ -153,7 +147,7 @@ class Scheduler(
             startDateTime =
                 LocalDateTime.of(
                     /* date = */ LocalDate.now(),
-                    /* time = */ LocalTime.of(21, 0)
+                    /* time = */ LocalTime.of(20, 0)
                 ),
             content = content
         )
