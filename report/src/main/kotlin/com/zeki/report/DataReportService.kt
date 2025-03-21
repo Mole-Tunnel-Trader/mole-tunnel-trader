@@ -39,23 +39,22 @@ class DataReportService(
         val startDateTime = now.withSecond(0).withNano(0)
         val endDateTime = now.withSecond(59)
         val dataReports =
-            dataReportRepository.findByReportDateTimeBetweenAndName(
+            dataReportRepository.findByReportDateTimeBetween(
                 startDateTime,
-                endDateTime,
-                ReportType.DATA_GO
+                endDateTime
             )
 
         dataReports.forEach {
             ExceptionUtils.log.info { "sendDataReport: $it" }
             val reqBody = objectMapper.readValue(it.content, DiscordWebhookDto::class.java)
-            val connect = okHttpClientConnector.connect(
+            okHttpClientConnector.connect(
                 clientType = OkHttpClientConnector.ClientType.DEFAULT,
                 method = HttpMethod.POST,
                 path = it.url,
                 requestBody = reqBody,
                 responseClassType = JsonNode::class.java,
             )
-            //TODO: response 확인 후 isSend 값 변경
+
             it.isSend = "Y"
         }
 
