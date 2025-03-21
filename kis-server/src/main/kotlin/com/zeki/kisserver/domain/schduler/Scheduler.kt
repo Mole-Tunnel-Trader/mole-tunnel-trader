@@ -24,6 +24,7 @@ class Scheduler(
     private val objectMapper: ObjectMapper,
     private val stockInfoService: StockInfoService,
     private val stockPriceService: StockPriceService,
+    private val asyncScheduler: AsyncScheduler
 ) {
 
     @Scheduled(cron = "0 30 7 * * *")
@@ -151,5 +152,8 @@ class Scheduler(
                 ),
             content = content
         )
+        
+        asyncScheduler.updateRsi()
     }
+
 }
