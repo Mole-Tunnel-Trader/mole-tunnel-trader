@@ -64,7 +64,7 @@ class TradeHistory(
     var orderType: OrderType = orderType
         protected set
 
-    @Column(name = "order_price", nullable = false, precision = 12)
+    @Column(name = "order_price", nullable = false)
     var orderPrice: BigDecimal = orderPrice
         protected set
 

@@ -23,22 +23,22 @@ class StockPrice private constructor(
     var date: LocalDate = date
         protected set
 
-    @Column(name = "close", nullable = false, precision = 12)
+    @Column(name = "close", nullable = false)
     @Comment("종가")
     var close: BigDecimal = close
         protected set
 
-    @Column(name = "open", nullable = false, precision = 12)
+    @Column(name = "open", nullable = false)
     @Comment("시가")
     var open: BigDecimal = open
         protected set
 
-    @Column(name = "high", nullable = false, precision = 12)
+    @Column(name = "high", nullable = false)
     @Comment("고가")
     var high: BigDecimal = high
         protected set
 
-    @Column(name = "low", nullable = false, precision = 12)
+    @Column(name = "low", nullable = false)
     @Comment("저가")
     var low: BigDecimal = low
         protected set
@@ -48,7 +48,7 @@ class StockPrice private constructor(
     var volume: Long = volume
         protected set
 
-    @Column(name = "rsi", nullable = true, precision = 12)
+    @Column(name = "rsi", nullable = true)
     @Comment("RSI")
     var rsi: Float? = rsi
 
