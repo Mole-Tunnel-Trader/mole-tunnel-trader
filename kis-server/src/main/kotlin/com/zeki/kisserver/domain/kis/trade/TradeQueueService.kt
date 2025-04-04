@@ -66,7 +66,7 @@ class TradeQueueService(
                     // orderAmountRate는 알고리즘이 판단한 종목별 매매 비율
                     // tradePriceRate는 계좌의 알고리즘 연동 비율
                     val orderAmount =
-                        tradeQueue.orderAmountRate.toDouble() * accountAlgorithm.tradePriceRate
+                        tradeQueue.orderAmountRate * accountAlgorithm.tradePriceRate.toBigDecimal()
 
                     // 매매 항목 추가
                     tradeQueueItems.add(
@@ -75,7 +75,7 @@ class TradeQueueService(
                             stockCode = tradeQueue.stockCode,
                             orderType = tradeQueue.orderType,
                             orderPrice = tradeQueue.orderPrice,
-                            orderAmount = orderAmount,
+                            orderAmount = orderAmount.toDouble(),
                             account = account
                         )
                     )
