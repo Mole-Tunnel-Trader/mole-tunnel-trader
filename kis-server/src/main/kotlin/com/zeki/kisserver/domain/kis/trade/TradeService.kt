@@ -35,13 +35,11 @@ class TradeService(
         }
 
         tradeQueueService.removeTradeQueue(
-            tradeQueueDtoList.stream()
-                .map { tradeQueueDto ->
-                    tradeQueueDto.items.stream()
-                        .map { item ->
-                            item.id
-                        }.toList()
+            tradeQueueDtoList.map { tradeQueueDto ->
+                tradeQueueDto.items.map { item ->
+                    item.id
                 }.toList()
+            }.toList()
                 .flatten()
         )
     }
