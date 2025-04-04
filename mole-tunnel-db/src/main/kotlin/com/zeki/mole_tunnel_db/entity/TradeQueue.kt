@@ -21,8 +21,9 @@ class TradeQueue(
     orderDate: LocalDate,
     orderType: OrderType,
     orderPrice: BigDecimal,
-    orderAmount: Double,
-    orderBy: String
+    orderAmountRate: BigDecimal,
+    orderBy: String,
+    algorithm: Algorithm
 ) : BaseEntity() {
     @Column(name = "stock_code", nullable = false, length = 20)
     var stockCode: String = stockCode
@@ -41,15 +42,20 @@ class TradeQueue(
     var orderType: OrderType = orderType
         protected set
 
-    @Column(name = "order_price", nullable = false, precision = 12)
+    @Column(name = "order_price", nullable = false)
     var orderPrice: BigDecimal = orderPrice
         protected set
 
-    @Column(name = "order_amount", nullable = false)
-    var orderAmount: Double = orderAmount
+    @Column(name = "order_amount_rate", nullable = false)
+    var orderAmountRate: BigDecimal = orderAmountRate
         protected set
 
     @Column(name = "order_by", nullable = false, length = 20)
     var orderBy: String = orderBy
         protected set
+
+    @JoinColumn(name = "algorithm_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    var algorithm: Algorithm = algorithm
+
 }
