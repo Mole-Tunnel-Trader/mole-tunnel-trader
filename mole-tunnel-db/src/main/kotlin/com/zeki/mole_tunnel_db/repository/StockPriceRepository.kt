@@ -17,7 +17,6 @@ interface StockPriceRepository : JpaRepository<StockPrice, Long> {
         stockCodeList: List<String>
     ): List<StockPrice>
 
-
     fun findAllByDateBetweenAndStockInfoCodeIn(
         startDate: LocalDate,
         endDate: LocalDate,
@@ -28,4 +27,12 @@ interface StockPriceRepository : JpaRepository<StockPrice, Long> {
         stockCodeList: List<String>,
         date: LocalDate
     ): List<StockPrice>
+
+    fun findByStockInfo_CodeAndDate(stockCode: String, date: LocalDate): StockPrice?
+
+    /** 특정 날짜의 모든 주식 가격 데이터를 조회하는 메소드 종목 코드 기준으로 정렬 */
+    fun findAllByDateOrderByStockInfoCode(date: LocalDate): List<StockPrice>
+
+    /** 특정 날짜의 모든 주식 가격 데이터를 조회하는 메소드 */
+    fun findAllByDate(date: LocalDate): List<StockPrice>
 }

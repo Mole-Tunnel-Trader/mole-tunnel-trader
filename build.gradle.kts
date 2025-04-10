@@ -55,6 +55,8 @@ subprojects {
 project(":kis-server") {
     dependencies {
         implementation(project(":report"))
+        implementation(project(":stock-code"))
+        implementation(project(":stock-data"))
         implementation(project(":holiday"))
 
         implementation(project(":mole-tunnel-db"))
@@ -66,6 +68,8 @@ project(":kis-server") {
 project(":back-test-server") {
     dependencies {
         implementation(project(":report"))
+        implementation(project(":stock-code"))
+        implementation(project(":stock-data"))
         implementation(project(":holiday"))
 
         implementation(project(":mole-tunnel-db"))
@@ -73,13 +77,30 @@ project(":back-test-server") {
         implementation(project(":algorithm-common"))
         implementation(project(":common"))
 
-        implementation(project(":_test_algo"))
+        implementation(project(":cursor-algorithm"))
     }
 }
 
 project(":report") {
     dependencies {
         implementation(project(":common"))
+        implementation(project(":mole-tunnel-db"))
+        implementation(project(":ok-http-client"))
+    }
+}
+
+project(":stock-code") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":holiday"))
+        implementation(project(":mole-tunnel-db"))
+        implementation(project(":ok-http-client"))
+    }
+}
+project(":stock-data") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":holiday"))
         implementation(project(":mole-tunnel-db"))
         implementation(project(":ok-http-client"))
     }
@@ -106,16 +127,20 @@ project(":ok-http-client") {
     }
 }
 
-project(":_test_algo") {
-    dependencies {
-        implementation(project(":common"))
-        implementation(project(":algorithm-common"))
-    }
-}
 
 project(":algorithm-common") {
     dependencies {
         implementation(project(":common"))
+    }
+}
+
+project(":cursor-algorithm") {
+    dependencies {
+        implementation(project(":common"))
+        implementation(project(":algorithm-common"))
+        implementation(project(":mole-tunnel-db"))
+        implementation(project(":stock-code"))
+        implementation(project(":stock-data"))
     }
 }
 

@@ -5,15 +5,15 @@ import com.zeki.mole_tunnel_db.dto.TradeQueueDto
 import com.zeki.mole_tunnel_db.repository.AccountAlgorithmRepository
 import com.zeki.mole_tunnel_db.repository.AccountRepository
 import com.zeki.mole_tunnel_db.repository.TradeQueueRepository
-import java.time.LocalDate
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDate
 
 @Service
 class TradeQueueService(
-        private val tradeQueueRepository: TradeQueueRepository,
-        private val accountAlgorithmRepository: AccountAlgorithmRepository,
-        private val accountRepository: AccountRepository
+    private val tradeQueueRepository: TradeQueueRepository,
+    private val accountAlgorithmRepository: AccountAlgorithmRepository,
+    private val accountRepository: AccountRepository
 ) {
     /**
      * tradeQueue 테이블에서 데이터를 조회하고 계좌와 알고리즘 연동 정보(rate)를 고려하여 실제 매매를 위한 TradeQueueDto 목록을 생성합니다.
@@ -32,7 +32,7 @@ class TradeQueueService(
 
         // 매매 실행 계좌 조회 (실제 환경에서 사용할 계좌)
         val liveAccounts =
-                accountRepository.findByAccountTypeIn(listOf(TradeMode.REAL, TradeMode.TRAIN))
+            accountRepository.findByAccountTypeIn(listOf(TradeMode.REAL, TradeMode.TRAIN))
 
         // 알고리즘별로 그룹화
         val tradeQueueByAlgorithm = tradeQueueList.groupBy { it.algorithm }
@@ -49,7 +49,7 @@ class TradeQueueService(
 
             // 실제 사용할 계좌와 연결된 계좌 알고리즘만 필터링
             val validAccountAlgorithms =
-                    accountAlgorithms.filter { liveAccounts.contains(it.account) }
+                accountAlgorithms.filter { liveAccounts.contains(it.account) }
 
             if (validAccountAlgorithms.isEmpty()) {
                 return@mapNotNull null
@@ -57,26 +57,26 @@ class TradeQueueService(
 
             // flatMap을 사용하여 이중 for문 대체
             val tradeQueueItems =
-                    tradeQueues.flatMap { tradeQueue ->
-                        validAccountAlgorithms.map { accountAlgorithm ->
-                            // 계좌의 알고리즘 연동 비율에 따라 매매 수량 계산
-                            // orderAmountRate는 알고리즘이 판단한 종목별 매매 비율
-                            // tradePriceRate는 계좌의 알고리즘 연동 비율
-                            val orderAmount =
-                                    tradeQueue.orderAmountRate *
-                                            accountAlgorithm.tradePriceRate.toBigDecimal()
+                tradeQueues.flatMap { tradeQueue ->
+                    validAccountAlgorithms.map { accountAlgorithm ->
+                        // 계좌의 알고리즘 연동 비율에 따라 매매 수량 계산
+                        // orderAmountRate는 알고리즘이 판단한 종목별 매매 비율
+                        // tradePriceRate는 계좌의 알고리즘 연동 비율
+                        val orderAmount =
+                            tradeQueue.orderAmountRate *
+                                    accountAlgorithm.tradePriceRate.toBigDecimal()
 
-                            // 매매 항목 생성
-                            TradeQueueDto.Item(
-                                    id = tradeQueue.id!!,
-                                    stockCode = tradeQueue.stockCode,
-                                    orderType = tradeQueue.orderType,
-                                    orderPrice = tradeQueue.orderPrice,
-                                    orderAmount = orderAmount.toDouble(),
-                                    account = accountAlgorithm.account
-                            )
-                        }
+                        // 매매 항목 생성
+                        TradeQueueDto.Item(
+                            id = tradeQueue.id!!,
+                            stockCode = tradeQueue.stockCode,
+                            orderType = tradeQueue.orderType,
+                            orderPrice = tradeQueue.orderPrice,
+                            orderAmount = orderAmount.toDouble(),
+                            account = accountAlgorithm.account
+                        )
                     }
+                }
 
             // 매매 항목이 없으면 null 반환하여 필터링
             if (tradeQueueItems.isEmpty()) {

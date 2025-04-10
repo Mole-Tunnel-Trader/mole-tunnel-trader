@@ -4,15 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.zeki.common.em.ReportType
 import com.zeki.holiday.service.HolidayDateService
 import com.zeki.holiday.service.HolidayService
-import com.zeki.kisserver.domain.data_go.stock_code.GetStockCodeService
-import com.zeki.kisserver.domain.data_go.stock_code.StockCodeService
-import com.zeki.kisserver.domain.kis.stock_info.StockInfoService
-import com.zeki.kisserver.domain.kis.stock_price.StockPriceService
 import com.zeki.kisserver.domain.kis.trade.TradeService
 import com.zeki.report.DataReportService
+import com.zeki.stockcode.service.GetStockCodeService
+import com.zeki.stockcode.service.StockCodeService
+import com.zeki.stockdata.service.stock_info.StockInfoService
+import com.zeki.stockdata.service.stock_price.StockPriceService
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.LocalDate
+import java.time.LocalTime
 
 @Component
 class Scheduler(
@@ -69,14 +70,17 @@ class Scheduler(
         dataReportService.createReportFromMap(
             reportType = ReportType.KIS,
             reportName = "주식정보 Report",
-            reportMap = reportMap
+            reportMap = reportMap,
+            date = LocalDate.now().plusDays(1),
+            time = LocalTime.of(22, 1)
         )
     }
 
     @Scheduled(cron = "0 1 20 * * *")
     fun updateStockPrice() {
         val stockCodeList = getStockCodeService.getStockCodeStringList()
-        val upsertPrice = stockPriceService.upsertStockPrice(stockCodeList, LocalDate.now(), 10)
+        val now = LocalDate.now()
+        val upsertPrice = stockPriceService.upsertStockPrice(stockCodeList, now, 10)
 
         // 맵을 이용한 report 내역 저장
         val reportMap =
@@ -89,10 +93,13 @@ class Scheduler(
         dataReportService.createReportFromMap(
             reportType = ReportType.KIS,
             reportName = "주식가격 Report",
-            reportMap = reportMap
+            reportMap = reportMap,
+            date = LocalDate.now().plusDays(1),
+            time = LocalTime.of(22, 1)
         )
 
-        asyncScheduler.updateRsi()
+        asyncScheduler.updateRsi(now)
+        asyncScheduler.updateVolumeIndicators(now)
     }
 
     /** 매일 장 시작 직후(8시 50분)에 매매 처리 tradeQueue 테이블의 데이터를 처리하여 주식 매수 및 매도를 실행 */

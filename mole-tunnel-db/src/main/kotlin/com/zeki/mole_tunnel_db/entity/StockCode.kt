@@ -7,16 +7,16 @@ import jakarta.persistence.*
 
 @Entity
 @Table(
-        name = "stock_code", indexes = [
-    Index(name = "idx_stock_code_code", columnList = "code"),
-    Index(name = "idx_stock_code_name", columnList = "name"),
-]
+    name = "stock_code", indexes = [
+        Index(name = "idx_stock_code_code", columnList = "code"),
+        Index(name = "idx_stock_code_name", columnList = "name"),
+    ]
 )
 class StockCode(
-        code: String,
-        name: String,
-        market: StockMarket,
-        isAlive: Status
+    code: String,
+    name: String,
+    market: StockMarket,
+    isAlive: Status
 ) : BaseEntity() {
 
     @Column(name = "code", nullable = false, length = 20)
@@ -37,15 +37,14 @@ class StockCode(
     var isAlive: Status = isAlive
         protected set
 
-
     fun updateStockCode(
-            name: String,
-            market: StockMarket,
-            isAlive: Status
+        name: String,
+        market: StockMarket,
+        isAlive: Status
     ): Boolean {
         if (this.name == name &&
-                this.market == market &&
-                this.isAlive == isAlive
+            this.market == market &&
+            this.isAlive == isAlive
         ) return false
 
         this.name = name

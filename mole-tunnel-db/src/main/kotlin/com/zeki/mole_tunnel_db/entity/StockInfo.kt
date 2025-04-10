@@ -79,8 +79,7 @@ class StockInfo(
     @OneToMany(
         mappedBy = "stockInfo",
         fetch = FetchType.LAZY,
-        cascade = [CascadeType.PERSIST, CascadeType.MERGE],
-        orphanRemoval = true
+        cascade = [CascadeType.PERSIST, CascadeType.MERGE]
     )
     @BatchSize(size = 1000)
     @OrderBy("date DESC ")
