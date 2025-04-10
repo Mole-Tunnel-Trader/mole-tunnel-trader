@@ -9,4 +9,5 @@ interface AccountRepository : JpaRepository<Account, Long> {
     fun findByAccountTypeAndAccountName(accountType: TradeMode, accountName: String): Optional<Account>
 
     fun findByAccountType(tradeMode: TradeMode): List<Account>
+    fun findByAccountTypeIn(tradeModeList: List<TradeMode>): List<Account>
 }

@@ -13,6 +13,11 @@ tasks.named<Jar>("jar") {
 //}
 
 dependencies {
+    // actuator
+    api("org.springframework.boot:spring-boot-starter-actuator")
+    api("io.micrometer:micrometer-core")
+//    api("io.micrometer:micrometer-registry-elastic")
+
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 

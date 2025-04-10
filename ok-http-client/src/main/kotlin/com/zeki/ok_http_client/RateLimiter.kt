@@ -2,12 +2,12 @@ package com.zeki.ok_http_client
 
 import com.zeki.common.em.TradeMode
 import jakarta.annotation.PostConstruct
-import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
-import java.util.concurrent.TimeUnit
 import org.slf4j.LoggerFactory
 import org.springframework.cache.CacheManager
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+import java.util.concurrent.TimeUnit
 
 @Component
 open class RateLimiter(private val cacheManager: CacheManager) {
@@ -27,15 +27,15 @@ open class RateLimiter(private val cacheManager: CacheManager) {
         val cache = cacheManager.getCache(cacheName)
         @Suppress("UNCHECKED_CAST")
         return cache?.get(appkey, MutableList::class.java) as? MutableList<LocalDateTime>
-                ?: mutableListOf<LocalDateTime>().also { cache?.put(appkey, it) }
+            ?: mutableListOf<LocalDateTime>().also { cache?.put(appkey, it) }
     }
 
     open fun waitForRateLimit(appkey: String, tradeMode: TradeMode) {
         val maxRequests =
-                when (tradeMode) {
-                    TradeMode.TRAIN -> 2
-                    TradeMode.REAL, TradeMode.BATCH -> 19 // 1초당 최대 19개 요청 허용
-                }
+            when (tradeMode) {
+                TradeMode.TRAIN -> 2
+                TradeMode.REAL, TradeMode.BATCH -> 19 // 1초당 최대 19개 요청 허용
+            }
 
         while (true) {
             val currentTime = LocalDateTime.now()
@@ -43,9 +43,9 @@ open class RateLimiter(private val cacheManager: CacheManager) {
 
             // 1초 이내의 유효한 요청만 필터링
             val validRequestTimes =
-                    requestTimes
-                            .filter { it.until(currentTime, ChronoUnit.MILLIS) < 1000 }
-                            .toMutableList()
+                requestTimes
+                    .filter { it.until(currentTime, ChronoUnit.MILLIS) < 1000 }
+                    .toMutableList()
 
             // 캐시 업데이트 (필요한 경우)
             if (validRequestTimes.size != requestTimes.size) {
@@ -70,7 +70,7 @@ open class RateLimiter(private val cacheManager: CacheManager) {
                 // 가장 오래된 요청이 만료될 때까지 대기 (최소 200ms)
                 val waitTimeMillis = (1000 - elapsedMillis).coerceAtLeast(200)
                 logger.debug(
-                        "요청 제한 도달: ${validRequestTimes.size}/${maxRequests}, 대기 시간: ${waitTimeMillis}ms"
+                    "요청 제한 도달: ${validRequestTimes.size}/${maxRequests}, 대기 시간: ${waitTimeMillis}ms"
                 )
                 TimeUnit.MILLISECONDS.sleep(waitTimeMillis)
             } else {

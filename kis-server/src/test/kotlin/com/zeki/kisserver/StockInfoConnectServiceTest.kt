@@ -1,7 +1,7 @@
 package com.zeki.kisserver
 
-import com.zeki.kisserver.domain.kis.stock_info.StockInfoConnectService
 import com.zeki.mole_tunnel_db.dto.KisStockInfoResDto
+import com.zeki.stockdata.service.stock_info.StockInfoConnectService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance

@@ -1,6 +1,6 @@
 package com.zeki.kisserver
 
-import com.zeki.kisserver.domain.kis.stock_info.AssetConnectService
+import com.zeki.stockdata.service.account.AssetConnectService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired

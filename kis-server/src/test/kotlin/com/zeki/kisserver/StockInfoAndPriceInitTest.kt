@@ -1,8 +1,8 @@
 package com.zeki.kisserver
 
-import com.zeki.kisserver.domain.kis.stock_info.StockInfoService
-import com.zeki.kisserver.domain.kis.stock_price.StockPriceService
 import com.zeki.mole_tunnel_db.repository.StockCodeRepository
+import com.zeki.stockdata.service.stock_info.StockInfoService
+import com.zeki.stockdata.service.stock_price.StockPriceService
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance

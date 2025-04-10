@@ -7,10 +7,12 @@ import java.time.LocalDate
 
 @Entity
 @Table(name = "algorithm_log")
-class AlgorithmLog private constructor(
+class AlgorithmLog
+private constructor(
     startDate: LocalDate,
     endDate: LocalDate,
     depositPrice: BigDecimal,
+    valuationPrice: BigDecimal = BigDecimal.ZERO,
     algorithm: Algorithm
 ) : BaseEntity() {
     @Column(name = "start_date", nullable = false)
@@ -23,6 +25,10 @@ class AlgorithmLog private constructor(
 
     @Column(name = "deposit_price", nullable = false, precision = 38, scale = 18)
     var depositPrice: BigDecimal = depositPrice
+        protected set
+
+    @Column(name = "valuation_price", nullable = false, precision = 38, scale = 18)
+    var valuationPrice: BigDecimal = valuationPrice
         protected set
 
     @JoinColumn(name = "algorithm_id", nullable = false)
@@ -48,9 +54,10 @@ class AlgorithmLog private constructor(
             startDate: LocalDate,
             endDate: LocalDate,
             depositPrice: BigDecimal,
-            algorithm: Algorithm
+            algorithm: Algorithm,
+            valuationPrice: BigDecimal = BigDecimal.ZERO
         ): AlgorithmLog {
-            return AlgorithmLog(startDate, endDate, depositPrice, algorithm)
+            return AlgorithmLog(startDate, endDate, depositPrice, valuationPrice, algorithm)
         }
     }
 

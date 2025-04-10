@@ -2,6 +2,8 @@ package com.zeki.common.util
 
 import com.zeki.common.em.TradeMode
 import org.springframework.core.env.Environment
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -31,3 +33,14 @@ object CustomUtils {
         LocalDate.parse(this, DateTimeFormatter.ofPattern(format))
 }
 
+// BigDecimal 리스트의 평균을 계산하는 확장 함수
+fun List<BigDecimal>.average(): BigDecimal {
+    if (this.isEmpty()) return BigDecimal.ZERO
+    val sum = this.fold(BigDecimal.ZERO) { acc, value -> acc.add(value) }
+    return sum.divide(BigDecimal.valueOf(this.size.toLong()), 10, RoundingMode.HALF_UP)
+}
+
+// BigDecimal 리스트의 합을 계산하는 확장 함수 (성능 개선)
+fun List<BigDecimal>.sum(): BigDecimal {
+    return this.fold(BigDecimal.ZERO) { acc, value -> acc.add(value) }
+}

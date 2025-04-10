@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional
 class TradeService(
     private val tradeQueueService: TradeQueueService,
     private val tradeHistoryService: TradeHistoryService,
-
     private val tradeConnectService: TradeConnectService
 ) {
 
@@ -35,13 +34,11 @@ class TradeService(
         }
 
         tradeQueueService.removeTradeQueue(
-            tradeQueueDtoList.stream()
+            tradeQueueDtoList
                 .map { tradeQueueDto ->
-                    tradeQueueDto.items.stream()
-                        .map { item ->
-                            item.id
-                        }.toList()
-                }.toList()
+                    tradeQueueDto.items.map { item -> item.id }.toList()
+                }
+                .toList()
                 .flatten()
         )
     }
@@ -52,14 +49,19 @@ class TradeService(
         orderBy: String
     ) {
 
-        val orderState = when (kisOrderStockResDto.rtCd) {
-            "0" -> OrderState.SUCCESS
-            else -> OrderState.FAIL
-        }
+        val orderState =
+            when (kisOrderStockResDto.rtCd) {
+                "0" -> OrderState.SUCCESS
+                else -> OrderState.FAIL
+            }
 
         // TODO : webHook으로 성공 및 실패 알림 (비동기)
 
-        tradeHistoryService.createTradeHistory(kisOrderStockResDto, tradeQueueDtoItem, orderState, orderBy)
+        tradeHistoryService.createTradeHistory(
+            kisOrderStockResDto,
+            tradeQueueDtoItem,
+            orderState,
+            orderBy
+        )
     }
-
 }

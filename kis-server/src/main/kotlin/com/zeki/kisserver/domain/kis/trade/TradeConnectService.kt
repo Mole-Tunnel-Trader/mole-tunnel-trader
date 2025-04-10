@@ -4,10 +4,10 @@ import com.zeki.common.em.OrderType
 import com.zeki.common.em.TradeMode
 import com.zeki.common.exception.ApiException
 import com.zeki.common.exception.ResponseCode
-import com.zeki.kisserver.domain.kis.account.AccountService
 import com.zeki.mole_tunnel_db.dto.KisOrderStockResDto
 import com.zeki.mole_tunnel_db.entity.Account
 import com.zeki.ok_http_client.OkHttpClientConnector
+import com.zeki.stockdata.service.account.AccountService
 import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
