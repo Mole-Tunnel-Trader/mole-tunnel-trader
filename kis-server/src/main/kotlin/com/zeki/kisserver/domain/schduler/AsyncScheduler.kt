@@ -4,6 +4,7 @@ import com.zeki.holiday.service.HolidayDateService
 import com.zeki.holiday.service.HolidayService
 import com.zeki.stockcode.service.GetStockCodeService
 import com.zeki.stockdata.service.stock_price.StockPriceService
+import com.zeki.stockdata.service.stock_price.StockPriceVolumeIndicatorService
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
@@ -13,6 +14,7 @@ import java.time.LocalDate
 class AsyncScheduler(
     private val getStockCodeService: GetStockCodeService,
     private val stockPriceService: StockPriceService,
+    private val stockPriceVolumeIndicatorService: StockPriceVolumeIndicatorService,
     private val holidayService: HolidayService,
     private val holidayDateService: HolidayDateService,
 ) {
@@ -68,7 +70,7 @@ class AsyncScheduler(
 
                     try {
                         val updatedCount =
-                            stockPriceService.updateVolumeIndicators(chunk, targetDate)
+                            stockPriceVolumeIndicatorService.updateVolumeIndicators(chunk, targetDate)
                         dateUpdatedCount += updatedCount
 
                         val chunkElapsedTime = System.currentTimeMillis() - chunkStartTime

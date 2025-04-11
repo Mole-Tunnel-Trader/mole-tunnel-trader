@@ -287,3 +287,9 @@ else
   fi
 fi
 echo "===================="
+
+
+echo "===================="
+echo "docker unused image remove"
+docker image prune
+echo "===================="
