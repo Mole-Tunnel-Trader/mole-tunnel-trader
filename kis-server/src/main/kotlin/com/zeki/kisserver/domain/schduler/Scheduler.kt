@@ -71,8 +71,7 @@ class Scheduler(
             reportType = ReportType.KIS,
             reportName = "주식정보 Report",
             reportMap = reportMap,
-            date = LocalDate.now().plusDays(1),
-            time = LocalTime.of(22, 1)
+            time = LocalTime.of(21, 1)
         )
     }
 
@@ -94,8 +93,7 @@ class Scheduler(
             reportType = ReportType.KIS,
             reportName = "주식가격 Report",
             reportMap = reportMap,
-            date = LocalDate.now().plusDays(1),
-            time = LocalTime.of(22, 1)
+            time = LocalTime.of(21, 1)
         )
 
         asyncScheduler.updateRsi(now)
