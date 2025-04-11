@@ -2,6 +2,7 @@ package com.zeki.kisserver.domain.schduler
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
 
@@ -33,8 +34,9 @@ class SchedulerController(
     }
 
     @GetMapping("/volume-indicators")
-    fun getVolumeIndicators() {
-        asyncScheduler.updateVolumeIndicators(LocalDate.now())
+    fun getVolumeIndicators(
+        @RequestParam("count", defaultValue = "10") count: Int = 10
+    ) {
+        asyncScheduler.updateVolumeIndicators(LocalDate.now(), count)
     }
-
 }

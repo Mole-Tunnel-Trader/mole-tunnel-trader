@@ -27,13 +27,13 @@ class AsyncScheduler(
     }
 
     @Async
-    fun updateVolumeIndicators(now: LocalDate) {
+    fun updateVolumeIndicators(now: LocalDate, count: Int = 10) {
         val stockCodeList = getStockCodeService.getStockCodeStringList()
         logger.info("볼륨 관련 지표 업데이트 시작: 날짜 = $now, 종목 수 = ${stockCodeList.size}")
 
         try {
             // 최대 처리할 과거 날짜
-            val maxDaysToProcess = 10
+            val maxDaysToProcess = count
             var successCount = 0
             var totalUpdated = 0
 
