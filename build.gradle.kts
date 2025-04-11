@@ -1,12 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25" apply false
-    kotlin("plugin.jpa") version "1.9.25" apply false
-    kotlin("kapt") version "1.9.25" apply false
-    id("org.springframework.boot") version "3.3.5" apply false
-    id("io.spring.dependency-management") version "1.1.6" apply false
+    // Spring
+    id("org.springframework.boot") version "3.3.5"
+    id("io.spring.dependency-management") version "1.1.6"
+
+    // Kotlin
+    kotlin("jvm") version "2.1.20"
+    kotlin("plugin.spring") version "2.1.20"
+    kotlin("plugin.jpa") version "2.1.20"
+    kotlin("kapt") version "2.1.20"
 }
 
 allprojects {
@@ -19,14 +22,14 @@ allprojects {
 
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
+        sourceCompatibility = "23"
+        targetCompatibility = "23"
     }
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "17"
+            jvmTarget = "23"
         }
     }
 
