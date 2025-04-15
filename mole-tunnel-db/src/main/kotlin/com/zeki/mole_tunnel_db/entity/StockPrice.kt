@@ -134,10 +134,10 @@ private constructor(
         low: BigDecimal,
         volume: Long
     ): Boolean {
-        if (this.close == close &&
-            this.open == open &&
-            this.high == high &&
-            this.low == low &&
+        if (this.close.compareTo(close) == 0 &&
+            this.open.compareTo(open) == 0 &&
+            this.high.compareTo(high) == 0 &&
+            this.low.compareTo(low) == 0 &&
             this.volume == volume
         )
             return false
@@ -166,11 +166,11 @@ private constructor(
         priceChangeRate: BigDecimal,
         volatility: BigDecimal
     ): Boolean {
-        if (this.volumeAvg5 == volumeAvg5 &&
-            this.volumeAvg20 == volumeAvg20 &&
-            this.volumeRatio == volumeRatio &&
-            this.priceChangeRate == priceChangeRate &&
-            this.volatility == volatility
+        if ((this.volumeAvg5 != null && this.volumeAvg5!!.compareTo(volumeAvg5) == 0) &&
+            (this.volumeAvg20 != null && this.volumeAvg20!!.compareTo(volumeAvg20) == 0) &&
+            (this.volumeRatio != null && this.volumeRatio!!.compareTo(volumeRatio) == 0) &&
+            (this.priceChangeRate != null && this.priceChangeRate!!.compareTo(priceChangeRate) == 0) &&
+            (this.volatility != null && this.volatility!!.compareTo(volatility) == 0)
         )
             return false
 
