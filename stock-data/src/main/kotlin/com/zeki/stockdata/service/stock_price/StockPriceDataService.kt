@@ -4,6 +4,7 @@ import com.zeki.mole_tunnel_db.entity.StockPrice
 import com.zeki.mole_tunnel_db.repository.StockInfoRepository
 import com.zeki.mole_tunnel_db.repository.StockPriceRepository
 import com.zeki.stockdata.service.stock_info.CrawlNaverFinanceService
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
@@ -14,6 +15,9 @@ class StockPriceDataService(
     private val stockPriceRepository: StockPriceRepository,
     private val crawlNaverFinanceService: CrawlNaverFinanceService
 ) {
+
+    private val log = KotlinLogging.logger {}
+
     @Transactional(readOnly = true)
     fun prepareStockPriceData(
         stockCodeList: List<String>,
@@ -22,6 +26,11 @@ class StockPriceDataService(
     ): Pair<List<StockPrice>, List<StockPrice>> {
         val stockPriceSaveList = mutableListOf<StockPrice>()
         val stockPriceUpdateList = mutableListOf<StockPrice>()
+
+        // 디버깅용 지표
+        var stockInfoNotFoundCount = 0
+        var processedStockCount = 0
+        val itemsPerStockCode = mutableMapOf<String, Int>()
 
         // 1. StockInfo 정보 로드
         val stockInfoList = stockInfoRepository.findByCodeIn(stockCodeList)
@@ -47,7 +56,15 @@ class StockPriceDataService(
 
         // 4. 각 종목별 처리
         for (stockCode in stockCodeList) {
-            val stockInfo = stockInfoMap[stockCode] ?: continue
+            val stockInfo = stockInfoMap[stockCode]
+            if (stockInfo == null) {
+                stockInfoNotFoundCount++
+                continue
+            }
+
+            processedStockCount++
+            val saveCountBefore = stockPriceSaveList.size
+            val updateCountBefore = stockPriceUpdateList.size
 
             // 해당 종목의 주가 데이터 맵
             val pricesByDate = stockPriceByCodeAndDate.getOrPut(stockCode) { mutableMapOf() }
@@ -94,6 +111,28 @@ class StockPriceDataService(
                     // 실제로 변경된 경우에만 업데이트 리스트에 추가
                     if (isUpdate) stockPriceUpdateList.add(existingStockPrice)
                 }
+            }
+
+            val savedCount = stockPriceSaveList.size - saveCountBefore
+            val updatedCount = stockPriceUpdateList.size - updateCountBefore
+            itemsPerStockCode[stockCode] = savedCount + updatedCount
+
+            // 일정 수 이상의 레코드가 처리되면 경고 로그 남기기
+            if (savedCount + updatedCount > 15) {
+                log.warn("주의: 종목 $stockCode 에서 많은 데이터 처리됨 - 저장: $savedCount, 업데이트: $updatedCount")
+            }
+        }
+
+        // 종합 로그
+        println("종목 처리 결과 - 전체: ${stockCodeList.size}, 처리됨: $processedStockCount, StockInfo 없음: $stockInfoNotFoundCount")
+        println("저장: ${stockPriceSaveList.size}, 업데이트: ${stockPriceUpdateList.size}")
+
+        // 비정상적으로 많은 데이터를 처리한 종목 로깅
+        val suspiciousStocks = itemsPerStockCode.filter { it.value > 10 }.toList().sortedByDescending { it.second }
+        if (suspiciousStocks.isNotEmpty()) {
+            println("많은 데이터를 처리한 상위 종목:")
+            suspiciousStocks.take(5).forEach { (code, count) ->
+                log.warn("  - $code: $count 개 레코드")
             }
         }
 

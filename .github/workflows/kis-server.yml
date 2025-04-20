@@ -1,8 +1,8 @@
 name: kis-server CI
 
 on:
-  pull_request:
-    branches: [ "main" ]
+  push:
+    branches: ["main"]
     paths:
       - "kis-server/**"
       - ".github/workflows/kis-server.yml"
@@ -20,7 +20,6 @@ env:
   GREEN_PORT: 38011
   INNER_PORT: 8080
   TIME_DELATE: 300
-
 
 jobs:
   build:
@@ -80,7 +79,7 @@ jobs:
       - name: Deploy to Server
         run: |
           set -e
-          
+
           # rsa 키 생성
           # github secrets에 등록된 key를 .ssh/id_rsa에 저장
           mkdir -p ~/.ssh
@@ -88,23 +87,23 @@ jobs:
           echo "${{ secrets.SERVER_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
           chmod 600 ~/.ssh/id_rsa
           chmod 644 ~/.ssh/id_rsa.pub
-          
-          
+
+
           # known_hosts 파일에 내용 추가 (서버의 공개키 등록)
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
-          
+
           # PROJECT_DIR 정의
           PROJECT_DIR=/home/${{ secrets.SERVER_USERNAME }}/docker/${{ env.SERVICE_NAME }}
-          
+
           # 서버에 디렉토리 생성 및 권한 설정
           ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "sudo mkdir -p $PROJECT_DIR && sudo chmod -R 755 $PROJECT_DIR"
-          
+
           # 소유권 변경
           ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "sudo chown -R ${{ secrets.SERVER_USERNAME }}:${{ secrets.SERVER_USERNAME }} $PROJECT_DIR"
-          
+
           # deploy.sh 파일 전송
           scp ./deploy.sh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:$PROJECT_DIR
-          
+
           # deploy.sh 실행
           ssh -T ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "set -e; sudo bash $PROJECT_DIR/deploy.sh ${{ env.SERVICE_NAME }} $PROJECT_DIR '${{ env.BLUE_PORT }}' '${{ env.GREEN_PORT }}' '${{ env.INNER_PORT }}' '${{ env.TIME_DELATE }}' '${{ secrets.DOCKER_USERNAME }}' '${{ secrets.DOCKER_TOKEN }}' '${{ secrets.KIS_NGINX_DOMAIN }}' ''"
         shell: bash
