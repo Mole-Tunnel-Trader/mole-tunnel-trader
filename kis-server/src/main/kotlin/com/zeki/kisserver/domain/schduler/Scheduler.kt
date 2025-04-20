@@ -78,15 +78,18 @@ class Scheduler(
     @Scheduled(cron = "0 1 20 * * *")
     fun updateStockPrice() {
         val stockCodeList = getStockCodeService.getStockCodeStringList()
+        val stockCount = stockCodeList.size
         val now = LocalDate.now()
         val upsertPrice = stockPriceService.upsertStockPrice(stockCodeList, now, 10)
 
         // 맵을 이용한 report 내역 저장
         val reportMap =
             mapOf(
-                "주식가격 신규" to upsertPrice.newCount,
-                "주식가격 변경" to upsertPrice.updateCount,
-                "주식가격 삭제" to upsertPrice.deleteCount
+                "전체 종목 수" to stockCount,
+                "처리된 종목 수" to upsertPrice.deleteCount,
+                "가격 데이터 신규" to upsertPrice.newCount,
+                "가격 데이터 변경" to upsertPrice.updateCount,
+                "가격 레코드 총 처리" to (upsertPrice.newCount + upsertPrice.updateCount)
             )
 
         dataReportService.createReportFromMap(

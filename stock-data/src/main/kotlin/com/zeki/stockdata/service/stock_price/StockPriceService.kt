@@ -34,6 +34,9 @@ class StockPriceService(
         // 결과를 합산하기 위한 변수들
         val totalStockPriceSaveList = mutableListOf<StockPrice>()
         val totalStockPriceUpdateList = mutableListOf<StockPrice>()
+        
+        // 각 종목별로 데이터가 얼마나 많이 처리되었는지 추적
+        val processedStockCodes = mutableSetOf<String>()
 
         try {
             // 500개씩 나누어 처리
@@ -41,6 +44,10 @@ class StockPriceService(
                 // 1. 데이터 준비 트랜잭션에서 데이터 조회 및 처리
                 val (stockPriceSaveList, stockPriceUpdateList) =
                     stockPriceDataService.prepareStockPriceData(batchCodes, standardDate, count)
+
+                // 처리된 종목 코드 추적
+                stockPriceSaveList.forEach { processedStockCodes.add(it.stockInfo.code) }
+                stockPriceUpdateList.forEach { processedStockCodes.add(it.stockInfo.code) }
 
                 // 결과 리스트에 추가
                 totalStockPriceSaveList.addAll(stockPriceSaveList)
@@ -53,14 +60,17 @@ class StockPriceService(
 
             // 3. 결과 보고서 반환
             log.info(
-                "주가 데이터 벌크 업데이트 완료: 삽입 ${totalStockPriceSaveList.size}건, 업데이트 ${totalStockPriceUpdateList.size}건"
+                "주가 데이터 벌크 업데이트 완료: 총 ${processedStockCodes.size}개 종목, " + 
+                "삽입 ${totalStockPriceSaveList.size}건, 업데이트 ${totalStockPriceUpdateList.size}건"
             )
-            return UpsertReportDto(totalStockPriceSaveList.size, totalStockPriceUpdateList.size, 0)
+            
+            // 종목 수를 deleteCount 필드를 활용하여 전달 (UpsertReportDto의 구조를 변경하지 않고 재활용)
+            return UpsertReportDto(totalStockPriceSaveList.size, totalStockPriceUpdateList.size, processedStockCodes.size)
         } catch (e: Exception) {
             log.error("주가 데이터 upsert 중 오류 발생: ${e.message}", e)
 
             // 오류 발생 시에도 부분적으로 성공한 처리 수를 반환
-            return UpsertReportDto(totalStockPriceSaveList.size, totalStockPriceUpdateList.size, 0)
+            return UpsertReportDto(totalStockPriceSaveList.size, totalStockPriceUpdateList.size, processedStockCodes.size)
         }
     }
 
